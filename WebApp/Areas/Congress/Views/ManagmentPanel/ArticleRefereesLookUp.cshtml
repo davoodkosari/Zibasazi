@@ -1,0 +1,110 @@
+﻿@using Radyn.Web.Mvc
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.EnterpriseNode.ExtentionTools
+@model Dictionary<Radyn.Congress.DataStructure.Referee,bool>
+    @{
+        ViewBag.Title = Resources.Congress.Referee;
+        Layout = "~/Views/Shared/LookUpLayout.cshtml";
+
+    }
+
+    @section Head{
+
+        <style>
+            .highlight {
+                background-color: khaki;
+            }
+
+            input {
+                text-align: right;
+                direction: rtl;
+            }
+        </style>
+        <script type="text/javascript">
+            function Selectandclose() {
+                $.post("@Url.Content("~/Congress/ManagmentPanel/UpdateArticleRefereesLookUp")", $('form[action^="@Url.Content("~/Congress/ManagmentPanel/ArticleRefereesLookUp")"]').serialize(), function (data) {
+                    if (data != "false") {
+                        ShowRadynMessage();
+                    }
+                    ShowRadynMessage();
+                });
+
+            }
+            jQuery.expr[':'].icontains = function (a, i, m) {
+                return jQuery(a).text().toUpperCase()
+                    .indexOf(m[3].toUpperCase()) >= 0;
+            };
+            function search(value) {
+                $("label").not("label:icontains('" + value + "')").css("background-color","");
+                $("label:icontains('" + value + "')").css("background-color", "#ffdddd");
+            }
+        </script>
+    }
+    @section PageAction
+{
+        <div class="button-div m-btn waves-green i-save">
+            @{Html.Radyn().ImageActionLink().Text(@Resources.Common.Save).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImageHeight("25").ImageWidth("25").ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "Selectandclose();" }).Render(); }
+
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().Text(@Resources.Common.Close).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Delete-Close.png")).ImageHeight("25").ImageWidth("25").ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "Close_thisModal();" }).Render(); }
+
+        </div>
+
+    }
+    @section PageActionDown
+{
+        <div class="button-div m-btn waves-green i-save">
+            @{Html.Radyn().ImageActionLink().Text(@Resources.Common.Save).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImageHeight("25").ImageWidth("25").ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "Selectandclose();" }).Render(); }
+
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().Text(@Resources.Common.Close).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Delete-Close.png")).ImageHeight("25").ImageWidth("25").ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "Close_thisModal();" }).Render(); }
+
+        </div>
+
+    }
+
+
+    <div class="radynForm">
+        <div class="full_width">
+            <div class="table-row-item">
+                <div class="item">
+                    <input placeholder="جست و جو ..." style="text-align: right" type="text" id="txt_search" onkeyup="search(this.value)" />
+
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="ArticleId" id="ArticleId" value="@ViewBag.ArticleId" />
+
+        <div id="listReferee">
+            @{
+                const int column = 3;
+
+                var couter = -1;
+                foreach (var referee in Model)
+                {
+                    couter++;
+                    if (couter % column == 0)
+                    {
+                    }
+                    <div>
+                    </div>
+
+                    <div title="@(Resources.Congress.WaitForAnswerCount + " : " + referee.Key.WaitForAnswerArticleCount + "\n" + string.Format(Resources.Congress.AllArticleCount,SessionParameters.CurrentCongress.Configuration.ArticleTitle) + " : " + referee.Key.AllArticleCount)">
+                        <div class="table-row-cap width30percent" id="tbl">
+                            <div class="item">
+                                <div style="float: right">
+                                    @{Html.Radyn().CheckBox().Checked(referee.Value).ID(referee.Key.Id.ToString()).Name("SelectedReferee").Value(referee.Key.Id.ToString()).Text(@referee.Key.EnterpriseNode.DescriptionField).Render(); }
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+

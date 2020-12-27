@@ -1,0 +1,118 @@
+﻿@using Radyn.FileManager
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp.AppCode.Base
+
+@model Radyn.Congress.DataStructure.VIP
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#DivItem").html("");
+        var isnew = '@ViewBag.IsNew';
+        var thisstate = "Edit";
+        var getid = '@Model.Id';
+        if (isnew == "True") {
+            getid = "@Guid.Empty";
+            thisstate = "Create";
+        }
+        $.get("@Url.Content("~/EnterpriseNode/EnterPriseNode/GenerateEnterpriseNodeModify")", { state: thisstate, id: getid, type: "r", date: new Date().getTime() }, function (data) {
+            $("#DivItem").html(data).slideDown("slow");;
+        });
+    });
+</script>
+
+
+
+@Html.ValidationSummary(true)
+<div>
+    <div id="DivItem"></div>
+    <div class="item-row file-upload">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Resume
+
+            </div>
+        </div>
+        <div class="table-row-item table-c-fit">
+            <div class="item">
+
+                @{
+                    Html.RenderAction("FileUploader", "FileUpload", new { area = "FileManager", filePropName = "ResumeFileId", fileid = Model.ResumeFileId, fileName = "ImageResume" });
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.PresentDate
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item date-picker">
+                @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.PresentDate).Render(); }
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Role
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.TextBoxFor(model => model.Role, new { })
+
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Sort
+
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.TextBoxFor(model => model.Sort, new { })
+
+            </div>
+        </div>
+    </div>
+
+    <div class="item-row fit">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Subject
+
+            </div>
+        </div>
+        <div class="table-row-item table-fit">
+            <div class="item">
+                @Html.TextBoxFor(model => model.Abstract, new { })
+
+            </div>
+        </div>
+    </div>
+    <div class="item-row fit">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.AbstarctDes
+
+            </div>
+        </div>
+        <div class="table-row-item ">
+            <div class="item">
+                @Html.TextAreaFor(vip => vip.Remark, new { })
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

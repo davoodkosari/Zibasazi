@@ -1,0 +1,61 @@
+﻿@model Dictionary<Radyn.Congress.DataStructure.Pivot, bool>
+    @using Radyn.Web.Mvc
+
+    
+<script>
+    jQuery.expr[':'].icontains = function (a, i, m) {
+        return jQuery(a).text().toUpperCase()
+            .indexOf(m[3].toUpperCase()) >= 0;
+    };
+    function search(value) {
+        $("label").not("label:icontains('" + value + "')").css("background-color","");
+        $("label:icontains('" + value + "')").css("background-color", "#ffdddd");
+    }
+</script>
+<div class="radynForm">
+    <div class="full_width">
+        <div class="item-row ">
+            <div class="table-row-cap">
+                <div class="item">
+                 
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item">
+                    <input placeholder="جست و جو ..." style="text-align: right" type="text" id="txt_search" onkeyup="search(this.value)"/>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <div id="listReferee">
+        @{
+            const int column = 1;
+
+            var couter = -1;
+            foreach (var referee in Model)
+            {
+                couter++;
+                if (couter % column == 0)
+                {
+                }
+                <div>
+                </div>
+
+                <div>
+                    <div class="table-row-cap width30percent" id="tbl">
+                        <div class="item">
+                            <div style="float: right">
+                                @{Html.Radyn().CheckBox().Checked(referee.Value).ID(referee.Key.Id.ToString()).Name("SelectedPivot").Value(referee.Key.Id.ToString()).Text(@referee.Key.Title).Render(); }
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+    </div>
+</div>

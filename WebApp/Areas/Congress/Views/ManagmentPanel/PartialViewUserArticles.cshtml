@@ -1,0 +1,103 @@
+﻿@using System.Web.Mvc.Html
+@using Radyn.Congress.DataStructure
+@using Radyn.Congress.Tools
+@using Radyn.Web.Mvc
+
+@using Radyn.Utility
+@using Radyn.WebApp.AppCode.Security
+@model IEnumerable<dynamic>
+
+    <script type="text/javascript">
+
+        function LookUpForm(id, state) {
+            if (id != "") {
+                switch (state) {
+                    case "Edit":
+                        ShowModalFullScreen("@Url.Content("~/Congress/ManagmentPanel/ModifyArticle?articleId=")" + id + "&state=AdminModify");
+                        break;
+                    case "View":
+                        ShowModalFullScreen("@Url.Content("~/Congress/ManagmentPanel/ModifyArticle?articleId=")" + id + "&state=Details");
+                        break;
+                    case "Delete":
+                        ShowModal("@Url.Content("~/Congress/ManagmentPanel/DeleteArticle?articleId=")" + id);
+                        break;
+                    case "Comment":
+                        ShowModal("@Url.Content("~/Congress/ArticleUserComment/Index?articleId=")" + id);
+                        break;
+                    case "Log":
+                        ShowModal("@Url.Content("~/Security/Log/Index?id=")" + id);
+                        break;
+                }
+            }
+        }
+
+        function PaymentDetails(id) {
+            if (id != "")
+                ShowModal("@Url.Content("~/Payment/Transaction/LookUPTransactionDetails?Id=")" + id);
+            else
+                alert('@Resources.Common.No_results_found');
+        }
+
+        function Refereeopinion(id) {
+            if (id != "") {
+                ShowModal("@Url.Content("~/Congress/ManagmentPanel/ArticleRefereeopinionLookUp?articleId=")" + id);
+            }
+        }
+
+        function RefreeSelect(articleid) {
+            if (articleid != "") {
+                ShowModal("@Url.Content("~/Congress/ManagmentPanel/ArticleRefereesLookUp?ArticleId=")" + articleid);
+
+            } else {
+                ShowRadynMessage("آیتمی انتخاب نشده است");
+            }
+        }
+
+        function SelectAllArticleStatus() {
+            var value = $('#check-allstatus').is(':checked');
+            if (value) {
+                $('input[name="check-status"]').each(function () {
+                    $(this).attr('checked', 'checked');
+                })
+            }
+            else {
+                $('input[name="check-status"]').each(function () {
+                    $(this).removeAttr('checked');
+                })
+            }
+        }
+    </script>
+    @{
+        Html.Radyn().Grid(Model).Name("RadynGrid").Columns(columns =>
+        {
+            columns.Template(article => ("<input type='checkbox' id='" + (Guid)article.Id + "' name='check-status' />")).Title("<input type='checkbox' id='check-allstatus' onchange='SelectAllArticleStatus()' />").HtmlAttributes(new { @class = "text-align" }).Encode(false).Filterable(false);
+
+            columns.Template(article => "<a style='cursor: pointer;' onclick=\"LookUpForm('" + article.Id + "','View')\"  > " + article.Title + " - " + article.Code + "</a> ").Title(string.Format(Resources.Congress.ArticleTitle, SessionParameters.CurrentCongress.Configuration.ArticleTitle)).HeaderHtmlAttributes(new { @class = "" }).Encode(false);
+            columns.Template(article => "<span style='cursor: pointer;'  onclick=\"window.open('/Congress/User/Details?id=" + article.UserId + "');\" >" + article.FirstNameAndLastName + "</span>").Title(@Resources.Congress.User).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:center;" }).Encode(false);
+            columns.Template(article => ((byte)article.Status).ToString().ToEnum<Enums.ArticleState>().GetDescriptionInLocalization()).Title(Resources.Congress.Status);
+            columns.Template(article => Html.DropDownList("drpArticleType-" + (Guid)article.Id, new SelectList(ViewBag.ArticleType, "Key", "Value", article.TypeId), "", new { }) + "<input type=\"hidden\" name=\"ModelId\" id=\"ModelId\" value=\"" + (Guid)article.Id + "\" />" + "<input type=\"hidden\" name=\"oldtype-" + (Guid)article.Id + "\" id=\"oldtype-" + (Guid)article.Id + "\" value=\"" + article.TypeId + "\" />").Title(string.Format(Resources.Congress.ArticleType, SessionParameters.CurrentCongress.Configuration.ArticleTitle)).Encode(false).Filterable(false);
+            columns.Template(article => Html.DropDownList("drpfinalstatus-" + (Guid)article.Id, new SelectList(ViewBag.finalstatus, "Key", "Value", article.FinalState), new { }) + "<input type=\"hidden\" name=\"oldFinalState-" + (Guid)article.Id + "\" id=\"oldFinalState-" + (Guid)article.Id + "\" value=\"" + article.FinalState + "\" />").Title(Resources.Congress.FinalState).Encode(false).Filterable(false);
+            columns.Template(article => Html.DropDownList("drppaymentstatus-" + (Guid)article.Id, new SelectList(ViewBag.paystatus, "Key", "Value", article.PayStatus), new { }) + "<input type=\"hidden\" name=\"oldPayStatus-" + (Guid)article.Id + "\" id=\"oldPayStatus-" + (Guid)article.Id + "\" value=\"" + article.PayStatus + "\" />").Title(Resources.Congress.PaymentStatus).Visible((bool)ViewBag.HasArticlePayment).Filterable(true).Encode(false);
+            columns.Template(article =>
+
+      (article.OrginalFileId != null || !string.IsNullOrEmpty(article.ArticleOrginalText) ? "<img src='" + Url.Content("~/Content/Images/online.png") + "' title='" + string.Format(Resources.Congress.OrginalFile, SessionParameters.CurrentCongress.Configuration.ArticleTitle) + "' border='0'/> |" : (article.AbstractFileId != null || !string.IsNullOrEmpty(article.Abstract) ? "<img src='" + Url.Content("~/Content/Images/online-red.png") + "' title='" + Resources.Congress.ArticleAbstract + "' border='0'/> |" : "<img src='" + Url.Content("~/Content/Images/offline.png") + "' border='0'/>")) +
+                            (article.TransactionId != null ? " <img  style='cursor: pointer' width = '20px;' height = '20px;' src='" + Url.Content("/Areas/Congress/Content/Images/payment-command.png") + "'   title='" + Resources.Payment.PaymentDetails + "'   onclick=\"PaymentDetails(" + "'" + article.TransactionId + "'" + ");\"  />" + " | " : "") +
+                            (article.HasRefereeOpinion ? "  <img alt='" + Resources.Congress.CommentofReferee + "' title='" + Resources.Congress.CommentofReferee + "'  style='cursor: pointer' width = '20px;' height = '20px;' src='" + Url.Content("/Areas/Congress/Content/Images/judge-comments.png") + "'    onclick=\"Refereeopinion(" + "'" + article.Id + "'" + ");\" />" + " | " : "")
+                            + (article.HasRefereeAttachment ? "  <img alt='" + Resources.Congress.Referee + "'   title='" + Resources.Congress.Referee + "' style='cursor: pointer' width = '20px;' height = '20px;' src='" + Url.Content("/Areas/Congress/Content/Images/judge-assigned.png") + "'    onclick=\"RefreeSelect(" + "'" + article.Id + "'" + ");\" />" + " | "
+                                : "  <img alt='" + Resources.Congress.Referee + "' style='cursor: pointer' width = '20px;' height = '20px;' src='" + Url.Content("/Areas/Congress/Content/Images/judge-not-assigned.png") + "'    onclick=\"RefreeSelect(" + "'" + article.Id + "'" + ");\" />" + " | ") +
+                            " <img  alt='" + Resources.Common.Print + " " + Resources.Congress.Certificate + "' title='" + Resources.Common.Print + " " + Resources.Congress.Certificate + "'   style='cursor: pointer' width = '20px;' height = '20px;' src='" + Url.Content("~/Content/Images/printer-certificate.png") + "'    onclick=\"PrintCertificate(" + "'" + article.Id + "'" + ");\" /img>" + " | " +
+                            "<a style='cursor: pointer;' onclick=\"DeleteAricle('" + article.Id + "')\" >" +
+                            " <img width='18' align='absmiddle' title='" + Resources.Congress.SendToAvchive + "' src='" + Url.Content("~/Content/Images/recyclebin.png") + "' />" + "</a> | " +
+                            "<a style='cursor: pointer;' onclick=\"LookUpForm('" + article.Id + "','Edit')\" > " +
+                                                        " <img width='18' align='absmiddle' title='" + Resources.Common.Edit + "' src='" + Url.Content("~/Content/Images/edit.png") + "' />" + "</a>  | " +
+                                                       "<a style=\"text-align:left;cursor: pointer;\"   onClick=\"SaveRecord('" + article.Id + "')\"><img width='18' align='absmiddle' title='" + Resources.Common.SaveChanges + "' src='" + Url.Content("~/Content/Images/Save.png") + "' /></a> |" +
+                                                       "<a style=\"text-align:left;cursor: pointer;\"   onClick=\"LookUpForm('" + article.Id + "','Log')\"><img width='18' align='absmiddle' title='" + Resources.Security.Log + "' src='" + Url.Content("~/Content/Images/Logs.png") + "' /></a> |"  +
+            (SessionParameters.CurrentCongress.Configuration.EnableArticleComment ? "<a style=\"text-align:left;cursor: pointer;margin:0 2px; \"   onClick=\"LookUpForm('" + article.Id + "','Comment')\"><img width='18' align='absmiddle' title='" + Resources.Congress.ArticleUserComment + "' src='" + Url.Content("~/Content/Images/comment-alt.png") + "' /></a>" : "")).Width(300).HtmlAttributes(new { @class = "text-align" }).Encode(false).Filterable(false);
+
+        }).Pageable(x => x.Enabled(true))
+.Searchable(x => x.Enabled(false))
+.Filterable(x => x.Enabled(true))
+.Sortable(x => x.Enabled(true))
+.Culture(@SessionParameters.Culture)
+.Render();
+    }

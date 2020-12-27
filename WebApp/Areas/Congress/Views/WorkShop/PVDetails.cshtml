@@ -1,0 +1,113 @@
+﻿@using Radyn.FileManager
+@using Radyn.Utility
+@using Radyn.WebApp.Areas.Common.Component
+@model Radyn.Congress.DataStructure.WorkShop 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.get("@Url.Content("~/Congress/Teacher/GetTeachers")", { workShopId: '@Model.Id', modifymode: false, Data: new Date().getTime() }, function (data) {
+            $("#DivTeachers").html(data).slideDown("slow");;
+        });
+    });
+</script>
+<div class="fit">
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Cost
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                 @Model.ValidCost.ToDecimal().ToString("n0")  @(Model.CurrencyType.ToEnum<Radyn.Common.Definition.Enums.CurrencyType>().GetDescriptionInLocalization())
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Capacity
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Model.Capacity
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.FreeCapicity
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Model.FreeCapicity
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap ">
+            <div class="item">
+                @Resources.Congress.Attachment  @Resources.Congress.Program
+
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @if (Model != null)
+                {
+                    if (Model.ProgramAttachId.HasValue)
+                    {
+                        Html.RadynFile().Image().ID(Model.ProgramAttachId.Value).Download().Render();
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Attachment  @Resources.Congress.File
+
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @if (Model != null)
+                {
+                    if (Model.FileAttachId.HasValue)
+                    {
+                        Html.RadynFile().Image().ID(Model.FileAttachId.Value).Download().Render();
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Subject
+
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Html.DisplayFor(m => m.Subject)
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Comment
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Html.DisplayFor(vip => vip.Comment)
+            </div>
+        </div>
+    </div>
+    <div id="DivTeachers" class="fit"></div>
+</div>

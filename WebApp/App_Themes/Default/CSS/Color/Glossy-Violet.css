@@ -1,0 +1,219 @@
+﻿.ui-h-menu {
+    border-color: #9A5398;
+    background: #8c478a;
+    background: -moz-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #8c478a), color-stop(50%, #934090), color-stop(51%, #853284), color-stop(100%, #733471));
+    background: -webkit-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -o-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -ms-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: linear-gradient(to bottom, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c478a', endColorstr='#733471', GradientType=0 );
+    -webkit-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    -moz-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    box-shadow: inset 0px 0px 0px 1px #A975A8;
+}
+/*##############Superfish*/
+/*##Superfish-Horizontal*/
+.sf-menu a {
+    border-color: #9A5398;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    -moz-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    box-shadow: inset 0px 0px 0px 1px #A975A8;
+}
+
+
+.sf-menu li, .sf-menu ul li, .sf-menu ul ul li {
+    background: #8c478a;
+    background: -moz-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #8c478a), color-stop(50%, #934090), color-stop(51%, #853284), color-stop(100%, #733471));
+    background: -webkit-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -o-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -ms-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: linear-gradient(to bottom, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c478a', endColorstr='#733471', GradientType=0 );
+}
+
+
+
+    .sf-menu li:hover,
+    .sf-menu li.sfHover {
+        background: #ba5fb8;
+        background: -moz-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, #ba5fb8), color-stop(50%, #c85ec4), color-stop(51%, #b745b5), color-stop(100%, #9f449d));
+        background: -webkit-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+        background: -o-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+        background: -ms-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+        background: linear-gradient(to bottom, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ba5fb8', endColorstr='#9f449d', GradientType=0 );
+        -webkit-box-shadow: inset 0px 0px 0px 1px #CC88CA;
+        -moz-box-shadow: inset 0px 0px 0px 1px #CC88CA;
+        box-shadow: inset 0px 0px 0px 1px #CC88CA;
+    }
+
+    .sf-menu > li.sfHover > a, .sf-menu > li.sfHover > a:hover,
+    .sf-menu > li > a:hover, .sf-menu > li.active > a,
+    .sf-menu > li.active > a:hover, .sf-menu > li > ul li > a:hover,
+    .sf-menu > li > ul li.sfHover > a, .sf-menu ul ul li a:hover {
+        color: #ffffff;
+        text-shadow: 1px 1px 1px #444444;
+    }
+/*##Superfish-Vertical*/
+/*Superfish##############*/
+.radyn-Resources {
+    background: #a16fa0;
+    background: -moz-linear-gradient(top, #a16fa0 0%, #733471 50%, #a16fa0 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #a16fa0), color-stop(50%, #733471), color-stop(100%, #a16fa0));
+    background: -webkit-linear-gradient(top, #a16fa0 0%, #733471 50%, #a16fa0 100%);
+    background: -o-linear-gradient(top, #a16fa0 0%, #733471 50%, #a16fa0 100%);
+    background: -ms-linear-gradient(top, #a16fa0 0%, #733471 50%, #a16fa0 100%);
+    background: linear-gradient(to bottom, #a16fa0 0%, #733471 50%, #a16fa0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a16fa0', endColorstr='#a16fa0', GradientType=0 );
+    border-color: #480646;
+    -webkit-box-shadow: inset 0px 0px 1px 1px #C3A6C3;
+    -moz-box-shadow: inset 0px 0px 1px 1px #C3A6C3;
+    box-shadow: inset 0px 0px 1px 1px #C3A6C3;
+}
+
+/*container*/
+.container-hd {
+    border: 1px solid #A37A32;
+}
+
+.container-header {
+    background: #ba5fb8;
+    background: -moz-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #ba5fb8), color-stop(50%, #c85ec4), color-stop(51%, #b745b5), color-stop(100%, #9f449d));
+    background: -webkit-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    background: -o-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    background: -ms-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    background: linear-gradient(to bottom, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ba5fb8', endColorstr='#9f449d', GradientType=0 );
+    -webkit-box-shadow: inset 0px 0px 0px 1px #CC88CA;
+    -moz-box-shadow: inset 0px 0px 0px 1px #CC88CA;
+    box-shadow: inset 0px 0px 0px 1px #CC88CA;
+    border-bottom: solid 1px #A37A32;
+}
+
+
+
+
+/**/
+
+/*MENU*/
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border-color: #9A5398;
+    background: #8c478a;
+    background: -moz-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #8c478a), color-stop(50%, #934090), color-stop(51%, #853284), color-stop(100%, #733471));
+    background: -webkit-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -o-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -ms-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: linear-gradient(to bottom, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c478a', endColorstr='#733471', GradientType=0 );
+    -webkit-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    -moz-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    box-shadow: inset 0px 0px 0px 1px #A975A8;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    border-color: #A04B9E;
+    background: #ba5fb8;
+    background: -moz-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #ba5fb8), color-stop(50%, #c85ec4), color-stop(51%, #b745b5), color-stop(100%, #9f449d));
+    background: -webkit-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    background: -o-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    background: -ms-linear-gradient(top, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    background: linear-gradient(to bottom, #ba5fb8 0%, #c85ec4 50%, #b745b5 51%, #9f449d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ba5fb8', endColorstr='#9f449d', GradientType=0 );
+    -webkit-box-shadow: inset 0px 0px 0px 1px #CC88CA;
+    -moz-box-shadow: inset 0px 0px 0px 1px #CC88CA;
+    box-shadow: inset 0px 0px 0px 1px #CC88CA;
+}
+
+/* General link styling */
+
+
+/* The hover state of the menu/submenu links */
+.cssmenu > ul li a:hover,
+.cssmenu > ul li:hover > a {
+    border-color: #9A5398;
+    background: #8c478a;
+    background: -moz-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #8c478a), color-stop(50%, #934090), color-stop(51%, #853284), color-stop(100%, #733471));
+    background: -webkit-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -o-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: -ms-linear-gradient(top, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    background: linear-gradient(to bottom, #8c478a 0%, #934090 50%, #853284 51%, #733471 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c478a', endColorstr='#733471', GradientType=0 );
+    -webkit-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    -moz-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    box-shadow: inset 0px 0px 0px 1px #A975A8;
+}
+
+/* THE SUBMENUS */
+.cssmenu > ul ul {
+    /* Background & effects */
+    background-color: #FAF1FA;
+    border: 1px solid #9A5398;
+}
+
+
+
+/* End Vertical menu =====================================================================================*/
+
+
+/*INTERNALMAIL*/
+.nav-mail-item {
+    background-color: #8c478a;
+    border-color: #9A5398;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    -moz-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    box-shadow: inset 0px 0px 0px 1px #A975A8;
+}
+
+    .nav-mail-item:first-child {
+        border-top: 1px solid #9A5398;
+    }
+
+.nav-mailText {
+    color: #ffffff;
+}
+
+.nav-mail-item:hover, .nav-mail-item-selected {
+    background-color: #ba5fb8;
+}
+
+.nav-mail-item span {
+    background-color: #733471;
+    border-color: #9A5398;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    -moz-box-shadow: inset 0px 0px 0px 1px #A975A8;
+    box-shadow: inset 0px 0px 0px 1px #A975A8;
+}
+
+.nav-mail-item:hover span {
+    background-color: #9f449d;
+}
+
+.userinfo span {
+    background-color: #AA4061;
+    color: #ffffff;
+}
+
+    .userinfo span div {
+        background-color: #D5557C;
+    }
+
+.gv-header {
+    background-color: #C962C6;
+    border-color: #A04B9E;
+    color: #ffffff;
+}
+
+.gv-row-style:hover, .gv-alternaterow-style:hover {
+    background-color: #E1CAE1; /*#73a039;*/
+}
+
+.container-box {
+    background-color: #FAF1FA;
+}

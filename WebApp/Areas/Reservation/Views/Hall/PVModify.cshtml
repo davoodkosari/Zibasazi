@@ -1,0 +1,117 @@
+﻿@using Radyn.WebApp.Areas.Common.Component
+
+@using Radyn.FileManager
+@model Radyn.Reservation.DataStructure.Hall
+<script type="text/javascript">
+    function GetDesign() {
+        ShowModal("/Reservation/HallChairDesign/LookUpDesign?hallId=" + '@Model.Id');
+    }
+    function GetView() {
+        ShowModal("/Reservation/HallChairDesign/LookUpView?hallId=" + '@Model.Id');
+    }
+    function GetViewPhoto() {
+        ShowModal("/Reservation/Hall/ShowHallPhoto?Id=" + '@Model.PhotoId');
+    }
+</script>
+
+@if (Model != null)
+{
+
+    @Html.ValidationSummary(true)
+    <div>
+        <div class="item-row fit">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Reservation.Name
+                </div>
+            </div>
+            <div class="table-row-item table-fit">
+                <div class="item">
+                    @{
+                        Html.LanguageContentTextBoxFor(Model, x => x.Name);
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Reservation.Length
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item">
+                    @Html.EditorFor(model => model.Length)
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Reservation.Width
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item">
+                    @Html.EditorFor(model => model.Width)
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Reservation.Parent
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.ParentId, (SelectList)TempData["hall"], "")
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Common.Enable
+                </div>
+            </div>
+            <div class="table-row-item drp">
+                <div class="item">
+                    @Html.RadioButtonFor(model => model.Enabled, true)@Resources.Common.Enable
+                    @Html.RadioButtonFor(model => model.Enabled, false)@Resources.Common.Disable
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap table-c-fit">
+                <div class="item">
+                    @Resources.Reservation.HallPhoto
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @{
+                        Html.RenderAction("FileUploader", "FileUpload", new { area = "FileManager", filePropName = "PhotoId", showimage = true, fileid = Model.PhotoId, fileName = "Hallphoto" });
+
+                    }
+
+                </div>
+            </div>
+        </div>
+        @if (Model != null && Model.Id != Guid.Empty)
+        {
+            <div class="table-row-empty button-th">
+                <div class="item">
+                    <div class="button-div m-btn waves-green i-save">
+                        <input type="button" name="FormDesign" onclick="GetDesign()" value="طراحی" />
+                    </div>
+                    <div class="button-div m-btn waves-green i-save">
+                        <input type="button" name="FormDesign" onclick="GetView()" value="نمایش" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+}

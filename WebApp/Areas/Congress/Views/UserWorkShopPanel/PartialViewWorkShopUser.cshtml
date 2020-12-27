@@ -1,0 +1,45 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+
+@model IEnumerable<Radyn.Congress.DataStructure.WorkShopUser>
+<script type="text/javascript">
+    function DeleteReserv(userId, workshopId) {
+        if (confirm('@Resources.Common.Are_You_Soure_For_Delete')) {
+             $.get("@Url.Content("~/Congress/ManagmentPanel/DeleteUserWorkShop")", { userId: userId, workshopId: workshopId, date: new Date().getTime() }, function (data) {
+                if (data != "false") {
+                    GetChildReserved();
+                    ShowRadynMessage();
+                }
+                ShowRadynMessage();
+            });
+        }
+
+    }
+</script>
+@if (Model.Any())
+{
+    <div class="fit ">
+        @{
+    Html.Radyn().Grid(Model).DataKeys(x => x.Add(y => y.WorkShopId)).DataKeys(y => y.Add(user => user.UserId)).Name("Grid").HtmlAttributes(new { style = "width:700px;margin: 0 auto" }).Columns(columns =>
+    {
+        columns.Template(user => user.User.Username).Title(Resources.Security.UserUsername).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(user => user.User.EnterpriseNode.RealEnterpriseNode.FirstName).Title(Resources.EnterPriseNode.FirstName).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(user => user.User.EnterpriseNode.RealEnterpriseNode.LastName).Title(Resources.EnterPriseNode.LastName).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(workShopUser => workShopUser.RegisterDate).Title(@Resources.Congress.RegisterDate).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(workShopUser => workShopUser.Status.ToString().ToEnum<Enums.WorkShopRezervState>().GetDescriptionInLocalization()).Title(Resources.Congress.Status).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(workShopUser => (workShopUser.Status != (byte)Enums.WorkShopRezervState.Finalconfirm && workShopUser.Status != (byte)Enums.WorkShopRezervState.PresentConfirm) ? (" <img alt='" + @Resources.Common.Delete + "' style='cursor: pointer' width = '20px;' height = '20px;' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "'    onclick=\"DeleteReserv('" + workShopUser.UserId + "','" + workShopUser.WorkShopId + "');\" />") : "").Title(Resources.Common.Delete).HeaderHtmlAttributes(new { style = "text-align:center" }).Visible((bool)(ViewBag.AllowDelete != null && (bool)ViewBag.AllowDelete)).Encode(false);
+
+    })
+        
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Enabled(true))
+        .Footer(false).Render();
+        }
+        
+    </div>
+
+}
+
+

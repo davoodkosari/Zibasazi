@@ -1,0 +1,35 @@
+﻿@using Radyn.Common
+@using Radyn.Congress.DataStructure
+@using Radyn.WebApp.AppCode.Security
+@model IEnumerable<Radyn.Congress.DataStructure.Article>
+@{
+    ViewBag.Title = string.Format(Resources.Congress.ArticleArchive,SessionParameters.CurrentCongress.Configuration.ArticleTitle);
+    Layout = "~/Views/Shared/User_Layout.cshtml";
+
+}
+
+@section Head{}
+<div class="container-hd">
+    <div class="container-header">
+        <div class="container-header-item">
+            @string.Format(Resources.Congress.ArticleArchive, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+        </div>
+    </div>
+    <div class="container-box">
+        @{ var count = 0;}
+
+        @foreach (var item in Model)
+        {
+            count++;
+            <div class="article-title">
+               @count - @item.Title
+            </div>
+            <div style="width: 100%; float: right">
+                <div class="art-seprattor">
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

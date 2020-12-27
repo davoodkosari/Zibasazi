@@ -1,0 +1,1 @@
+﻿alter table [ContentManage].[Partials] add RefId varchar(100) 

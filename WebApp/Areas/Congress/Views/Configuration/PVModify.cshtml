@@ -1,0 +1,1924 @@
+﻿@using Radyn.FileManager
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.Common.Component
+
+@model Radyn.Congress.DataStructure.Configuration
+<script type="text/javascript">
+
+
+    function ThemeChange() {
+        var value = $('#Theme').val();
+
+            $('#ThemeColorURL').parentsUntil('#Basic-UIDesigneConfig').show();
+            $.get("@Url.Content("~/Congress/Configuration/FillThemeColorURL")", { folder: value, date: new Date().getTime() }, function (data) {
+                FillThemeColorURL(data);
+            });
+
+    }
+
+    function FillThemeColorURL(list) {
+        
+        $('#DivThemeColorURL').html('');
+        var select = $('<select>').attr('id', 'ThemeColorURL').attr('name', 'ThemeColorURL').append($('<option>').val('').text(''));
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].Url === '@ViewBag.ThemeUrl') {
+                select.append($('<option selected="selected">').val(list[i].Url).text(list[i].Name));
+            } else {
+            select.append($('<option>').val(list[i].Url).text(list[i].Name));
+
+            }
+
+    }
+    $('#DivThemeColorURL').append(select);
+    }
+
+    $(document).ready(function () {
+
+        GetContent();
+        GetAbstarctFile('@Model.GetAbstractFile');
+        GetChangeArticleOrginalFile('@Model.GetArticleOrginalFile');
+        GetChangeHasArticlePayment('@Model.HasArticlePayment');
+        GetAbsrtacts('@Model.GetAbsrtact');
+        GetArticleOrginal('@Model.GetOrginal');
+
+        ChangeBackground('@(Model.BackgroundIsImage)');
+        ThemeChange();
+        ('@Model.HasArticle' == "True") ? ShowDiv("DivArticle") : HideDiv("DivArticle");
+        ('@Model.HasBooth' == "True") ? ShowDiv("DivBooth") : HideDiv("DivBooth");
+        ('@Model.HasHotel' == "True") ? ShowDiv("DivHotel") : HideDiv("DivHotel");
+        ('@Model.HasWorkShop' == "True") ? ShowDiv("DivWorkShop") : HideDiv("DivWorkShop");
+
+
+        $("#BankId").on("change", function () {
+            onBankIdChanged();
+        });
+        onBankIdChanged();
+
+        $('#Theme')
+            .on('change',
+                function () {
+                    ThemeChange();
+                });
+
+    });
+
+    function GetContent() {
+        $.get("@Url.Content("~/Congress/Configuration/GetContent")", { Id: '@Model.CongressId', date: new Date().getTime() }, function (data) {
+            $("#DivContent").html(data);
+        });
+    }
+
+    function changeAttachmentCulture() {
+        var culid = document.getElementById("LanguageId").value;
+        $.get("@Url.Content("~/Congress/Configuration/GetContent")", { Id: '@Model.CongressId', langid: culid, date: new Date().getTime() }, function (data) {
+            $("#DivContent").html(data);
+
+        });
+    }
+
+
+    function ShowDiv(Name) {
+        $("#" + Name).slideDown();
+    }
+    function HideDiv(Name) {
+        $("#" + Name).slideUp();
+    }
+    function GetAbstarctFile(value) {
+        if (value == "True") {
+            $("#divabstractfile").show();
+            $("#DivAbstracttext").hide();
+        } else {
+            $("#divabstractfile").hide();
+            $("#DivAbstracttext").show();
+        }
+
+    }
+    function GetChangeArticleOrginalFile(value) {
+
+        if (value == "True") {
+            $("#DivArtileorginaltext").hide();
+            $("#DivArticleOrginalFile").show();
+        } else {
+            $("#DivArtileorginaltext").show();
+            $("#DivArticleOrginalFile").hide();
+
+        }
+
+    }
+    function GetChangeHasArticlePayment(value) {
+
+        if (value == "True") {
+            $("#DivArticlePaymentStep").show();
+        } else {
+            $("#DivArticlePaymentStep").hide();
+
+
+        }
+    }
+    function GetArticleOrginal(value) {
+
+        if (value == "True") {
+            $("#DivGetArticleOrginal").show();
+
+        } else {
+            $("#DivGetArticleOrginal").hide();
+
+        }
+
+    }
+    function GetAbsrtacts(value) {
+        if (value === "True") {
+            $("#DivGetAbsrtacts").show();
+
+        } else {
+            $("#DivGetAbsrtacts").hide();
+
+        }
+    }
+    function ChangeBackground(isimage) {
+        if (isimage == "True") {
+            $("#Div-BackgroundImage").show();
+            $("#Div-BackgroundColor").hide();
+        } else {
+            $("#Div-BackgroundImage").hide();
+            $("#Div-BackgroundColor").show();
+        }
+
+    }
+    function viewHtml() {
+        var value = $("#Theme").val();
+        if (value != "")
+            ShowModalFullScreen('@Url.Content("~/Home/Index?theme=")' + value);
+    }
+
+    function onBankIdChanged() {
+        var bankId = $("#BankId").attr("value");
+
+        if (bankId == "7") {
+            if ($("#merchant_id_section").length > 0) {
+                $("#merchant_id_section").hide();
+            }
+            if ($("#terminal_id_section").length > 0) {
+                $("#terminal_id_section").show();
+            }
+            if ($("#terminal_username_section").length > 0) {
+                $("#terminal_username_section").show();
+            }
+            if ($("#terminal_password_section").length > 0) {
+                $("#terminal_password_section").show();
+            }
+            if ($("#certificate_path_section").length > 0) {
+                $("#certificate_path_section").show();
+            }
+            if ($("#certificate_pass_section").length > 0) {
+                $("#certificate_pass_section").show();
+            }
+            if ($("#merchant_public_key_section").length > 0) {
+                $("#merchant_public_key_section").hide();
+            }
+            if ($("#merchant_private_key_section").length > 0) {
+                $("#merchant_private_key_section").hide();
+            }
+        } else if (bankId == "8") {//iranKish
+            if ($("#merchant_id_section").length > 0) {
+                $("#merchant_id_section").show();
+            }
+            if ($("#terminal_id_section").length > 0) {
+                $("#terminal_id_section").hide();
+            }
+            if ($("#terminal_username_section").length > 0) {
+                $("#terminal_username_section").hide();
+            }
+            if ($("#terminal_password_section").length > 0) {
+                $("#terminal_password_section").hide();
+            }
+            if ($("#certificate_path_section").length > 0) {
+                $("#certificate_path_section").hide();
+            }
+            if ($("#certificate_pass_section").length > 0) {
+                $("#certificate_pass_section").hide();
+            }
+            if ($("#merchant_public_key_section").length > 0) {
+                $("#merchant_public_key_section").hide();
+            }
+            if ($("#merchant_private_key_section").length > 0) {
+                $("#merchant_private_key_section").show();
+            }
+        } else if (bankId == "9") { //mabna
+
+            if ($("#merchant_id_section").length > 0) {
+                $("#merchant_id_section").show();
+            }
+            if ($("#terminal_id_section").length > 0) {
+                $("#terminal_id_section").show();
+            }
+            if ($("#terminal_username_section").length > 0) {
+                $("#terminal_username_section").hide();
+            }
+            if ($("#terminal_password_section").length > 0) {
+                $("#terminal_password_section").hide();
+            }
+            if ($("#certificate_path_section").length > 0) {
+                $("#certificate_path_section").hide();
+            }
+            if ($("#certificate_pass_section").length > 0) {
+                $("#certificate_pass_section").hide();
+            }
+            if ($("#merchant_public_key_section").length > 0) {
+                $("#merchant_public_key_section").show();
+                $("#merchant_public_key_section .item-title").text("@Resources.Congress.MerchantPublicKey");
+
+            }
+            if ($("#merchant_private_key_section").length > 0) {
+                $("#merchant_private_key_section").show();
+                $("#merchant_private_key_section .item-title").text("@Resources.Congress.MerchantPrivateKey");
+
+            }
+        } else if (bankId == "10") { //ghavamin
+
+            if ($("#merchant_id_section").length > 0) {
+                $("#merchant_id_section").show();
+            }
+            if ($("#terminal_id_section").length > 0) {
+                $("#terminal_id_section").hide();
+            }
+            if ($("#terminal_username_section").length > 0) {
+                $("#terminal_username_section").hide();
+            }
+            if ($("#terminal_password_section").length > 0) {
+                $("#terminal_password_section").hide();
+            }
+            if ($("#certificate_path_section").length > 0) {
+                $("#certificate_path_section").hide();
+            }
+            if ($("#certificate_pass_section").length > 0) {
+                $("#certificate_pass_section").hide();
+            }
+            if ($("#merchant_public_key_section").length > 0) {
+                $("#merchant_public_key_section").show();
+                $("#merchant_public_key_section .item-title").text("@Resources.Congress.Wsp1");
+            }
+            if ($("#merchant_private_key_section").length > 0) {
+                $("#merchant_private_key_section").show();
+                $("#merchant_private_key_section .item-title").text("@Resources.Congress.Wsp2");
+            }
+        } else if (bankId === "11") {
+            if ($("#merchant_id_section").length > 0) {
+                $("#merchant_id_section").show();
+            }
+            if ($("#terminal_id_section").length > 0) {
+                $("#terminal_id_section").hide();
+            }
+            if ($("#terminal_username_section").length > 0) {
+                $("#terminal_username_section").hide();
+            }
+            if ($("#terminal_password_section").length > 0) {
+                $("#terminal_password_section").hide();
+            }
+            if ($("#certificate_path_section").length > 0) {
+                $("#certificate_path_section").hide();
+            }
+            if ($("#certificate_pass_section").length > 0) {
+                $("#certificate_pass_section").hide();
+            }
+            if ($("#merchant_public_key_section").length > 0) {
+                $("#merchant_public_key_section").hide();
+            }
+            if ($("#merchant_private_key_section").length > 0) {
+                $("#merchant_private_key_section").hide();
+            }
+        } else {
+            if ($("#merchant_id_section").length > 0) {
+                $("#merchant_id_section").hide();
+            }
+            if ($("#terminal_id_section").length > 0) {
+                $("#terminal_id_section").show();
+            }
+            if ($("#terminal_username_section").length > 0) {
+                $("#terminal_username_section").show();
+            }
+            if ($("#terminal_password_section").length > 0) {
+                $("#terminal_password_section").show();
+            }
+            if ($("#certificate_path_section").length > 0) {
+                $("#certificate_path_section").hide();
+            }
+            if ($("#certificate_pass_section").length > 0) {
+                $("#certificate_pass_section").hide();
+            }
+            if ($("#merchant_public_key_section").length > 0) {
+                $("#merchant_public_key_section").hide();
+            }
+            if ($("#merchant_private_key_section").length > 0) {
+                $("#merchant_private_key_section").hide();
+            }
+        }
+    }
+
+
+</script>
+
+
+<div class="accordion-setting">
+    @*تنظیمات پایه*@
+    <div class="fit item-row">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Settings');">
+            <div class="item">
+                @Resources.Congress.BaseSetting
+                <span class="arrow toButton Basic-Settings"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Settings">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.HasFinancialOperation
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.HasFinancialOperation, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.HasFinancialOperation, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.RegisterEmailConfirm
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.RegisterEmailConfirm, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.RegisterEmailConfirm, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.CongressCode
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.CongressCode, new { })
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.RegisterGroup
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item font11">
+                        @Html.RadioButtonFor(model => model.RegisterGroupEnable, true)@Resources.Common.Enable
+                        @Html.RadioButtonFor(model => model.RegisterGroupEnable, false)@Resources.Common.Disable
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @string.Format(Resources.Congress.HasArticle, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.HasArticle, true, new { onclick = "ShowDiv('DivArticle')" })@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.HasArticle, false, new { onclick = "HideDiv('DivArticle')" })@Resources.Common.No
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.HasHotel
+
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.HasHotel, true, new { onclick = "ShowDiv('DivHotel')" })@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.HasHotel, false, new { onclick = "HideDiv('DivHotel')" })@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.HasWorkShop
+
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.HasWorkShop, true, new { onclick = "ShowDiv('DivWorkShop')" })@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.HasWorkShop, false, new { onclick = "HideDiv('DivWorkShop')" })@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.HasBoothReserv
+
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.HasBooth, true, new { onclick = "ShowDiv('DivBooth')" })@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.HasBooth, false, new { onclick = "HideDiv('DivBooth')" })@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.CanUserSelectChairs
+
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.CanUserSelectChairs, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.CanUserSelectChairs, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row" style="display: none">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.IsScrollSupporter
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.IsScrollSupporter, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.IsScrollSupporter, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row" style="display: none">
+                <div class="table-row-cap font10">
+                    <div class="item">
+                        @Resources.Congress.IsScrollVip
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.IsScrollVIP, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.IsScrollVIP, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap font10">
+                    <div class="item">
+                        @Resources.Congress.CanUserReserveBoothWithoutPaymentType
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.CanUserReserveBoothWithoutPaymentType, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.CanUserReserveBoothWithoutPaymentType, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap font10">
+                    <div class="item">
+                        @Resources.Congress.CanUserReserveHotelWithoutPaymentType
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.CanUserReserveHotelWithoutPaymentType, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.CanUserReserveHotelWithoutPaymentType, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap font10">
+                    <div class="item">
+                        @Resources.Congress.CanUserReserveWorkShopWithoutPaymentType
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.CanUserReserveWorkShopWithoutPaymentType, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.CanUserReserveWorkShopWithoutPaymentType, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap font10">
+                    <div class="item">
+                        @string.Format(Resources.Congress.CanUserSendArticleWithoutPaymentType, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.CanUserSendArticleWithoutPaymentType, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.CanUserSendArticleWithoutPaymentType, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.HasUserPayment
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.HasUserPayment, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.HasUserPayment, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.MaxNewsCountToShow
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MaxNewsCountShow, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.ShoudBeUserPaymentApprovedForUserCardPrint
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.ShoudBeUserPaymentApprovedForUserCardPrint, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.ShoudBeUserPaymentApprovedForUserCardPrint, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.AccessToUserImportDataFromExcel
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.AccessToUserImportFromExcel, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.AccessToUserImportFromExcel, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.HasUserForms
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.HasUserForms, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.HasUserForms, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    @*تنظیمات ظاهری*@
+    <div class="fit item-row" id="DivHtml">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-UIDesigneConfig');">
+            <div class="item">
+                @Resources.Congress.UIDesigneConfig
+                <span class="arrow toButton Basic-UIDesigneConfig"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-UIDesigneConfig">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.IntroductionPage
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.IntroPageId, (SelectList)ViewBag.IntroPages, "")
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MiniSlideId
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.MiniSlideId, (SelectList)ViewBag.Slides, "")
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.AverageSlideId
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.AverageSlideId, (SelectList)ViewBag.Slides, "")
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  ">
+                    <div class="item">
+                        @Resources.Congress.BigSlideId
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.BigSlideId, (SelectList)ViewBag.Slides, "")
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.Theme
+                    </div>
+                </div>
+                <div class="table-row-item select-row two-col small-btn">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.Theme, (SelectList)ViewBag.Themes, "")
+                        <div class="m-btn waves-blue i-preview icon-btn">
+                            <span>
+                                <a onclick="viewHtml()">
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  ">
+                    <div class="item">
+                        @Resources.Congress.BackgroundColor
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item" id="DivThemeColorURL">
+                        @*@Html.DropDownListFor(model => model.ThemeColorURL, (SelectList)ViewBag.SelectTheme, "")*@
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  ">
+                    <div class="item">
+                        @Resources.Congress.ModuleContainer
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.DefaultContrainerId, (SelectList)ViewBag.Contrainers, "")
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  ">
+                    <div class="item">
+                        @Resources.Congress.DefaultHtml
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.DefaultHtmlId, (SelectList)ViewBag.Htmls, "")
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  ">
+                    <div class="item">
+                        @Resources.Congress.DefaultMenuHtml
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.DefaultMenuHtmlId, (SelectList)ViewBag.MenuHtmls, "")
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        Fav Icon
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @{
+                            Html.RenderAction("FileUploader", "FileUpload", new { area = "FileManager", filePropName = "FavIcon", fileid = Model.FavIcon, showimage = true, fileName = "UpFileFavIcon" });
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="item-row ">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        زمینه سایت
+                    </div>
+                </div>
+                <div class="table-row-item table-c-fit ">
+                    <div class="item">
+                        <div class="drp" style="display: inline-block">
+                            @Html.RadioButtonFor(model => model.BackgroundIsImage, true, new { onclick = "ChangeBackground('True')" })@Resources.Congress.BackgroundImage
+                            @Html.RadioButtonFor(model => model.BackgroundIsImage, false, new { onclick = "ChangeBackground('False')" })@Resources.Congress.BackgroundColor
+                        </div>
+                        <div class="" id="Div-BackgroundImage">
+                            <div id="ImageUploader">
+                                @{ Html.RenderAction("FileUploader", "FileUpload", new { area = "FileManager", filePropName = "BackgroundImage", fileid = Model.BackgroundImage, fileName = "UploadBackgroundImageId" }); }
+                            </div>
+                        </div>
+                        <div class="color-picker" id="Div-BackgroundColor">
+                            @{Html.Radyn().ColorPickerFor(Model, mo => mo.BackgroundColor).Render(); }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row fit">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.WebStatistics
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextAreaFor(model => model.WebStatistics)
+                    </div>
+                </div>
+            </div>
+       
+
+
+
+
+        </div>
+    </div>
+
+    @*تنظیمات مقالات*@
+    <div class="fit item-row" id="DivArticle">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Article')">
+            <div class="item">
+                @string.Format(Resources.Congress.ArticleSetting, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                <span class="arrow toButton Basic-Article"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Article">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @string.Format(Resources.Congress.MultiLanguageArticle, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.MultiLanguageArticle, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.MultiLanguageArticle, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item font11">
+                        @string.Format(Resources.Congress.SentArticleSpecialReferee, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.SentArticleSpecialReferee, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.SentArticleSpecialReferee, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+
+        <div class="item-row">
+            <div class="table-row-cap ">
+                <div class="item">
+                    @string.Format(Resources.Congress.AutoAssigneReferee, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                </div>
+            </div>
+            <div class="table-row-item drp ">
+                <div class="item">
+                    @Html.RadioButtonFor(model => model.AutoAssigneArticleToReferee, true)@Resources.Common.Yes
+                    @Html.RadioButtonFor(model => model.AutoAssigneArticleToReferee, false)@Resources.Common.No
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    ثبت نویسندگان توسط کاربر
+                </div>
+            </div>
+            <div class="table-row-item drp ">
+                <div class="item">
+                    @Html.RadioButtonFor(model => model.AllowUserAddAuthor, true)@Resources.Common.Enable
+                    @Html.RadioButtonFor(model => model.AllowUserAddAuthor, false)@Resources.Common.Disable
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap  font10">
+                <div class="item">
+                    کلید واژه توسط کاربر ارسال شود؟
+                </div>
+            </div>
+            <div class="table-row-item drp ">
+                <div class="item">
+                    @Html.RadioButtonFor(model => model.EnabledArticleKeyword, true)@Resources.Common.Yes
+                    @Html.RadioButtonFor(model => model.EnabledArticleKeyword, false)@Resources.Common.No
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                  درصد مشارکت نویسندگان
+                </div>
+            </div>
+            <div class="table-row-item drp ">
+                <div class="item">
+                    @Html.RadioButtonFor(model => model.EnableArticlePercentage, true)@Resources.Common.Enable
+                    @Html.RadioButtonFor(model => model.EnableArticlePercentage, false)@Resources.Common.Disable
+                </div>
+            </div>
+        </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @string.Format(Resources.Congress.GetAbsrtact, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.GetAbsrtact, true, new { onclick = "GetAbsrtacts('True');" })@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.GetAbsrtact, false, new { onclick = "GetAbsrtacts('False');" })@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="DivGetAbsrtacts">
+                <div class="item-row">
+                    <div class="table-row-cap ">
+                        <div class="item font11">
+                            @string.Format(Resources.Congress.AllowSentOrginalWhileAbstractDeny, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                        </div>
+                    </div>
+                    <div class="table-row-item drp ">
+                        <div class="item">
+                            @Html.RadioButtonFor(model => model.AllowSentOrginalWhileAbstractDeny, true)@Resources.Common.Yes
+                            @Html.RadioButtonFor(model => model.AllowSentOrginalWhileAbstractDeny, false)@Resources.Common.No
+                        </div>
+                    </div>
+                </div>
+                <div class="item-row">
+                    <div class="table-row-cap ">
+                        <div class="item font11">
+                            @Resources.Congress.GetAbstractFile
+                        </div>
+                    </div>
+                    <div class="table-row-item drp ">
+                        <div class="item">
+                            @Html.RadioButtonFor(model => model.GetAbstractFile, true, new { onclick = "GetAbstarctFile('True');" })@Resources.Congress.File
+                            @Html.RadioButtonFor(model => model.GetAbstractFile, false, new { onclick = "GetAbstarctFile('False');" })@Resources.Congress.Text
+                        </div>
+                    </div>
+                </div>
+                <div class="item-row" id="divabstractfile">
+                    <div class="table-row-cap  font10">
+                        <div class="item">
+                            @Resources.Congress.AbstractFileSize
+                        </div>
+                    </div>
+                    <div class="table-row-item ">
+                        <div class="item">
+                            @Html.TextBoxFor(model => model.AbstractFileSize, new { })
+                        </div>
+                    </div>
+                </div>
+                <div id="DivAbstracttext">
+                    <div class="item-row">
+                        <div class="table-row-cap  font10">
+                            <div class="item">
+                                @Resources.Congress.AbstractWordCount
+                            </div>
+                        </div>
+                        <div class="table-row-item ">
+                            <div class="item">
+                                @Html.TextBoxFor(model => model.AbstractWordCount, new { })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-row">
+                        <div class="table-row-cap  font10">
+                            <div class="item">
+                                @Resources.Congress.MinAbstractWordCount
+                            </div>
+                        </div>
+                        <div class="table-row-item ">
+                            <div class="item">
+                                @Html.TextBoxFor(model => model.MinAbstractWordCount, new { })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-row">
+                    <div class="table-row-cap ">
+                        <div class="item">
+                            @Resources.Congress.AbstractStartDate
+
+                        </div>
+                    </div>
+                    <div class="table-row-item ">
+                        <div class="item date-picker">
+                            @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.AbstractStartDate).Render(); }
+                        </div>
+                    </div>
+                </div>
+                <div class="item-row">
+                    <div class="table-row-cap ">
+                        <div class="item">
+                            @Resources.Congress.AbstractFinishDate
+
+                        </div>
+                    </div>
+                    <div class="table-row-item ">
+                        <div class="item date-picker">
+                            @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.AbstractFinishDate).Render(); }
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @string.Format(Resources.Congress.GetOrginal, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.GetOrginal, true, new { onclick = "GetArticleOrginal('True');" })@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.GetOrginal, false, new { onclick = "GetArticleOrginal('False');" })@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div id="DivGetArticleOrginal">
+                <div class="item-row">
+                    <div class="table-row-cap ">
+                        <div class="item font11">
+                            @string.Format(Resources.Congress.GetArticleFile, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                        </div>
+                    </div>
+                    <div class="table-row-item drp ">
+                        <div class="item">
+                            @Html.RadioButtonFor(model => model.GetArticleOrginalFile, true, new { onclick = "GetChangeArticleOrginalFile('True');" })@Resources.Congress.File
+                            @Html.RadioButtonFor(model => model.GetArticleOrginalFile, false, new { onclick = "GetChangeArticleOrginalFile('False');" })@Resources.Congress.Text
+                        </div>
+                    </div>
+                </div>
+                <div id="DivArtileorginaltext">
+                    <div class="item-row">
+                        <div class="table-row-cap  font10">
+                            <div class="item">
+                                @string.Format(Resources.Congress.ArticleWordCount, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                            </div>
+                        </div>
+                        <div class="table-row-item ">
+                            <div class="item">
+                                @Html.TextBoxFor(model => model.ArticleOrginalWordCount, new { })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-row">
+
+                        <div class="table-row-cap  font10">
+                            <div class="item">
+                                @string.Format(Resources.Congress.MinArticleWordCount, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                            </div>
+                        </div>
+                        <div class="table-row-item ">
+                            <div class="item">
+                                @Html.TextBoxFor(model => model.MinArticleOrginalWordCount, new { })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-row" id="DivArticleOrginalFile">
+                    <div class="table-row-cap  font10">
+                        <div class="item">
+                            @string.Format(Resources.Congress.ArticleFileSize, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                        </div>
+                    </div>
+                    <div class="table-row-item ">
+                        <div class="item">
+                            @Html.TextBoxFor(model => model.ArticleOrginalFileSize, new { })
+                        </div>
+                    </div>
+                </div>
+                <div class="item-row">
+                    <div class="table-row-cap ">
+                        <div class="item">
+                            @string.Format(Resources.Congress.OrginalStartDate, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+
+                        </div>
+                    </div>
+                    <div class="table-row-item ">
+                        <div class="item date-picker">
+                            @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.OrginalStartDate).Render(); }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="item-row">
+                    <div class="table-row-cap ">
+                        <div class="item">
+                            @string.Format(Resources.Congress.OrginalFinishDate, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                        </div>
+                    </div>
+                    <div class="table-row-item ">
+                        <div class="item date-picker">
+                            @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.OrginalFinishDate).Render(); }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        <div class="item-row">
+            <div class="table-row-cap  font10 ">
+                <div class="item">
+                    @string.Format(Resources.Congress.CanUserDeleteArticle, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                </div>
+            </div>
+            <div class="table-row-item drp ">
+                <div class="item">
+                    @Html.RadioButtonFor(model => model.CanUserDeleteArticle, true)@Resources.Common.Yes
+                    @Html.RadioButtonFor(model => model.CanUserDeleteArticle, false)@Resources.Common.No
+                </div>
+            </div>
+        </div>
+      
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @string.Format(Resources.Congress.HasArticlePayment, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.HasArticlePayment, true, new { onclick = "GetChangeHasArticlePayment('True');" })@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.HasArticlePayment, false, new { onclick = "GetChangeHasArticlePayment('False');" })@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.AttachReferee
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.AttachReferee, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.AttachReferee, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.RequireArticleTypeForCertificate
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.RequireArticleTypeForCertificate, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.RequireArticleTypeForCertificate, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @string.Format(Resources.Congress.MaxArticlePerUser, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MaxArticlePerUser, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @string.Format(Resources.Congress.MaxArticleCountShow, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MaxArticleCountShow, new { })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item-row" id="DivArticlePaymentStep">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @string.Format(Resources.Congress.ArticlePaymentStep, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.ArticlePaymentStep, (SelectList)ViewBag.ArticlePaymentSteps)
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.ArticleCertificateState
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.ArticleCertificateState, (SelectList)ViewBag.ArticleCertificateStatList, "")
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.EnableArticleComment
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.EnableArticleComment, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.EnableArticleComment, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+
+            @*<div id="Multilanguage" class="fit"></div>*@
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.KeywordArticle
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.ArticleTitle, new { })
+
+                    </div>
+                </div>
+            </div>
+        <div class="item-row">
+            <div class="table-row-cap  font10">
+                <div class="item">
+                    @string.Format(Resources.Congress.ArticleText, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item">
+                    @Html.TextBoxFor(model => model.ArticleOrginalTitle, new { })
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    @*تنظیمات رزو و مدیریت اسکان*@
+    <div class="fit item-row" id="DivHotel">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Hotel');">
+            <div class="item">
+                @Resources.Congress.Configuration @Resources.Congress.HotelReserve
+                <span class="arrow toButton Basic-Hotel"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Hotel">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MaxHotelPerUser
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MaxHotelPerUser, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item font11">
+                        @Resources.Congress.DayCountDeleteHotelReserveNotPay
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.DayCountDeleteHotelReserveNotPay, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.HotelReservDailyCount
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.HotelReservDailyCount, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.HotelRezervStartDate
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item date-picker">
+                        @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.HotelRezervStartDate).Render(); }
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.HotelRezervEndDate
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item date-picker">
+                        @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.HotelRezervEndDate).Render(); }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @*تنظیمات رزرو کارگاه*@
+    <div class="fit item-row" id="DivWorkShop">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Workshop');">
+            <div class="item">
+                @Resources.Congress.WorkShopSetting
+                <span class="arrow toButton Basic-Workshop"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Workshop">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MaxWorkShopPerUser
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MaxWorkShopPerUser, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item font11">
+                        @Resources.Congress.DayCountDeleteWorkShopReserveNotPay
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.DayCountDeleteWorkShopReserveNotPay, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.WorkShopRezervStartDate
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item date-picker">
+                        @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.WorkShopRezervStartDate).Render(); }
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.WorkShopRezervEndDate
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item date-picker">
+                        @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.WorkShopRezervEndDate).Render(); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*تنظیمات رزرو غرفه*@
+    <div class="fit item-row" id="DivBooth">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Booth');">
+            <div class="item">
+                @Resources.Congress.BoothSetting
+                <span name="Basic-Booth" class="arrow toButton Basic-Booth"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Booth">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.BoothRezervStartDate
+
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item date-picker">
+                        @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.BoothRezervStartDate).Render(); }
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item ">
+                        @Resources.Congress.BoothRezervEndDate
+
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item date-picker">
+                        @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.BoothRezervEndDate).Render(); }
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.RegisterForReservBooth
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.RegisterForReservBooth, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.RegisterForReservBooth, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MaxBoothPerUser
+
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MaxBoothPerUser, new { })
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.DayCountDeleteBoothReserveNotPay
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.DayCountDeleteBoothReserveNotPay, new { })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*تنظیمات پرداخت و تخفیفا*@
+    <div class="fit item-row">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Payment');">
+            <div class="item">
+                @Resources.Congress.PayAndDiscountSetting
+                <span name="Basic-Payment" class="arrow toButton Basic-Payment"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Payment">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.DiscountCount
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.DisscountCount, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.BankId
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.BankId, (SelectList)ViewBag.Banks, "")
+                    </div>
+                </div>
+            </div>
+            <div class="item-row" id="merchant_id_section">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MerchantId
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MerchantId, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row" id="terminal_id_section">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.TerminalId
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.TerminalId, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row" id="terminal_username_section">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.TerminalUserName
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.TerminalUserName, new { })
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row" id="merchant_public_key_section" style="clear: both;">
+                <div class="table-row-cap">
+                    <div class="item  item-title">
+                        @*@Resources.Congress.MerchantPublicKey*@
+                    </div>
+                </div>
+                <div class="table-row-item table-fit drp">
+                    <div class="item">
+                        @Html.TextAreaFor(model => model.MerchantPublicKey, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row" id="merchant_private_key_section">
+                <div class="table-row-cap">
+                    <div class="item  item-title">
+                        @*@Resources.Congress.MerchantPrivateKey*@
+                    </div>
+                </div>
+                <div class="table-row-item table-fit drp">
+                    <div class="item">
+                        @Html.TextAreaFor(model => model.MerchantPrivateKey, new { })
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row" id="terminal_password_section">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.TerminalPassword
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.PasswordFor(model => model.TerminalPassword)
+                    </div>
+                </div>
+            </div>
+            <div class="item-row" id="certificate_path_section">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.CertificatePath
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.CertificatePath, new { })
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-row" id="certificate_pass_section">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.CertificatePassword
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.PasswordFor(model => model.CertificatePassword)
+                    </div>
+                </div>
+            </div>
+            <div>
+                @{
+                    Html.RenderAction("GetPayTypes", "Transaction", new { area = "Payment", value = Model.PaymentType });
+                }
+            </div>
+            <div>
+                @{
+                    Html.RenderAction("GenerateConfigDiscountSection", "CongressDiscountType", new { area = "Congress" });
+                }
+            </div>
+        </div>
+    </div>
+
+    @*تنظیمات ایمیل*@
+    <div class="fit item-row">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Email');">
+            <div class="item">
+                @Resources.Congress.MailSetting
+                <span class="arrow toButton Basic-Email"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Email">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MailHost
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MailHost, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MailUserName
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MailUserName, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MailPassword
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.PasswordFor(model => model.MailPassword)
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MailFrom
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MailFrom, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.MailPort
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.MailPort, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.EnableSSL
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.EnableSSL, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.EnableSSL, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.GroupEmailInterval
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.GroupEmailInterval)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*تنظیمات حساب کاربری پیامک*@
+    <div class="fit item-row">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Message');">
+            <div class="item">
+                @Resources.Congress.SMSSetting
+                <span class="arrow toButton Basic-Message"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Message">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.SMSAccountNumber
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.SMSAccountId, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.SMSAccountUserName
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.SMSAccountUserName, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.SMSAccountpassword
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.PasswordFor(model => model.SMSAccountPassword)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*اطلاع رسانی*@
+    <div class="fit item-row">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Information');">
+            <div class="item">
+                @Resources.Congress.InformSetting
+                <span class="arrow toButton Basic-Information"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Information">
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.UserWorkShopReserveInformType
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.UserWorkReserveShopInformType, (SelectList)ViewBag.InformTypes, Resources.Congress.None)
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.UserHotelReserveInformType
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.UserHotelReserveInformType, (SelectList)ViewBag.InformTypes, Resources.Congress.None)
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.UserRegisterInformType
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.UserRegisterInformType, (SelectList)ViewBag.InformTypes, Resources.Congress.None)
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.BoothReserveInformType
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.BoothReserveInformType, (SelectList)ViewBag.InformTypes, Resources.Congress.None)
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @string.Format(Resources.Congress.ArticlePaymentInformType, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.ArticleInformType, (SelectList)ViewBag.InformTypes, Resources.Congress.None)
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.RefereeInformType
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.RefereeInformType, (SelectList)ViewBag.InformTypes, Resources.Congress.None)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @*تنظیمات چاپ کارت*@
+    <div class="fit item-row">
+        <div class="table-row-roller cursor-pointer" onclick="slide('PrintCard-Settings');">
+            <div class="item">
+                @Resources.Congress.CardPrintSetting
+                <span class="arrow toButton PrintCard-Settings"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="PrintCard-Settings">
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.CardLanguageId
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+
+                        @Html.DropDownListFor(model => model.CardLanguageId, (SelectList)ViewBag.Languages)
+                    </div>
+                </div>
+
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @string.Format(Resources.Congress.ArticleCertificateType, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.DropDownListFor(model => model.ArticleCertificateTypeId, (SelectList)ViewBag.ArticleCertificateTypes)
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.AllowUserPrintCertification
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.AllowUserPrintCertification, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.AllowUserPrintCertification, false)@Resources.Common.No
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap ">
+                    <div class="item">
+                        @Resources.Congress.AllowUserPrintCard
+                    </div>
+                </div>
+                <div class="table-row-item drp ">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.AllowUserPrintCard, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.AllowUserPrintCard, false)@Resources.Common.No
+
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap  font10">
+                    <div class="item">
+                        @Resources.Congress.CardTypeEmptyValue
+
+                    </div>
+                </div>
+                <div class="table-row-item ">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.CartTypeEmptyValue, new { })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fit item-row">
+        <div class="table-row-roller cursor-pointer" onclick="slide('Basic-Attachment');">
+            <div class="item">
+                @Resources.Congress.Attachments
+                <span class="arrow toButton Basic-Attachment"></span>
+            </div>
+        </div>
+        <div class="fit advanceSetting" id="Basic-Attachment">
+            <div class="fit" id="DivContent"></div>
+        </div>
+    </div>
+
+
+
+</div>

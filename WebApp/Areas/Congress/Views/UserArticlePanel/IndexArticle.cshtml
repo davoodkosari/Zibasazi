@@ -1,0 +1,93 @@
+﻿@using Radyn.Congress.DataStructure
+@using Radyn.Congress.Tools
+@using Radyn.Web.Mvc;
+
+@using Radyn.Utility
+@using Radyn.WebApp.AppCode.Security
+@model IEnumerable<Article>
+    @{
+        ViewBag.Title = string.Format(Resources.Congress.YourSendedArticles, SessionParameters.CurrentCongress.Configuration.ArticleTitle);
+        Layout = "~/Areas/Congress/Views/Shared/CongressUserLayout.cshtml";
+    }
+    @section Head{
+        <script type="text/javascript">
+
+        function PrintCertificate(Id) {
+                window.open('@Url.Content("~/Congress/ReportPanel/PrintArticleCertificate?Id=")' + Id);
+                ShowRadynMessage();
+
+        }
+        </script>
+    }
+    @section PageTitle
+{
+        @string.Format(Resources.Congress.YourSendedArticles, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+    }
+    @section PageAction
+{
+        <div class="button-div m-btn waves-green i-add">
+
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserArticlePanel/CreateArticle")).Text(String.Format(Resources.Congress.SendNewArticle, SessionParameters.CurrentCongress.Configuration.ArticleTitle)).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserPanel/Home")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+
+        </div>
+    }
+    @section PageActionDown
+{
+        <div class="button-div m-btn waves-green i-add">
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserArticlePanel/CreateArticle")).Text(String.Format(Resources.Congress.SendNewArticle, SessionParameters.CurrentCongress.Configuration.ArticleTitle)).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserPanel/Home")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+        </div>
+    }
+    <div class="radynForm">
+        @if (Model.Any())
+        {
+            Html.Radyn().Grid(Model).Name("UserArticleGrid").HtmlAttributes(new { style = "width:98%;margin: 0 auto" }).Columns(columns =>
+            {
+                columns.Template(article => article.Code).Title(Resources.Congress.Code).Width(70).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(article => "<a style='cursor: pointer;'  href='" + Url.Content("~/Congress/UserArticlePanel/DetailsArticle?articleId=" + article.Id) + "'>" + article.Title + "</a>").Title(string.Format(Resources.Congress.ArticleTitle, SessionParameters.CurrentCongress.Configuration.ArticleTitle).Trancate(20)).Width(400).HeaderHtmlAttributes(new { style = "text-align:center" }).Encode(false);
+                columns.Template(article => article.Pivot.Title).Title(Resources.Congress.Pivot).Width(150).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(article => article.IsArchive == true ? string.Format(Resources.Congress.ArticleWasDeletedByTheAdministrator, SessionParameters.CurrentCongress.Configuration.ArticleTitle) : (article.Status.ToString().ToEnum<Enums.ArticleState>().GetDescriptionInLocalization())).Title(Resources.Common.Status).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(article => article.PayStatus.HasValue ? article.PayStatus.ToString().ToEnum<Enums.ArticlepayState>().GetDescriptionInLocalization() : "").Title(Resources.Congress.PaymentStatus).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" }).Visible(((Configuration)ViewBag.config).HasArticlePayment);
+                columns.Template(article => article.TypeId.HasValue ? article.ArticleType.Title : "").Title(string.Format(Resources.Congress.ArticleType, SessionParameters.CurrentCongress.Configuration.ArticleTitle)).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(article =>
+                         "<a style='cursor: pointer;'  href='" + Url.Content("~/Congress/UserArticlePanel/DetailsArticle?articleId=" + article.Id) + "'>" +
+                        " <img width='18' align='absmiddle' title='" + Resources.Common.Detail + "' src='" + Url.Content("~/Content/Images/details.png") + "' />" + "</a>  " +
+                            (article.IsArchive == true ? "" : " | <a style='cursor: pointer;'  href='" + Url.Content("~/Congress/UserArticlePanel/EditArticle?ArticleId=" + article.Id) + "'> " +
+                        " <img width='18' align='absmiddle' title='" + Resources.Common.Edit + "' src='" + Url.Content("~/Content/Images/edit.png") + "' />" + "</a> ") +
+                        (article.IsArchive != true && article.AllowSent
+                        ? " | " + "  <a   style='cursor: pointer;'   href='" + Url.Content("~/Congress/UserArticlePanel/SentArticle?Id=" + article.Id) + "' >" +
+                              "<img width='18' align='absmiddle' title='" + string.Format(Resources.Congress.SendArticle, SessionParameters.CurrentCongress.Configuration.ArticleTitle) + "' src='" + Url.Content("~/Content/Images/upload-file.png") + "' />" +
+                          "</a> " : "") +
+                    (article.IsArchive != true && article.PaymentVisibility
+                                ? " | " + "  <a   style='cursor: pointer;'  href='" + Url.Content("~/Congress/UserArticlePanel/UserArticlePayment?articleId=" + article.Id) + "'  >" +
+                                  "<img width='18' align='absmiddle' title='" + string.Format(Resources.Congress.ArticlePayment, SessionParameters.CurrentCongress.Configuration.ArticleTitle) + "' src='" + Url.Content("/Areas/Congress/Content/Images/Payment1.png") + "' />" +
+                              "</a> " : "") +
+                     (article.AllowDelete
+                        ? " | " + "<a  style='cursor: pointer;'  href='" + Url.Content("~/Congress/UserArticlePanel/DeleteArticle?articleId=" + article.Id) + "'>" +
+                          " <img width='18' align='absmiddle' title='" + Resources.Common.Delete + "' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "' />" +
+                          "</a> "
+                        : "") +
+                   (article.IsArchive != true && article.AllowPrintCertificate
+                       ? " | " + "<a  style='cursor: pointer;' onclick=\"PrintCertificate(" + "'" + article.Id + "'" + ");\" >" +
+                         " <img width='18' align='absmiddle' title='" + Resources.Common.Print + " " + Resources.Congress.Certificate + "' src='" + Url.Content("~/Content/Images/printer-certificate.png") + "' />" +
+                         "</a> "
+                       : "")).Width(300).Encode(false).Filterable(false);
+            })
+        //
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Enabled(true))
+        //.Footer(true)
+        .Render();
+        }
+        else
+        {
+            string.Format(Resources.Congress.YouNotAddedArticle, SessionParameters.CurrentCongress.Configuration.ArticleTitle);
+        }
+    </div>

@@ -1,0 +1,9 @@
+﻿@using Radyn.FileManager
+@model Radyn.Congress.DataStructure.ConfigurationContent
+<div class="container-box">
+    @if (Model!=null&&Model.LogoId.HasValue)
+    {
+        Html.RadynFile().Image().ID((Guid)Model.LogoId).OtherAttribute(new { style = "width:100%" }).Render();
+
+    }
+</div>

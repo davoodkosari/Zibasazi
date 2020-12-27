@@ -1,0 +1,39 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+@using Radyn.WebApp.AppCode.Security
+
+@model IEnumerable<Radyn.Congress.DataStructure.User>
+@if (Model.Count() == 1 && (Model.FirstOrDefault()!=null&&Model.FirstOrDefault().Id == SessionParameters.CongressUser.Id))
+{
+    <input type="hidden" name="CheckSelect" id="CheckSelect" value="@SessionParameters.CongressUser.Id"/>
+}
+else
+{
+    if (Model.Any())
+    {
+        <div class="fit">
+            @{
+                Html.Radyn().Grid(Model).DataKeys(x => x.Add(y => y.Id)).Name("Grid").HtmlAttributes(new {style = "width:700px;margin: 0 auto"}).Columns(columns =>
+                {
+                    columns.Template(user => "<input type=\"checkbox\" name=\"CheckSelect\" id=\"CheckSelect\"" + (user.ReservedItem ? "checked='checked'" : "") + " value=\"" + user.Id + "\"   />").Title(@Resources.Common.Select).HeaderHtmlAttributes(new {style = "text-align:center;height:20px;"}).Encode(false);
+                    columns.Template(user => user.Username).Title(Resources.Security.UserUsername).HeaderHtmlAttributes(new {style = "text-align:center"});
+                    columns.Template(user => user.EnterpriseNode.RealEnterpriseNode.FirstName).Title(Resources.EnterPriseNode.FirstName).HeaderHtmlAttributes(new {style = "text-align:center"});
+                    columns.Template(user => user.EnterpriseNode.RealEnterpriseNode.LastName).Title(Resources.EnterPriseNode.LastName).HeaderHtmlAttributes(new {style = "text-align:center"});
+                    columns.Template(user => ((Enums.UserStatus) user.Status).GetDescriptionInLocalization()).Title(Resources.Congress.Status).HeaderHtmlAttributes(new {style = "text-align:center"});
+                    columns.Template(user => user.RegisterDate).Title(Resources.Congress.RegisterDate).HeaderHtmlAttributes(new {style = "text-align:center"});
+
+
+                })
+                   
+                    .Sortable(sorting => sorting.Enabled(true))
+                    .Pageable(paging => paging.Enabled(true))
+                    .Filterable(filtering => filtering.Enabled(true))
+                    .Footer(false).Render();
+            }
+        </div>
+    }
+}
+
+
+

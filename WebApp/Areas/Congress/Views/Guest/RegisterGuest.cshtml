@@ -1,0 +1,85 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.WebApp.Areas.Congress.Tools
+@{
+    ViewBag.Title = @Resources.Congress.BoothRezerv;
+    Layout = "~/Views/Shared/User_Layout.cshtml";
+}
+@section Head{
+    <script type="text/javascript">
+        function GetBooths() {
+            ShowPostBackLoader();
+            $("#divbooths").html("");
+            $.get("@Url.Content("~/Congress/Guest/Getbooths")", { date: new Date().getTime() }, function (data) {
+                if (data != "false") {
+                    $("#divbooths").html(data).slideDown("slow");;
+                }
+                ShowRadynMessage();
+            }).complete(function () {
+                GetNewGest();
+            });
+        }
+        function BoothOfficerList() {
+            $("#DivAuthorBoothOfficerList").html("");
+            $.get("@Url.Content("~/Congress/Booth/GetBoothOfficerList")", { date: new Date().getTime() }, function (data) {
+                $("#DivAuthorBoothOfficerList").html(data).slideDown("slow");;
+            });
+        }
+        function GetNewGest() {
+            $("#DivItem").html("");
+            $.get("@Url.Content("~/EnterpriseNode/EnterPriseNode/GenerateEnterpriseNodeModify")", { state: "Create", id: '@Guid.NewGuid()', date: new Date().getTime() }, function (data) {
+                $("#DivItem").html(data).slideDown("slow");;
+            }).complete(function () {
+                BoothOfficerList();
+                GenerateDiscount();
+            });
+        }
+        function GenerateDiscount() {
+            $("#DivDiscount").html("");
+            $.get("@Url.Content("~/Payment/DiscountType/GenerateDiscount")", { model: '@AppExtention.CongressMoudelName', section: '@((byte)Enums.PaymentSection.Booth)', date: new Date().getTime() }, function (data) {
+                if (data != "false") {
+                    $("#DivDiscount").html(data).slideDown("slow");;
+                }
+            }).complete(function () {
+                HidePostBackLoader();
+            });
+        }
+        $(document).ready(function () {
+
+            GetBooths();
+        });
+    </script>
+
+}
+<div class="container-hd">
+    <div class="container-header">
+        <div class="container-header-item">
+            <img src="@Url.Content("/Areas/Congress/Content/Images/news.png")" />
+            @Resources.Congress.BoothRezerv
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="container-box">
+
+            @Html.ValidationSummary(true)
+            <div class="radynForm">
+               
+                <div id="divbooths">
+                </div>
+
+                <div id="DivItem">
+                </div>
+                <div id="DivAuthorBoothOfficerList"></div>
+            </div>
+        </div>
+        <div id="DivDiscount">
+        </div>
+        <div id="divOpration">
+            <div class="button">
+                <input type="submit" value="@Resources.Common.Save" />
+            </div>
+        </div>
+
+    }
+</div>
+

@@ -1,0 +1,78 @@
+﻿@using Radyn.Web.Mvc;
+@model Radyn.Congress.DataStructure.User
+@{
+    ViewBag.Title = Resources.Congress.SubscribeComplete;
+    Layout = "~/Views/Shared/User_Layout.cshtml";
+}
+@section Head{
+    <script type="text/javascript">
+        function CompleteUser() {
+            ShowPostBackLoader();
+            var pathname = window.location.pathname; // Returns path only
+            $.post("@Url.Content("~/Congress/UserPanel/InsertWithEmail")", $('form[action^="' + pathname + '"]').serialize(), function (data) {
+                if (data != "false") {
+                    window.location = '@Url.Content("~/Congress/UserPanel/Home")';
+                }
+                RefreshCaptcha();
+                ShowRadynMessage();
+            }).complete(function () {
+                HidePostBackLoader();
+            });
+
+        }
+        $(document).ready(function () {
+
+            $("#DivItem").html("");
+            $.get("@Url.Content("~/Congress/User/GetModify")", { Id: '@ViewBag.Id', ShowImage:false, date: new Date().getTime() }, function (data) {
+                $("#DivItem").html(data).slideDown("slow");;
+            });
+
+
+        });
+    </script>
+}
+<div class="container-hd">
+    <div class="container-header">
+        <div class="container-header-item">
+            <img src="~/Areas/Congress/Content/Images/register.png" />
+            @Resources.Congress.User @Resources.Common.New
+        </div>
+    </div>
+    <div class="container-box">
+        @using (Html.BeginForm())
+        {
+
+            <div class="radynForm">
+                <div style="width: 80%; margin: 0 auto;">
+
+                    @Html.ValidationSummary(true)
+                    <div>
+                        <div id="DivItem"></div>
+                        <div>
+                            <div class="table-row-cap ">
+                                <div class="item">
+                                    @Resources.Common.PleaseEnterTheText
+                                </div>
+                            </div>
+                            <div class="table-row-item ">
+                                <div class="item">
+                                    @{Html.Radyn().Captcha().NumberMode().Render(); }
+                                    <div class="fit">
+                                        <input type="text" class="captcha" name="captch" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fit">
+                            <div class="button" id="BtnSave">
+                                <input type="button" class="btn-save" onclick="CompleteUser();" value="@Resources.Common.Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                                        }
+
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@using Radyn.FileManager
+@model List<Radyn.Gallery.DataStructure.Gallery>
+@{
+    ViewBag.Title = Resources.Gallery1.Galleryname;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head{
+    <script type="text/javascript">
+        function GetItems(id) {
+            $.get("/Gallery/Photo/GalleryPhotos", { galleyId: id, date: new Date().getTime() }, function (data) {
+                if (data != "") {
+                    window.location = '/Gallery/Photo/GalleryPhotos?galleyId=' + id;
+                }
+                ShowRadynMessage();
+            });
+
+        }
+
+    </script>
+}
+<div class="shell">
+    <div class="news-content" style="margin-top: 30px; padding-bottom: 10px; min-height: 600px;">
+
+        <div class="content-item-header">
+            <div class="content-item-header-caption">
+                @Resources.Gallery1.Galleryname
+            </div>
+        </div>
+        <div class="article-board" style="width: 940px;">
+            <div class="article-box" style="border: none;">
+
+
+                <table border="0" cellpadding="0" width="100%" cellspacing="0" align="center">
+
+                    <tr>
+                        <td style="padding: 10px 10px 10px 2px;">
+                            <table border="0" cellpadding="4" cellspacing="4" align="center">
+                                @{short index = 0;
+                                  for (int r = -1; r < (Model.Count() - 1) / 4; r++)
+                                  {
+                                    <tr>
+                                        @for (int c = 0; c < 4; c++)
+                                        {
+                                            if (index < Model.Count)
+                                            {
+
+                                            <td class="EditRow" style="vertical-align: top; width: 200px;">
+                                                <div style="cursor:pointer" class="EditFiled" onclick="GetItems('@Model[index].Id')" >
+                                                    @Model[index].Title
+                                                </div>
+                                                <div style="text-align: center; vertical-align: top;cursor: pointer" onclick="GetItems('@Model[index].Id');">
+                                                    @{
+                                                if (Model[index].Thumbnail.HasValue)
+                                                {
+                                                    Html.RadynFile().Image().ID(Model[index].Thumbnail.Value).Height(70).Width(100).Style("border: solid 1px grey;").Alt(Model[index].Title).Render();
+                                                }
+                                                    }
+                                                </div>
+                                            </td>
+                                            }
+                                            index++;
+                                        }
+                                    </tr> 
+                                  }
+                                }
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

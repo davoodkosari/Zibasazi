@@ -1,0 +1,59 @@
+﻿@using Radyn.Web.Mvc;
+@model Radyn.Congress.DataStructure.ChipsFood
+
+@if (Model != null)
+{
+    @Html.ValidationSummary(true)
+    <div class="radynForm">
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Name
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+            </div>
+        </div>
+       
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Capicity
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit ">
+                <div class="item">
+                    @Html.DisplayFor(model => model.Capacity)
+                </div>
+            </div>
+        </div>
+        <div class="item-row fit">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Description
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @Html.DisplayFor(model => model.Description, new { })
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.BaseCapacity
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit ">
+                <div class="item">
+                    @Html.DisplayFor(model => model.BaseCapacity)
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

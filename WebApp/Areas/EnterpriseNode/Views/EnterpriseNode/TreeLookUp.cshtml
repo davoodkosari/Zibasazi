@@ -1,0 +1,78 @@
+﻿@using Radyn.Web.Mvc
+
+@model Radyn.EnterpriseNode.DataStructure.EnterpriseNode
+
+
+<link href="@Url.Content("~/Content/EnterPriseNodeStyle.css")" rel="stylesheet" type="text/css" />
+<div style="border-color: black; border-width: 1px; border-style: solid;">
+    <input type="text" width="50px" />
+    <img src="/Content/Images/search-Green.png" />
+</div>
+<script type="text/javascript">
+
+    function Show() {
+        $(function () {
+            // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+            $("#dialog:ui-dialog").dialog("destroy");
+
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                height: 140,
+                modal: true,
+                buttons: {
+                    "Delete all items": function () {
+                        $(this).dialog("close");
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+
+    }
+    function ShowSearchOption() {
+        $("#SearchOption").slideDown('slow');
+    }
+    function HideSearchOption() {
+        $("#SearchOption").slideUp('Fast');
+    }
+</script>
+<div id="dialog-confirm" title="Empty the recycle bin?">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        @{
+            Html.Radyn().TreeView().Name("TreeView").Items(
+                item =>
+                {
+                    item.Add().Id("Mail").Title("Mail").Icon(Url.Content("~/Content/PanelBar/FirstLook/mail.gif"));
+                    item.Add().Parent("Mail").Title("Personal Folders").Icon(Url.Content("~/Content/PanelBar/FirstLook/mailPersonalFolders.gif"));
+                    item.Add().Parent("Mail").Title("Deleted Items").Icon(Url.Content("~/Content/PanelBar/FirstLook/mailDeletedItems.gif"));
+                    item.Add().Parent("Mail").Title("Inbox").Icon(Url.Content("~/Content/PanelBar/FirstLook/mailInbox.gif"));
+                    item.Add().Parent("Mail").Title("My Mail").Icon(Url.Content("~/Content/PanelBar/FirstLook/mailFolder.gif"));
+                    item.Add().Parent("Mail").Title("Sent Items").Icon(Url.Content("~/Content/PanelBar/FirstLook/mailSent.gif"));
+                    item.Add().Parent("Mail").Title("Outbox").Icon(Url.Content("~/Content/PanelBar/FirstLook/mailOutbox.gif"));
+                    item.Add().Parent("Mail").Title("Search Folders").Icon(Url.Content("~/Content/PanelBar/FirstLook/mailSearch.gif"));
+                }
+                ).Render();
+        }
+        ;
+
+
+    </p>
+</div>
+
+<div id="EnterPriseNodeLookUp">
+    <font size="1px" style="vertical-align:bottom;">@Resources.EnterPriseNode.EnterpriseNode</font>
+    <div style="border-color:DarkGray; border-width: 1px; border-style: solid;width:230px;vertical-align:baseline;" onmouseout="HideSearchOption();">
+        <input type="text" width="50px" style="font-size:12px;vertical-align:top;border-color:white;border-width:1px;border-style:solid;height:15px;" /> <img src="/Content/Images/search-Green.png" style="height:20px;vertical-align:baseline;" />
+    </div>
+    <div style="text-align:@Resources.Design.InvertAlign;width:230px;">
+        <div id="btnShower"><font size="1px" style="vertical-align:top;">@Resources.Common.SearchOption</font><img src="/Content/Images/bullet-arrow-down.png" style="vertical-align:Top;cursor:pointer;" onmouseover="ShowSearchOption();" /></div>
+        <div id="SearchOption" style="border-color:Gray;border-style:solid;padding:0px 4px 4px 0px;border-width:1px;border-top-color:White;border-top-style:none;border-top-style:none;width:227px;height:30px;text-align:right;vertical-align:top;;display:none;" onmouseleave="HideSearchOption();">
+            <input type="checkbox" style="font-size:12px;" />حقيقي
+            <input type="checkbox" style="font-size:12px;" />حقوقي
+        </div>
+    </div>
+
+</div>

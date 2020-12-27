@@ -1,0 +1,93 @@
+﻿@using System.Data
+@using Radyn.SQL.Enums
+@model object
+
+@{
+    Layout = null;
+
+}
+@if (Model is String)
+{
+    <b style="color: red;">Error : @Model</b>
+}
+else if (Model is DataTable)
+{
+    <table border="0" cellpadding="4" cellspacing="4" width="100%" align="center" style="background-color: whitesmoke;border: solid 1px darkblue;padding: 4px 4px 4px 4px;font-weight: bolder; direction: ltr;">
+        <tr>
+            <td>
+                OutPut Status :
+            </td>
+            <td style="border: solid black 1px; background-color: gainsboro; color: darkslateblue;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                font-family: tahoma; font-size: 12px;">
+                @{if (((SqlOutType)ViewBag.OutType) == SqlOutType.Datatable)
+                {
+                    var Data = (DataTable)(Model);
+
+                    <div style="font-size: 13px; font-weight: bold;">@Data.Rows.Count.ToString() Row Effective</div>
+
+                } }
+                @{if (((SqlOutType)ViewBag.OutType) == SqlOutType.Object)
+                {
+
+
+                    <div style="font-size: 13px; font-weight: bold;">
+                        @(Model.ToString())
+                        Row Effective
+                    </div>
+
+                } }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="height: 400px; width: 910px; overflow: auto; font-family: tahoma; font-size: 12px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        background-color: lightslategray;">
+                    @{if (((SqlOutType)ViewBag.OutType) == SqlOutType.Datatable)
+                    {
+                        <table cellpadding="2" cellspacing="4" border="0">
+                            <tr style="background-color: lightslategrey; font-weight: bold; color: white; border: solid 1px white;">
+                                <td>
+                                    #
+                                </td>
+                                @{
+                        var Data = (DataTable)(Model);
+                        foreach (DataColumn col in Data.Columns)
+                        {
+                            <td style="border: solid 1px white;">
+                                @col.ColumnName
+                            </td>
+                        }
+                                }
+                            </tr>
+                            @{
+                        bool flag = false;
+                        int rowIndex = 0;
+
+                        foreach (DataRow row in Data.Rows)
+                        {
+                            rowIndex++;
+                            flag = !flag;
+
+                            <tr style="background-color:@( flag ? "lightblue" : "lightgrey");border: solid 1px white; ">
+                                <td>
+                                    @(rowIndex)
+                                </td>
+                                @foreach (DataColumn column in Data.Columns)
+                                {
+                                    <td nowrap="nowrap" style="border: solid 1px white;">
+                                        @row[column.ColumnName].ToString()
+                                    </td>
+                                }
+                            </tr>
+                        }
+                            }
+                        </table>
+
+
+                    } }
+                </div>
+            </td>
+        </tr>
+    </table>
+
+}

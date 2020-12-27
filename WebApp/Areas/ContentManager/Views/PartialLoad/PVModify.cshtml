@@ -1,0 +1,216 @@
+﻿@using Radyn.ContentManager.Definition
+@using Radyn.Utility
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp
+@using Radyn.WebApp.AppCode
+@using Radyn.WebApp.Areas.Common.Component
+@model Radyn.ContentManager.DataStructure.PartialLoad
+
+<script type="text/javascript">
+
+
+
+        function EditPartialLoad() {
+            $.post("@Url.Content("~/ContentManager/PartialLoad/Modify")", $('form[action^="@Url.Content("~/ContentManager/PartialLoad/Modify")"]').serialize(), function (data) {
+                if (data != "false") {
+                    GetPartialLoad();
+                    $("#DivResultPartialLoad").html("");
+
+                }
+            });
+            ShowRadynMessage();
+        }
+
+        function GetPartialList() {
+            $("#PartialId").html("");
+            $("#DivOperation").hide();
+            var culture = $("#LanguageId").val();
+            var Type = $("#Type").val();
+            var OperationId = "";
+            OperationId = $("#OperationId").val();
+            if (Type == '@Enums.PartialTypes.Modual')
+                $("#DivOperation").show();
+
+
+            $.get("@Url.Content("~/ContentManager/UIDesginPanel/GetOperationPartialListJson")",
+                {
+                    OperationId: OperationId,
+                    PartialTypeId: Type,
+                    culture: culture,
+                    date: new Date().getTime()
+                },
+                function(data) {
+                    if (data != "") {
+                        $('#PartialId').html('');
+                        $('#PartialId').append($('<option>'));
+                        for (var i = 0; i < data.length; i++) {
+                            var op = $('<option>').attr('value', data[i].Id).text(data[i].Name);
+                            if ('@Html.Encode(Model.PartialId)' == data[i].Id)
+                                op.attr("selected", "selected");
+                            $('#PartialId').append(op);
+                        }
+
+                    }
+
+                });
+
+
+
+
+
+        }
+        $(document).ready(function () {
+            GetPartialList();
+        });
+</script>
+
+
+
+
+
+<div class="radynForm">
+
+    <div id="DivItem">
+        <div>
+            @Html.HiddenFor(x => x.HtmlDesginId)
+            <div class="item-row ">
+                @{
+                    Html.LanguageDropDownList("GetPartialList();");
+                }
+            </div>
+
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        نوع
+                    </div>
+                </div>
+                <div class="table-row-item">
+                    @if (this.Html.GetPageMode() == PageMode.Create)
+                    {
+                        <div class="item">
+                            @Html.DropDownListFor(x => x.Type, (SelectList)ViewBag.PartialTypes, "", new { onchange = "GetPartialList();" })
+                        </div>
+
+                    }
+                    else
+                    {
+
+                        <div class="item">
+                            @(Html.Encode(Model.Type.GetDescription()))
+                        </div>
+                        @Html.HiddenFor(x => x.Type)
+                    }
+
+
+                </div>
+            </div>
+
+            <div class="item-row" id="DivOperation">
+                <div class="table-row-cap">
+                    عملیات
+                </div>
+                <div class="table-row-item">
+                    @if (this.Html.GetPageMode() == PageMode.Create)
+                    {
+                        <div class="item">
+                            @Html.DropDownListFor(x => x.OperationId, (SelectList)ViewBag.OperationList, "", new { onchange = "GetPartialList();" })
+                        </div>
+
+                    }
+                    else
+                    {
+
+                        <div class="item">
+
+                            @(Html.Encode(Model.Type == Enums.PartialTypes.Modual ? Model.Partials.Operation.Title : ""))
+                        </div>
+                        @Html.HiddenFor(x => x.OperationId)
+                    }
+
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    ماژول
+                </div>
+                <div class="table-row-item">
+                    @if (this.Html.GetPageMode() == PageMode.Create)
+                    {
+                        <div class="item">
+                            <select id="PartialId" name="PartialId"></select>
+                        </div>
+
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(x => x.PartialId)
+
+                        <div class="item detail">
+                            @(Html.Encode(Model.Type == Enums.PartialTypes.Modual ? Model.Partials.Title : Model.Content.Title))
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        CustomId
+                    </div>
+                </div>
+                <div class="table-row-item">
+
+                    @if (this.Html.GetPageMode() == PageMode.Create)
+                    {
+                        <div class="item">
+                            @Html.DropDownListFor(x => x.CustomId, (SelectList)ViewBag.CustomIdList, "")
+                        </div>
+
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(x => x.CustomId)
+                        <div class="item">
+                            @Model.CustomId
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        HasContainer
+                    </div>
+                </div>
+                <div class="table-row-item drp">
+                    <div class="item">
+                        @Html.RadioButtonFor(model => model.HasContainer, true)@Resources.Common.Yes
+                        @Html.RadioButtonFor(model => model.HasContainer, false)@Resources.Common.No
+                    </div>
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        position
+                    </div>
+                </div>
+                <div class="table-row-item table-fit">
+                    <div class="item">
+                        @Html.EditorFor(model => model.position)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group my_form-group button-row">
+        <div class="button-div m-btn waves-green i-save">
+            @{Html.Radyn().ImageActionLink().Text(@Resources.Common.Save).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "EditPartialLoad()" }).Render();}
+        </div>
+    </div>
+</div>
+

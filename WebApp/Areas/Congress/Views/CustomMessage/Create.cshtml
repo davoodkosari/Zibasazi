@@ -1,0 +1,68 @@
+﻿@using Radyn.Web.Mvc;
+@using Radyn.WebApp.AppCode.Base
+@using Radyn.WebApp.Areas.Common.Component
+@model Radyn.Congress.DataStructure.CustomMessage
+@{
+    ViewBag.Title = Resources.Congress.CustomMessageNew;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head{
+
+    <script>
+         
+        function changeCulture() {
+            var langId = document.getElementById("LanguageId").value;
+            $("#DivItem").html("");
+            $.get("@Url.Content("~/Congress/CustomMessage/GetModify")", {  culture: langId, date: new Date().getTime() }, function (data) {
+                $("#DivItem").html(data).slideDown("slow");;
+            });
+        }
+
+        $(document).ready(function () {
+            changeCulture();
+        });
+
+
+    </script>
+}
+
+@section PageTitle
+{
+    @Resources.Congress.CustomMessageNew
+
+}
+@section PageAction
+{
+
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Common.Save).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).Submit().Render(); }
+    </div>
+
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/CustomMessage/Index")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+@section PageActionDown
+{
+
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Common.Save).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).Submit().Render(); }
+    </div>
+
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/CustomMessage/Index")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+@Html.ValidationSummary(true)
+
+<div class="radynForm">
+    <div class="item-row">
+        @{
+            Html.LanguageDropDownList("changeCulture();");
+        }
+    </div>
+    <div id="DivItem">
+
+
+    </div>
+</div>

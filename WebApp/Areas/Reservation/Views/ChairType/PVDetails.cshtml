@@ -1,0 +1,33 @@
+﻿@using Radyn.Utility
+@model Radyn.Reservation.DataStructure.ChairType
+<div class="radynForm">
+    <div class="item-row fit">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Reservation.Name
+            </div>
+        </div>
+        <div class="table-row-item table-fit">
+            <div class="item">
+                @Html.DisplayFor(x => x.Title)
+                    
+            </div>
+        </div>
+    </div>
+   
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Reservation.Amount
+            </div>
+        </div>
+        <div class="table-row-item ">
+            <div class="item">
+                @Model.ValidAmount.ToDecimal().ToString("n0") @(Model.CurrencyType.ToEnum<Radyn.Common.Definition.Enums.CurrencyType>().GetDescriptionInLocalization())
+            </div>
+        </div>
+    </div>
+  
+</div>
+
+

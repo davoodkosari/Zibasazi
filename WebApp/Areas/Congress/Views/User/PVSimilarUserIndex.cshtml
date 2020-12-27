@@ -1,0 +1,67 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Framework
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+
+@model IEnumerable<Radyn.Congress.DataStructure.User>
+    <script type="text/javascript">
+        function LookUpForm(id) {
+            if (id != "") {
+                ShowModal("@Url.Content("~/Congress/User/LookUpDetails?Id=")" + id);
+            }
+
+        }
+
+        function SelectAll() {
+
+            if ($("#CheckSelectAll").attr("checked") == "checked") {
+                $("[id^='CheckSelect']").each(function () {
+                    $(this).attr("checked", true);
+                });
+            } else {
+                $("[id^='CheckSelect']").each(function () {
+                    $(this).attr("checked", false);
+                });
+            }
+        }
+
+        $(document).ready(function () {
+
+        });
+    </script>
+    
+    @if (Model.Any())
+    {
+        <div class="fit" dir="@Resources.Design.Align">
+            <br />
+            <br />
+            @{
+                Html.Radyn().Grid(Model).DataKeys(x => x.Add(y => y.Id)).Name("Grid").HtmlAttributes(new { style = "width:98%;margin: 0 auto" }).Columns(columns =>
+                {
+                columns.Template(user => "<input type='checkbox' class='checkboxGroups'  alt='" + Resources.Common.Select + "' style='cursor: pointer' value='" + user.Id + "'  id='CheckSelect-" + user.Id + "' name='CheckSelect' />").Title("<input type='checkbox' class='checkboxGroups'  onclick='SelectAll();' style='cursor: pointer'   id='CheckSelectAll' name='CheckSelectAll' />").Width(60).Encode(false).HeaderHtmlAttributes(new { style = "text-align:center;height:30px" });
+                    columns.Template(x=>x.EnterpriseNode.PictureId.HasValue?"<img alt=\""+ x.EnterpriseNode.DescriptionField + "\"  src=\""+ @Radyn.FileManager.FileManagerContants.FileHandlerRoot+x.EnterpriseNode.PictureId + "\" height=\"50\" width=\"80\" />":"").Title(@Resources.EnterPriseNode.Picture).Encode(false);
+                    columns.Template(user => user.Username).Title(Resources.Congress.UserName).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(user => user.Number).Title(Resources.Congress.Number).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(user => user.EnterpriseNode.RealEnterpriseNode.FirstName).Title(Resources.EnterPriseNode.FirstName).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(user => user.EnterpriseNode.RealEnterpriseNode.LastName).Title(Resources.EnterPriseNode.LastName).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(user => user.RegisterDate).Title(Resources.Congress.RegisterDate).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(user => user.Status.ToString().ToEnum<Enums.UserStatus>().GetDescriptionInLocalization()).Title(Resources.Congress.Status).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(user =>
+                        "<a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "')\"  >" +
+                        " <img width='18' align='absmiddle' title='" + Resources.Common.Detail + "' src='" + Url.Content("~/Content/Images/details.png") + "' />" + "</a>  ").Encode(false).Width(100);
+                })
+                    
+                    .Sortable(sorting => sorting.Enabled(true))
+                    .Pageable(paging => paging.Enabled(true))
+                    .Filterable(filtering => filtering.Enabled(true))
+                    .Footer(false).Render();
+            }
+        </div>
+                }
+                else
+                {
+                    <div class="fit">
+                        @Resources.Congress.Dataformatisnotcorrect
+                    </div>
+                }
+

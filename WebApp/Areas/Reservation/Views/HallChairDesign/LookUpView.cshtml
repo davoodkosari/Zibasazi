@@ -1,0 +1,335 @@
+﻿@using Radyn.Reservation.DataStructure
+@using Radyn.Reservation.Definition
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+@using Radyn.FileManager
+@model Radyn.Reservation.DataStructure.Hall
+
+
+@{
+    ViewBag.Title = "LookupAdminDesign";
+    Layout = "~/Views/Shared/LookUpLayout.cshtml";
+}
+@section Head
+{
+    <script type='text/javascript'>
+
+        function SelectedAttribute(cell, value) {
+                var selectedChairTypeId = $("#SelectedChairTypeId").val();
+                if (selectedChairTypeId != "") {
+                    if (value[5] != '@Guid.Empty' && value[5].toLowerCase() == selectedChairTypeId && value[4] > 0) {
+                        $("#Div-" + cell).attr("onclick", "AddToBasket('" + cell + "')");
+                        $("#Div-" + cell).css('cursor', 'pointer');
+                    } else {
+                        $("#Div-" + cell).addClass('NotForSaleStatus');
+                    }
+                } else {
+                    if (value[5] != '@Guid.Empty' && value[4] > 0) {
+                        $("#Div-" + cell).attr("onclick", "AddToBasket('" + cell + "')");
+                        $("#Div-" + cell).css('cursor', 'pointer');
+                    } else {
+                        $("#Div-" + cell).addClass('NotForSaleStatus');
+                    }
+                }
+            
+
+        }
+
+        function SetCss(cell) {
+            $("#Div-" + cell).removeClass();
+            var inlineStyle = $("#Div-" + cell).attr('parametrs');
+            var value = inlineStyle.split(',');
+            $("#Div-" + cell).addClass('CommonStyle');
+            switch (value[3]) {
+                case '@((byte) Enums.ReservStatus.None)':
+                    $("#Div-" + cell).addClass('NoneStatus');
+                    break;
+                case '@((byte) Enums.ReservStatus.Free)':
+                    $("#Div-" + cell).addClass('FreeStatus');
+                    SelectedAttribute(cell, value);
+                    break;
+                case '@((byte) Enums.ReservStatus.NotForSale)':
+                    $("#Div-" + cell).addClass('NotForSaleStatus');
+                    var object = $("#canselectUnableSale").val();
+                    if (object == "True") {
+                        SelectedAttribute(cell, value);
+                    }
+                    break;
+                case '@((byte) Enums.ReservStatus.Saled)':
+                    $("#Div-" + cell).addClass('SaledStatus');
+                    break;
+                case '@((byte) Enums.ReservStatus.Reserved)':
+                    $("#Div-" + cell).addClass('ReservedStatus');
+                    break;
+
+                default:
+            }
+
+            SetSelectedCss(cell);
+        }
+
+        function GetCellEnable(cell) {
+            var inlineStyle = $("#Div-" + cell).attr('parametrs');
+            var value = inlineStyle.split(',');
+            return parseInt(value[3]) > '@((byte) Enums.ReservStatus.None)';
+        }
+
+        function AddToBasket(cell) {
+            if (GetCellEnable(cell) == true) {
+                $("#Div-" + cell).removeClass();
+                $("#Div-" + cell).addClass('CommonStyle');
+                var inlineStyle = $("#Div-" + cell).attr('parametrs');
+                var value = inlineStyle.split(',');
+                var selectedChairs = $("#SelectedChairs").val();
+                var maxselect = $("#maxselect").val();
+                $.get("/Reservation/HallChairDesign/AddChairToAddToBasket", { Id: value[2], selectedId: selectedChairs, maxselect: maxselect, date: new Date().getTime() }, function (data) {
+                    if (data.Result == 1) {
+                        $("#Div-" + cell).addClass('SelectForReserv');
+                    }
+                    if (data.Result == 0) {
+                        if (value[3] == '@((byte) Enums.ReservStatus.Free)' || value[3] == '@((byte) Enums.ReservStatus.Reserved)')
+                            $("#Div-" + cell).addClass('FreeStatus');
+                        if (value[3] == '@((byte) Enums.ReservStatus.NotForSale)')
+                            $("#Div-" + cell).addClass('NotForSaleStatus');
+                    }
+                    if (data.Result == -1) {
+                        if (value[3] == '@((byte) Enums.ReservStatus.Free)' || value[3] == '@((byte) Enums.ReservStatus.Reserved)')
+                            $("#Div-" + cell).addClass('FreeStatus');
+                        if (value[3] == '@((byte) Enums.ReservStatus.NotForSale)')
+                            $("#Div-" + cell).addClass('NotForSaleStatus');
+                        alert("@Resources.Reservation.Morethathenumberofseatsyouselected" + data.ChairCount);
+                    }
+                    $("#SelectedChairs").val(data.Value);
+                    GetselectedHtml();
+                    ShowRadynMessage();
+
+                });
+
+            }
+        }
+
+        function GetselectedHtml() {
+            var selectedChairs = $("#SelectedChairs").val();
+            $("#DivResult").html("");
+            $.get("/Reservation/HallChairDesign/GetSelectedHtml", { selectedId: selectedChairs, date: new Date().getTime() }, function (data) {
+                $("#DivResult").html(data.Html);
+
+            });
+
+        }
+
+        function GetParent(Id) {
+            var selectedChairs = $("#SelectedChairs").val();
+            ShowModalWithReturnValue("/Reservation/HallChairDesign/LookUpView?hallId=" + Id.trim() + "&onlyselectChairTypeId=" + '@ViewBag.SelectedChairTypeId' + "&selectedId=" + selectedChairs + "&maxselect=" + '@ViewBag.maxselect' + "&canselectUnableSale=" + '@ViewBag.canselectUnableSale', "SelectedChairs", "SelectedChairs");
+        }
+
+        function Returnvalue() {
+            var value = $("#SelectedChairs").val();
+            showModalReturn(value, value);
+        }
+
+        function SetSelectedCss(cell) {
+            if (GetCellEnable(cell) == true) {
+                var value1 = $("#SelectedChairs").val();
+                if (value1 != "") {
+                    var valuesplite = value1.split(',');
+                    var inlineStyle = $("#Div-" + cell).attr('parametrs');
+                    var value = inlineStyle.split(',');
+                    for (var i = 0; i < valuesplite.length; i++) {
+                        if (valuesplite[i] == value[2].toLowerCase()) {
+                            $("#Div-" + cell).removeClass();
+                            $("#Div-" + cell).addClass('CommonStyle');
+                            $("#Div-" + cell).addClass('SelectForReserv');
+                            if (value[3] == '@((byte) Enums.ReservStatus.Reserved)')
+                                SelectedAttribute(cell, value);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            $("#DivLoad").hide();
+            $("[id^=Div-]").each(function () {
+                var Id = $(this).attr('val');
+                SetCss(Id);
+            });
+            GetselectedHtml();
+
+        });
+
+        function GetViewPhoto() {
+            ShowModal("/Reservation/Hall/ShowHallPhoto?Id=" + '@Model.PhotoId');
+        }
+    </script>
+    <style>
+        .CommonStyle {
+            height: 15px;
+            width: 15px;
+            text-align: center;
+            margin-bottom: 2px;
+            margin-top: 2px;
+            margin-right: 1px;
+            margin-left: 1px;
+            float: @Resources.Design.Align;
+            font-size: 10px;
+        }
+
+        .FreeStatus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-icon.png');
+        }
+
+        .SaledStatus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-soldout.png');
+        }
+
+        .NotForSaleStatus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-deactived.png');
+        }
+
+        .SelectForReserv {
+            background-image: url('/Areas/Reservation/Content/Images/chair-hover.png');
+        }
+
+        .ReservedStatus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-reserved.png');
+        }
+
+        .NoneStatus {
+            background-color: transparent;
+        }
+    </style>
+
+
+
+}
+@section PageAction
+{
+
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(@Resources.Common.Save).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "Returnvalue();" }).Render();}
+    </div>
+    @if (Model.HaveChild())
+    {
+        foreach (var child in Model.Childs())
+        {
+            <div class="button-div m-btn waves-green i-save">
+                @{Html.Radyn().ImageActionLink().Text(child.Name).Align(ImageActionLink.Alignment.Left).ImageUrl(FileManagerContants.FileHandlerRoot + child.PhotoId).ImagePosition(ImageActionLink.Position.Right).ImageWidth("25").ImageHeight("30").OtherAttribute(new { onclick = "GetParent('" + child.Id + "');" }).Render();}
+            </div>
+        }
+
+    }
+
+}
+@using (Html.BeginForm())
+{
+    if (Model != null)
+    {
+
+        <div class="reservationbg">
+            <div class="reservationtitle">
+                @Resources.Common.Help
+            </div>
+            <ul>
+                <li>
+                    <img src="/Areas/Reservation/Content/Images/chair-icon.png" />
+                    @Enums.ReservStatus.Free.GetDescriptionInLocalization()
+                </li>
+                <li>
+                    <img src="/Areas/Reservation/Content/Images/chair-soldout.png" />
+                    @Enums.ReservStatus.Saled.GetDescriptionInLocalization()
+                </li>
+                <li>
+                    <img src="/Areas/Reservation/Content/Images/chair-reserved.png" />
+                    @Enums.ReservStatus.Reserved.GetDescriptionInLocalization()
+                </li>
+                <li>
+                    <img src="/Areas/Reservation/Content/Images/chair-deactived.png" />
+                    @Enums.ReservStatus.NotForSale.GetDescriptionInLocalization()
+                </li>
+                @if (Model.PhotoId.HasValue)
+                {
+                    <li>
+                        @{
+                    Html.RadynFile().Image().ID(Model.PhotoId.Value).Width(20).Height(20).OtherAttribute(new { style = "cursor: pointer", onclick = "GetViewPhoto()" }).Render();
+                        }
+                        @Resources.Reservation.HallPhoto
+                    </li>
+                }
+            </ul>
+            <div id="DivResult" dir="@Resources.Common.Direction" class="fit"></div>
+        </div>
+        <div class="fit" align="center" id="DivLoad">
+            @Resources.Reservation.PleaseWait
+            <img id="loading" width="150" src="@Url.Content("~/Content/Images/Gif/Loading128.gif")" alt="" />
+        </div>
+        <input type="hidden" value="@ViewBag.selectedId" id="SelectedChairs" name="SelectedChairs" />
+        <input type="hidden" value="@ViewBag.maxselect" id="maxselect" name="maxselect" />
+        <input type="hidden" value="@ViewBag.canselectUnableSale" id="canselectUnableSale" name="canselectUnableSale" />
+        <input type="hidden" value="@ViewBag.SelectedChairTypeId" id="SelectedChairTypeId" name="SelectedChairTypeId" />
+        if (Model.Chairs == null || Model.Chairs.Count == 0)
+        {
+            <div class="fit" align="center">
+                @if (Model.PhotoId.HasValue)
+                {
+                    Html.RadynFile().Image().ID(Model.PhotoId.Value).OtherAttribute(new { style = "cursor: pointer", onclick = "window.location='" + FileManagerContants.FileHandlerRoot + Model.PhotoId + "?dl=true" + "';" }).Render();
+                }
+            </div>
+        }
+        else
+        {
+
+            <div id="DivCheckBox" dir="@Resources.Common.Direction">
+                @{
+            short Column = 0;
+            int count = Model.Length * Model.Width;
+            for (int i = 1; i <= Model.Length; i++)
+            {
+                if (i == 1)
+                {
+                    <div style="width: 17px; float: @Resources.Design.Align;  margin-@Resources.Design.Align: 14px; text-align: center;">
+                        @i
+                    </div>
+                }
+                else
+                {
+                    <div style="width: 17px; float: @Resources.Design.Align;  text-align: center;">
+                        @i
+                    </div>
+                }
+
+            }
+            for (int r = 1; r <= count / Model.Length; r++)
+            {
+                <div class="fit">
+                    <div style="width: 1%" class="page-align">
+                        @r
+                    </div>
+                    <div class="width98percent page-align">
+                        @for (int c = 1; c <= Model.Length; c++)
+                        {
+
+                            if (Column <= count)
+                            {
+                                var value = Model.Chairs[Column].ColumValue;
+                                var cell = Model.Chairs[Column].CellValue;
+                                var splite = value.Split(',');
+                                <div id="Div-@cell" val="@cell" parametrs="@value" title="@(splite[3].ToInt() > (byte)Enums.ReservStatus.None ? (Resources.Reservation.Row + " : " + splite[0] + "\n" + Resources.Reservation.Column + " : " + splite[1] + "\n" + Resources.Reservation.Status + " : " + splite[3].ToEnum<Enums.ReservStatus>().GetDescriptionInLocalization() + "\n" + (Model.Chairs[Column].ChairTypeId != null ? (Resources.Reservation.ChairType + " : " + Model.Chairs[Column].ChairType.DescriptionField + "\n") : "") + Resources.Reservation.Number + " : " + splite[4] + "\n" + ((ViewBag.canselectUnableSale!=null&&(bool)ViewBag.canselectUnableSale&&Model.Chairs[Column].OwnerId != null) ? (Resources.Reservation.Owner + " : " + Model.Chairs[Column].Owner.DescriptionField + "-" + Model.Chairs[Column].Owner.Email) : "")) : "")">
+                                </div>
+
+
+                            }
+                            Column++;
+                        }
+                    </div>
+
+                </div>
+            }
+                }
+            </div>
+        }
+
+    }
+
+}

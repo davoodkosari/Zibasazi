@@ -1,0 +1,30 @@
+﻿@using Radyn.FileManager
+
+@model Radyn.Congress.DataStructure.ConfigurationContent
+@if (Model != null)
+{
+    if (!Model.FooterFromContentManager && Model.FooterId.HasValue)
+    {
+        Html.RadynFile().Image().ID((Guid) Model.FooterId).OtherAttribute(new {style = "width:100%;"}).Render();
+    }
+    else if (Model.ContentManagerFooterId.HasValue)
+    {
+        Html.RenderAction("ViewPartial", "Content", new {area = "ContentManager", id = Model.ContentManagerFooterId});
+    }
+}
+<div class="footer-company-box" style="visibility: hidden">
+    <div class="footer-company">
+        <div class="radyn-Resources license footer-company-content">
+            <div class="footer-responsive">
+                <p>@Resources.Common.HomaVersion:@System.Configuration.ConfigurationManager.AppSettings["HomaVersion"]</p>
+
+                <div class="radyn-Resources-a">
+                    <a href="http://ehamayesh.com" target="_blank">
+                        <img style="width: 40px; height: 40px; margin-top: -5px;" align="absmiddle" src="@Url.Content("~/Areas/Congress/Content/Images/homa-icon.png")"/>
+                        <p>@Resources.Common.Homa</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

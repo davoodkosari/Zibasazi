@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Aviny';
+    src: url('eot/Aviny.eot');
+    src: url('eot/Avinyd41d.eot?#iefix') format('embedded-opentype'),
+         url('woff2/Aviny.woff2') format('woff2'),
+         url('woff/Aviny.woff') format('woff'),
+         url('ttf/Aviny.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

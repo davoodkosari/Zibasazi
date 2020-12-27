@@ -1,0 +1,21 @@
+@using Radyn.Web.Mvc
+@{
+    Layout = null;
+}
+<head>
+    @RenderSection("Head", false)
+</head>
+
+<div class="inner-lookup">
+
+    @RenderSection("PageAction", false)
+    <div class="c-widget-content c-widget-lookup">
+        @RenderBody()
+    </div>
+    <div class="page-action-title">
+        @RenderSection("PageActionDown", false)
+    </div>
+
+
+</div>
+

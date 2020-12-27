@@ -1,0 +1,61 @@
+﻿@using Radyn.Web.Mvc
+@model Radyn.Security.Tools.LoginViewModel
+<script type="text/javascript">
+
+
+    function Register() {
+        window.location = "@Url.Content("~/Congress/UserPanel/Subscribe")";
+    }
+
+
+</script>
+
+@using (Html.BeginForm("Login", "UserPanel", new { area = "Congress" }))
+{ 
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="RequestCount" id="RequestCount" />
+    <input type="hidden" name="Ipaddress" id="Ipaddress" />
+
+    <div class="container-box login-box banner-web">
+        <div class="news-section">
+            <div class="title-banner" style="display: none">
+                <h2>  @Resources.Common.LoginRegistration</h2>
+            </div>
+            <div class="login-main">
+                <div class="login-data-row">
+                    <div class="login-data-row-item">
+                        @Html.TextBoxFor(m => m.Username, new {  placeholder = Resources.Congress.UserName,autocomplete ="off" })
+                        @{Html.Radyn().Validator().ID("username").GroupName("g1").Render(); }
+
+                    </div>
+                </div>
+                <div class="login-data-row">
+                    <div class="login-data-row-item">
+                        @Html.PasswordFor(m => m.Password, new { placeholder = Resources.Security.UserPassword })
+                        @{Html.Radyn().Validator().ID("password").GroupName("g1").Render(); }
+                    </div>
+                </div>
+                <div class="login-data-row button-row-login">
+                    <div class="login-data-row-item">
+                        <input type="button" onclick="submit();" name="BtnEnter" id="BtnEnter" value="@Resources.Security.Login" />
+                        <img style="display: none" src='@Url.Content("~/Content/images/Gif/loading2.gif")' id="progress1" />
+                    </div>
+                </div>
+                <div class="login-data-row button-row-login">
+                    <div class="login-data-row-item">
+                        <input id="button-yellow" type="button" name="name" value="@Resources.Congress.SignUp" onclick="Register();" />
+                    </div>
+                </div>
+                <div class="login-data-row button-row-login">
+                    <div class="login-data-row-item">
+                        <a class="login-solid-btn" href="@Url.Content("~/Congress/UserPanel/ForgotPassword")">
+                            @Resources.Security.ForgotPassword
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}

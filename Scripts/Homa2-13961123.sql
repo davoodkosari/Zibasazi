@@ -1,0 +1,1 @@
+ALTER TABLE [Congress].[Configuration] ALTER COLUMN	[MerchantId] varchar(100)

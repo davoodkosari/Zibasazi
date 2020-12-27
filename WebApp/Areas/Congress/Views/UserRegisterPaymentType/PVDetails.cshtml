@@ -1,0 +1,77 @@
+﻿@using Radyn.Utility
+@model Radyn.Congress.DataStructure.UserRegisterPaymentType
+    <div class="item-row fit">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Title
+            </div>
+        </div>
+        <div class="table-row-item table-c-fit">
+            <div class="item">
+                  @Html.DisplayFor(x => x.Title)
+                    
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.PaymentType
+            </div>
+        </div>
+        <div class="table-row-item table-c-fit">
+            <div class="item">
+                @Model.ValidAmount.ToDecimal().ToString("n0") @(Model.CurrencyType.ToEnum<Radyn.Common.Definition.Enums.CurrencyType>().GetDescriptionInLocalization())
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Capicity
+            </div>
+        </div>
+        <div class="table-row-item table-c-fit">
+            <div class="item">
+                @Html.DisplayFor(model => model.Capacity)
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.BaseCapacity
+            </div>
+        </div>
+        <div class="table-row-item table-c-fit">
+            <div class="item">
+                @Html.DisplayFor(model => model.BaseCapacity)
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Printable
+            </div>
+        </div>
+        <div class="table-row-item drp">
+            <div class="item">
+                @(Model.Printable ? @Resources.Common.Yes : @Resources.Common.No)
+            </div>
+        </div>
+    </div>
+    <div class="item-row" >
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.CanUserSelect
+            </div>
+        </div>
+        <div class="table-row-item drp">
+            <div class="item">
+                @(Model.CanUserSelect ? @Resources.Common.Yes : @Resources.Common.No)
+            </div>
+        </div>
+    </div>
+
+

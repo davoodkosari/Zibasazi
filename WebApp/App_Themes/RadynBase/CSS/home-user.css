@@ -1,0 +1,79 @@
+﻿.page-caption h2 {
+    border: none
+}
+
+.topbar {
+    visibility: hidden;
+    display: none;
+}
+
+.exhibz-theme .big-pane {
+    margin: 20px;
+    border-radius: 4px;
+    background-color: #f0f4f5;
+}
+
+.exhibz-theme .congress-title {
+    display: block !important;
+}
+
+.exhibz-theme .ui-sheet .big-pane {
+    margin: 0 !important;
+    margin-bottom: -300px !important;
+}
+
+.exhibz-theme .ui-user .big-pane {
+    width: 100%;
+}
+
+.exhibz-theme .ui-user .ui-h-menu {
+    position: relative;
+    min-height: 625px;
+    background-image: url('../../Exhibz/Img/headerimage_1.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.exhibz-theme .ui-user .content {
+    position: relative;
+    top: -240px;
+    width: calc(100% - 50px);
+    float: none;
+    margin: auto;
+}
+@media(max-width:460px) {
+    .exhibz-theme .ui-user .content {
+        width: 95%;
+}
+}
+.exhibz-theme .ui-user .big-pane {
+    background-color: transparent !important;
+}
+
+.exhibz-theme .ui-sheet.ui-user .big-pane.fit .c-widget, .ui-sheet.ui-user .big-pane.fit .innerRL, .ui-sheet.ui-user .big-pane.fit .page-caption {
+    background-color: transparent !important;
+    padding-top: 0;
+    box-shadow: none !important;
+}
+
+.exhibz-theme .ui-sheet.ui-user .big-pane.fit .page-caption {
+    display: none;
+}
+
+@media(max-width: 768px) {
+    .exhibz-theme .ui-h-menu .navigation-menu.close-nav {
+        margin-top: 17px;
+    }
+}
+
+
+.exhibz-theme .big-pane {
+    margin: 0;
+    background-color: #f0f4f5;
+}
+
+
+.exhibz-theme .ui-user .ui-h-menu .content-navigation-menu {
+    padding: 13px 12px 1px 12px;
+    margin-top: 15px;
+}

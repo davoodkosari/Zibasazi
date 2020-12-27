@@ -1,0 +1,168 @@
+﻿@using Radyn.Web.Mvc;
+@using Radyn.WebApp
+
+@model Radyn.Congress.DataStructure.ArticleUserComment
+
+@{
+    ViewBag.Title = Resources.Common.Detail;
+    Layout = "~/Views/Shared/LookUpLayout.cshtml";
+}
+@section Head{
+    <script>
+    function DeleteComment() {
+           ShowPostBackLoader();
+        $.post("@Url.Content("~/Congress/ArticleUserComment/Delete")", $('form[action*="@Url.Content("~/Congress/ArticleUserComment/Details")"]').serialize(), function (data) {
+            if (data != "false") {
+                GetSearch();
+              
+
+            }
+
+            ShowRadynMessage();
+        }).complete(function () {
+            HidePostBackLoader();
+        });
+    }
+
+    function SaveFromDetails() {
+        ShowPostBackLoader();
+        var id = $('#Id').val();
+        $.post("/Congress/ArticleUserComment/UpdateConfirm", { id: id }, function (data) {
+            ShowRadynMessage();
+            GetSearch();
+            Close_thisModal();
+
+        }).complete(function () {
+                    HidePostBackLoader();
+                });
+        }
+          function GetSearch() {
+                ShowPostBackLoader();
+                $("#DivArtileResult").html("");
+                $.post("@Url.Content("~/Congress/ArticleUserComment/Index")", $('form[action*="@Url.Content("~/Congress/ArticleUserComment/Index")"]').serialize(), function (data) {
+
+                    if (data != "false") {
+                        $("#DivArtileResult").html(data);
+                        $("#DivArtileResult").slideDown();
+                    }
+
+                    ShowRadynMessage();
+                }).complete(function () {
+                    HidePostBackLoader();
+                });
+
+        }
+    </script>
+}
+@section PageAction
+    {
+
+}
+@section PageActionDown
+    {
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(!Model.ConfirmAdmin ? Resources.Congress.DoConfirm : Resources.Congress.DontConfirm).ImageUrl(Url.Content("~/Content/Images/save.png")).ImagePosition(ImageActionLink.Position.Right).Align(ImageActionLink.Alignment.Left).OtherAttribute(new { onclick = "SaveFromDetails()" }).Render(); }
+    </div>
+    @{
+        if (ViewBag.Status == PageMode.Delete)
+        {
+    <div class="button-div m-btn waves-red i-delete">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Common.Delete).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Delete-Close.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "DeleteComment()" }).Render(); }
+    </div>
+        }
+    }
+
+}
+
+@using (Html.BeginForm())
+{
+    <div class="radynForm">
+        <div class="item-row fit">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.User
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+            </div>
+
+        </div>
+        @Html.Hidden("ArticleId", (Guid)Model.ArticleId)
+        @Html.Hidden("Id", (Guid)Model.Id)
+        <div class="item-row fit">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.ArticleTitle
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @Html.DisplayFor(model => model.Article.Title)
+                </div>
+            </div>
+
+        </div>
+
+        <div class="item-row fit">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.SaveDate
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @Html.DisplayFor(model => model.SaveDate)
+                </div>
+            </div>
+
+        </div>
+
+        <div class="item-row fit">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.SaveTime
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @Html.DisplayFor(model => model.SaveTime)
+                </div>
+            </div>
+
+        </div>
+
+        <div class="item-row fit">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Description
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
+            </div>
+
+        </div>
+
+        <div class="item-row fit">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.ConfirmAdmin
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @(Model.ConfirmAdmin ? Resources.Common.Yes : Resources.Common.No)
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+}
+

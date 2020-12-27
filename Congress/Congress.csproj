@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{79646684-2388-425D-87EA-2B2E4F69783C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Radyn.Congress</RootNamespace>
+    <AssemblyName>Radyn.Congress</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\lib\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Excel, Version=2.1.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TParty\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\TParty\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NString, Version=1.1.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NString.1.1.7\lib\dotnet\NString.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Quartz, Version=1.0.3.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TParty\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="Radyn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TParty\Radyn.dll</HintPath>
+    </Reference>
+    <Reference Include="Radyn.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TParty\Radyn.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Radyn.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TParty\Radyn.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Radyn.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TParty\Radyn.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.1.37\lib\dotnet\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TParty\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TParty\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Agent\Definition\DailyScheduler.cs" />
+    <Compile Include="Agent\Jobs\DateChanged.cs" />
+    <Compile Include="BaseInfoComponents.cs" />
+    <Compile Include="BO\ArticleAuthorsBO.cs" />
+    <Compile Include="BO\ArticleBO.cs" />
+    <Compile Include="BO\ArticleFlowBO.cs" />
+    <Compile Include="BO\CongressTypeBO.cs" />
+    <Compile Include="BO\ArticleTypeBO.cs" />
+    <Compile Include="BO\ArticleUserCommentBO.cs" />
+    <Compile Include="BO\CongressMenuHtmlBO.cs" />
+    <Compile Include="BO\CustomMessageBO.cs" />
+    <Compile Include="BO\NewsLetterBO.cs" />
+    <Compile Include="BO\BoothBO.cs" />
+    <Compile Include="BO\BoothCatgoryBO.cs" />
+    <Compile Include="BO\BoothOfficerBO.cs" />
+    <Compile Include="BO\ChipsFoodBO.cs" />
+    <Compile Include="BO\ChipsFoodUserBO.cs" />
+    <Compile Include="BO\ConfigurationBO.cs" />
+    <Compile Include="BO\ConfigurationContentBO.cs" />
+    <Compile Include="BO\ConfigurationSupportTypeBO.cs" />
+    <Compile Include="BO\CongessGalleryBO.cs" />
+    <Compile Include="BO\CongressAccountBO.cs" />
+    <Compile Include="BO\CongressContainerBO.cs" />
+    <Compile Include="BO\CongressContentBO.cs" />
+    <Compile Include="BO\CongressDefinitionBO.cs" />
+    <Compile Include="BO\CongressDiscountTypeBO.cs" />
+    <Compile Include="BO\CongressFAQBO.cs" />
+    <Compile Include="BO\CongressFoldersBO.cs" />
+    <Compile Include="BO\CongressFormsBO.cs" />
+    <Compile Include="BO\HomaAliasBO.cs" />
+    <Compile Include="BO\PivotCategoryBO.cs" />
+    <Compile Include="BO\ResourceBO.cs" />
+    <Compile Include="BO\SecurityUserBO.cs" />
+    <Compile Include="BO\CongressHallBO.cs" />
+    <Compile Include="BO\CongressHtmlBO.cs" />
+    <Compile Include="BO\CongressNewsBO.cs" />
+    <Compile Include="BO\CongressMenuBO.cs" />
+    <Compile Include="BO\ArticlePaymentTypeBO.cs" />
+    <Compile Include="BO\CongressSlideBO.cs" />
+    <Compile Include="BO\CongressLanguageBO.cs" />
+    <Compile Include="BO\GroupRegisterDiscountBO.cs" />
+    <Compile Include="BO\RefereePivotBO.cs" />
+    <Compile Include="BO\UserBoothBO.cs" />
+    <Compile Include="BO\HomaBO.cs" />
+    <Compile Include="BO\HotelBO.cs" />
+    <Compile Include="BO\HotelUserBO.cs" />
+    <Compile Include="BO\UserChairBO.cs" />
+    <Compile Include="BO\UserFileBO.cs" />
+    <Compile Include="BO\UserFormsBO.cs" />
+    <Compile Include="BO\UserRegisterPaymentTypeBO.cs" />
+    <Compile Include="BO\PivotBO.cs" />
+    <Compile Include="BO\RefereeBO.cs" />
+    <Compile Include="BO\RefereeCartableBO.cs" />
+    <Compile Include="BO\SupporterBO.cs" />
+    <Compile Include="BO\SupportTypeBO.cs" />
+    <Compile Include="BO\TeacherBO.cs" />
+    <Compile Include="BO\UserBO.cs" />
+    <Compile Include="BO\VIPBO.cs" />
+    <Compile Include="BO\WorkShopBO.cs" />
+    <Compile Include="BO\WorkShopTeacherBO.cs" />
+    <Compile Include="BO\WorkShopUserBO.cs" />
+    <Compile Include="CongressComponent.cs" />
+    <Compile Include="CongressBaseFacade.cs" />
+    <Compile Include="DataStructure\ArticleAuthors.cs" />
+    <Compile Include="DataStructure\CongressType.cs" />
+    <Compile Include="DataStructure\ArticleUserComment.cs" />
+    <Compile Include="DataStructure\CongressMenuHtml.cs" />
+    <Compile Include="DataStructure\CustomMessage.cs" />
+    <Compile Include="DataStructure\NewsLetter.cs" />
+    <Compile Include="DataStructure\BoothOfficer.cs" />
+    <Compile Include="DataStructure\ChipsFood.cs" />
+    <Compile Include="DataStructure\ChipsFoodUser.cs" />
+    <Compile Include="DataStructure\CongressAccount.cs" />
+    <Compile Include="DataStructure\CongressDefinition.cs" />
+    <Compile Include="DataStructure\CongressDiscountType.cs" />
+    <Compile Include="DataStructure\CongressFAQ.cs" />
+    <Compile Include="DataStructure\CongressFolders.cs" />
+    <Compile Include="DataStructure\ArticlePaymentType.cs" />
+    <Compile Include="DataStructure\HomaAlias.cs" />
+    <Compile Include="DataStructure\PivotCategory.cs" />
+    <Compile Include="DataStructure\Resource.cs" />
+    <Compile Include="DataStructure\SecurityUser.cs" />
+    <Compile Include="DataStructure\CongressForms.cs" />
+    <Compile Include="DataStructure\CongressHall.cs" />
+    <Compile Include="DataStructure\CongressSlide.cs" />
+    <Compile Include="DataStructure\CongressLanguage.cs" />
+    <Compile Include="DataStructure\GroupRegisterDiscount.cs" />
+    <Compile Include="DataStructure\RefereePivot.cs" />
+    <Compile Include="DataStructure\UserBooth.cs" />
+    <Compile Include="DataStructure\UserChair.cs" />
+    <Compile Include="DataStructure\UserFile.cs" />
+    <Compile Include="DataStructure\UserForms.cs" />
+    <Compile Include="DA\ArticleAuthorsDA.cs" />
+    <Compile Include="DA\CongressTypeDA.cs" />
+    <Compile Include="DA\ArticleUserCommentDA.cs" />
+    <Compile Include="DA\CongressMenuHtmlDA.cs" />
+    <Compile Include="DA\CustomMessageDA.cs" />
+    <Compile Include="DA\NewsLetterDA.cs" />
+    <Compile Include="DA\BoothOfficerDA.cs" />
+    <Compile Include="DA\ChipsFoodDA.cs" />
+    <Compile Include="DA\ChipsFoodUserDA.cs" />
+    <Compile Include="DA\CongressAccountDA.cs" />
+    <Compile Include="DA\CongressDefinitionDA.cs" />
+    <Compile Include="DA\CongressDiscountTypeDA.cs" />
+    <Compile Include="DA\CongressFAQDA.cs" />
+    <Compile Include="DA\CongressFoldersDA.cs" />
+    <Compile Include="DA\ArticlePaymentTypeDA.cs" />
+    <Compile Include="DA\CongressFormsDA.cs" />
+    <Compile Include="DA\HomaAliasDA.cs" />
+    <Compile Include="DA\PivotCategoryDA.cs" />
+    <Compile Include="DA\ResourceDA.cs" />
+    <Compile Include="DA\SecurityUserDA.cs" />
+    <Compile Include="DA\CongressHallDA.cs" />
+    <Compile Include="DA\CongressSlideDA.cs" />
+    <Compile Include="DA\GroupRegisterDiscountDA.cs" />
+    <Compile Include="DA\RefereePivotDA.cs" />
+    <Compile Include="DA\UserBoothDA.cs" />
+    <Compile Include="DA\UserChairDA.cs" />
+    <Compile Include="DA\UserFileDA.cs" />
+    <Compile Include="DA\UserFormsDA.cs" />
+    <Compile Include="DA\UserRegisterPaymentTypeDA.cs" />
+    <Compile Include="Facade\ArticleAuthorsFacade.cs" />
+    <Compile Include="Facade\CongressTypeFacade.cs" />
+    <Compile Include="Facade\ArticleUserCommentFacade.cs" />
+    <Compile Include="Facade\CongressMenuHtmlFacade.cs" />
+    <Compile Include="Facade\CustomMessageFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressTypeFacade.cs" />
+    <Compile Include="Facade\Interface\IArticleUserCommentFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressMenuHtmlFacade.cs" />
+    <Compile Include="Facade\Interface\ICustomMessageFacade.cs" />
+    <Compile Include="Facade\Interface\INewsLetterFacade.cs" />
+    <Compile Include="Facade\Interface\IPivotCategoryFacade.cs" />
+    <Compile Include="Facade\Interface\IResourceFacade.cs" />
+    <Compile Include="Facade\Interface\IUserForms.cs" />
+    <Compile Include="Facade\NewsLetterFacade.cs" />
+    <Compile Include="Facade\BoothOfficerFacade.cs" />
+    <Compile Include="Facade\ChipsFoodFacade.cs" />
+    <Compile Include="Facade\ChipsFoodUserFacade.cs" />
+    <Compile Include="Facade\CongressAccountFacade.cs" />
+    <Compile Include="Facade\CongressDefinitionFacade.cs" />
+    <Compile Include="Facade\CongressDiscountTypeFacade.cs" />
+    <Compile Include="Facade\CongressFAQFacade.cs" />
+    <Compile Include="Facade\CongressFoldersFacade.cs" />
+    <Compile Include="Facade\ArticlePaymentTypeFacade.cs" />
+    <Compile Include="Facade\CongressFormsFacade.cs" />
+    <Compile Include="Facade\HomaAliasFacade.cs" />
+    <Compile Include="Facade\Interface\IHomaAliasFacade.cs" />
+    <Compile Include="Facade\PivotCategoryFacade.cs" />
+    <Compile Include="Facade\ResourceFacade.cs" />
+    <Compile Include="Facade\SecurityUserFacade.cs" />
+    <Compile Include="Facade\CongressHallFacade.cs" />
+    <Compile Include="Facade\CongressSlideFacade.cs" />
+    <Compile Include="Facade\CongressLanguageFacade.cs" />
+    <Compile Include="Facade\GroupRegisterDiscountFacade.cs" />
+    <Compile Include="Facade\Interface\IBoothOfficerFacade.cs" />
+    <Compile Include="Facade\Interface\IChipsFoodFacade.cs" />
+    <Compile Include="Facade\Interface\IChipsFoodUserFacade.cs" />
+    <Compile Include="Facade\Interface\ISecurityUserFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressHallFacade.cs" />
+    <Compile Include="Facade\Interface\IGroupRegisterDiscountFacade.cs" />
+    <Compile Include="Facade\Interface\IRefereePivotFacade.cs" />
+    <Compile Include="Facade\Interface\IUserChairFacade.cs" />
+    <Compile Include="Facade\Interface\IUserFileFacade.cs" />
+    <Compile Include="Facade\RefereePivotFacade.cs" />
+    <Compile Include="Facade\UserBoothFacade.cs" />
+    <Compile Include="Facade\Interface\IUserBoothFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressAccountFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressDefinitionFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressDiscountTypeFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressFAQFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressLanguageFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressFormsFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressSlideFacade.cs" />
+    <Compile Include="Facade\Interface\IArticleAuthorsFacade.cs" />
+    <Compile Include="Facade\Interface\IArticlePaymentTypeFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressFoldersFacade.cs" />
+    <Compile Include="Facade\UserChairFacade.cs" />
+    <Compile Include="Facade\UserFileFacade.cs" />
+    <Compile Include="Facade\UserFormsFacade.cs" />
+    <Compile Include="ReportComponents.cs" />
+    <Compile Include="DataStructure\Article.cs" />
+    <Compile Include="DataStructure\ArticleFlow.cs" />
+    <Compile Include="DataStructure\ArticleType.cs" />
+    <Compile Include="DataStructure\Booth.cs" />
+    <Compile Include="DataStructure\BoothCatgory.cs" />
+    <Compile Include="DataStructure\Configuration.cs" />
+    <Compile Include="DataStructure\ConfigurationContent.cs" />
+    <Compile Include="DataStructure\ConfigurationSupportType.cs" />
+    <Compile Include="DataStructure\CongessGallery.cs" />
+    <Compile Include="DataStructure\CongressContainer.cs" />
+    <Compile Include="DataStructure\CongressContent.cs" />
+    <Compile Include="DataStructure\CongressHtml.cs" />
+    <Compile Include="DataStructure\CongressNews.cs" />
+    <Compile Include="DataStructure\CongressMenu.cs" />
+    <Compile Include="DataStructure\Homa.cs" />
+    <Compile Include="DataStructure\Hotel.cs" />
+    <Compile Include="DataStructure\HotelUser.cs" />
+    <Compile Include="DataStructure\UserRegisterPaymentType.cs" />
+    <Compile Include="DataStructure\Pivot.cs" />
+    <Compile Include="DataStructure\Referee.cs" />
+    <Compile Include="DataStructure\RefereeCartable.cs" />
+    <Compile Include="DataStructure\Supporter.cs" />
+    <Compile Include="DataStructure\SupportType.cs" />
+    <Compile Include="DataStructure\Teacher.cs" />
+    <Compile Include="DataStructure\User.cs" />
+    <Compile Include="DataStructure\VIP.cs" />
+    <Compile Include="DataStructure\WorkShop.cs" />
+    <Compile Include="DataStructure\WorkShopTeacher.cs" />
+    <Compile Include="DataStructure\WorkShopUser.cs" />
+    <Compile Include="DA\ArticleDA.cs" />
+    <Compile Include="DA\ArticleFlowDA.cs" />
+    <Compile Include="DA\ArticleTypeDA.cs" />
+    <Compile Include="DA\BoothCatgoryDA.cs" />
+    <Compile Include="DA\BoothDA.cs" />
+    <Compile Include="DA\ConfigurationContentDA.cs" />
+    <Compile Include="DA\ConfigurationDA.cs" />
+    <Compile Include="DA\ConfigurationSupportTypeDA.cs" />
+    <Compile Include="DA\CongessGalleryDA.cs" />
+    <Compile Include="DA\CongressContainerDA.cs" />
+    <Compile Include="DA\CongressContentDA.cs" />
+    <Compile Include="DA\CongressHtmlDA.cs" />
+    <Compile Include="DA\CongressNewsDA.cs" />
+    <Compile Include="DA\CongressMenuDA.cs" />
+    <Compile Include="DA\HomaDA.cs" />
+    <Compile Include="DA\HotelDA.cs" />
+    <Compile Include="DA\HotelUserDA.cs" />
+    <Compile Include="DA\CongressLanguageDA.cs" />
+    <Compile Include="DA\PivotDA.cs" />
+    <Compile Include="DA\RefereeCartableDA.cs" />
+    <Compile Include="DA\RefereeDA.cs" />
+    <Compile Include="DA\SupporterDA.cs" />
+    <Compile Include="DA\SupportTypeDA.cs" />
+    <Compile Include="DA\TeacherDA.cs" />
+    <Compile Include="DA\UserDA.cs" />
+    <Compile Include="DA\VIPDA.cs" />
+    <Compile Include="DA\WorkShopDA.cs" />
+    <Compile Include="DA\WorkShopTeacherDA.cs" />
+    <Compile Include="DA\WorkShopUserDA.cs" />
+    <Compile Include="Facade\ArticleFacade.cs" />
+    <Compile Include="Facade\ArticleFlowFacade.cs" />
+    <Compile Include="Facade\ArticleTypeFacade.cs" />
+    <Compile Include="Facade\BoothCatgoryFacade.cs" />
+    <Compile Include="Facade\BoothFacade.cs" />
+    <Compile Include="Facade\ConfigurationContentFacade.cs" />
+    <Compile Include="Facade\ConfigurationFacade.cs" />
+    <Compile Include="Facade\ConfigurationSupportTypeFacade.cs" />
+    <Compile Include="Facade\CongessGalleryFacade.cs" />
+    <Compile Include="Facade\CongressContainerFacade.cs" />
+    <Compile Include="Facade\CongressContentFacade.cs" />
+    <Compile Include="Facade\CongressHtmlFacade.cs" />
+    <Compile Include="Facade\CongressNewsFacade.cs" />
+    <Compile Include="Facade\CongressMenuFacade.cs" />
+    <Compile Include="Facade\HomaFacade.cs" />
+    <Compile Include="Facade\HotelFacade.cs" />
+    <Compile Include="Facade\HotelUserFacade.cs" />
+    <Compile Include="Facade\Interface\IConfigurationContentFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressContainerFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressHtmlFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressMenuFacade.cs" />
+    <Compile Include="Facade\Interface\IArticleFacade.cs" />
+    <Compile Include="Facade\Interface\IArticleFlowFacade.cs" />
+    <Compile Include="Facade\Interface\IArticleTypeFacade.cs" />
+    <Compile Include="Facade\Interface\IBoothCatgoryFacade.cs" />
+    <Compile Include="Facade\Interface\IBoothFacade.cs" />
+    <Compile Include="Facade\Interface\IConfigurationFacade.cs" />
+    <Compile Include="Facade\Interface\IConfigurationSupportTypeFacade.cs" />
+    <Compile Include="Facade\Interface\ICongessGalleryFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressContentFacade.cs" />
+    <Compile Include="Facade\Interface\ICongressNewsFacade.cs" />
+    <Compile Include="Facade\Interface\IHomaFacade.cs" />
+    <Compile Include="Facade\Interface\IHotelFacade.cs" />
+    <Compile Include="Facade\Interface\IHotelUserFacade.cs" />
+    <Compile Include="Facade\Interface\IUserRegisterPaymentTypeFacade.cs" />
+    <Compile Include="Facade\Interface\IPivotFacade.cs" />
+    <Compile Include="Facade\Interface\IRefereeCartableFacade.cs" />
+    <Compile Include="Facade\Interface\IRefereeFacade.cs" />
+    <Compile Include="Facade\Interface\ISupporterFacade.cs" />
+    <Compile Include="Facade\Interface\ISupportTypeFacade.cs" />
+    <Compile Include="Facade\Interface\ITeacherFacade.cs" />
+    <Compile Include="Facade\Interface\IUserFacade.cs" />
+    <Compile Include="Facade\Interface\IVIPFacade.cs" />
+    <Compile Include="Facade\Interface\IWorkShopFacade.cs" />
+    <Compile Include="Facade\Interface\IWorkShopTeacherFacade.cs" />
+    <Compile Include="Facade\Interface\IWorkShopUserFacade.cs" />
+    <Compile Include="Facade\UserRegisterPaymentTypeFacade.cs" />
+    <Compile Include="Facade\PivotFacade.cs" />
+    <Compile Include="Facade\RefereeCartableFacade.cs" />
+    <Compile Include="Facade\RefereeFacade.cs" />
+    <Compile Include="Facade\SupporterFacade.cs" />
+    <Compile Include="Facade\SupportTypeFacade.cs" />
+    <Compile Include="Facade\TeacherFacade.cs" />
+    <Compile Include="Facade\UserFacade.cs" />
+    <Compile Include="Facade\VIPFacade.cs" />
+    <Compile Include="Facade\WorkShopFacade.cs" />
+    <Compile Include="Facade\WorkShopTeacherFacade.cs" />
+    <Compile Include="Facade\WorkShopUserFacade.cs" />
+    <Compile Include="Resources\Congress.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Congress.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Congress.fa-IR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Congress.fa-IR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\CongressSetting.cs" />
+    <Compile Include="Settings\JobSchedulerSetting.cs" />
+    <Compile Include="Tools\Constants.cs" />
+    <Compile Include="Tools\Enums.cs" />
+    <Compile Include="Tools\Extenstion.cs" />
+    <Compile Include="Tools\FCMRepository.cs" />
+    <Compile Include="Tools\ModelView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\CongressReport.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{3b7185a9-70d1-4cbe-9835-88944bf9384c}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContentManager\ContentManager.csproj">
+      <Project>{88186c77-0bd8-4068-b6a7-03914ba9b864}</Project>
+      <Name>ContentManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnterpriseNode\EnterpriseNode.csproj">
+      <Project>{46953CE7-5185-464D-9DB4-3BCB91BD04A6}</Project>
+      <Name>EnterpriseNode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Evaluation\Evaluation.csproj">
+      <Project>{c2a8bd14-ea42-46d1-a00f-cc70e9acfa84}</Project>
+      <Name>Evaluation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FAQ\FAQ.csproj">
+      <Project>{EA76A670-2CA6-40DD-BF3B-9C7E22F84A06}</Project>
+      <Name>FAQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FCM\FCM.csproj">
+      <Project>{fcdb0a9a-8e51-4584-9ae5-92ce5fee4827}</Project>
+      <Name>FCM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileManager\FileManager.csproj">
+      <Project>{189d7172-b237-4afa-a5aa-105aa7693637}</Project>
+      <Name>FileManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FormGenerator\FormGenerator.csproj">
+      <Project>{4F138651-DDA4-4453-BB8C-E998DBC90C4A}</Project>
+      <Name>FormGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gallery\Gallery.csproj">
+      <Project>{9D4F5FA9-0871-4921-AA00-63FBE92B8D48}</Project>
+      <Name>Gallery</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Message\Message.csproj">
+      <Project>{d2dfc1bf-8ce6-4684-8ef0-3c3d2d6112f2}</Project>
+      <Name>Message</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\News\News.csproj">
+      <Project>{03f3c529-60b9-4266-9b14-3052da14a312}</Project>
+      <Name>News</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageVersion\PackageNotifier.csproj">
+      <Project>{839c3830-a393-4cc5-a362-6793375dab5c}</Project>
+      <Name>PackageNotifier</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Payment\Payment.csproj">
+      <Project>{d3f8d1a7-7eb1-49ad-bf12-123b32ea554b}</Project>
+      <Name>Payment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reservations\Reservations.csproj">
+      <Project>{36D8923E-BDA6-4C92-B3E4-190885FCA06D}</Project>
+      <Name>Reservations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security\Security.csproj">
+      <Project>{35aea767-a451-4bcd-a8f5-e0e412686279}</Project>
+      <Name>Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slider\Slider.csproj">
+      <Project>{adc9ffd5-6590-4345-917e-9d69f165be64}</Project>
+      <Name>Slider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Statistics\Statistics.csproj">
+      <Project>{f00e74e6-ae53-4da6-9dec-d0b05a0e7d33}</Project>
+      <Name>Statistics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XmlModel\XmlModel.csproj">
+      <Project>{bae639b9-35f9-4a45-b60e-5af2d48f8366}</Project>
+      <Name>XmlModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Congress.ar-SA.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Congress.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Congress.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Congress.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Congress.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

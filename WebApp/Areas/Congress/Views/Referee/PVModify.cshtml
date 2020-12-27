@@ -1,0 +1,97 @@
+﻿@using Radyn.Web.Mvc;
+@using Radyn.WebApp.AppCode.Base
+@model Radyn.Congress.DataStructure.Referee
+
+<div class="radynForm">
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.UserName
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.EditorFor(model => model.Username)
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.SendInformToReferee
+            </div>
+        </div>
+        <div class="table-row-item drp">
+            <div class="item">
+                @Html.RadioButtonFor(model => model.SendInform, true)@Resources.Common.Enable
+                @Html.RadioButtonFor(model => model.SendInform, false)@Resources.Common.Disable
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Common.Enable
+            </div>
+        </div>
+        <div class="table-row-item drp">
+            <div class="item">
+                @Html.RadioButtonFor(model => model.Enabled, true)@Resources.Common.Enable
+                @Html.RadioButtonFor(model => model.Enabled, false)@Resources.Common.Disable
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Type
+            </div>
+        </div>
+        <div class="table-row-item drp">
+            <div class="item">
+                @Html.RadioButtonFor(model => model.IsSpecial, true)داور
+                @Html.RadioButtonFor(model => model.IsSpecial, false)عضو شورای سیاست گذاری
+                
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Password
+
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.PasswordFor(model => model.Password)
+
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.RepeatPassword
+
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.Password("RepeatPassword")
+            </div>
+        </div>
+    </div>
+    @{
+        Html.RenderAction("GenerateEnterpriseNodeModify", "EnterPriseNode", new { Area = "EnterpriseNode", state = ViewBag.ENState, id = Model.Id,type= "r", ShowParent= false, ShowPicture=true });
+    }
+    @{
+        if (Model != null)
+        {
+            Html.RenderAction("Refereepivots", "Referee", new { refreeId = Model.Id, enable = true });
+        }
+    }
+   
+</div>
+
+

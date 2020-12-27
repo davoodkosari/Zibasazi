@@ -1,0 +1,179 @@
+﻿.slide-items-box:after {
+    opacity: 0.65;
+}
+
+.about-conference:after {
+    opacity: 0.80;
+}
+
+@media (min-width: 992px) {
+    .list-nav-content > li a span, .links-item > li a span {
+        color: #ffffff;
+    }
+
+    .list-nav-content > li .dropdown-li a span:before {
+        background-color: #c6c5c4;
+    }
+
+    .list-nav-content > li:hover .dropdown-li li:hover > a span:before {
+        background: #c6c5c4;
+    }
+}
+
+.control-gallery, .mixitup-control-active:hover {
+    color: #c6c5c4;
+}
+
+.mixitup-control-active {
+    border-color: #c6c5c4
+}
+
+.header {
+    background-color: #c6c5c4;
+}
+
+.current .content-slide > span, .lasts .content-slide > span {
+    color: #c6c5c4;
+}
+
+.r-slider-btn:hover {
+    background: #c6c5c4 !important;
+}
+
+.r-slider-btn {
+    border: 3px solid #c6c5c4;
+    color: #c6c5c4;
+}
+
+.items-service-input:hover {
+    border-color: #c6c5c4;
+    color: #c6c5c4;
+}
+
+.footer-social-media, .footer-person-item, .see-profile {
+    background: #c6c5c4;
+}
+
+.section-person-info .owl-carousel .owl-nav button.owl-next, .section-person-info .owl-carousel .owl-nav button.owl-prev {
+    border: 2px solid #c6c5c4 !important;
+    color: #c6c5c4 !important;
+}
+
+.avas .about-conference .widget-title span:first-child, .avas .ui-content-nav .widget-title span:first-child, .items-conference label, .custom-footer ul li svg {
+    color: #de5f33;
+}
+
+.banner-web {
+    background-color: #c6c5c4;
+}
+
+.btn-white.solid:hover {
+    background: #c6c5c4;
+    border-color: #c6c5c4;
+}
+
+.radyn-Resources.license {
+    border-top-color: #c6c5c4
+}
+
+
+::-moz-selection {
+    background: #c6c5c4;
+    color: #fff
+}
+
+::selection {
+    background: #c6c5c4;
+    color: #fff
+}
+
+.ui-sheet .ui-h-menu .r-nav {
+    background-color: #c6c5c4
+}
+
+
+.login-container:after, .login-container:before {
+    background: #c6c5c4;
+    background: linear-gradient(0deg, #a38b84 0%, #c6c5c4 52%, #c6c5c4 100%);
+}
+
+
+.container-hd .login-data-row input[type="text"], .container-hd .login-data-row input[type="password"] {
+    border: 2px solid #c6c5c4;
+}
+
+.input-effects svg {
+    color: #c6c5c4;
+}
+
+.input-effects input:hover, .login-data-row-item.input-effects input:focus, .login-data-row-item .input-effects input:focus.container-hd .login-data-row input[type="text"], .container-hd .login-data-row input[type="password"] {
+    border: 2px solid #a38b84 !important;
+}
+
+    .input-effects input:hover ~ svg, .userinfo span div, .userinfo b ~ span:after, .userinfo span div p:last-child:after, .userinfo b ~ span:after, .userinfo span div p:last-child:after {
+        color: #a38b84;
+    }
+
+.ui-sheet input[type="checkbox"]:checked:before, .ui-sheet input[type="checkbox"]:not(:checked):before {
+    border-color: #c6c5c4
+}
+
+.login-container-bg .m-btn.waves-yellow {
+    background-color: #c6c5c4;
+    text-shadow: none
+}
+
+.topbar .d-item:hover {
+    border-right: 4px solid #c6c5c4;
+}
+
+.login-container-bg .m-btn.waves-yellow .waves-ripple {
+    background-color: #a38b84;
+}
+
+.btn-solid {
+    color: #c6c5c4 !important;
+    border: 2px solid #a38b84;
+}
+
+    .btn-solid:hover {
+        color: #fff !important;
+        background: #c6c5c4;
+    }
+
+.list-nav-content > li:hover .dropdown-li li:hover > a span:before, .user-home-items .d-item:hover .d-item-bg, .ui-sheet input[type="radio"]:checked:before, .ui-sheet input[type="radio"]:not(:checked):before {
+    background: #c6c5c4 !important;
+}
+
+.r-badge span {
+    background: #c6c5c4;
+}
+
+.nav-mail .nav-mail-item {
+    border-right: 10px solid #c6c5c4 !important
+}
+
+.radyn_grid table tbody tr:nth-child(even) {
+    background-color: rgba(198, 197, 196, 0.21)  !important;
+}
+
+.gv-row-style:hover, .gv-alternaterow-style:hover, .radyn_grid tbody tr:hover td {
+    background-color: rgba(198, 197, 196, 0.32);
+}
+
+.container-header-item:after {
+    border-top: 3px solid #c6c5c4;
+}
+
+.content-pro-users label {
+    color: #ffffff;
+}
+
+.content-pro-users {
+    color: #fff;
+    background-color: #de5f33;
+}
+
+    .content-pro-users label:after {
+        border-top: 2px solid #ffffff;
+    }

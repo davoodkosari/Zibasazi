@@ -1,0 +1,31 @@
+﻿@using Radyn.Common.Component
+@using Radyn.Congress.Tools
+@using Radyn.FileManager
+@using Radyn.WebApp.AppCode.Security
+@model List<dynamic>
+    <div id="_mainwrapper" class="gallery-box-content">
+        @{
+
+            foreach (var gallery in Model)
+            {
+                <div class="box image-gallery-category" onclick="GetItems('@gallery.Id')">
+                    @{
+                        if (gallery.Thumbnail!=null)
+                        {
+                            Html.RadynFile().Image().ID((Guid)gallery.Thumbnail).Alt(gallery.Title).Render();
+                        }
+                    }
+                    <span>
+                        <p>
+                            @gallery.Title
+                        </p>
+                    </span>
+                </div>
+                        }
+
+        }
+
+    </div>
+
+
+

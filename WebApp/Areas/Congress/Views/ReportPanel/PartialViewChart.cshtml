@@ -1,0 +1,135 @@
+﻿@using Radyn.Web.Mvc
+
+@model IEnumerable<Radyn.Congress.Tools.ModelView.ReportChartModel>
+
+    <script>
+        function ChartGenerator() {
+            var categoryamount = JSON.parse(@Html.Raw(Json.Encode(ViewBag.ValueDataColum)));
+            var seriesamount = JSON.parse(@Html.Raw(Json.Encode(ViewBag.ArgumantDataColum)));
+            Highcharts.chart("DivChartPlace",
+            {
+                chart: {
+                    type: 'column',
+                    style: {
+                        fontFamily: 'vazir,Tahoma'
+
+                    }
+                },
+                title: {
+                    text: "",
+                    style: {
+                        fontSize: '10px',
+
+                    }
+                },
+                xAxis: {
+                    categories: categoryamount,
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '8px', 'text-anchor': 'end'
+
+                        }
+
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '@Resources.Common.Count'
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '8px'
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:,.0f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: { enabled: false },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+
+                        },
+                        enableMouseTracking: false
+
+                    },
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true
+
+                        }
+
+                    }
+                },
+                colors: [
+        "#1ABDC6", "#4C5667", "#7266AD", "#F69577", "#50C6E0", "#26B78E", "#F06C9B", "#FBBF14", "#6799D0", "#A38AC0"
+                ],
+                series: [
+                    {
+                        name: "تعداد",
+                        data: seriesamount,
+                        colorByPoint: true,
+                        dataLabels: {
+                            enabled: false,
+                            rotation: -90,
+                            color: '#808080',
+                            align: 'right',
+                            format: '{point.y:,.0f}', // one decimal
+                            y: 10, // 10 pixels down from the top
+                            style: {
+                                fontSize: '13px'
+
+                            }
+                        }
+
+
+                    }
+                ]
+            });
+        }
+
+        $(document).ready(function () {
+            ChartGenerator();
+        });
+    </script>
+    <div>
+        <div class="radynForm">
+            <div id="DivChartPlace">
+            </div>
+            @{
+                <br />
+                Html.Radyn().Grid(Model).Name("Grid").Footer(true).HtmlAttributes(new { style = "width:99%;margin: 0 auto" }).Columns(columns =>
+                {
+
+                    columns.Template(article => article.Value).Title(Resources.Congress.Title).Width(150).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(article => article.Count.ToString(article.StringFormat)).Title(Resources.Congress.Value).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+
+
+                })
+
+                    .Sortable(sorting => sorting.Enabled(true))
+                    .Pageable(paging => paging.Enabled(true))
+                    .Filterable(filtering => filtering.Enabled(false))
+                    .Footer(false)
+                    .Render();
+            }
+
+
+        </div>
+    </div>

@@ -1,0 +1,29 @@
+﻿@using Radyn.EnterpriseNode.Tools
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+@using Radyn.Web.Mvc.Utility
+
+@model System.Data.Objects.ObjectSet<Radyn.EnterpriseNode.DataStructure.EnterpriseNode>
+    @{
+        ViewBag.Title = @Resources.Common.Index;
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    @section Head{}
+    <h2>
+        @Resources.EnterPriseNode.ComponentTitle
+    </h2>
+    <div class="button-div m-btn waves-blue i-add">
+        @{Html.Radyn().ImageActionLink().NavigateUrl("/EnterPriseNode/EnterPriseNode/CreateRealEnterpriseNode").Text(@Resources.Common.Create).Align(Resources.Common.Aligment.ToEnum<ImageActionLink.Alignment>()).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+    @*@{Html.RenderAction("GenerateTreeLookUp1","EnterPriseNode",new {area="EnterpriseNode"})}*@
+    @{Html.Radyn().Grid(Model).Name("Grid").HtmlAttributes(new { style = "width:600px;" }).DataKeys(keys => keys.Add(x => x.Id)).Columns(columns =>
+            {
+                columns.Template(t => t.Title()).Title(@Resources.EnterPriseNode.Title).Width(150).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(d => d.Email.Truncate(20)).Title(@Resources.EnterPriseNode.Email).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(d => d.Tel).Title(@Resources.EnterPriseNode.Tel).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(d => d.Cellphone).Title(@Resources.EnterPriseNode.Cellphone).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(d => d.Address.Truncate(25)).Title(@Resources.EnterPriseNode.Address).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(d => d.PictureId.HasValue ? ("<img border='0' src=''/>") : "").Title(@Resources.EnterPriseNode.Photo).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" }).Encode(false);
+
+            }).Sortable(sorting => sorting.Enabled(true)).Pageable(paging => paging.Enabled(true)).Filterable(filtering => filtering.Enabled(true)).Render();
+    }

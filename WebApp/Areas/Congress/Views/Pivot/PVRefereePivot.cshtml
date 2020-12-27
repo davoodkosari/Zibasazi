@@ -1,0 +1,46 @@
+﻿@model Dictionary<Radyn.Congress.DataStructure.Referee, bool>
+@using Radyn.Web.Mvc
+
+<div class="radynForm">
+    @{
+        if (Model.Any())
+        {
+            
+        @Resources.Congress.Referee 
+            
+            const int column = 3;
+
+            var couter = -1;
+            foreach (var keyValuePair in Model)
+            {
+                couter++;
+                if (couter % column == 0)
+                {
+                }
+        <div>
+        </div>
+
+        <div>
+            <div class="table-row-item width18percent">
+                <div class="item">
+                    <div style="float: right">
+                        @{Html.Radyn().CheckBox().Checked(keyValuePair.Value).Name("SelectedRefree").Value(keyValuePair.Key.Id.ToString()).Render(); }
+
+                    </div>
+                    <div style="float: right">@keyValuePair.Key.FullName</div>
+                </div>
+            </div>
+
+
+        </div>
+            }
+        }
+        else
+        {
+        <div class="fit">
+            @Resources.Common.No_results_found
+        </div>
+        }
+       
+    }
+</div>

@@ -1,0 +1,111 @@
+﻿@using System.Threading.Tasks
+@using Radyn.Congress.DataStructure
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.Congress.Tools
+@using Radyn.WebApp.Areas.FormGenerator.Tools
+@model Radyn.Congress.DataStructure.WorkShopUser
+@{
+    ViewBag.Title = @Resources.Congress.Reserve + " " + @Resources.Congress.WorkShop + " " + @Resources.Common.New;
+    Layout = "~/Views/Shared/LookUpLayout.cshtml";
+
+}
+@section Head{
+    <script type="text/javascript">
+        function PostData() {
+            RadynPostForm("@Url.Content("~/Congress/ManagmentPanel/GetModifyUserWorkShop")", "@Url.Content("~/Congress/ManagmentPanel/GetModifyUserWorkShop")", function (data2) {
+                if (data2 != "false") {
+                    Close_thisModal();
+                    SearchWorkShop();
+                }
+
+            });
+
+
+        }
+        $(function() {
+            GetWorkShopForm();
+        })
+
+        function GetWorkShopForm() {
+            $("#WorkShopform").html("");
+            var id = $('#UserId').val();
+            if (id == undefined || id == "") {
+                return;
+            }
+            var url = '@(AppExtention.CongressMoudelName)' + "-/Congress/WorkShop/WorkShop";
+           var modelId = id+","+'@Model.WorkShopId.ToString()';
+            $.get("@Url.Content("~/FormGenerator/UI/RenderForm")", { url: url, modelname: '@(typeof(WorkShopUser).Name)', modelid: modelId, id: new Date().getTime() }, function (data) {
+                if (data != "false") {
+                    $("#WorkShopform").html(data).slideDown("slow");
+                }
+            });
+        }
+
+
+    </script>
+}
+
+@section PageAction
+{
+
+    <div class="button-div m-btn waves-green i-save" id="divSave1">
+        @{Html.Radyn().ImageActionLink().ImageUrl(Url.Content("~/Content/Images/Save.png")).Text(Resources.Common.Save).OtherAttribute(new { onclick = "PostData();" }).Render(); }
+    </div>
+
+
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Text(@Resources.Common.Return).OtherAttribute(new { onclick = "Close_thisModal()" }).Render(); }
+    </div>
+}
+@section PageActionDown
+{
+
+    <div class="button-div m-btn waves-green i-save" id="divSave2">
+        @{Html.Radyn().ImageActionLink().ImageUrl(Url.Content("~/Content/Images/Save.png")).Text(Resources.Common.Save).OtherAttribute(new { onclick = "PostData();" }).Render(); }
+    </div>
+
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Text(@Resources.Common.Return).OtherAttribute(new { onclick = "Close_thisModal()" }).Render(); }
+
+    </div>
+}
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(x => x.WorkShopId)
+    <div class="radynForm">
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    کاربر
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @{
+                        Html.Radyn().AutoCompleteFor(Model, x => x.UserId, x => (x.User != null ? x.User.DescriptionField+" ("+x.User.Username+")" : "")).Class("form-control").DataUrl("/Congress/User/SearchUser").OtherAttribute(new { onchage = "GetWorkShopForm()" }).KeyTextField("Key").ValueTextField("Value").Render();
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Status
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item">
+                    @Html.DropDownListFor(x => x.Status, new SelectList(ViewBag.WorkShopRezervstatus, "Key", "Value"), "")
+                </div>
+            </div>
+        </div>
+        <div id="WorkShopform">
+
+        </div>
+
+
+
+    </div>
+}

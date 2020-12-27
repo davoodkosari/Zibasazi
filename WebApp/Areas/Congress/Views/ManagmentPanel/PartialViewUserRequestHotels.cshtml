@@ -1,0 +1,57 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Web.Mvc
+@using Radyn.WebApp
+
+@model IEnumerable<Radyn.Congress.DataStructure.HotelUser>
+<script type="text/javascript">
+    function PaymentDetails(id) {
+        if (id != "") 
+            ShowModal("@Url.Content("~/Payment/Transaction/LookUPTransactionDetails?Id=")" + id);
+        else
+            alert('@Resources.Common.No_results_found');
+
+    }
+    function Details(userId, hotelId) {
+        if (userId != "" && hotelId != "") {
+            ShowModal("@Url.Content("~/FormGenerator/UI/LookUpFormData?refId=")" + userId + "," + hotelId + "&objectname=HotelUser");
+        }
+
+    }
+    function DeleteReserv(userId, hotelId) {
+        if (confirm('@Resources.Common.Are_You_Soure_For_Delete')) {
+            $.get("@Url.Content("~/Congress/ManagmentPanel/DeleteUserHotel")", { userId: userId, hotelId: hotelId, date: new Date().getTime() }, function (data) {
+                 if (data != "false") {
+                     SearchHotels();
+                 }
+             });
+         }
+
+     }
+</script>
+    <div class="fit">
+
+        @{
+            Html.Radyn().Grid(Model).DataKeys(x=>x.Add(y=>y.HotelId)).DataKeys(y=>y.Add(x=>x.UserId)).Name("Grid").HtmlAttributes(new { style = "width:98%;margin: 0 auto;" }).Columns(columns =>
+            {
+
+                columns.Template(hotelUser => hotelUser.User.FullName).Title(@Resources.Congress.User).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(hotelUser => hotelUser.DaysCount).Title(@Resources.Congress.DaysCountRezerv).Width(120).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(hotelUser => hotelUser.RegisterDate).Title(@Resources.Congress.RegisterDate).Width(50).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(hotelUser => Html.DropDownList("Status-" + hotelUser.UserId , new SelectList(ViewBag.status, "Key", "Value", hotelUser.Status), new { }) +" <input type=\"hidden\"    value=\"" + hotelUser.UserId  + "\"    name=\"ModelId\"   Id=\"ModelId\"  />"+ "<input type=\"hidden\" name=\"oldstatus-" + hotelUser.UserId  + "\" id=\"oldtype-" + hotelUser.UserId +  "\" value=\"" + hotelUser.Status + "\" />").Title(Resources.Congress.RezervStatus).Encode(false).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(hotelUser => (hotelUser.Status != (byte)Enums.RezervState.Finalconfirm ? " <img alt='" + @Resources.Common.Delete + "' style='cursor: pointer' width = '20px;' height = '20px;' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "'    onclick=\"DeleteReserv('" + hotelUser.UserId + "','" + hotelUser.HotelId + "');\" />" : "")+" | "+
+                " <img alt='" + @Resources.Payment.PaymentDetails + "' style='cursor: pointer' width = '20px;' height = '20px;' src='" + Url.Content("~/Content/Images/payment-detail.png") + "'    onclick=\"PaymentDetails(" + "'" + hotelUser.TransactionId + "'" + ");\" />"+" | "+
+                " <img alt='" + @Resources.Payment.PaymentDetails + "' style='cursor: pointer' width = '20px;' height = '20px;' src='" + Url.Content("~/Content/Images/details.png") + "'    onclick=\"Details('" + hotelUser.UserId + "','" + hotelUser.HotelId + "');\" /> |"+
+                                              "<a style='cursor: pointer;' onclick=\"ModifyHotelUser('" + hotelUser.UserId+ "','"+PageMode.Edit+"')\" > " +
+                                              " <img width='20' align='absmiddle' title='" + Resources.Common.Edit + "' src='" + Url.Content("~/Content/Images/edit.png") + "' />" + "</a>"
+                ).Title(Resources.Common.Delete).Encode(false).HeaderHtmlAttributes(new { style = "text-align:center" });
+               
+            })
+      
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Enabled(true))
+        .Footer(false).Render();
+        }
+
+
+    </div>

@@ -1,0 +1,110 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+@using Radyn.WebApp.AppCode.Security
+
+@model IEnumerable<dynamic>
+    <script type="text/javascript">
+        function LookUpForm(id, state) {
+            if (id != "") {
+                    switch (state) {
+                    case "Edit":
+                            ShowModal("@Url.Content("~/Congress/User/Edit?Id=")" + id);
+                        break;
+                    case "Details":
+                        ShowModal("@Url.Content("~/Congress/User/Details?Id=")" + id);
+                        break;
+                    case "Delete":
+                            ShowModal("@Url.Content("~/Congress/User/Delete?Id=")" + id);
+                        break;
+                    case "Forms":
+                        showModal("@Url.Content("~/Congress/ManagmentPanel/LookUpUserForm?userId=")" + i);
+                        break;
+
+                    }
+
+                }
+
+
+
+        }
+
+        function PaymentDetails(id) {
+
+            if (id != "") {
+                showModal("@Url.Content("~/Payment/Transaction/LookUPTransactionDetails?Id=")" + id);
+            }
+
+        }
+
+
+        function ShowHall(userId) {
+            var hallId = document.getElementById("HallId-" + userId).value;
+            var selectedChairId = $("#ChairId-" + userId).val();
+            if (hallId != "") {
+                ShowModalWithReturnValue("/Reservation/HallChairDesign/LookUpView?hallId=" + hallId + "&onlyselectChairTypeId=" + null + "&selectedId=" + selectedChairId + "&maxselect=" + '@StringUtils.Encrypt("1")' + "&canselectUnableSale=" + true, "ChairId-" + userId, "ChairId-" + userId);
+
+            }
+        }
+
+        function loginas(Id) {
+            if (confirm("@Resources.Congress.AreYouSureLoginUserPanel")) {
+                window.open("/Congress/ManagmentPanel/LoginAsUser?Id=" + Id);
+            }
+        }
+
+        function Paymentorder(Id) {
+            if (Id != "") {
+                showModal("@Url.Content("~/Payment/UserTransaction/LookUPUserTransaction?Id=")" + Id + "&callbackurl=/Congress/UserPanel/UserTemps&postdataUrl=/Congress/UserPanel/AddUserTemp");
+            }
+        }
+    </script>
+
+
+    <div class="fit">
+        @if (Model.Any())
+        {
+
+
+            Html.Radyn().Grid(Model).Name("RadynGrid").Columns(columns =>
+            {
+                columns.Template(user => user.FirstNameAndLastName).Title(Resources.Congress.Name).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(user => user.Username).Title(Resources.Congress.UserName).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(user => (bool)ViewBag.enableedit ? Html.DropDownList("Status-" + (Guid)user.Id, new SelectList(ViewBag.SearchstatusList, "Key", "Value", (byte)user.Status), new { }) + "<input type=\"hidden\" name=\"ModelId\" id=\"ModelId\" value=\"" + (Guid)user.Id + "\" />" + "<input type=\"hidden\" name=\"oldstatus-" + (Guid)user.Id + "\" id=\"oldstatus-" + (Guid)user.Id + "\" value=\"" + user.Status + "\" />" : ((string)user.Status.ToString()).ToEnum<Enums.UserStatus>().GetDescriptionInLocalization()).Title(Resources.Congress.Status).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" }).Encode(false);
+                columns.Template(user => Html.DropDownList("HallId-" + (Guid)user.Id, new SelectList(ViewBag.Halls, "Key", "Value", (object)user.HallId), "", new { style = "width:70%" }) + "  <a style='cursor: pointer;' id='Btn-" + user.Id + "' onclick=\"ShowHall('" + (Guid)user.Id + "');\" > " + " <img width='18' align='absmiddle' title='" + Resources.Congress.SelectChair + "' src='" + Url.Content("/Areas/Congress/Content/Images/chair-select.png") + "' />" + "</a>" + "<input type=\"hidden\" name=\"ChairId-" + (Guid)user.Id + "\" id=\"ChairId-" + user.Id + "\" value=\"" + user.ChairId + "\" />" + "<input type=\"hidden\" name=\"OldChairId-" + (Guid)user.Id + "\" id=\"OldChairId-" + (Guid)user.Id + "\" value=\"" + user.ChairId + "\" />").Title(Resources.Congress.SelectChair).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" }).Visible((bool)ViewBag.enableedit && SessionParameters.CurrentCongress.Configuration.CanUserSelectChairs).Encode(false);
+                columns.Template(user => user.RegisterDate).Title(Resources.Congress.RegisterDate).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(user => user.Title != null ? user.Title + (string.IsNullOrEmpty(user.PaymentTypeDaysInfo) ? "" : "\n" + Resources.Congress.Day + "" + user.PaymentTypeDaysInfo) : "").Title(Resources.Congress.PaymentType).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" }).Visible(SessionParameters.CurrentCongress.Configuration.HasUserPayment);
+                columns.Template(user =>
+                        "<a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "','Details')\"  >" +
+                        " <img width='18' align='absmiddle' title='" + Resources.Common.Detail + "' src='" + Url.Content("~/Content/Images/details.png") + "' />" + "</a> | " +
+                        "<a style='cursor: pointer;'  onclick=\"DeleteUser('" + user.Id + "')\" >" +
+                        " <img width='18' align='absmiddle' title='" + Resources.Common.Delete + "' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "' />" + "</a> | " +
+                        "<a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "','Edit')\" > " +
+                        " <img width='18' align='absmiddle' title='" + Resources.Common.Edit + "' src='" + Url.Content("~/Content/Images/edit.png") + "' />" + "</a>| " +
+                        "<img width='18' align='absmiddle' title='" + Resources.Security.Login + "'   onclick=\"loginas('" + user.Id + "')\"  style=\"cursor: pointer\"  src='"
+                        + Url.Content("/Areas/Congress/Content/Images/Loginas.png") + "' />|"
+                        + (user.Done ? " <img  style='cursor: pointer ;vertical-align:middle' width = '18px;' height = '18px;' src=\"" + Url.Content("/Areas/Congress/Content/Images/detail-pays.png")
+                        + "\"   title='" + @Resources.Payment.PaymentDetails + "'   onclick=\"PaymentDetails(" + "'" + user.TransactionId + "'" + ");\"  />" : "") +
+                        "  <img  style='cursor: pointer;vertical-align:middle;' width = '18px;' height = '18px;'  src=\"/Areas/Congress/Content/Images/"
+                        + (user.HasSuccedPayment ? "payment-detailsOK.png" : "payment-details.png")
+                        + "\"  title='" + @Resources.Payment.Paymentorder + "'   onclick=\"Paymentorder('" + user.Id + "');\"  />"
+                        + (user.HasChildUser ? " | <img style='cursor: pointer;vertical-align:middle;' width = '18px;' height = '18px;'  src=\"/Areas/Congress/Content/Images/group-register.png\" title='" + @Resources.Congress.RegisterGroup + "' />" : "")
+                        + (user.HasOtherPay ? " | <img style='cursor: pointer;vertical-align:middle;' width = '18px;' height = '18px;'  src=\"/Areas/Congress/Content/Images/payment-order.png\" title='" + @Resources.Congress.HasOtherPay + "' />" : "")
+                        + (SessionParameters.CurrentCongress.Configuration.HasUserForms ? " | <a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "','Forms')\" > " +
+                                                                                            " <img width='18' align='absmiddle' title='" + Resources.Congress.UserForm + "' src='" + Url.Content("~/Areas/Congress/Content/Images/user-form-black.png") + "' />" + "</a> " : "")
+                        ).Width(100).Visible((bool)(ViewBag.enableedit != null && (bool)ViewBag.enableedit)).Encode(false).Filterable(false);
+
+
+
+            })
+        .Pageable(x => x.Enabled(true))
+        .Searchable(x => x.Enabled(false))
+        .Filterable(x => x.Enabled(true))
+        .Sortable(x => x.Enabled(true))
+        .Render();
+
+
+        }
+
+    </div>
+

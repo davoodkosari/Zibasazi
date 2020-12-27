@@ -1,0 +1,59 @@
+﻿@using Radyn.WebApp.AppCode.Security
+<script>
+    function ChangeCongress() {
+        var congressid = $("#SelectedCongressId").val();
+        $.post("@Url.Content("~/Congress/Homa/SelectChangeCongress")", { congressId: congressid, date: new Date().getTime() }, function (data) {
+            ShowRadynMessage();
+            window.location.reload();
+        });
+
+    }
+    function ShowCongress() {
+        var congressid = $("#SelectedCongressId").val();
+        window.open("/Congress/UIPanel/Index?hid=" + congressid);
+
+    }
+</script>
+
+<style>
+    .btn-select {
+        float: left;
+        background: #fff;
+        padding: 4px 5px 5px 5px;
+        cursor: pointer;
+        margin: 0 1px 0 0;
+        border-radius: 5px;
+        transition: all .3s ease;
+    }
+
+        .btn-select svg {
+            color: #2b2b2b;
+            font-size: 20px
+        }
+
+        .btn-select:hover svg {
+            color: #4f4f4f;
+        }
+</style>
+@Html.ValidationSummary(true)
+@{
+
+
+
+    var list = ViewBag.CongressList;
+    var hascongress = list != null && ((SelectList)list).Count() > 1;
+    if (hascongress)
+    {
+        <a onclick="ShowCongress()" class="btn-select"><i class="fas fa-window-maximize"></i></a>
+        <a onclick="ChangeCongress()" class="btn-select"><i class="fas fa-check-circle"></i></a>
+        @Html.DropDownList("SelectedCongressId", (SelectList)ViewBag.CongressList, new {  })
+        
+
+     } 
+    
+ 
+    
+   
+
+
+}

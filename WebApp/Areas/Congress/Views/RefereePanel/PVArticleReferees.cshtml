@@ -1,0 +1,48 @@
+﻿@using Radyn.Web.Mvc
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.EnterpriseNode.ExtentionTools
+@model Dictionary<Radyn.Congress.DataStructure.Referee,bool>
+<script type="text/javascript">
+    function Refereeopinion(id) {
+        if (id != "") {
+            window.open("@Url.Content("~/Congress/RefereePanel/ViewRefereeopinion?refereeId=")" + id+"&articleId="+'@ViewBag.articleId');
+        }
+    }
+</script>
+    @if (ViewBag.HasValue)
+    {
+        <div class="radynForm">
+            @{
+                const int column = 3;
+
+                var couter = -1;
+                foreach (var referee in Model)
+                {
+                    couter++;
+                    if (couter%column == 0)
+                    {
+                    }
+                    <div>
+                    </div>
+
+                    <div title="@(Resources.Congress.WaitForAnswerCount + " : " + referee.Key.WaitForAnswerArticleCount + "\n" + string.Format(Resources.Congress.AllArticleCount,SessionParameters.CurrentCongress.Configuration.ArticleTitle) + " : " + referee.Key.AllArticleCount)">
+                        <div class="table-row-cap width30percent">
+                            <div class="item">
+                                <div style="float: right">
+                                    @{Html.Radyn().CheckBox().Checked(referee.Value).Name("SelectedReferee").Value(referee.Key.Id.ToString()).Render(); }
+                                </div>
+                                <div style="float: right">@referee.Key.EnterpriseNode.EnterpriseNodeTitle()</div>
+                                @if (referee.Value)
+                                {
+                                    <div style="float: right"><input type="button" class="btn-forms" value="@Resources.Congress.CommentofReferee" onclick="Refereeopinion('@referee.Key.Id')" /></div>
+
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+
+    }

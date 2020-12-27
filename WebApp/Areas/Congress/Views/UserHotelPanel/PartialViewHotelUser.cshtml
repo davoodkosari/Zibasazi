@@ -1,0 +1,46 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+
+@model IEnumerable<Radyn.Congress.DataStructure.HotelUser>
+<script type="text/javascript">
+    function DeleteReserv(userId, hotelId) {
+        if (confirm('@Resources.Common.Are_You_Soure_For_Delete')) {
+             $.get("@Url.Content("~/Congress/ManagmentPanel/DeleteUserHotel")", { userId: userId, hotelId: hotelId, date: new Date().getTime() }, function (data) {
+                if (data != "false") {
+                    GetChildReserved();
+                    ShowRadynMessage();
+                }
+                ShowRadynMessage();
+            });
+        }
+
+    }
+</script>
+@if (Model.Any())
+{
+    <div class="fit">
+        @{
+    Html.Radyn().Grid(Model).DataKeys(x => x.Add(y => y.HotelId)).DataKeys(y => y.Add(user => user.UserId)).Name("Grid").HtmlAttributes(new { style = "width:700px;margin: 0 auto" }).Columns(columns =>
+    {
+        columns.Template(user => user.User.Username).Title(Resources.Security.UserUsername).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(user => user.User.EnterpriseNode.RealEnterpriseNode.FirstName).Title(Resources.EnterPriseNode.FirstName).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(user => user.User.EnterpriseNode.RealEnterpriseNode.LastName).Title(Resources.EnterPriseNode.LastName).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(workShopUser => workShopUser.RegisterDate).Title(@Resources.Congress.RegisterDate).Width(50).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(workShopUser => workShopUser.DaysCount).Title(@Resources.Congress.DaysCountRezerv).Width(50).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(hotel => hotel.Status.ToString().ToEnum<Enums.RezervState>().GetDescriptionInLocalization()).Title(Resources.Congress.Status).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(hotelUser => hotelUser.Status != (byte)Enums.RezervState.Finalconfirm ? (" <img alt='" + @Resources.Common.Delete + "' style='cursor: pointer' width = '20px;' height = '20px;' src='/Content/Images/Delete-Close.png'    onclick=\"DeleteReserv('" + hotelUser.UserId + "','" + hotelUser.HotelId + "');\" />") : "").Title(Resources.Common.Delete).HeaderHtmlAttributes(new { style = "text-align:center" }).Width(50).Encode(false);
+        
+        
+    })
+       
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Enabled(true))
+        .Footer(false).Render();
+        }
+    </div>
+}
+
+
+

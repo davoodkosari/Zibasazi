@@ -1,0 +1,1040 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="4">
+      <Model Ref="2" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+        <Alias>Model</Alias>
+        <BusinessObjects isList="true" count="5">
+          <User Ref="3" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+            <Alias>User</Alias>
+            <BusinessObjects isList="true" count="0" />
+            <Category />
+            <Columns isList="true" count="24">
+              <value>Id,System.Guid</value>
+              <value>CongressId,System.Guid</value>
+              <value>Username,System.String</value>
+              <value>Password,System.String</value>
+              <value>RegisterDate,System.String</value>
+              <value>Comment,System.String</value>
+              <value>ProvinceOrg,System.String</value>
+              <value>OrgName,System.String</value>
+              <value>CitiyOrg,System.String</value>
+              <value>FaxnNmber,System.String</value>
+              <value>PostalCode,System.String</value>
+              <value>StudyDegree,System.String</value>
+              <value>StudyField,System.String</value>
+              <value>StudyDescription,System.String</value>
+              <value>TransactionId,System.Nullable`1[System.Guid]</value>
+              <value>TempId,System.Nullable`1[System.Guid]</value>
+              <value>PaymentTypeId,System.Nullable`1[System.Guid]</value>
+              <value>Status,System.Byte</value>
+              <value>StatusNullable,System.Nullable`1[System.Byte]</value>
+              <value>FullName,System.String</value>
+              <value>FirstNameAndLastName,System.String</value>
+              <value>StatusTostring,System.String</value>
+              <value>DescriptionField,System.String</value>
+              <value>State,System.Object</value>
+            </Columns>
+            <Dictionary isRef="1" />
+            <Guid>dc6d9ea7788a4967a05f5ab9e468c86b</Guid>
+            <Name>User</Name>
+          </User>
+          <Pivot Ref="4" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+            <Alias>Pivot</Alias>
+            <BusinessObjects isList="true" count="0" />
+            <Category />
+            <Columns isList="true" count="5">
+              <value>Id,System.Guid</value>
+              <value>CongressId,System.Guid</value>
+              <value>Title,System.String</value>
+              <value>DescriptionField,System.String</value>
+              <value>State,System.Object</value>
+            </Columns>
+            <Dictionary isRef="1" />
+            <Guid>0619bb27fcdf4cc0b614a5739cda1bd0</Guid>
+            <Name>Pivot</Name>
+          </Pivot>
+          <ArticleType Ref="5" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+            <Alias>ArticleType</Alias>
+            <BusinessObjects isList="true" count="0" />
+            <Category />
+            <Columns isList="true" count="5">
+              <value>Id,System.Guid</value>
+              <value>CongressId,System.Guid</value>
+              <value>Title,System.String</value>
+              <value>DescriptionField,System.String</value>
+              <value>State,System.Object</value>
+            </Columns>
+            <Dictionary isRef="1" />
+            <Guid>bf71af365951458a9bb5918ede11d813</Guid>
+            <Name>ArticleType</Name>
+          </ArticleType>
+          <ArticlePaymentType Ref="6" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+            <Alias>ArticlePaymentType</Alias>
+            <BusinessObjects isList="true" count="0" />
+            <Category />
+            <Columns isList="true" count="6">
+              <value>Id,System.Guid</value>
+              <value>CongressId,System.Guid</value>
+              <value>Title,System.String</value>
+              <value>Amount,System.Decimal</value>
+              <value>DescriptionField,System.String</value>
+              <value>State,System.Object</value>
+            </Columns>
+            <Dictionary isRef="1" />
+            <Guid>5ef00fb865054b269ac798bcfd29964b</Guid>
+            <Name>ArticlePaymentType</Name>
+          </ArticlePaymentType>
+          <Transaction Ref="7" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+            <Alias>Transaction</Alias>
+            <BusinessObjects isList="true" count="0" />
+            <Category />
+            <Columns isList="true" count="26">
+              <value>Id,System.Guid</value>
+              <value>RefId,System.String</value>
+              <value>InvoiceId,System.Int64</value>
+              <value>SaleReferenceId,System.Nullable`1[System.Int64]</value>
+              <value>PayTypeId,System.Byte</value>
+              <value>PayDate,System.DateTime</value>
+              <value>Amount,System.Decimal</value>
+              <value>Description,System.String</value>
+              <value>Status,System.Nullable`1[System.Int32]</value>
+              <value>LastSentDate,System.Nullable`1[System.DateTime]</value>
+              <value>LastReceiveDate,System.Nullable`1[System.DateTime]</value>
+              <value>PayerId,System.Nullable`1[System.Guid]</value>
+              <value>PayerTitle,System.String</value>
+              <value>DocNo,System.String</value>
+              <value>Done,System.Boolean</value>
+              <value>AccountId,System.Nullable`1[System.Int16]</value>
+              <value>CallBackUrl,System.String</value>
+              <value>AdditionalData,System.String</value>
+              <value>DocScan,System.Nullable`1[System.Guid]</value>
+              <value>PersianDate,System.String</value>
+              <value>PayerName,System.String</value>
+              <value>LocalUrl,System.String</value>
+              <value>PayTypeDescription,System.String</value>
+              <value>IsTemp,System.Boolean</value>
+              <value>DescriptionField,System.String</value>
+              <value>State,System.Object</value>
+            </Columns>
+            <Dictionary isRef="1" />
+            <Guid>d8b8b791e8e94123bb0b1a8afdbc47f7</Guid>
+            <Name>Transaction</Name>
+          </Transaction>
+        </BusinessObjects>
+        <Category />
+        <Columns isList="true" count="35">
+          <value>Id,System.Guid</value>
+          <value>Code,System.Int64</value>
+          <value>CongressId,System.Guid</value>
+          <value>Title,System.String</value>
+          <value>Abstract,System.String</value>
+          <value>PublishDate,System.String</value>
+          <value>VisitCount,System.Int32</value>
+          <value>AbstractFileId,System.Nullable`1[System.Guid]</value>
+          <value>OrginalFileId,System.Nullable`1[System.Guid]</value>
+          <value>UserId,System.Guid</value>
+          <value>PivotId,System.Guid</value>
+          <value>Status,System.Byte</value>
+          <value>FinalState,System.Byte</value>
+          <value>PayStatus,System.Nullable`1[System.Byte]</value>
+          <value>TypeId,System.Nullable`1[System.Guid]</value>
+          <value>Keyword,System.String</value>
+          <value>Authors,System.String</value>
+          <value>Description,System.String</value>
+          <value>TransactionId,System.Nullable`1[System.Guid]</value>
+          <value>TempId,System.Nullable`1[System.Guid]</value>
+          <value>PaymentTypeId,System.Nullable`1[System.Guid]</value>
+          <value>FinalStateNullable,System.Nullable`1[System.Byte]</value>
+          <value>StateNullable,System.Nullable`1[System.Byte]</value>
+          <value>Statustostring,System.String</value>
+          <value>PaymentStatus,System.String</value>
+          <value>AuthorsToString,System.String</value>
+          <value>HasRefereeAttachment,System.Boolean</value>
+          <value>HasRefereeOpinion,System.Boolean</value>
+          <value>AllowSent,System.Boolean</value>
+          <value>AllowDelete,System.Boolean</value>
+          <value>PaymentVisibility,System.Boolean</value>
+          <value>AllowPrintCertificate,System.Boolean</value>
+          <value>DescriptionField,System.String</value>
+          <value>State,System.Object</value>
+          <value>RefreeTitle,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Guid>24017e35930f4ebcaf49074fa65d45cb</Guid>
+        <Name>Model</Name>
+      </Model>
+      <Title Ref="8" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+        <Alias>Title</Alias>
+        <BusinessObjects isList="true" count="0" />
+        <Category />
+        <Columns isList="true" count="10">
+          <value>Id,System.Guid</value>
+          <value>CongressTitle,System.String</value>
+          <value>OwnerId,System.Guid</value>
+          <value>CreateDate,System.String</value>
+          <value>StartDate,System.String</value>
+          <value>EndDate,System.String</value>
+          <value>Enabled,System.Boolean</value>
+          <value>InstallPath,System.String</value>
+          <value>DescriptionField,System.String</value>
+          <value>State,System.Object</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Guid>2fcd775e7abc4103a40308bb67520b1c</Guid>
+        <Name>Title</Name>
+      </Title>
+      <SUM Ref="9" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+        <Alias>SUM</Alias>
+        <BusinessObjects isList="true" count="0" />
+        <Category />
+        <Columns isList="true" count="1">
+          <value>Data,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Guid>064d77ca64ba4d419fb61ea92d3068e5</Guid>
+        <Name>SUM</Name>
+      </SUM>
+      <COUNT Ref="10" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+        <Alias>COUNT</Alias>
+        <BusinessObjects isList="true" count="0" />
+        <Category />
+        <Columns isList="true" count="1">
+          <value>Data,System.Int32</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Guid>27dc579f7cc74d669c4bb3c708633e0c</Guid>
+        <Name>COUNT</Name>
+      </COUNT>
+    </BusinessObjects>
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="0" />
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="11" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <ReportTitleBand1 Ref="12" type="ReportTitleBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,10.91,0.5</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text1 Ref="13" type="Text" isKey="true">
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>0.1,0,10.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,15.75,Regular,Point,False,0</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>لیست مقالات   {Title.CongressTitle}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>ReportTitleBand1</Name>
+          <Page isRef="11" />
+          <Parent isRef="11" />
+        </ReportTitleBand1>
+        <TableArticle_x000D__x000A_ Ref="14" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid>24017e35930f4ebcaf49074fa65d45cb</BusinessObjectGuid>
+          <ClientRectangle>0,1.1,10.91,1.2</ClientRectangle>
+          <ColumnCount>11</ColumnCount>
+          <Components isList="true" count="33">
+            <TableArticle_x000D__x000A__Cell1 Ref="15" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>LightGray</Brush>
+              <ClientRectangle>0,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>48</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell1</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>مبلغ پرداختی به ریال</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell1>
+            <TableArticle_x000D__x000A__Cell2 Ref="16" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>1,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>0</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell2</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>نام نویسندگان</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell2>
+            <TableArticle_x000D__x000A__Cell3 Ref="17" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>LightGray</Brush>
+              <ClientRectangle>2,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>51</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell3</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>نوع پرداخت</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell3>
+            <TableArticle_x000D__x000A__Cell4 Ref="18" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>3,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>1</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell4</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>وضعیت پرداخت</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell4>
+            <TableArticle_x000D__x000A__Cell5 Ref="19" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>4,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>2</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell5</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>نوع پذیرش</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell5>
+            <TableArticle_x000D__x000A__Cell6 Ref="20" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>5,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>3</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell6</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>وضعیت </Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell6>
+            <TableArticle_x000D__x000A__Cell7 Ref="21" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>6,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>4</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell7</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>تاریخ ارسال</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell7>
+            <TableArticle_x000D__x000A__Cell8 Ref="22" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>7,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>54</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell8</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>داوران</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell8>
+            <TableArticle_x000D__x000A__Cell9 Ref="23" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>8,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>25</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell9</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>عنوان </Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell9>
+            <TableArticle_x000D__x000A__Cell10 Ref="24" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>9,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>26</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell10</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>نام و نام خانوادگی ارسال کننده </Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell10>
+            <TableArticle_x000D__x000A__Cell11 Ref="25" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>10,0,0.91,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>27</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell11</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>کد </Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell11>
+            <TableArticle_x000D__x000A__Cell12 Ref="26" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>49</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell12</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.Transaction.Amount}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="27" type="CustomFormat" isKey="true">
+                <StringFormat>###,###,###</StringFormat>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell12>
+            <TableArticle_x000D__x000A__Cell13 Ref="28" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <ID>5</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell13</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.AuthorsToString}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell13>
+            <TableArticle_x000D__x000A__Cell14 Ref="29" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>52</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell14</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.ArticlePaymentType.Title}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell14>
+            <TableArticle_x000D__x000A__Cell15 Ref="30" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <ID>6</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell15</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.PaymentStatus}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell15>
+            <TableArticle_x000D__x000A__Cell16 Ref="31" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <ID>7</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell16</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.ArticleType.Title}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell16>
+            <TableArticle_x000D__x000A__Cell17 Ref="32" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <ID>8</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell17</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.Statustostring}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell17>
+            <TableArticle_x000D__x000A__Cell18 Ref="33" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <ID>9</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell18</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.PublishDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell18>
+            <TableArticle_x000D__x000A__Cell19 Ref="34" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>55</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell19</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.RefreeTitle}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell19>
+            <TableArticle_x000D__x000A__Cell20 Ref="35" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>8,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <ID>28</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell20</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.Title}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell20>
+            <TableArticle_x000D__x000A__Cell21 Ref="36" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>9,0.4,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <ID>29</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell21</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.User.DescriptionField}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell21>
+            <TableArticle_x000D__x000A__Cell22 Ref="37" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>10,0.4,0.91,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>B Nazanin,9.75,Regular,Point,False,178</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <ID>30</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell22</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Model.Code}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell22>
+            <TableArticle_x000D__x000A__Cell23 Ref="38" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <AllowHtmlTags>True</AllowHtmlTags>
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>LightGray</Brush>
+              <ClientRectangle>0,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>50</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell23</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{SUM.Data}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="39" type="CustomFormat" isKey="true">
+                <StringFormat>###,###,###</StringFormat>
+              </TextFormat>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell23>
+            <TableArticle_x000D__x000A__Cell24 Ref="40" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>LightGray</Brush>
+              <ClientRectangle>1,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <ID>40</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell24</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>:جمع کل به ریال</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell24>
+            <TableArticle_x000D__x000A__Cell25 Ref="41" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>LightGray</Brush>
+              <ClientRectangle>2,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,9.75,Bold,Point,False,178</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>53</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell25</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{COUNT.Data} تعداد </Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell25>
+            <TableArticle_x000D__x000A__Cell26 Ref="42" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>LightGray</Brush>
+              <ClientRectangle>3,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Enabled>False</Enabled>
+              <Font>Tahoma,9.75,Regular,Point,False,0</Font>
+              <ID>41</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell26</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableArticle_x000D__x000A__Cell26>
+            <TableArticle_x000D__x000A__Cell27 Ref="43" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Enabled>False</Enabled>
+              <Font>Arial,9</Font>
+              <ID>42</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell27</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+            </TableArticle_x000D__x000A__Cell27>
+            <TableArticle_x000D__x000A__Cell28 Ref="44" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Enabled>False</Enabled>
+              <Font>Arial,9</Font>
+              <ID>43</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell28</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+            </TableArticle_x000D__x000A__Cell28>
+            <TableArticle_x000D__x000A__Cell29 Ref="45" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Enabled>False</Enabled>
+              <Font>Arial,9</Font>
+              <ID>44</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell29</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+            </TableArticle_x000D__x000A__Cell29>
+            <TableArticle_x000D__x000A__Cell30 Ref="46" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Enabled>False</Enabled>
+              <Font>Arial,9</Font>
+              <ID>56</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell30</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <TextBrush>Black</TextBrush>
+            </TableArticle_x000D__x000A__Cell30>
+            <TableArticle_x000D__x000A__Cell31 Ref="47" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Enabled>False</Enabled>
+              <Font>Arial,9</Font>
+              <ID>45</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell31</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+            </TableArticle_x000D__x000A__Cell31>
+            <TableArticle_x000D__x000A__Cell32 Ref="48" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9,0.7,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Enabled>False</Enabled>
+              <Font>Arial,9</Font>
+              <ID>46</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell32</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+            </TableArticle_x000D__x000A__Cell32>
+            <TableArticle_x000D__x000A__Cell33 Ref="49" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,0.7,0.91,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Enabled>False</Enabled>
+              <Font>Arial,9</Font>
+              <ID>47</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableArticle
+_Cell33</Name>
+              <Page isRef="11" />
+              <Parent isRef="14" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+            </TableArticle_x000D__x000A__Cell33>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName isNull="true" />
+          <Filters isList="true" count="0" />
+          <FooterRowsCount>1</FooterRowsCount>
+          <HeaderRowsCount>1</HeaderRowsCount>
+          <MinHeight>0.30000000000000004</MinHeight>
+          <Name>TableArticle
+</Name>
+          <NumberID>60</NumberID>
+          <Page isRef="11" />
+          <Parent isRef="11" />
+          <RowCount>3</RowCount>
+          <Sort isList="true" count="0" />
+        </TableArticle_x000D__x000A_>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>8857570bd9584f27b7c8e30076271d1e</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>8.27</PageHeight>
+      <PageWidth>11.69</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="50" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="51" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="11">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+    <value>Radyn.Dll</value>
+    <value>Radyn.Framework.dll</value>
+    <value>Radyn.Congress.dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>8/27/2019 2:10:06 PM</ReportChanged>
+  <ReportCreated>3/5/2014 8:30:15 PM</ReportCreated>
+  <ReportFile>E:\MAzamiFolder(WorkSpace)\Homa\WebApp\Areas\Congress\Reports\RptCongressArticleListWithpayment.mrt</ReportFile>
+  <ReportGuid>4f22703e50a046c8889155b1b9a94c71</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2013.1.1505</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

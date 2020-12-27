@@ -1,0 +1,89 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.Congress.Tools
+@using Radyn.WebApp.Areas.EnterpriseNode.ExtentionTools
+@model Radyn.Congress.DataStructure.User
+@{
+    ViewBag.Title = Resources.Congress.SelectChair + " " + (SessionParameters.CongressUser != null ? SessionParameters.CongressUser.EnterpriseNode.EnterpriseNodeTitle() : "");
+    Layout = "~/Areas/Congress/Views/Shared/CongressUserLayout.cshtml";
+}
+@section Head
+{
+    <script type="text/javascript">
+
+
+        function ShowHall() {
+            var hallId = $("#HallId").val();
+            var paymentTypeId = '@SessionParameters.CongressUser.PaymentTypeId';
+            var selectedChairId = $("#SelectedChairId").val();
+            if (hallId != "") {
+                ShowModalWithReturnValue("/Reservation/HallChairDesign/LookUpView?hallId=" + hallId + "&onlyselectChairTypeId=" + paymentTypeId + "&selectedId=" + selectedChairId + "&maxselect=" + '@StringUtils.Encrypt("1")',  "SelectedChairId", "SelectedChairId");
+            }
+        }
+
+        function ShowHallImage(Id) {
+            ShowModal('@Url.Content("~/Congress/Configuration/ShowImage?Id=")' + Id);
+        }
+        function UpdateUser() {
+            var selectedChairId = $("#SelectedChairId").val();
+            $.get("@Url.Content("~/Congress/UserPanel/SetUserChair")", { chairId: selectedChairId, date: new Date().getTime() }, function (data) {
+                if (data === "false") {
+                    ShowRadynMessage();
+                    window.location = '@Url.Content("~/Congress/UserPanel/UserChair")';
+
+                } else {
+                    ShowRadynMessage();
+                    window.location = '@Url.Content("~/Congress/UserPanel/UserPayment")';
+                }
+            });
+
+
+        }
+    </script>
+}
+@section PageTitle
+{
+    @Resources.Congress.UserRegisterPayment
+}
+@section PageAction
+{
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Congress.Continue).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "UpdateUser()" }).Render(); }
+    </div>
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserPanel/Home")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+
+    </div>
+}
+@section PageActionDown
+{
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Congress.Continue).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "UpdateUser()" }).Render(); }
+    </div>
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserPanel/Home")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+@Html.ValidationSummary(true)
+<div class="radynForm users-page full-size">
+    <input type="hidden" name="SelectedChairId" value="@SessionParameters.CongressUser.ChairId" id="SelectedChairId" />
+    @if ((bool)ViewBag.HasHall)
+    {
+        <div class="item-input">
+            <div class="table-row-cap" @(SessionParameters.CurrentCongress.Configuration.GetConfigurationContent().HallMapId.HasValue ? "style=cursor:pointer onclick=ShowHallImage('" + SessionParameters.CurrentCongress.Configuration.GetConfigurationContent().HallMapId + "')" : "")>
+                <div class="item">
+                    @Resources.Reservation.Hall @(SessionParameters.CurrentCongress.Configuration.GetConfigurationContent().HallMapId.HasValue ? "(" + Resources.Congress.ViewHallMap + ")" : "")
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownList("HallId", (SelectList)ViewBag.CongressHalls, "", new { style = "width: 120px" })
+                    <input class="btn-forms" type="button" onclick="ShowHall()" value="@Resources.Congress.SelectChair" style="width: 100px!important" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Radyn.EnterpriseNode.DataStructure.EnterpriseNode>
+@{
+   
+    Layout = "/Views/Shared/LookUpLayout.cshtml";
+}
+@section Head
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Radyn/enterpriseNode.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Radyn/ModalWindows.js")"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var type = '@Request.QueryString["type"]';
+            if (type != "n") {
+               
+                $("#div-Radio").hide();
+                if (type == "l") {
+                    $("#div-real").hide();
+                    $("#div-legal").slideDown();
+                    $('#hid-type').val('l');
+                }
+               else if (type == "r") {
+                    $("#div-legal").hide();
+                    $("#div-real").slideDown();
+                    $('#hid-type').val('r');
+                }
+            }
+        });
+      
+        function search() {
+            var values = "";
+            for (index in document.all) {
+                if (document.all[index].name != undefined && document.all[index].name != "")
+                    values += document.all[index].name + "=" + document.all[index].value + "&";
+            }
+            if (values != "")
+                values = values.substring(0, values.length - 1);
+            $.post('/EnterPriseNode/EnterPriseNode/SearchEn', values, function (data) {
+                $("#grid").html("");
+                var grid = "";
+                for (index in data) {
+                    addRow(data[index]);
+                }
+                ShowRadynMessage();
+            });
+            ShowRadynMessage();
+        }
+    </script>
+    <style type="text/css">
+        tr[name^='tr-']
+        {
+            cursor: pointer;
+        }
+        tr[name='tr-alt']
+        {
+            background-color: whitesmoke;
+        }
+        tr[name='tr-norm']
+        {
+            background-color: lightsteelblue;
+            color: black;
+        }
+        tr[name='head']
+        {
+            border: solid 1px darkgray;
+            padding: 2px 4px 2px 4px;
+            background-color: gainsboro;
+            white-space: nowrap;
+        }
+    </style>
+}
+@using (Html.BeginForm())
+{
+    <div dir="@Resources.Common.Direction" align="center" class="EditFiled" style="width: 95%;">
+        <div class="EditFiled">
+            <a href="javascript:;" id="a-search" onclick="ChangeState();">@Resources.Common.Advance
+                @Resources.Common.Search </a>
+            <input type="hidden" value="@Request.QueryString["Type"]" id="EnterPriseNodeType" name="EnterPriseNodeType"/>
+            <input type="hidden" id="state" name="state" value="s" />
+            <input type="hidden" value=""/>
+        </div>
+        <div id="s-div">
+            <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="EditRow">
+                        @Resources.EnterPriseNode.Title
+                    </td>
+                    <td class="EditFiled">
+                        <input type="text" name="title" value="@ViewBag.Title" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="a-div">
+            <div class="EditRow" id="div-Radio">
+                <input type="radio" name="etype" value="legal" id="r-legal" onclick="checkType(this);" />@Resources.EnterPriseNode.LegalEnterPriseNode
+                <input type="radio" name="etype" value="real" id="r-real" onclick="checkType(this);" />@Resources.EnterPriseNode.RealEnterPriseNode
+                <input type="hidden" id="hid-type" name="type" />
+            </div>
+            <div id="div-real">
+                <table border="0" cellpadding="2" cellspacing="3">
+                    <tr>
+                        <td width="80" class="EditRow" align="@Resources.Common.InversAligment">
+                            @Resources.EnterPriseNode.FirstName
+                        </td>
+                        <td width="140" class="EditFiled" align="@Resources.Common.Aligment">
+                            <input type="text" name="fname" />
+                        </td>
+                        <td width="100" class="EditRow" align="@Resources.Common.InversAligment">
+                            @Resources.EnterPriseNode.LastName
+                        </td>
+                        <td  width="140" class="EditFiled" align="@Resources.Common.Aligment">
+                            <input type="text" name="lname" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="EditRow"  align="@Resources.Common.InversAligment">
+                            @Resources.EnterPriseNode.NationalCode
+                        </td>
+                        <td class="EditFiled" align="@Resources.Common.InversAligment">
+                            <input type="text" name="nationalId" />
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="div-legal">
+                <table border="0" cellpadding="2" cellspacing="3">
+                    <tr>
+                        <td width="80" class="EditRow" align="@Resources.Common.InversAligment">
+                            @Resources.EnterPriseNode.Title
+                        </td>
+                        <td width="140" class="EditFiled" align="@Resources.Common.Aligment">
+                            <input type="text" name="legalTitle" />
+                        </td>
+                        <td width="100" class="EditRow" align="@Resources.Common.InversAligment">
+                            @Resources.EnterPriseNode.RegisterNo
+                        </td>
+                        <td  width="140" class="EditFiled" align="@Resources.Common.Aligment">
+                            <input type="text" name="registerNo" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="EditRow" align="@Resources.Common.InversAligment">
+                            @Resources.EnterPriseNode.NationalId
+                        </td>
+                        <td class="EditFiled" align="@Resources.Common.InversAligment">
+                            <input type="text" name="nationalCode" />
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            <input type="button" value="@Resources.Common.Search" onclick="search();" />
+        </div>
+    </div>
+}
+<table width="90%"  id="grid" border="0" cellpadding="2" cellspacing="1"   align="center" class="EditFiled" dir="@Resources.Common.Direction">
+</table>

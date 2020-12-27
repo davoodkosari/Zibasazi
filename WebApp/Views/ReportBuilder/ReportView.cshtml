@@ -1,0 +1,39 @@
+﻿@using Radyn.WebApp.AppCode.Security
+@using Stimulsoft.Report.Mvc
+@using Stimulsoft.Report.Web
+@{
+    ViewBag.Title = "گزارش";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+
+}
+
+@section Head{
+
+}
+<div>
+    @Html.Stimulsoft().StiMvcViewer(new StiMvcViewerOptions()
+    {
+        Localization = SessionParameters.Culture=="fa-IR"? "~/StimulResource/fa.xml" : "~/StimulResource/en.xml",
+        Theme = StiViewerTheme.Office2013WhiteGreen,
+        Appearance =
+
+        {
+
+            ScrollbarsMode = true,
+            FullScreenMode = true,
+            InterfaceType = StiInterfaceType.Auto
+
+        },
+        
+        Actions =
+        {
+            GetReport = "GetReport",
+            PrintReport = "PrintReport",
+            ExportReport = "ExportReport",
+            ViewerEvent = "ViewerEvent",
+        
+            
+        }
+    })
+
+</div>

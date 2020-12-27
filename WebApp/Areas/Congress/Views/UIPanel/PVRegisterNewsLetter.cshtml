@@ -1,0 +1,84 @@
+﻿@using Radyn.Web.Mvc
+<script type="text/javascript">
+
+    function DeleteFromNewsLetter() {
+        $("#DivThisMessege").hide();
+        if (confirm("@Resources.Common.Are_You_Soure_For_Delete")) {
+            $("#progress").show();
+            $("#btnDeleteFromNewsLetter").hide();
+            $.post("@Url.Content("~/Congress/UIPanel/RemoveFromNewsLetter")", $('form[action^="@Url.Content("~/Congress/UIPanel/GetRegisterNewsLetter")"]').serialize(), function (data) {
+                GetMessage(data);
+                $("#btnDeleteFromNewsLetter").show();
+                $("#progress").hide();
+            });
+        }
+    }
+
+    function GetMessage(data) {
+        if (data.Result == true)
+            $('#DivThisMessege').css("color", "green");
+        else $('#DivThisMessege').css("color", "red");
+        $('#DivThisMessege').html(data.Message);
+        $('#DivThisMessege').show();
+    }
+    function RegiserFromNewsLetter() {
+        $("#DivThisMessege").hide();
+        $("#progress").show();
+        $("#btnSave").hide();
+        $.post("@Url.Content("~/Congress/UIPanel/RegisterNewsLetter")", $('form[action^="@Url.Content("~/Congress/UIPanel/GetRegisterNewsLetter")"]').serialize(), function (data) {
+            GetMessage(data);
+            $("#btnSave").show();
+            $("#progress").hide();
+        });
+    }
+    $(document).ready(function () {
+        $("#progress").hide();
+        $("#DivThisMessege").hide();
+
+    });
+
+</script>
+<div class="container-box login-box banner-web newsletter">
+    @using (Html.BeginForm("GetRegisterNewsLetter", "UIPanel", new { area = "Congress" }))
+    {
+        <div class="news-section ">
+            <div class="title-banner head-event" style="display: none">
+                <h2>
+                    <span class="mini-head" style="display: none">اطلاعات بیشتر میخواهید ؟</span>
+                    <span class="big-head">
+                        @Resources.Congress.SubscribeToNewsletter
+                    </span>
+                </h2>
+            </div>
+            <div class="login-main">
+                <div class="login-data-row">
+                    <div class="login-data-row-item">
+                        <input type="text" name="mail" id="mail" placeholder="@Resources.Congress.Email" />
+                    </div>
+                </div>
+                <div class="login-data-row">
+                    <div class="login-data-row-item">
+                        <input type="text" class="captcha" name="captch" placeholder="@Resources.Congress.Captcha" value="" />
+                    </div>
+                </div>
+                <div class="login-data-row button-row-login captcha-control">
+                    <div class="login-data-row-item">
+                        @{Html.Radyn().Captcha().NumberMode().Render(); }
+                    </div>
+                </div>
+                <div class="login-data-row button-row-login">
+                    <div class="login-data-row-item">
+                        <input id="button-yellow" type="button" name="name" value="@Resources.Congress.Register " onclick="Register();" />
+                        <img style="display: none" src='@Url.Content("~/Content/images/Gif/loading2.gif")' id="progress1" />
+                    </div>
+                </div>
+                <div class="login-data-row button-row-login">
+                    <div class="login-data-row-item">
+                        <input type="button" value="@Resources.Congress.DeleteFromNewsLetter" onclick="DeleteFromNewsLetter()" id="btnDeleteFromNewsLetter" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

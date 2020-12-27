@@ -1,0 +1,182 @@
+﻿.slide-items-box:after {
+    opacity: 0.65;
+}
+
+.about-conference:after {
+    opacity: 0.80;
+}
+
+@media (min-width: 992px) {
+    .list-nav-content > li a span, .links-item > li a span {
+        color: #ffffff;
+    }
+
+    .list-nav-content > li .dropdown-li a span:before {
+        background-color: #e45c4e;
+    }
+
+    .list-nav-content > li:hover .dropdown-li li:hover > a span:before {
+        background: #e45c4e;
+    }
+}
+
+.control-gallery, .mixitup-control-active:hover {
+    color: #e45c4e;
+}
+
+.mixitup-control-active {
+    border-color: #e45c4e
+}
+
+.header {
+    background-color: #e45c4e;
+}
+
+.current .content-slide > span, .lasts .content-slide > span {
+    color: #e45c4e;
+}
+
+.r-slider-btn:hover {
+    background: #e45c4e !important;
+}
+
+.r-slider-btn {
+    border: 3px solid #e45c4e;
+    color: #e45c4e;
+}
+
+.items-service-input:hover {
+    border-color: #e45c4e;
+    color: #e45c4e;
+}
+
+
+
+.footer-social-media, .footer-person-item, .see-profile {
+    background: #e45c4e;
+}
+
+.section-person-info .owl-carousel .owl-nav button.owl-next, .section-person-info .owl-carousel .owl-nav button.owl-prev {
+    border: 2px solid #e45c4e !important;
+    color: #e45c4e !important;
+}
+
+.avas .about-conference .widget-title span:first-child, .avas .ui-content-nav .widget-title span:first-child, .items-conference label, .custom-footer ul li svg {
+    color: #e45c4e;
+}
+
+.banner-web {
+    background-color: #e45c4e;
+}
+
+.btn-white.solid:hover {
+    background: #e45c4e;
+    border-color: #e45c4e;
+}
+
+.radyn-Resources.license {
+    border-top-color: #e45c4e
+}
+
+
+::-moz-selection {
+    background: #e45c4e;
+    color: #fff
+}
+
+::selection {
+    background: #e45c4e;
+    color: #fff
+}
+
+.ui-sheet .ui-h-menu .r-nav {
+    background-color: #e45c4e
+}
+
+
+.login-container:after, .login-container:before {
+    background: #e45c4e;
+    background: linear-gradient(0deg, rgb(173, 66, 55) 0%, rgb(228, 92, 78) 52%, rgb(228, 92, 78) 100%);
+}
+
+.container-hd .login-data-row input[type="text"], .container-hd .login-data-row input[type="password"] {
+    border: 2px solid #e45c4e;
+}
+
+.input-effects svg {
+    color: #e45c4e;
+}
+
+.input-effects input:hover, .login-data-row-item.input-effects input:focus, .login-data-row-item .input-effects input:focus.container-hd .login-data-row input[type="text"], .container-hd .login-data-row input[type="password"] {
+    border: 2px solid #bb4a3e !important;
+}
+
+    .input-effects input:hover ~ svg, .userinfo span div, .userinfo b ~ span:after, .userinfo span div p:last-child:after, .userinfo b ~ span:after, .userinfo span div p:last-child:after {
+        color: #bb4a3e;
+    }
+
+.ui-sheet input[type="checkbox"]:checked:before, .ui-sheet input[type="checkbox"]:not(:checked):before {
+    border-color: #e45c4e
+}
+
+.login-container-bg .m-btn.waves-yellow {
+    background-color: #e45c4e;
+    text-shadow: none
+}
+
+.topbar .d-item:hover {
+    border-right: 4px solid #e45c4e;
+}
+
+.login-container-bg .m-btn.waves-yellow .waves-ripple {
+    background-color: #bb4a3e;
+}
+
+.btn-solid {
+    color: #e45c4e !important;
+    border: 2px solid #e45c4e;
+}
+
+    .btn-solid:hover {
+        color: #fff !important;
+        background: #e45c4e;
+    }
+
+.list-nav-content > li:hover .dropdown-li li:hover > a span:before, .user-home-items .d-item:hover .d-item-bg, .ui-sheet input[type="radio"]:checked:before, .ui-sheet input[type="radio"]:not(:checked):before {
+    background: #e45c4e !important;
+}
+
+.r-badge span {
+    background: #e45c4e;
+}
+
+.nav-mail .nav-mail-item {
+    border-right: 10px solid #e45c4e !important
+}
+
+.radyn_grid table tbody tr:nth-child(even) {
+    background-color: rgba(228, 92, 78, 0.18) !important;
+}
+
+.gv-row-style:hover, .gv-alternaterow-style:hover, .radyn_grid tbody tr:hover td {
+    background-color: rgb(245, 212, 210);
+}
+
+.container-header-item:after {
+    border-top: 3px solid #e45c4e;
+}
+
+
+
+.content-pro-users label {
+    color: #ffffff;
+}
+
+.content-pro-users {
+    color: #fff;
+    background-color: #e45c4e;
+}
+
+    .content-pro-users label:after {
+        border-top: 2px solid #ffffff;
+    }

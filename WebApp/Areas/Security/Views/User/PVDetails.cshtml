@@ -1,0 +1,27 @@
+﻿@using Radyn.Utility
+@using Radyn.Web.Mvc;
+@model Radyn.Security.DataStructure.User
+<div class="radynForm">
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Security.UserUsername
+            </div>
+        </div>
+        <div class="table-row-item table-c-fit">
+            <div class="item">
+                @Html.DisplayFor(model => model.Username)
+            </div>
+        </div>
+
+    </div>
+    <div id="Info">
+    </div>
+
+</div>
+<script type="text/javascript">
+    $.get("/EnterpriseNode/EnterpriseNode/GenerateRealInfoDetails", { state: 'Details', id: '@Model.Id', r: new Date().getTime() }, function (data) {
+        $("#Info").html(data.toString());
+
+    });
+</script>

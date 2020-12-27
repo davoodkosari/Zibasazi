@@ -1,0 +1,75 @@
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp.Areas.EnterpriseNode.ExtentionTools
+
+@using Radyn.Utility
+@model IEnumerable<Radyn.Congress.DataStructure.VIP>
+    @{
+        ViewBag.Title = Resources.Congress.VipList;
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    @section Head{}
+
+    @section PageTitle
+{
+        @Resources.Congress.VipList
+
+    }
+    @section PageAction
+{
+        <div class="button-div m-btn waves-blue i-add">
+            @{Html.Radyn().ImageActionLink().ActionName("Create").ControllerName("VIP").Area("Congress").Text(@Resources.Congress.VipNew).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).ImageHeight("20").ImageWidth("20").Render(); }
+
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "window.location='/Security/User/Menu?oid=" + Radyn.Common.Constants.OperationId.CongressOperationId + "'" }).Render(); }
+        </div>
+    }
+    @section PageActionDown
+{
+        <div class="button-div m-btn waves-blue i-add">
+            @{Html.Radyn().ImageActionLink().ActionName("Create").ControllerName("VIP").Area("Congress").Text(@Resources.Congress.VipNew).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).ImageHeight("20").ImageWidth("20").Render(); }
+
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "window.location='/Security/User/Menu?oid=" + Radyn.Common.Constants.OperationId.CongressOperationId + "'" }).Render(); }
+        </div>
+    }
+    <div class="radynForm">
+        <div class="grid-guid">
+            <div class="grid-guid-title">
+                @Resources.Common.Help
+            </div>
+            <ul>
+                <li>
+                    <img src="/Content/Images/details.png">
+                    @Resources.Common.Detail
+                </li>
+                <li>
+                    <img src="/Content/Images/Delete-Close.png">
+                    @Resources.Common.Delete
+                </li>
+                <li>
+                    <img src="/Content/Images/edit.png">
+                    @Resources.Common.Edit
+                </li>
+            </ul>
+        </div>
+        <div class="fit">
+            @{Html.Radyn().Grid(Model).Name("Grid").HtmlAttributes(new { style = "width:98%;margin: 0 auto" }).Columns(columns =>
+                  {
+                      columns.Template(vIp => vIp.EnterpriseNode.EnterpriseNodeTitle()).Title(Resources.EnterPriseNode.Title).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                      columns.Template(vIp => vIp.Abstract.Trancate(20)).Title(Resources.Congress.Remark).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                      columns.Template(vIp => vIp.PresentDate).Title(Resources.Congress.PresentDate).Width(50).HeaderHtmlAttributes(new { style = "text-align:center" });
+                      columns.Template(vIp => vIp.Role).Title(Resources.Congress.Role).Width(70).HeaderHtmlAttributes(new { style = "text-align:center" });
+                      columns.Template(vIp => vIp.Sort).Title(Resources.Congress.Sort).Width(50).HeaderHtmlAttributes(new { style = "text-align:center" });
+                      columns.Template(vIp => Html.ActionLink(Resources.Common.Detail, "Details", new { Id = vIp.Id }) + " | " +
+                      Html.ActionLink(Resources.Common.Edit, "Edit", new { Id = vIp.Id }) + " | " + Html.ActionLink(Resources.Common.Delete, "Delete", new { Id = vIp.Id })).Width(300).Encode(false).Filterable(false);
+                  })
+          //
+          .Sortable(sorting => sorting.Enabled(true))
+          .Pageable(paging => paging.Enabled(true))
+          .Filterable(filtering => filtering.Enabled(true))
+          //            .Footer(true)
+          .Render();}
+        </div>
+    </div>
