@@ -1,1 +1,0 @@
-ALTER TABLE [Congress].[Configuration] ADD CertificatePath varchar(200), 	CertificatePassword varchar(200)

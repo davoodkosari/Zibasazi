@@ -1,5 +1,0 @@
-.sf-vertical li:hover ul,
-.sf-vertical li.sfHover ul {
-    right: 10em; /* match ul width */
-    left: auto;
-}

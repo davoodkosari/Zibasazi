@@ -1,1 +1,0 @@
-EXEC sp_RENAME 'EnterpriseNode.PrefixTitle.Title' , 'Decription', 'COLUMN'

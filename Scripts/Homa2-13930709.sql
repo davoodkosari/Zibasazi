@@ -1,1 +1,0 @@
-﻿alter table [Congress].[SupportType] add ShowType tinyint not null default 1
