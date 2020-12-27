@@ -12,6 +12,7 @@ namespace Radyn.Reservation
 
         }
 
+
         private static ReservationComponent _instance;
         public static ReservationComponent Instance
         {
