@@ -1,0 +1,1 @@
+﻿ALter Table [Congress].[UserRegisterPaymentType] Add [Order] int null 

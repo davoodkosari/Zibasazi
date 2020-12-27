@@ -1,0 +1,63 @@
+﻿/*INTERNALMAIL*/
+.nav-mail-item {
+    background-color: #E25257;
+    border-color: #9D090D;
+    border-top-style: none;
+    width: 98%;
+    border-width: 1px;
+    height: 40px;
+    line-height: 40px;
+}
+
+    .nav-mail-item:first-child {
+        border-top: 1px solid #9D090D;
+    }
+
+.nav-mailText {
+    color: #ffffff;
+}
+.nav-mail-item:hover .nav-mailText {
+    color: #444444;
+}
+.nav-mail-item:hover, .nav-mail-item-selected {
+    background-color: #d8d8d8;
+    background-image: none;
+    filter: none;
+}
+
+.nav-mail-item span {
+    background: none repeat scroll 0 0 #B40208;
+    border-color: #9D090D;
+    width: 20px;
+    height: 22px;
+    padding: 9px;
+    border-width: 1px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.nav-mail-item:hover span {
+    background: none repeat scroll 0 0 #bebebe;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#inbox span {
+    background-image: url('/App_Themes/Homa-Silver-RedMenu/Images/Inbox.png');
+}
+
+#draft span {
+    background-image: url('/App_Themes/Homa-Silver-RedMenu/Images/Draft.png');
+}
+
+#Delete span {
+    background-image: url('/App_Themes/Homa-Silver-RedMenu/Images/Delete.png');
+}
+
+#Outbox span {
+    background-image: url('/App_Themes/Homa-Silver-RedMenu/Images/Outbox.png');
+}
+
+#Trash span {
+    background-image: url('/App_Themes/Homa-Silver-RedMenu/Images/Trash.png');
+}

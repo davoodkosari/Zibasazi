@@ -1,0 +1,152 @@
+﻿@using Radyn.Web.Mvc;
+@model IEnumerable<Radyn.Congress.Tools.ModelView.ReportChartModel>
+    @{
+        ViewBag.Title = Resources.Congress.ChartReport;
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    @section Head
+{
+        <script src="~/Scripts/Radyn/Highcharts/highcharts.js"></script>
+        <script src="~/Scripts/Radyn/Highcharts/Modules/exporting.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#divload").hide();
+                $("#DivYear").hide();
+                $("#DivMoth").hide();
+                Visible();
+            });
+            function GetChart() {
+                var value = document.getElementById("ChartTypeId").value;
+                var Year = document.getElementById("Year").value;
+                var MothId = document.getElementById("MothId").value;
+                if (value != "") {
+                    ShowPostBackLoader();
+                    $("#DivChart").html("");
+                    $.get("/Congress/Reportpanel/GetChart", { chartTypeId: value, year: Year, moth: MothId, date: new Date().getTime() }, function (data) {
+                        if (data != "false") {
+                            $("#DivChart").html(data).slideDown("slow");;
+                        }
+
+                    }).complete(function () {
+                        HidePostBackLoader();
+                    });
+                }
+
+            }
+            function GetPrintChart() {
+                var value = document.getElementById("ChartTypeId").value;
+                var Year = document.getElementById("Year").value;
+                var MothId = document.getElementById("MothId").value;
+                if (value != "") {
+                    ShowPostBackLoader();
+                    $("#DivChart").html("");
+                    $.get("/Congress/Reportpanel/GetPrintChart", { chartTypeId: value, year: Year, moth: MothId, date: new Date().getTime() }, function (data) {
+                        if (data != "false") {
+                             window.open('@Url.Content("~/ReportBuilder/ReportView")');
+                        }
+
+                    }).complete(function () {
+                        HidePostBackLoader();
+                    });
+                }
+            }
+
+            function Visible() {
+                var value = document.getElementById("ChartTypeId").value;
+
+                if (value == '@Radyn.Congress.Tools.Enums.ChartEnums.ChartCashBymoth' || value == '@Radyn.Congress.Tools.Enums.ChartEnums.ChartArticleByMoth' || value == '@Radyn.Congress.Tools.Enums.ChartEnums.ChartUserRegisterByMoth' || value == '@Radyn.Congress.Tools.Enums.ChartEnums.ChartViewsNumberByMonth') {
+                    $("#DivMoth").slideUp();
+                    $("#DivYear").slideDown();
+                    document.getElementById("MothId").value = "";
+                    document.getElementById("Year").selectedIndex = 1;
+                }
+                else if (value == '@Radyn.Congress.Tools.Enums.ChartEnums.ChartCashByDay' || value == '@Radyn.Congress.Tools.Enums.ChartEnums.ChartArticleByDay' || value == '@Radyn.Congress.Tools.Enums.ChartEnums.ChartUserRegisterByDay' || value == '@Radyn.Congress.Tools.Enums.ChartEnums.ChartViewsNumberByDay') {
+                    $("#DivYear").slideDown();
+                    $("#DivMoth").slideDown();
+                    document.getElementById("Year").selectedIndex = 1;
+                    document.getElementById("MothId").selectedIndex = 1;
+                } else {
+                    $("#DivYear").slideUp();
+                    $("#DivMoth").slideUp();
+                    document.getElementById("MothId").value = "";
+                    document.getElementById("Year").value = "";
+
+                }
+            }
+        </script>
+    }
+
+
+    @section PageTitle
+{
+        @Resources.Congress.ChartReport
+
+    }
+    @section PageAction
+{
+
+    }
+
+    @section PageActionDown
+{
+
+    }
+    <div>
+        <div class="radynForm">
+
+            <div class="fit">
+                <div class="item-row ">
+                    <div class="table-row-cap">
+                        <div class="item">
+                            @Resources.Congress.ChartReport
+                        </div>
+                    </div>
+                    <div class="table-row-item select-row tree-col">
+                        <div class="item">
+                            @Html.DropDownList("ChartTypeId", (SelectList)ViewBag.ChartTypes, new { onchange = "Visible();" })
+                            <div class="m-btn waves-blue i-search icon-btn">
+                                @{Html.Radyn().ImageActionLink().Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/search_button.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "GetChart()" }).Render(); }
+                            </div>
+                            <div class="m-btn waves-blue i-print icon-btn">
+                                
+                                @{Html.Radyn().ImageActionLink().Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/printer.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "GetPrintChart()" }).Render(); }
+
+                            </div>
+                            </div>
+                    </div>
+                </div>
+                </div>
+                <div id="DivYear" class="item-row">
+                    <div class="table-row-cap">
+                        <div class="item">
+                            @Resources.CommonComponent.Year
+                        </div>
+                    </div>
+                    <div class="table-row-item">
+                        <div class="item">
+                            @Html.DropDownList("Year", (SelectList)ViewBag.Year, "")
+                        </div>
+                    </div>
+                </div>
+                <div id="DivMoth" class="item-row">
+                    <div class="table-row-cap">
+                        <div class="item">
+                            @Resources.CommonComponent.Moth
+                        </div>
+                    </div>
+                    <div class="table-row-item">
+                        <div class="item">
+                            @Html.DropDownList("MothId", (SelectList)ViewBag.Moth, "")
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="fit" id="DivChart">
+            </div>
+    </div>
+
+
+
+

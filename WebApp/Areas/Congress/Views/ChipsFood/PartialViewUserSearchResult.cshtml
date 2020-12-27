@@ -1,0 +1,134 @@
+﻿@using Radyn.Framework
+@using Radyn.Web.Mvc
+@model Dictionary<Radyn.Congress.DataStructure.User,bool>
+
+    <script type="text/javascript">
+
+        function PrintCard(Id) {
+            var object = document.getElementById("chipFoodId").value;
+            if (object != "") {
+                window.open('@Url.Content("~/Congress/ReportPanel/PrintUserChipFoodCard?chipFoodId=")' + object + "&userId=" + Id);
+
+            }
+        }
+
+        function SelectAll() {
+            if ($("#CheckSelectAll").attr("checked") == "checked") {
+                $("[id^='Checkselect-']").each(function () {
+                    $(this).attr("checked", true);
+                });
+            } else {
+                $("[id^='Checkselect-']").each(function () {
+                    $(this).attr("checked", false);
+                });
+            }
+        }
+    </script>
+    @if (Model.Any())
+    {
+        <div>
+            <div class="gv-table width98percent page-align" style="margin-top: 20px;">
+                <div class="gv-row gv-header">
+                    <div class="gv-cell" style="width: 5%">
+                        <div class="cell-item">
+                            <input type='checkbox'  onclick='SelectAll();' style='cursor: pointer' id='CheckSelectAll' name='CheckSelectAll' />
+                        </div>
+                    </div>
+                    <div class="gv-cell width30percent">
+                        <div class="cell-item">
+                            @Resources.EnterPriseNode.Email
+                        </div>
+                    </div>
+                    <div class="gv-cell width13percent">
+                        <div class="cell-item">
+                            @Resources.EnterPriseNode.FirstName
+                        </div>
+                    </div>
+                    <div class="gv-cell width18percent">
+                        <div class="cell-item">
+                            @Resources.EnterPriseNode.LastName
+                        </div>
+                    </div>
+
+                    <div class="gv-cell width10percent">
+                        <div class="cell-item">
+                            @Resources.EnterPriseNode.Gender
+                        </div>
+                    </div>
+                    <div class="gv-cell gv-cell-last width18percent">
+                        <div class="cell-item">
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="gv-content">
+                    @{
+        int count = 0;
+        foreach (var keyValuePair in Model)
+        {
+            count++;
+            <div class="gv-row gv-row-style" id="@keyValuePair.Key.Id" title="@(Resources.Congress.Mobile+" "+":"+" "+keyValuePair.Key.EnterpriseNode.Cellphone+"\n"+ Resources.Congress.Address + " " + ":" + " " + keyValuePair.Key.EnterpriseNode.Address)">
+                <div class="gv-cell" style="width: 5%">
+                    <div class="cell-item">
+                        <input type="checkbox" @(!keyValuePair.Value ? "" : "checked=\"checked\"") id="Checkselect-@keyValuePair.Key.Id" name="Checkselect" value="@keyValuePair.Key.Id" />
+                    </div>
+                </div>
+                <div class="gv-cell width30percent">
+                    <div class="cell-item">
+                        @keyValuePair.Key.EnterpriseNode.Email
+                    </div>
+                </div>
+                <div class="gv-cell width13percent">
+                    <div class="cell-item">
+                        @keyValuePair.Key.EnterpriseNode.RealEnterpriseNode.FirstName
+                    </div>
+                </div>
+                <div class="gv-cell width18percent">
+                    <div class="cell-item">
+                        @keyValuePair.Key.EnterpriseNode.RealEnterpriseNode.LastName
+                    </div>
+                </div>
+
+                <div class="gv-cell width10percent">
+                    <div class="cell-item">
+                        @(keyValuePair.Key.EnterpriseNode.RealEnterpriseNode.Gender.HasValue ? (keyValuePair.Key.EnterpriseNode.RealEnterpriseNode.Gender.Value == true ? Resources.EnterPriseNode.Male : Resources.EnterPriseNode.Female) : "")
+                    </div>
+                </div>
+                <div class="gv-cell gv-cell-last width18percent">
+                    <div class="cell-item">
+                        @if (keyValuePair.Value)
+                        {
+                            <div class="page-align">
+                                @{Html.Radyn().ImageActionLink().Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/printer-certificate.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new {onclick = "PrintCard('" + keyValuePair.Key.Id + "')"}).Render(); }
+                                
+                            </div>
+                            <div class="page-align">
+                                @{Html.Radyn().ImageActionLink().Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/details.png")).ImagePosition(ImageActionLink.Position.Right).NavigateUrl(Url.Content("~/Congress/User/Details/" + keyValuePair.Key.Id)).Target("_blank").Render(); }
+
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        }
+                    }
+                </div>
+                <div class="gv-row  gv-footer" style="height: 25px">
+                    @Resources.Common.Count:@Model.Count
+                    <span id="CountData"></span>
+                </div>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="fit">
+            @Resources.Congress.Dataformatisnotcorrect
+        </div>
+    }
+

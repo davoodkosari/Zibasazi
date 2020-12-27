@@ -1,0 +1,84 @@
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp
+@using Radyn.WebApp.AppCode.Security
+
+    @{
+        ViewBag.Title = @Resources.Common.List + " " + @Resources.ContentManager.Partials;
+        Layout = "~/Views/Shared/LookUpLayout.cshtml";
+    }
+    @section Head{
+        <script>
+            function LookUpEditFormPartials(partialId,customId,htmlDesginId,pagemode) {
+                getPartialWithFormTag("@Url.Content("~/ContentManager/PartialLoad/Modify")", { PartialId: partialId,CustomId:customId,HtmlDesginId:htmlDesginId,pageMode:pagemode },"DivResultPartialLoad");
+
+
+            }
+
+            function DeletePartials(partialId,customId,htmlDesginId) {
+                
+                if (confirm('@Resources.Common.Are_You_Soure_For_Delete')) {
+                    $.get("@Url.Content("~/ContentManager/PartialLoad/Delete")", { PartialId: partialId,CustomId:customId,HtmlDesginId:htmlDesginId, date: new Date().getTime() }, function (data) {
+                        
+                        if (data != "false") {
+                            GetPartialLoad();
+                        }
+                        ShowRadynMessage();
+
+                    });
+                    ShowRadynMessage();
+                }
+            }
+
+
+            function GetPartialLoad() {
+
+                ShowPostBackLoader();
+                $("#DivResultSearchPartialLoadr").html("");
+                $.get("@Url.Content("~/ContentManager/PartialLoad/GetIndex")",
+                    {
+                        htmlId:'@ViewBag.htmlId'
+                    },
+                    function(data) {
+                        if (data != "false") {
+                            $("#DivResultSearchPartialLoadr").html(data).hide();
+                            $("#DivResultSearchPartialLoadr").slideDown();
+
+                        }
+                        ShowRadynMessage();
+                    }).complete(function() {
+                    HidePostBackLoader();
+
+                });
+            }
+            $(function() {
+                GetPartialLoad();
+            })
+        </script>
+    }
+   
+    @section PageAction
+    {
+       
+
+
+    }
+    @section PageActionDown
+{
+        
+    }
+<div class="radynForm" id="DivResultSearchPartialLoadr">
+        
+        
+
+</div>
+<div class="form-group my_form-group button-row">
+    <div class="button-div m-btn waves-blue i-add">
+        <a onclick="LookUpEditFormPartials(null,null,'@ViewBag.htmlId','@PageMode.Create')">@Resources.Common.Create</a>
+        <span><i class="fas fa-plus"></i></span>
+    </div>
+</div>
+<div class="radynForm" id="DivResultPartialLoad">
+        
+        
+
+</div>

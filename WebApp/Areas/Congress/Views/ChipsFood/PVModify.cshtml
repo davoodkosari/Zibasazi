@@ -1,0 +1,76 @@
+﻿@using Radyn.Web.Mvc;
+@model Radyn.Congress.DataStructure.ChipsFood
+<script type="text/javascript">
+    function ChangeDaysInfo() {
+        $("#DivDaysInfo").html("");
+        $.get("/Congress/ChipsFood/GetDaysInfo", { Id: '@Model.Id',date: new Date().getTime() }, function (data) {
+            if (data != "false") {
+                $("#DivDaysInfo").html(data).slideDown("slow");
+            }
+        });
+
+    }
+
+    $(document).ready(function () {
+        ChangeDaysInfo();
+    });
+</script>
+
+@if (Model != null)
+{
+
+    @Html.ValidationSummary(true)
+    <div class="">
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Name
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item">
+                    @Html.EditorFor(model => model.Name)
+                </div>
+            </div>
+        </div>
+
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Capicity
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.TextBoxFor(model => model.Capacity, new { })
+                </div>
+            </div>
+        </div>
+        <div class="item-row fit">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Description
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item " >
+                    @Html.TextAreaFor(model => model.Description, new {@style = "height: 54px" })
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.BaseCapacity
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @Html.DisplayFor(model => model.BaseCapacity)
+                </div>
+            </div>
+        </div>
+        <div class="fit" id="DivDaysInfo"></div>
+    </div>
+
+}

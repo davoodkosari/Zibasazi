@@ -1,0 +1,127 @@
+﻿/*
+    بژ تیره
+*/
+.my-nav, .radyn-footer, .ui-top-bar, .footer, .ui-footer, .footer-company-box { background: #6a6b70; }
+
+
+
+.header-lan li a, .language-btns table, .language-btn tr { background: #59575c; }
+
+.header, .header-nav-item > li { background: #D27c7b !important; }
+
+.nav-left-btn, .header-nav-item > li:hover, .header-nav-item li:focus {
+    background-color: #be7574;
+    background: #be7574 !important;
+}
+
+@media (max-width: 1200px) {
+    .nav-left-btn, .header-nav-item > li:hover, .header-nav-item li:focus { background-color: #be7574; }
+
+    .nav-left-btn { background: transparent !important; }
+}
+
+.border-title { border-color: #be7574; }
+
+.users-page .container-header-item:before { background: #be7574; }
+
+.login-container-bg .login-data-row-item input[type='submit'], .login-container-bg .login-data-row-item input[type='button'], .login-data-row-item input[type='submit'], .login-data-row-item input[type='button'], .btn-printcart, .archive-link > a{ background-color: #D27c7b; }
+
+.nav-left-btn:hover, .nav-left-btn:focus { background-color: #b36b6c !important; }
+
+.header-lan li a:hover, .language-btns table:hover, .language-btn tr:hover { background: #D27c7b; }
+
+.login-data-row-item input[type='submit']:hover, .login-data-row-item input[type='button']:hover, .btn-printcart:hover, .btn-printcart:focus {
+    opacity: 0.8;
+    background-color: #b36b6c;
+}
+
+@media (max-width: 768px) {
+    .header-nav-item > li:hover, .header-nav-item li:focus, .nav-left-btn:hover, .nav-left-btn :focus { background: rgba(253, 253, 253, 0.0784313725490196) !important; }
+}
+
+@media (min-width: 768px) {
+    .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover, .header-nav-item li li:hover, .header-nav-item li li:focus {
+        color: #ffffff;
+        background-color: #D27c7b !important;
+    }
+
+    .navbar-nav > li > .dropdown-menu > li > .dropdown-menu > li > a:hover, .navbar-nav > li > .dropdown-menu > li > .dropdown-menu > li > .dropdown-menu > li > a:hover, .navbar-nav > li > .dropdown-menu > li > .dropdown-menu > li > .dropdown-menu > li > .dropdown-menu > li > a:hover { box-shadow: inset -5px 0px 15px #b36867; }
+}
+
+/*---------------------User-Panel-------------------------*/
+
+
+.userloggedimg .liner-div { background: #D27c7b; }
+
+.userinfo span, .userinfo span > div { color: #D27c7b; }
+
+.gv-header { background: #D27c7b; }
+
+.ui-sheet input[type="checkbox"]:checked:after,
+.ui-sheet input[type="checkbox"]:not(:checked):after { border: 1px solid #D27c7b; }
+
+.ui-sheet input[type="checkbox"]:checked:before,
+.ui-sheet input[type="checkbox"]:not(:checked):before { border-color: #D27c7b; }
+
+
+/*Message-panel*/
+
+.ui-sheet .nav-mail-item:first-child { border-top-color: #b96f6e; }
+
+.ui-sheet .nav-mail-item span { background-color: #c77574; }
+
+.ui-sheet .nav-mail-item:hover { background-color: #c77574; }
+
+.ui-sheet .nav-mail-item:hover span { background-color: #b96f6e; }
+
+.ui-sheet .nav-mail-item {
+    background-color: #D27c7b;
+    border-color: #b96f6e;
+}
+
+.radyn_grid a, .radyn_grid a:hover, .radyn_grid a:focus, .radyn_grid a:active { color: #737373; }
+
+/*Message-panel*/
+
+.ui-sheet .btn-forms:hover, .ui-sheet .btn-forms:focus, .ui-sheet .btn-forms:active, .ui-sheet .c-widget .cell-item a.btn:hover, .ui-sheet .my_select-group_box .btn-info:hover {
+    border-color: #b96f6e;
+    background-color: #b96f6e;
+}
+
+.ui-sheet .btn-forms, .ui-sheet .c-widget .cell-item a.btn, .ui-sheet .my_select-group_box .btn-info {
+    background-color: #D27c7b;
+    border-color: #D27c7b;
+}
+
+.ui-sheet .radyn_grid td { border-color: #bdbdbd !important; }
+
+.ui-sheet .radyn_grid th {
+    border-color: #bdbdbd !important;
+    background-color: #D27c7b !important;
+}
+
+.ui-sheet input[type="radio"]:checked:before, .ui-sheet input[type="radio"]:not(:checked):before { background: #D27c7b; }
+
+.ui-sheet .gv-row-style, .ui-sheet .gv-cell, .ui-sheet .gv-footer, .ui-sheet .gv-header { border-color: #bdbdbd; }
+
+
+
+/*---------------------User-Panel-------------------------*/
+
+    
+
+.login-data-row-item a.login-solid-btn {
+    border-color: #D27c7b;
+    color: #D27c7b;
+}
+
+.login-data-row-item a.login-solid-btn:hover {
+    color: #fff;
+    background-color: #D27c7b
+}
+
+.wide-button { background: #be7574; }
+
+.wide-button:hover, .news-list-lead > a, .news-list-lead span { background: #d27c7b; }
+
+.aside-box .news-list-box a:hover, .aside-box .news-list-box a:active, .aside-box .news-list-box a:focus { color: #d27c7b }

@@ -1,0 +1,11 @@
+﻿@using Radyn.FormGenerator.Tools
+@using Radyn.Utility
+@using Radyn.WebApp.Areas.Congress.Tools
+@using Radyn.WebApp.Areas.FormGenerator.Tools
+@model Radyn.Congress.DataStructure.UserForms
+
+
+@{
+    Html.FormGenerator(Model.FormId, Model.GetType().Name, (string)ViewBag.RefId,(FormState)ViewBag.formState);
+}
+

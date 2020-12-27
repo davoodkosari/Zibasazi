@@ -1,0 +1,211 @@
+﻿.slide-items-box:after {
+    opacity: 0.65;
+}
+
+.about-conference:after {
+    opacity: 0.80;
+}
+
+@media (min-width: 992px) {
+    .list-nav-content > li a span, .links-item > li a span {
+        color: #0f5c6d;
+    }
+
+    .list-nav-content > li .dropdown-li a span:before {
+        background-color: #fff;
+    }
+
+    .list-nav-content > li:hover .dropdown-li li:hover > a span:before {
+        background: #fff;
+    }
+}
+
+.control-gallery, .mixitup-control-active:hover {
+    color: #fff;
+}
+
+.mixitup-control-active {
+    border-color: #fff
+}
+
+.header {
+    background-color: #fff;
+    box-shadow: 0 0 9px #ccc;
+}
+
+.current .content-slide > span, .lasts .content-slide > span {
+    color: #fff;
+}
+
+.r-slider-btn:hover {
+    background: #fff !important;
+}
+
+.r-slider-btn {
+    border: 3px solid #fff;
+    color: #fff;
+}
+
+.items-service-input:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+.btn-yellow, .btn-white, .archive-link > a, .login-data-row-item input[type="button"] {
+    background: #fff;
+    color: #fff;
+}
+
+.footer-social-media, .footer-person-item, .see-profile {
+    background: #fff;
+}
+
+.section-person-info .owl-carousel .owl-nav button.owl-next, .section-person-info .owl-carousel .owl-nav button.owl-prev {
+    border: 2px solid #fff !important;
+    color: #fff !important;
+}
+
+.avas .about-conference .widget-title span:first-child, .avas .ui-content-nav .widget-title span:first-child, .items-conference label, .custom-footer ul li svg {
+    color: #fff;
+}
+
+.banner-web {
+    background-color: #fff;
+}
+
+.btn-white.solid:hover {
+    background: #fff;
+    border-color: #fff;
+}
+
+.radyn-Resources.license {
+    border-top-color: #fff
+}
+
+
+
+
+.ui-sheet .ui-h-menu .r-nav {
+    background-color: #fff !important;
+    box-shadow: 0 0 9px #ccc !important;
+}
+
+
+.login-container:after, .login-container:before {
+    background: #fff;
+    background: linear-gradient(0deg, #F1F7F9 0%, #fff 52%, #fff 100%);
+}
+
+.container-hd .login-data-row input[type="text"], .container-hd .login-data-row input[type="password"] {
+    border: 2px solid #fff;
+}
+
+.input-effects svg {
+    color: #fff;
+}
+
+.input-effects input:hover, .login-data-row-item.input-effects input:focus, .login-data-row-item .input-effects input:focus.container-hd .login-data-row input[type="text"], .container-hd .login-data-row input[type="password"] {
+    border: 2px solid #fff !important;
+}
+
+    .input-effects input:hover ~ svg, .userinfo span div, .userinfo b ~ span:after, .userinfo span div p:last-child:after, .userinfo b ~ span:after, .userinfo span div p:last-child:after {
+        color: #F1F7F9;
+    }
+
+.ui-sheet input[type="checkbox"]:checked:before, .ui-sheet input[type="checkbox"]:not(:checked):before {
+    border-color: #fff
+}
+
+.login-container-bg .m-btn.waves-yellow {
+    background-color: #fff;
+    text-shadow: none
+}
+
+.topbar .d-item:hover {
+    border-right: 4px solid #fff;
+}
+
+.login-container-bg .m-btn.waves-yellow .waves-ripple {
+    background-color: #F1F7F9;
+}
+
+.btn-solid {
+    color: #fff !important;
+    border: 2px solid #fff;
+}
+
+    .btn-solid:hover {
+        color: #0f5c6d !important;
+        background: #fff;
+    }
+
+.list-nav-content > li:hover .dropdown-li li:hover > a span:before, .user-home-items .d-item:hover .d-item-bg, .ui-sheet input[type="radio"]:checked:before, .ui-sheet input[type="radio"]:not(:checked):before {
+    background: #fff !important;
+}
+
+.r-badge span {
+    background: #fff;
+}
+
+.nav-mail .nav-mail-item {
+    border-right: 10px solid #fff !important
+}
+
+.radyn_grid table tbody tr:nth-child(even) {
+    background-color: rgb(15,92,109) !important;
+}
+
+.gv-row-style:hover, .gv-alternaterow-style:hover, .radyn_grid tbody tr:hover td {
+    background-color: rgb(15,92,109);
+}
+
+.container-header-item:after {
+    border-top: 3px solid #fff;
+}
+
+.content-pro-users label {
+    color: #0f5c6d;
+}
+
+.content-pro-users {
+    color: #0f5c6d;
+    background-color: #fff;
+}
+
+    .content-pro-users label:after {
+        border-top: 2px solid #0f5c6d;
+    }
+
+.navbar, .ui-top-bar {
+    background-color: #0054a5 !important;
+}
+
+.news-list-lead span {
+    color: #0f5c6d !important;
+    background: #fff !important;
+}
+
+.filter-text + a {
+    float: right;
+    color: #0f5c6d !important;
+}
+
+.wide-button {
+    color: #0f5c6d !important;
+    background: #fff !important;
+}
+
+::selection {
+    color: #0f5c6d !important;
+    background: #fff !important;
+}
+
+::-moz-selection {
+    color: #0f5c6d !important;
+    background: #fff !important;
+}
+
+.footer-company-box {
+    background-color: #222c36 !important;
+    background-image: none !important
+}

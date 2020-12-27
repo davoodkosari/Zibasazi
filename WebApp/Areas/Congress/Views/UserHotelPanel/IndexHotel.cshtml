@@ -1,0 +1,58 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Utility
+@using Radyn.Web.Mvc;
+
+@model IEnumerable<Radyn.Congress.DataStructure.HotelUser>
+@{
+    ViewBag.Title = Resources.Congress.YourRezervedHotels;
+    Layout = "~/Areas/Congress/Views/Shared/CongressUserLayout.cshtml";
+}
+@section Head{}
+@section PageTitle
+{
+    @Resources.Congress.YourRezervedHotels
+
+}
+@section PageAction
+{
+    <div class="button-div m-btn waves-blue i-add">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserHotelPanel/CreateHotel")).Text(Resources.Congress.ReserveHotelNew).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+    </div>
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserPanel/Home")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+@section PageActionDown
+{
+    <div class="button-div m-btn waves-blue i-add">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserHotelPanel/CreateHotel")).Text(Resources.Congress.ReserveHotelNew).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+    </div>
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserPanel/Home")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+
+    <div class="radynForm">
+@if (Model.Any())
+{
+    Html.Radyn().Grid(Model).Name("Grid").HtmlAttributes(new { style = "width:98%;margin: 0 auto" }).Columns(columns =>
+    {
+        columns.Template(hotel => hotel.Hotel.Name).Title(Resources.Congress.Hotel).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(hotel => string.Format("{0:n0}",hotel.Hotel.ValidCost.ToDecimal()) + " " + hotel.Hotel.CurrencyType.ToEnum<Radyn.Common.Definition.Enums.CurrencyType>().GetDescriptionInLocalization()).Title(Resources.Congress.Cost).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(hotel => hotel.Hotel.Address).Title(Resources.Congress.Address).Width(300).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(hotel => hotel.StatusDescription).Title(Resources.Congress.Status).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Template(hotelUser => "<a href='" + Url.Content("~/Congress/UserHotelPanel/DetailsHotel?HotelId=" + hotelUser.HotelId) + "'> <img width='18' align='absmiddle' title='" + Resources.Common.Detail + "' src='"+Url.Content("~/Content/Images/details.png")+"' /></a> | " + "<a href='" + Url.Content("~/Congress/UserHotelPanel/EditHotel?HotelId=" + hotelUser.HotelId) + "'> <img width='18' align='absmiddle' title='" + Resources.Common.Edit + "' src='"+Url.Content("~/Content/Images/Edit.png")+"' /></a> |  <a href='" + Url.Content("~/Congress/UserHotelPanel/DeleteHotel?HotelId=" + hotelUser.HotelId) + "'> <img width='18' align='absmiddle' title='" + Resources.Common.Delete + "' src='"+Url.Content("~/Content/Images/Delete-Close.png")+"' /></a>").Width(300).Encode(false).Filterable(false);
+
+    })
+  //  
+  .Sortable(sorting => sorting.Enabled(true))
+  .Pageable(paging => paging.Enabled(true))
+  .Filterable(filtering => filtering.Enabled(true))
+  //  .Footer(true)
+  .Render();
+}
+else
+{
+    @Resources.Congress.YouNotRezervedHotel
+}
+    </div>

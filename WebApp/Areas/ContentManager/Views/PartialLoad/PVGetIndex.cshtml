@@ -1,0 +1,33 @@
+@using Radyn.ContentManager.Definition
+@using Radyn.Utility
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp
+@using Radyn.WebApp.AppCode.Security
+
+@model IEnumerable<Radyn.ContentManager.DataStructure.PartialLoad>
+                     
+                          <div class="fit">
+                              @{Html.Radyn().Grid(Model).Name("GridPartialLoad").HtmlAttributes(new { style = "width:98%;margin: 0 auto" }).Columns(columns =>
+                                            {
+                                                columns.Template(partials => partials.Partials != null ? partials.Partials.Title+(partials.Partials.Operation!=null?"( "+partials.Partials.Operation.Title+" )":"") : (partials.Content != null ? partials.Content.Title : "")).Title(@Resources.ContentManager.Title).Width(250).HeaderHtmlAttributes(new { style = "text-align:center" });
+                                                columns.Template(partials => partials.CustomId).Title("CustomId").Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                                                columns.Template(partials => partials.position).Title("position").Width(50).HeaderHtmlAttributes(new { style = "text-align:center" });
+                                                columns.Template(partials => partials.Type.GetDescription()).Title("type").Width(50).HeaderHtmlAttributes(new { style = "text-align:center" });
+                                                columns.Template(partials => partials.HasContainer ? Resources.Common.Yes : Resources.Common.No).Title("HasContainer").Width(50).HeaderHtmlAttributes(new { style = "text-align:center" });
+                                                columns.Template(content =>
+                                                    
+                                                    "<a style='cursor: pointer;'  onclick=\"DeletePartials('" + content.PartialId + "','" + content.CustomId + "','" + content.HtmlDesginId + "')\" >" +
+                                                    " <img width='18' align='absmiddle' title='" + Resources.Common.Delete + "' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "' />" + "</a> | " +
+                                                    "<a style='cursor: pointer;'  onclick=\"LookUpEditFormPartials('" + content.PartialId + "','" + content.CustomId + "','" + content.HtmlDesginId + "','"+PageMode.Edit+"')\" > " +
+                                                    " <img width='18' align='absmiddle' title='" + Resources.Common.Edit + "' src='" + Url.Content("~/Content/Images/edit.png") + "' />" + "</a> ").Width(150).Encode(false).Filterable(false);
+
+                                            })
+
+.Sortable(sorting => sorting.Enabled(true))
+.Pageable(paging => paging.Enabled(true))
+.Filterable(filtering => filtering.Enabled(true))
+//.Footer(true)
+.Render();}
+                          </div>
+
+                     

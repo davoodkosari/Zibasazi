@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Radyn.FileManager.DataStructure.File>
+    @using Radyn.FileManager
+    @using Radyn.Web.Mvc
+    @using Radyn.WebApp.AppCode.Security
+    @using Radyn.WebApp.Areas.EnterpriseNode.ExtentionTools
+    @{
+        ViewBag.Title = Resources.Congress.DocumentsForDownload;
+        Layout = "~/Areas/Congress/Views/Shared/CongressUserLayout.cshtml";
+    }
+    @section Head{
+
+    }
+    @section PageTitle
+{
+        @Resources.Congress.DocumentsForDownload
+    }
+    @section PageAction
+{
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserPanel/Home")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+
+        </div>
+    }
+    @section PageActionDown
+{
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserPanel/Home")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+
+        </div>
+    }
+    @if (Model != null)
+    {
+
+        <div style="width: 100%;margin: 0 auto;display: inline-block; padding: 10px" align="center" class="widget">
+            <div class="gv-table fit table-rc"  style="float: none">
+                <div class="gv-row gv-header">
+                    <div style="width: 30px;" class="gv-cell ">
+                        <div class="cell-item">
+                            #
+                        </div>
+                    </div>
+                    <div class="gv-cell width80percent">
+                        <div class="cell-item">
+                            @Resources.Congress.Name
+                        </div>
+                    </div>
+                    <div class="gv-cell gv-cell-last width17percent">
+                        <div class="cell-item">
+                            @Resources.Congress.Download
+                        </div>
+                    </div>
+                </div>
+                <div class="gv-content">
+                    @{
+                        int count = 0;
+                        foreach (var file in Model)
+                        {
+                            count++;
+                            var i = count % 2;
+                            <div class="@(i == 0 ? "gv-row gv-row-style" : "gv-row gv-row-style gv-row-style-alt")">
+                                <div style="width: 30px; text-align: center" class="gv-cell ">
+                                    <div class="cell-item">
+                                        @count.ToString()
+                                    </div>
+                                </div>
+                                <div class="gv-cell width80percent">
+                                    <div class="cell-item">
+                                        <a href="@(FileManagerContants.FileHandlerRoot + file.Id + "?dl=true")">@file.FullName</a>
+                                    </div>
+                                </div>
+                                <div class="gv-cell gv-cell-last width17percent">
+                                    <div class="cell-item">
+                                        <img src="/Content/Images/download-file.png" height="20" width="20" style="cursor: pointer" onclick="ShowModal('@(FileManagerContants.FileHandlerRoot + file.Id + "?dl=true")')" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="gv-row  gv-footer" style="height: 25px">
+                </div>
+
+            </div>
+        </div>
+                        }

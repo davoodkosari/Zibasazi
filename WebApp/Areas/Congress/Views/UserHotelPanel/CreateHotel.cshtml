@@ -1,0 +1,149 @@
+﻿@using Radyn.Congress.DataStructure
+@using Radyn.Congress.Tools
+@using Radyn.FormGenerator.Tools
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp.Areas.Congress.Tools
+@using Radyn.WebApp.Areas.FormGenerator.Tools
+@model Radyn.Congress.DataStructure.Hotel
+@{
+    ViewBag.Title = @Resources.Common.Create + " " + @Resources.Congress.HotelReserve;
+    Layout = "~/Areas/Congress/Views/Shared/CongressUserLayout.cshtml";
+}
+@section Head{
+    <script type="text/javascript">
+        function GetHotel() {
+            var hotelid = document.getElementById("Id").value;
+            if (hotelid != "") {
+                ShowPostBackLoader();
+                $("#DivHotel").html("");
+                $.get("@Url.Content("~/Congress/Hotel/GetDetail")", { Id: hotelid, date: new Date().getTime() }, function(data) {
+                    if (data != "false") {
+                        $("#DivHotel").html(data).slideDown("slow");;
+
+
+                    }
+                    ShowRadynMessage();
+                }).complete(function() {
+                    HidePostBackLoader();
+                    GetChildReserved();
+                });
+            }
+        }
+
+        function GenerateDiscount() {
+            $("#DivDiscount").html("");
+            $.get("@Url.Content("~/Payment/DiscountType/GenerateDiscount")", { model: '@AppExtention.CongressMoudelName', section: '@((byte) Enums.PaymentSection.Hotel)', date1: new Date().getTime() }, function(data) {
+                if (data != "false") {
+                    $("#DivDiscount").html(data);
+                    $("#DivDiscount").slideDown("slow");
+                }
+
+            });
+
+        }
+
+        function GetChildReserved() {
+
+            var hotelid = document.getElementById("Id").value;
+            if (hotelid != "") {
+                ShowPostBackLoader();
+                $("#DivReserveUsers").html("");
+                $("#DivSelectUsers").html("");
+                $.get("@Url.Content("~/Congress/UserHotelPanel/GetChildReserve")", { hotelId: hotelid, allowDelete: true, date1: new Date().getTime() }, function(data) {
+                    if (data != "false") {
+                        $("#DivReserveUsers").html(data).slideDown("slow");;
+                    }
+
+                }).complete(function() {
+                    $.get("@Url.Content("~/Congress/UserHotelPanel/GetChild")", { hotelId: hotelid, date1: new Date().getTime() }, function(data) {
+                        if (data != "false") {
+                            $("#DivSelectUsers").html(data).slideDown("slow");
+                        }
+
+                    }).complete(function() {
+                        HidePostBackLoader();
+
+                    });
+                });
+            }
+        }
+
+        $(document).ready(function() {
+          GetHotel();
+          GenerateDiscount();
+
+        });
+    </script>
+}
+@section PageTitle
+{
+    @Resources.Congress.Reserve @Resources.Congress.Hotel
+}
+@section PageAction
+{
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Congress.SaveAndcontinue).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).Submit().Render(); }
+    </div>
+    <div class="button-div m-btn waves-red i-return ">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserHotelPanel/IndexHotel")).Text(@Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+
+    </div>
+}
+@section PageActionDown
+{
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Congress.SaveAndcontinue).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).Submit().Render(); }
+
+    </div>
+    <div class="button-div m-btn waves-red i-return ">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserHotelPanel/IndexHotel")).Text(@Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+@Html.ValidationSummary(true)
+<div class="radynForm users-page full-size detail-edit">
+    <div class="item-input fit">
+        <div class="item-input">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Hotel
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownList("Id", (SelectList)ViewBag.Hotels, new { onchange = "GetHotel();" })
+
+                </div>
+            </div>
+        </div>
+        <div class="item-input">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.DaysCountRezerv
+                </div>
+            </div>
+            <div class="table-row-item readonly">
+                <div class="item">
+                    @if (((short)ViewBag.dailyCount) == 0)
+                    {
+                        @Html.TextBox("DaysCount")
+                    }
+                    else
+                    {
+                        @ViewBag.dailyCount
+                        <input type="hidden" value="@ViewBag.dailyCount" name="DaysCount" id="DaysCount" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fit" id="DivHotel"></div>
+    @{
+        Html.FormGenerator(AppExtention.CongressMoudelName + "-/Congress/Hotel/Hotel", new HotelUser().GetType().Name);
+    }
+    <div id="DivReserveUsers"></div>
+    <div id="DivSelectUsers"></div>
+    <div id="DivDiscount"></div>
+</div>
+
+
+

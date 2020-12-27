@@ -1,0 +1,18 @@
+﻿@using Radyn.Web.Mvc;
+@model IEnumerable<Radyn.Congress.DataStructure.ArticleUserComment>
+
+
+@{
+    foreach (var item in Model)
+    {
+        <div class="comment">
+            <div class="avatar-user">
+                <img src="/Content/Images/avatar-001.jpg" alt="" />
+                <span>@item.Name</span>
+            </div>
+            <p>
+                @item.Description
+            </p>
+        </div>
+    }
+}

@@ -1,0 +1,19 @@
+﻿@using Radyn.WebApp.AppCode.Security
+@model IEnumerable<Radyn.Congress.DataStructure.Article>
+<div class="container-box">
+
+
+    @foreach (var item in Model)
+    {
+        <div class="article-title">
+            <p>
+                <img src="@Url.Content("/Areas/Congress/Content/Images/Penci.png")"/>  @item.Title
+            </p>
+        </div>
+    }
+    <div class="archive-link">
+        <a href="@Url.Content("~/Congress/ArticlePanel/Archive")"> @string.Format(Resources.Congress.ArticleArchive, SessionParameters.CurrentCongress.Configuration.ArticleTitle)</a>
+    </div>
+</div>
+
+

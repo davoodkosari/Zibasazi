@@ -1,0 +1,36 @@
+﻿@using Radyn.News.Tools
+@using Radyn.FileManager
+@using Radyn.Utility
+@using Radyn.WebApp.AppCode.Security
+@model List<dynamic>
+    @{
+        ViewBag.Title = "لیست آثار ارسال شده";
+        Layout = "~/Views/Shared/User_Layout.cshtml";
+    }
+    @section Head{
+
+    }
+    <div class="container-box">
+        <div class="container-header widget-title">
+            <div class="container-header-item">
+                <img src="/Areas/Congress/Content/Images/news.png" />
+                <span>
+                  لیست آثار ارسال شده
+                </span>
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="article-title">
+                <p>
+                    <a style="text-decoration: none;" target="_blank" href="@(Radyn.FileManager.FileManagerContants.FileHandlerRoot+item.OrginalFileId)">
+                        <img src="@Url.Content("/Areas/Congress/Content/Images/doc-download.png")" width="25" height="25" /> @item.Title
+                    </a>
+                  
+                </p>
+            </div>
+
+
+        }
+      
+    </div>

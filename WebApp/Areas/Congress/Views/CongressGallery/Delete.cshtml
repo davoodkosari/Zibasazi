@@ -1,0 +1,49 @@
+﻿@using Radyn.Web.Mvc;
+@using Radyn.Utility
+@{
+    ViewBag.Title = Resources.Common.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@section Head{
+}
+@section PageTitle
+{
+    @Resources.Common.Delete
+}
+@section PageAction
+{
+    <div class="button-div m-btn waves-red i-delete">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Common.Delete).Align(Resources.Common.Aligment.ToEnum<ImageActionLink.Alignment>()).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).Submit().Render(); }
+    </div>
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/CongressGallery/Index")).Text(Resources.Common.Return).Align(Resources.Common.Aligment.ToEnum<ImageActionLink.Alignment>()).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+@section PageActionDown
+{
+    <div class="button-div m-btn waves-red i-delete">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Common.Delete).Align(Resources.Common.Aligment.ToEnum<ImageActionLink.Alignment>()).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).Submit().Render(); }
+    </div>
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/CongressGallery/Index")).Text(Resources.Common.Return).Align(Resources.Common.Aligment.ToEnum<ImageActionLink.Alignment>()).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+@using (Html.BeginForm())
+{
+    if (ViewBag.PhotoCount != null && ((int)ViewBag.PhotoCount) > 0)
+    {
+        <div class="radynForm">
+
+            <div class="item-row fit">
+                <div class="table-row-item" style="width: 54%; font-size: 17px; margin-right: 21%; font-weight: bold; text-align: center; padding: 10px; background-color: #ffebeb; border: none">
+                    <div class="item" style="color: red">
+                        @(string.Format(Resources.Congress.DeleteGalleryAlarm, ViewBag.PhotoCount))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    Html.RenderAction("GetDetails", "Gallery", new { Id = ViewBag.Id, area = "Gallery" });
+}

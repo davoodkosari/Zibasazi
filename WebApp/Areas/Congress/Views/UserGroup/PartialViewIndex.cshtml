@@ -1,0 +1,69 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+@using Radyn.WebApp.AppCode.Security
+
+@model IEnumerable<Radyn.Congress.DataStructure.User>
+<script type="text/javascript">
+    function LookUpForm(id, state) {
+        if (id != "") {
+            switch (state) {
+                case "Edit":
+                    window.location="@Url.Content("~/Congress/UserGroup/Edit?Id=")" + id;
+                    break;
+                case "Details":
+                    window.location="@Url.Content("~/Congress/UserGroup/Details?Id=")" + id;
+                    break;
+                case "Delete":
+                    window.location="@Url.Content("~/Congress/UserGroup/Delete?Id=")" + id;
+                    break;
+            }
+        }
+    }
+    
+    function SelectAll() {
+      
+        if ($("#CheckSelectAll").attr("checked") == true) {
+            $("[id^='CheckSelect-']").each(function () {
+                $(this).attr("checked", true);
+            });
+        } else {
+            $("[id^='CheckSelect-']").each(function () {
+                $(this).attr("checked", false);
+            });
+        }
+    }
+
+    
+</script>
+<div class="fit">
+    
+   
+    @{Html.Radyn().Grid(Model).DataKeys(x => x.Add(y => y.Id)).Name("Grid").HtmlAttributes(new { style = "width:900px;margin: 0 auto" }).Columns(columns =>
+{
+    columns.Template(user => (user.Status == (byte)Enums.UserStatus.Register || user.Status == (byte)Enums.UserStatus.PayDenial) ? ("<input type=\"checkbox\"   name=\"CheckSelect\" id=\"CheckSelect-" + user.Id + "\"  value=\"" + user.Id + "\"   />") : "").Title("<input type='checkbox' class='checkboxGroups'  onclick='SelectAll();' style='cursor: pointer'   id='CheckSelectAll' name='CheckSelectAll' />").Width(20).HeaderHtmlAttributes(new { style = "text-align:center;height:20px;" }).Visible((bool)(ViewBag.HasPayment != null && (bool)ViewBag.HasPayment)).Sorting(false).Encode(false);
+    columns.Template(user => user.Username + (user.ChairId.HasValue ? "<img width='18' align='absmiddle' title='" + Resources.Reservation.ChairInformation + "\n" + Resources.Reservation.Hall + ":" + user.Chair.Hall.Name + "\n" + Resources.Reservation.Row + ":" + user.Chair.Row + " " + Resources.Reservation.Column + ":" + user.Chair.Column + " " + Resources.Reservation.Number + ":" + user.Chair.Number + (user.Chair.ChairTypeId.HasValue ? " " + Resources.Reservation.ChairType + ":" + user.Chair.ChairType.Title : "") + "' src='" + Url.Content("/Areas/Congress/Content/Images/chair-hover.png") + "' />" : "")).Title(Resources.Security.UserUsername).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" }).Encode(false);
+    columns.Template(user => user.EnterpriseNode.RealEnterpriseNode.FirstName).Title(Resources.EnterPriseNode.FirstName).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+    columns.Template(user => user.EnterpriseNode.RealEnterpriseNode.LastName).Title(Resources.EnterPriseNode.LastName).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+    columns.Template(user => ((Enums.UserStatus)user.Status).GetDescriptionInLocalization()).Title(Resources.Congress.Status).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+    columns.Template(user => user.RegisterDate).Title(Resources.Congress.RegisterDate).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+    columns.Template(user =>(!user.PaymentTypeId.HasValue) ? "" : user.PaymentType.Title+(string.IsNullOrEmpty(user.PaymentTypeDaysInfo)?"":"\n"+Resources.Congress.Day+""+user.PaymentTypeDaysInfo)).Title(Resources.Congress.PaymentType).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" }).Visible((bool)(ViewBag.HasPayment != null && (bool)ViewBag.HasPayment));
+    columns.Template(user =>
+        "<a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "','Details')\"  >" +
+        " <img width='18' align='absmiddle' title='" + Resources.Common.Detail + "' src='" + Url.Content("~/Content/Images/details.png") + "' />" + "</a> | " +(user.Id!=SessionParameters.CongressUser.Id?
+        ("<a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "','Delete')\" >" +
+        " <img width='18' align='absmiddle' title='" + Resources.Common.Delete + "' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "' />" + "</a> | "):"  " )+
+        "<a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "','Edit')\" > " +
+        " <img width='18' align='absmiddle' title='" + Resources.Common.Edit + "' src='" + Url.Content("~/Content/Images/edit.png") + "' />" + "</a> ").Width(100).Visible((bool)(ViewBag.AllowEdit != null && (bool)ViewBag.AllowEdit)).Encode(false).Filterable(false);
+
+})
+            //  .Scrollable(scrolling => scrolling.Enabled(false).Height(500))
+            //  .Selectable(x => x.Enabled(true))
+              .Sortable(sorting => sorting.Enabled(false))
+              .Pageable(paging => paging.Enabled(false))
+           //   .Filterable(filtering => filtering.Enabled(true))
+              .Footer(false).Render();}
+  
+</div>
+
+

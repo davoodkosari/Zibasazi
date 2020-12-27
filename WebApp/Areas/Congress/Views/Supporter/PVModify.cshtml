@@ -1,0 +1,87 @@
+﻿@using Radyn.FileManager
+@using Radyn.Utility
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp.Areas.Common.Component
+
+@model Radyn.Congress.DataStructure.Supporter
+@if (Model != null)
+{
+    <div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Title
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item">
+
+                    @Html.EditorFor(x => x.Title)
+
+                </div>
+            </div>
+        </div>
+        <div class="item-row file-upload">
+            <div class="table-row-cap ">
+                <div class="item">
+                    @Resources.Congress.Logo
+                    <span>
+                        @Resources.Congress.MaxFileLength (200KB)
+                    </span>
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                  
+
+                    @{
+                        Html.RenderAction("FileUploader", "FileUpload", new { area = "FileManager", filePropName = "Image", fileid = Model.Image, fileName = "ImageSupporter" });
+
+                    }
+
+
+                    @if (Model == null || string.IsNullOrEmpty(Model.Image))
+                    {
+                        <input type="hidden" id="Image" name="Image" value="" />
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.SupportType
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.SupportTypeId, (SelectList)ViewBag.SupportType)
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.Congress.Sort
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.EditorFor(model => model.Sort)
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.EnterPriseNode.WebSite
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.EditorFor(model => model.WebSite)
+                </div>
+            </div>
+        </div>
+    </div>
+}

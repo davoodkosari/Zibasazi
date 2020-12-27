@@ -1,0 +1,64 @@
+﻿@using Radyn.Utility
+@using Radyn.Web.Mvc
+@model IEnumerable<Radyn.Congress.DataStructure.User>
+<script type="text/javascript">
+    function LookUpForm(id, state) {
+        if (id != "") {
+            switch (state) {
+                case "Details":
+                    window.open("@Url.Content("~/Congress/User/Details?Id=")" + id);
+                    break;
+              
+
+            }
+
+        }
+
+    }
+
+    function PaymentDetails(id) {
+
+        if (id != "") {
+            ShowModal("@Url.Content("~/Payment/Transaction/LookUPTransactionDetails?Id=")" + id);
+        }
+
+    }
+    
+
+    function Paymentorder(Id) {
+        if (Id != "") {
+            ShowModal("@Url.Content("~/Payment/UserTransaction/LookUPUserTransaction?Id=")" + Id + "&callbackurl=/Congress/UserPanel/UserTemps&postdataUrl=/Congress/UserPanel/AddUserTemp");
+        }
+    }
+</script>
+<div class="fit">
+    @if (Model.Any())
+    {
+
+
+        Html.Radyn().Grid(Model).DataKeys(x => x.Add(y => y.Id)).Name("Grid").HtmlAttributes(new { style = "width:700px;margin: 0 auto" }).Columns(columns =>
+        {
+            columns.Template(user => (user.TransactionId.HasValue ? " <img  style='cursor: pointer' width = '20px;' height = '20px;' src=\"" + Url.Content("/Areas/Congress/Content/Images/payment-command.png") + "\"   title='" + @Resources.Payment.PaymentDetails + "'   onclick=\"PaymentDetails(" + "'" + user.TransactionId + "'" + ");\"  />" : "") + " <img  style='cursor: pointer' width = '20px;' height = '20px;'  src=\"/Areas/Congress/Content/Images/payment-details.png\"  title='" + @Resources.Payment.Paymentorder + "'   onclick=\"Paymentorder('" + user.Id + "');\"  />").HeaderHtmlAttributes(new { style = "text-align:center" }).Width(40).Encode(false);
+            columns.Template(user => user.Username).Title(Resources.Security.UserUsername).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+            columns.Template(user => user.EnterpriseNode.RealEnterpriseNode.FirstName+" "+user.EnterpriseNode.RealEnterpriseNode.LastName).Title(Resources.Congress.Name).Width(200).HeaderHtmlAttributes(new {style = "text-align:center"});
+            columns.Template(user => user.Chair.Row).Title(Resources.Reservation.Row).Width(80).HeaderHtmlAttributes(new { style = "text-align:center" });
+            columns.Template(user => user.Chair.Column).Title(Resources.Reservation.Column).Width(80).HeaderHtmlAttributes(new { style = "text-align:center" });
+            columns.Template(user => user.Chair.Status.ToString().ToEnum<Radyn.Reservation.Definition.Enums.ReservStatus>().GetDescriptionInLocalization()).Title(Resources.Reservation.Status).Width(80).HeaderHtmlAttributes(new { style = "text-align:center" });
+            columns.Template(user => user.Chair.Number).Title(Resources.Reservation.Number).Width(80).HeaderHtmlAttributes(new {style = "text-align:center"});
+            columns.Template(user => user.Chair.ChairType.Title).Title(Resources.Reservation.ChairType).Width(80).HeaderHtmlAttributes(new { style = "text-align:center" });
+            columns.Template(user =>
+                "<a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "','Details')\"  >" +
+                " <img width='18' align='absmiddle' title='" + Resources.Common.Detail + "' src='" + Url.Content("~/Content/Images/details.png") + "' />" + "</a>  ").Encode(false).Width(100);
+
+        })
+            .Sortable(sorting => sorting.Enabled(true))
+            .Pageable(paging => paging.Enabled(true))
+            .Filterable(filtering => filtering.Enabled(true))
+            .Footer(false).Render();
+
+       
+    }
+
+        </div>
+    
+  

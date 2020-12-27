@@ -1,0 +1,38 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.Congress.Tools
+@model Radyn.Congress.DataStructure.Article
+<script type="text/javascript">
+    function GenerateDiscount() {
+        $("#DivDiscount").html("");
+        $.get("@Url.Content("~/Payment/DiscountType/GenerateDiscount")", { model: '@AppExtention.CongressMoudelName', section: '@((byte)Enums.PaymentSection.Article)', date: new Date().getTime() }, function (data) {
+                if (data != "false") {
+                    $("#DivDiscount").html(data).hide();
+                    $("#DivDiscount").slideDown();
+                }
+
+            });
+
+        }
+
+        $(document).ready(function () {
+            GenerateDiscount();
+        });
+</script>
+<div class="radynForm">
+    
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @string.Format(Resources.Congress.ArticlePaymentType, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+            </div>
+        </div>
+        <div class="table-row-item table-c-fit">
+            <div class="item">
+                @Html.DropDownListFor(x => x.PaymentTypeId, (SelectList)ViewBag.paymentTypes)
+            </div>
+        </div>
+    </div>
+     <div id="DivDiscount">
+        </div>
+</div>

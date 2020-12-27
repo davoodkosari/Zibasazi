@@ -1,0 +1,21 @@
+ DELETE FROM [Security].[OperationMenu] WHERE 
+[OperationId] = '4cc144ec-2d0e-4f06-a000-564f5b5669f1' AND 
+[MenuId] = '7555D9AE-E01F-42D9-847B-404D11949398'
+go
+
+ DELETE FROM [Security].[OperationMenu] WHERE 
+[OperationId] = '4cc144ec-2d0e-4f06-a000-564f5b5669f1' AND 
+[MenuId] = '6E5640B8-4229-43CA-9F2E-849BD2761E32'
+go
+
+ DELETE FROM [Security].[OperationMenu] WHERE 
+[OperationId] = '76179913-7FDA-43F3-A253-BDA1D123475F' AND 
+[MenuId] = '7555D9AE-E01F-42D9-847B-404D11949398'
+go
+
+ DELETE FROM [Security].[OperationMenu] WHERE 
+[OperationId] = '76179913-7FDA-43F3-A253-BDA1D123475F' AND 
+[MenuId] = '6E5640B8-4229-43CA-9F2E-849BD2761E32'
+
+
+go

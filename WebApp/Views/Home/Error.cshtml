@@ -1,0 +1,21 @@
+﻿@using Radyn.Web.Mvc.Utility
+@model Exception
+@{
+    ViewBag.Title =Resources.Congress.Error;
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+@section Head{
+    <script>
+        if (window.location.pathname != undefined && window.location.pathname.toLowerCase() != "/home/error" )
+            window.location = "/home/error";
+    </script>
+}
+<link href="~/App_Themes/MainBase/CSS/RadynCommon.css" rel="stylesheet" />
+<div class="error-box">
+    <img src="~/Content/Images/notfound.png" />
+    <p>
+
+        @{Html.HtmlEncoder(Resources.Common.AddressNotFound);}
+    </p>
+
+</div>

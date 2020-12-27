@@ -1,0 +1,1056 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AbstractSended" xml:space="preserve">
+    <value>إرسال ملخص من قبل المستخدم</value>
+  </data>
+  <data name="AbtractConfirm" xml:space="preserve">
+    <value>تأكيد التلخيص</value>
+  </data>
+  <data name="AfterFinalState" xml:space="preserve">
+    <value>بعد إعلان نتيجة الحكام</value>
+  </data>
+  <data name="AllsingleCertificate" xml:space="preserve">
+    <value>لجميع المستخدمين تصديق واحد</value>
+  </data>
+  <data name="Article" xml:space="preserve">
+    <value>المقالات </value>
+  </data>
+  <data name="ArticleChangeStatusSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) مقالك برمز (2) في (0) قد تم تغييره إلى وضعية (3)</value>
+  </data>
+  <data name="ArticleInsertSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) مقالك برمز (2) في (0) قد تم تسجيله بنجاح</value>
+  </data>
+  <data name="ArticlePaymentSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) تكاليف مقالك (2) في (0) تم دفعها  بنجاح</value>
+  </data>
+  <data name="ArticleUpdateSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) مقالك برمز (2) في (0) تم تحريره بنجاح</value>
+  </data>
+  <data name="BeforSendArticle" xml:space="preserve">
+    <value>قبل إرسال المقال</value>
+  </data>
+  <data name="booth" xml:space="preserve">
+    <value>الجناح</value>
+  </data>
+  <data name="BoothChangeStatusSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجزك للجناح (2) في (0) قد تم تغييره إلى وضعية (3)</value>
+  </data>
+  <data name="BoothInsertSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجزك للجناح (2) في (0) قد تم تسجيله بنجاح</value>
+  </data>
+  <data name="BoothOfficerCard" xml:space="preserve">
+    <value>مسؤول الجناح رمز (0)</value>
+  </data>
+  <data name="BoothOfficerCountismorethantheallowednumber" xml:space="preserve">
+    <value>عدد اصحاب الأجنحة أكبر من العدد المسموح</value>
+  </data>
+  <data name="BoothPaymentSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) تكاليف حجزك للجناح (2) في (0) قد تم دفعها بنجاح</value>
+  </data>
+  <data name="BoothUpdateSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجزك للجناح (2) في (0) تم تحريره بنجاح</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>الإثنان معاً</value>
+  </data>
+  <data name="Capacityisnotenough" xml:space="preserve">
+    <value>العدد غير كاف</value>
+  </data>
+  <data name="ChartArticleByDay" xml:space="preserve">
+    <value>عدد المقالات  وفقاً للأيام</value>
+  </data>
+  <data name="ChartArticleByMoth" xml:space="preserve">
+    <value>عدد المقالات  وفقاً للأشهر</value>
+  </data>
+  <data name="ChartArticleByPivot" xml:space="preserve">
+    <value>عدد المقالات  وفقاً لمحور الموضوع</value>
+  </data>
+  <data name="ChartArticleByStatus" xml:space="preserve">
+    <value>عدد المقالات  وفقاً للحالة</value>
+  </data>
+  <data name="ChartArticleByType" xml:space="preserve">
+    <value>عدد المقالات  وفقاً لنوع المقال</value>
+  </data>
+  <data name="ChartCash" xml:space="preserve">
+    <value>التقرير المالي</value>
+  </data>
+  <data name="ChartCashByDay" xml:space="preserve">
+    <value>التقرير المالي الشهري</value>
+  </data>
+  <data name="ChartCashBymoth" xml:space="preserve">
+    <value>التقرير المالي السنوي</value>
+  </data>
+  <data name="ChartHotelByStatus" xml:space="preserve">
+    <value>عدد أماكن الإقامة وفقاً للحالة</value>
+  </data>
+  <data name="ChartHotelUser" xml:space="preserve">
+    <value>عدد أماكن الإقامة وفقاً للحجز</value>
+  </data>
+  <data name="ChartUserRegisterByDay" xml:space="preserve">
+    <value>عدد التسجيل وفقاً لعدد الأيام</value>
+  </data>
+  <data name="ChartUserRegisterByMoth" xml:space="preserve">
+    <value>عدد التسجيل وفقاً لعدد الأشهر</value>
+  </data>
+  <data name="ChartUserRegisterByRegisterType" xml:space="preserve">
+    <value>عدد التسجيل وفقاً لنوع التسجيل</value>
+  </data>
+  <data name="ChartUserRegisterByStatus" xml:space="preserve">
+    <value>عدد التسجيل وفقاً لحالة التسجيل</value>
+  </data>
+  <data name="ChartViewsNumberByDay" xml:space="preserve">
+    <value>تقرير عدد الزيارات وفقاً لليوم</value>
+  </data>
+  <data name="ChartViewsNumberByMonth" xml:space="preserve">
+    <value>تقرير عدد الزيارات وفقاً للشهر</value>
+  </data>
+  <data name="ChartViewsNumberByYear" xml:space="preserve">
+    <value>تقرير عدد الزيارات وفقاً للسنة</value>
+  </data>
+  <data name="ChartWorkShopByStatus" xml:space="preserve">
+    <value>عدد ورشات العمل وفقاً للحالة</value>
+  </data>
+  <data name="ChartWorkShopUser" xml:space="preserve">
+    <value>عدد ورشات العمل وفقاً للحجز</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>التأكيد النهائي</value>
+  </data>
+  <data name="ConfirmandEdit" xml:space="preserve">
+    <value>تأكيد المقال مع التعديل</value>
+  </data>
+  <data name="ConFirmReferee" xml:space="preserve">
+    <value>تأكيد الحكم</value>
+  </data>
+  <data name="Congresshasnotdonesetting" xml:space="preserve">
+    <value>لم يتم تفعيل محيط المؤتمر</value>
+  </data>
+  <data name="Denial" xml:space="preserve">
+    <value>عدم التأكيد النهائي</value>
+  </data>
+  <data name="DenialAbstarct" xml:space="preserve">
+    <value>رفض المختصر</value>
+  </data>
+  <data name="DenialPay" xml:space="preserve">
+    <value>رفض الدفع</value>
+  </data>
+  <data name="Elementary" xml:space="preserve">
+    <value>إبتدائي</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="ErroInEditPosterOrginalFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير ملف الملصق الجداري الأصلي</value>
+  </data>
+  <data name="ErrorInDelereBooth" xml:space="preserve">
+    <value>هناك خطأ في حذف الجناح</value>
+  </data>
+  <data name="ErrorInDeleteArticleAuthor" xml:space="preserve">
+    <value>هناك خطأ في حذف كاتب المقال</value>
+  </data>
+  <data name="ErrorInDeleteArticleFromRefereecartabl" xml:space="preserve">
+    <value>هناك خطأ في حذف مقال من اللوحة الخاصة بالحكم</value>
+  </data>
+  <data name="ErrorInDeleteArticlePaymentType" xml:space="preserve">
+    <value>هناك خطأ في حذف نوع تناول المقالات </value>
+  </data>
+  <data name="ErrorInDeleteArticlePaymentTypeMultiLanguage" xml:space="preserve">
+    <value>هناك خطأ في حذف تعدد اللغات الخاص بنوع تناول المقالات </value>
+  </data>
+  <data name="ErrorInDeleteArticlePaymentTypeThisUseInArticle" xml:space="preserve">
+    <value>لقد تم استخدام هذا النوع من تناول المقال من قبل ولا يمكن حذفه</value>
+  </data>
+  <data name="ErrorInDeleteArticleType" xml:space="preserve">
+    <value>هناك خطأ في حذف نوع المقال</value>
+  </data>
+  <data name="ErrorInDeleteArticleTypeBecauseThereareArticleWithThisArticleType" xml:space="preserve">
+    <value>لا يمكن حذف هذا النوع من المقال لأنه مستخدم</value>
+  </data>
+  <data name="ErrorInDeleteBoothBecauseThisReserved" xml:space="preserve">
+    <value>لايمكن حذف هذا الجناح لأنه محجوز</value>
+  </data>
+  <data name="ErrorInDeleteBoothCategory" xml:space="preserve">
+    <value>هناك خطأ في حذف نوع الجناح</value>
+  </data>
+  <data name="ErrorInDeleteBoothcategoryBecauseThereAreBoothWithThisType" xml:space="preserve">
+    <value>لايمكن حذف هذا النوع من الجناح لأنه محجوز</value>
+  </data>
+  <data name="ErrorInDeleteCongress" xml:space="preserve">
+    <value>هناك خطأ في حذف المؤتمر</value>
+  </data>
+  <data name="ErrorInDeleteCongressAccount" xml:space="preserve">
+    <value>هناك خطأ في حذف رقم الحساب</value>
+  </data>
+  <data name="ErrorInDeleteCongressContainer" xml:space="preserve">
+    <value>هناك خطأ في حذف الإطار العام للمؤتمر</value>
+  </data>
+  <data name="ErrorInDeleteCongressContent" xml:space="preserve">
+    <value>هناك خطأ في حذف محتوى المؤتمر</value>
+  </data>
+  <data name="ErrorInDeleteCongressDiscountype" xml:space="preserve">
+    <value>هناك خطأ في حذف نوع التخفيض</value>
+  </data>
+  <data name="ErrorInDeleteCongressFAQ" xml:space="preserve">
+    <value>هناك خطأ في حذف التعليمات</value>
+  </data>
+  <data name="ErrorInDeleteCongressFolder" xml:space="preserve">
+    <value>هناك خطأ في حذف المجلد الخاص بملف المؤتمر</value>
+  </data>
+  <data name="ErrorInDeleteCongressGallery" xml:space="preserve">
+    <value>هناك خطأ في حذف معرض الصور</value>
+  </data>
+  <data name="ErrorInDeleteCongressHtml" xml:space="preserve">
+    <value>هناك خطأ في حذف الأتش تي أم أل</value>
+  </data>
+  <data name="ErrorInDeleteCongressMenu" xml:space="preserve">
+    <value>هناك خطأ في حذف قائمة المؤتمر</value>
+  </data>
+  <data name="ErrorInDeleteCongressNews" xml:space="preserve">
+    <value>هناك خطأ في حذف أخبار المؤتمر</value>
+  </data>
+  <data name="ErrorInDeleteCongressOwner" xml:space="preserve">
+    <value>هناك خطأ في حذف مالك المؤتمر</value>
+  </data>
+  <data name="ErrorInDeleteGuest" xml:space="preserve">
+    <value>هناك خطأ في حذف الضيف الخاص</value>
+  </data>
+  <data name="ErrorInDeleteHotel" xml:space="preserve">
+    <value>هناك خطأ في حذف مكان الإقامة</value>
+  </data>
+  <data name="ErrorInDeleteHotelBecauseThisReserved" xml:space="preserve">
+    <value>لا يمكن حذف هذا الفندق لأنه محجوز</value>
+  </data>
+  <data name="ErrorInDeleteLanguage" xml:space="preserve">
+    <value>هناك خطأ في حذف لغة المؤتمر</value>
+  </data>
+  <data name="ErrorInDeletePivot" xml:space="preserve">
+    <value>هناك خطأ في حذف محور المؤتمر</value>
+  </data>
+  <data name="ErrorInDeleteReferee" xml:space="preserve">
+    <value>هناك خطأ في حذف الحكم</value>
+  </data>
+  <data name="ErrorInDeleteRefereeBecauseHisCartablContainArticle" xml:space="preserve">
+    <value>لا يوجد مقال في لوحة عمل هذا الحكم ولا يمكنك حذفه</value>
+  </data>
+  <data name="ErrorInDeleteResume" xml:space="preserve">
+    <value>هناك خطأ في حذف السيرة الذاتية</value>
+  </data>
+  <data name="ErrorInDeleteSpecialGuest" xml:space="preserve">
+    <value>هناك خطأ في حذف الضيف الخاص</value>
+  </data>
+  <data name="ErrorInDeleteSupporter" xml:space="preserve">
+    <value>هناك خطأ في حذف الداعم</value>
+  </data>
+  <data name="ErrorInDeleteSupportType" xml:space="preserve">
+    <value>هناك خطأ في حذف نوع الداعم</value>
+  </data>
+  <data name="ErrorInDeleteSupportTypeBecuaseThereAreSupportWithThisType" xml:space="preserve">
+    <value>لايمكن حذف هذا النوع من الدعم لوجود الداعم</value>
+  </data>
+  <data name="ErrorInDeleteteacher" xml:space="preserve">
+    <value>هناك خطأ في حذف الأستاذ</value>
+  </data>
+  <data name="ErrorInDeleteUser" xml:space="preserve">
+    <value>هناك خطأ في حذف المستخدم</value>
+  </data>
+  <data name="ErrorInDeleteWorkShop" xml:space="preserve">
+    <value>هناك خطأ في حذف ورشة العمل</value>
+  </data>
+  <data name="ErrorInDeleteWorkShopprogramFile" xml:space="preserve">
+    <value>هناك خطأ في حذف ملف برنامج ورشة العمل</value>
+  </data>
+  <data name="ErrorInDeleteWorkShopTeacher" xml:space="preserve">
+    <value>هناك خطأ في حذف أستاذ ورشة العمل</value>
+  </data>
+  <data name="ErrorinEditArticle" xml:space="preserve">
+    <value>هناك خطأ في تحرير المقال</value>
+  </data>
+  <data name="ErrorInEditArticleAbstractFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير ملف تلخص المقال</value>
+  </data>
+  <data name="ErrorInEditArticleAuthor" xml:space="preserve">
+    <value>هناك خطأ في تحرير كتاب المقال</value>
+  </data>
+  <data name="ErrorInEditArticleCongress" xml:space="preserve">
+    <value>هناك خطأ في تحرير المقال</value>
+  </data>
+  <data name="ErrorInEditArticleOrginalFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير الملف الأصلي للمقال</value>
+  </data>
+  <data name="ErrorInEditArticlePaymentType" xml:space="preserve">
+    <value>هناك خطأ في تحرير نوع تناول المقالات </value>
+  </data>
+  <data name="ErrorInEditArticlePaymentTypeMultiLanguage" xml:space="preserve">
+    <value>هناك خطأ في تحرير تعدد اللغات نوع تناول المقالات </value>
+  </data>
+  <data name="ErrorInEditBoothMapFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير ملف خارطة الأجنحة</value>
+  </data>
+  <data name="ErrorInEditBoothReserv" xml:space="preserve">
+    <value>هناك خطأ في تحرير حجز الجناح</value>
+  </data>
+  <data name="ErrorInEditConfigurationBecauseThereErrorInDeleteSupportType" xml:space="preserve">
+    <value>لا يمكن حذف هذا النوع من الدعم لأنه مستخدم في قسم خيارات المؤتمرات</value>
+  </data>
+  <data name="ErrorInEditConfuguration" xml:space="preserve">
+    <value>هناك خطأ في تحرير الإعدادات</value>
+  </data>
+  <data name="ErrorInEditCongress" xml:space="preserve">
+    <value>هناك خطأ في تحرير المؤتمر</value>
+  </data>
+  <data name="ErrorInEditCongressHtml" xml:space="preserve">
+    <value>هناك خطأ في تحرير الأتش تي أم أل</value>
+  </data>
+  <data name="ErrorInEditFooterFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير تذييل الملف</value>
+  </data>
+  <data name="ErrorInEditHallmapFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير ملف خارطة القاعات</value>
+  </data>
+  <data name="ErrorInEditHeaderFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير رأس الملف</value>
+  </data>
+  <data name="ErrorInEditHotelReserv" xml:space="preserve">
+    <value>هناك خطأ في تحرير حجز مكان الإقامة</value>
+  </data>
+  <data name="ErrorInEditLogoFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير ملف الشعار</value>
+  </data>
+  <data name="ErrorInEditMiniPosterFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير ملف الملصق الجداري الصغير</value>
+  </data>
+  <data name="ErrorInEditMultiArticleLanguage" xml:space="preserve">
+    <value>هناك خطأ في تحرير تعدد اللغات</value>
+  </data>
+  <data name="ErrorInEditMultilanguage" xml:space="preserve">
+    <value>هناك خطأ في تحرير تعدد اللغات</value>
+  </data>
+  <data name="ErrorInEditPivot" xml:space="preserve">
+    <value>هناك خطأ في تحرير محور المؤتمر</value>
+  </data>
+  <data name="ErrorInEditReferee" xml:space="preserve">
+    <value>هناك خطأ في تحرير الحكم</value>
+  </data>
+  <data name="ErrorInEditRefereeCartabl" xml:space="preserve">
+    <value>هناك خطأ في تحرير </value>
+  </data>
+  <data name="ErrorInEditReservUserWorkShop" xml:space="preserve">
+    <value>هناك خطأ في تحرير حجز ورشة العمل للمستخدم</value>
+  </data>
+  <data name="ErrorInEditSpecialGuest" xml:space="preserve">
+    <value>هناك خطأ في تحرير الضيف الخاص</value>
+  </data>
+  <data name="ErrorInEditSupporter" xml:space="preserve">
+    <value>هناك خطأ في تحرير الداعمين</value>
+  </data>
+  <data name="ErrorInEditSupporterInConfiguration" xml:space="preserve">
+    <value>هناك خطأ في تحرير إعدادات الداعمين</value>
+  </data>
+  <data name="ErrorInEditSupportType" xml:space="preserve">
+    <value>هناك خطأ في تحرير نوع الداعم</value>
+  </data>
+  <data name="ErrorInEditTeacher" xml:space="preserve">
+    <value>هناك خطأ في تحرير الإستاذ</value>
+  </data>
+  <data name="ErrorInEditUser" xml:space="preserve">
+    <value>هناك خطأ في تحرير المستخدم</value>
+  </data>
+  <data name="ErrorInEditWorkShop" xml:space="preserve">
+    <value>هناك خطأ في تحرير لوحة عمل الحكم</value>
+  </data>
+  <data name="ErrorInEditWorkShopAttachFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير الملف الملحق لورشة العمل</value>
+  </data>
+  <data name="ErrorInEditWorkShopProgramFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير برنامج ورشة العمل</value>
+  </data>
+  <data name="ErrorInInsertFAQ" xml:space="preserve">
+    <value>هناك خطأ في حفظ التعليمات</value>
+  </data>
+  <data name="ErrorInPayArticleAmount" xml:space="preserve">
+    <value>هناك خطأ في دفع تكاليف المقال</value>
+  </data>
+  <data name="ErrorInReservBooth" xml:space="preserve">
+    <value>هناك خطأ في حفظ حجز الجناح</value>
+  </data>
+  <data name="ErrorInReservWorkShop" xml:space="preserve">
+    <value>هناك خطأ في تسجيل حجز ورشة العمل</value>
+  </data>
+  <data name="ErrorInSaveArticle" xml:space="preserve">
+    <value>هناك خطأ في حفظ المقال</value>
+  </data>
+  <data name="ErrorInSaveArticleAbstractFile" xml:space="preserve">
+    <value>هناك خطأ في حفظ ملف التلخيص</value>
+  </data>
+  <data name="ErrorInSaveArticleAuthor" xml:space="preserve">
+    <value>هناك خطأ في حفظ كتاب المقال</value>
+  </data>
+  <data name="ErrorInSaveArticleFlow" xml:space="preserve">
+    <value>هناك خطأ في حفظ التدفق</value>
+  </data>
+  <data name="ErrorInSaveArticleOrginalFile" xml:space="preserve">
+    <value>هناك خطأ في حفظ الملف الأصلي</value>
+  </data>
+  <data name="ErrorInSaveArticlePaymentType" xml:space="preserve">
+    <value>هناك خطأ في حفظ نوع تناول المقالات </value>
+  </data>
+  <data name="ErrorInSaveArticlePaymentTypeMultiLanguage" xml:space="preserve">
+    <value>هناك خطأ في حفظ تعدد اللغات الخاص بنوع تناول المقالات </value>
+  </data>
+  <data name="ErrorInSaveBoothOfficer" xml:space="preserve">
+    <value>هناك خطأ في حفظ مسؤول الجناح</value>
+  </data>
+  <data name="ErrorInSaveBoothReserv" xml:space="preserve">
+    <value>هناك خطأ في حفظ حجز الجناح</value>
+  </data>
+  <data name="ErrorInSaveChipFood" xml:space="preserve">
+    <value>هناك خطأ في حفظ كوبون الطعام</value>
+  </data>
+  <data name="ErrorInSaveConfiguartion" xml:space="preserve">
+    <value>هناك خطأ في حفظ الاعدادات</value>
+  </data>
+  <data name="ErrorInSaveCongress" xml:space="preserve">
+    <value>هناك خطأ في حفظ المؤتمر</value>
+  </data>
+  <data name="ErrorInSaveCongressAccount" xml:space="preserve">
+    <value>هناك خطأ في حفظ رقم الحساب</value>
+  </data>
+  <data name="ErrorInSaveCongressContainer" xml:space="preserve">
+    <value>هناك خطأ في حفظ الإطار العام للمؤتمر</value>
+  </data>
+  <data name="ErrorInSaveCongressContent" xml:space="preserve">
+    <value>هناك خطأ في حفظ محتوى المؤتمر</value>
+  </data>
+  <data name="ErrorInSaveCongressDiscountype" xml:space="preserve">
+    <value>هناك خطأ في حفظ نوع التخفيض</value>
+  </data>
+  <data name="ErrorInSaveCongressFolder" xml:space="preserve">
+    <value>هناك خطأ في حفظ مجلد ملف المؤتمر</value>
+  </data>
+  <data name="ErrorInSaveCongressGallery" xml:space="preserve">
+    <value>هناك خطأ في حفظ معرض الصور</value>
+  </data>
+  <data name="ErrorInSaveCongressHtml" xml:space="preserve">
+    <value>هناك خطأ في حفظ الأتش تي أم أل</value>
+  </data>
+  <data name="ErrorInSaveCongressLanguage" xml:space="preserve">
+    <value>هناك خطأ في حفظ لغة المؤتمر</value>
+  </data>
+  <data name="ErrorInSaveCongressMenu" xml:space="preserve">
+    <value>هناك خطأ في حفظ قائمة المؤتمر</value>
+  </data>
+  <data name="ErrorInSaveCongressNews" xml:space="preserve">
+    <value>هناك خطأ في حفظ أخبار المؤتمر</value>
+  </data>
+  <data name="ErrorInSaveFile" xml:space="preserve">
+    <value>هناك خطأ في حفظ الملف</value>
+  </data>
+  <data name="ErrorInSaveFooterFile" xml:space="preserve">
+    <value>هناك خطأ في حفظ تذييل الملف </value>
+  </data>
+  <data name="ErrorInSaveGuest" xml:space="preserve">
+    <value>هناك خطأ في حفظ الضيف الخاص</value>
+  </data>
+  <data name="ErrorInSaveHotel" xml:space="preserve">
+    <value>هناك خطأ في حفظ الفندق</value>
+  </data>
+  <data name="ErrorInSaveHotelReserv" xml:space="preserve">
+    <value>هناك خطأ في حفظ مكان إقامة المستخدم</value>
+  </data>
+  <data name="ErrorInSaveMultiArticleLanguage" xml:space="preserve">
+    <value>هناك خطأ في حفظ تعدد اللغات</value>
+  </data>
+  <data name="ErrorInSavePivot" xml:space="preserve">
+    <value>هناك خطأ في حفظ محور المؤتمر</value>
+  </data>
+  <data name="ErrorInSaveReferee" xml:space="preserve">
+    <value>هناك خطأ في حفظ الحكم</value>
+  </data>
+  <data name="ErrorInSaveResume" xml:space="preserve">
+    <value>هناك خطأ في حفظ السيرة الذاتية</value>
+  </data>
+  <data name="ErrorInSaveSpecialGuest" xml:space="preserve">
+    <value>هناك خطأ في حفظ الضيف الخاص</value>
+  </data>
+  <data name="ErrorInSaveSupporter" xml:space="preserve">
+    <value>هناك خطأ في حفظ الداعم</value>
+  </data>
+  <data name="ErrorInSaveSupporterPartialInConfiguration" xml:space="preserve">
+    <value>هناك خطأ في حفظ قسم من الإعدادات</value>
+  </data>
+  <data name="ErrorInSaveSupportType" xml:space="preserve">
+    <value>هناك خطأ في حفظ نوع الداعم</value>
+  </data>
+  <data name="ErrorInSaveTeacher" xml:space="preserve">
+    <value>هناك خطأ في حفظ الأستاذ</value>
+  </data>
+  <data name="ErrorInSaveUser" xml:space="preserve">
+    <value>هناك خطأ في حفظ المستخدم</value>
+  </data>
+  <data name="ErrorInSaveWorkShop" xml:space="preserve">
+    <value>هناك خطأ في حفظ ورشة العمل</value>
+  </data>
+  <data name="ErrorInSaveWorkShopTeacher" xml:space="preserve">
+    <value>هناك خطأ في حفظ استاذ ورشة العمل</value>
+  </data>
+  <data name="ErrorInSendArticle" xml:space="preserve">
+    <value>هناك خطأ في إرسال المقال</value>
+  </data>
+  <data name="ErrorInUpdateChipFood" xml:space="preserve">
+    <value>هناك خطأ في تحرير كوبون الطعام</value>
+  </data>
+  <data name="ErrorInUpdateFile" xml:space="preserve">
+    <value>هناك خطأ في تحرير الملف</value>
+  </data>
+  <data name="ErrorInWorkDailyScheduler" xml:space="preserve">
+    <value>هناك خطأ في تنفيذ العمليات اليومية</value>
+  </data>
+  <data name="Finalconfirm" xml:space="preserve">
+    <value>التأكيد النهائي</value>
+  </data>
+  <data name="FirstMiddleSchool" xml:space="preserve">
+    <value>المرحلة الأولى من المتوسطة</value>
+  </data>
+  <data name="ForeachCertificate" xml:space="preserve">
+    <value>لكل واحد من المستخدمين تصديق على حدة</value>
+  </data>
+  <data name="FreeUser" xml:space="preserve">
+    <value>مشارك حر</value>
+  </data>
+  <data name="Guest" xml:space="preserve">
+    <value>الضيف</value>
+  </data>
+  <data name="GuestChangeStatusSMS" xml:space="preserve">
+    <value>الضيف الكريم (1) حجزك للجناح (2) في (0) تم تغييره إلى وضعية (3)</value>
+  </data>
+  <data name="GuestInsertSMS" xml:space="preserve">
+    <value>المستخدم (1) حجزك لجناح (2) في (0) تم بنجاح</value>
+  </data>
+  <data name="GuestPaymentSMS" xml:space="preserve">
+    <value>الضيف الكريم (1) تكاليف حجزك للجناح (2) في (0) تم دفعها بنجاح</value>
+  </data>
+  <data name="GuestUpdateSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجزك للجناح (2) في (0) تم تحريره بنجاح</value>
+  </data>
+  <data name="HasChair" xml:space="preserve">
+    <value>يوجد مقعد</value>
+  </data>
+  <data name="Hotel" xml:space="preserve">
+    <value>الفندق يا (مكان الإقامة)</value>
+  </data>
+  <data name="HotelCapacityLessThanNumberOfSelectedUser" xml:space="preserve">
+    <value>حجم استيعاب الفندق أقل من عدد المستخدمين</value>
+  </data>
+  <data name="HotelChangeStatusSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجز إقامتك (2) في (0) قد تم تغييره إلى وضعية (3)</value>
+  </data>
+  <data name="HotelInsertSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجزك إقامتك (2) في (0) قد تم بنجاح</value>
+  </data>
+  <data name="HotelPaymentSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) تكاليف حجزك للفندق (2) في (0) قد تم دفعها بنجاح</value>
+  </data>
+  <data name="HotelUpdateSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجز إقامتك (2) في (0) تم تحريره بنجاح</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>الصورة</value>
+  </data>
+  <data name="ImageAndTitle" xml:space="preserve">
+    <value>الأسم والصورة</value>
+  </data>
+  <data name="IsDirector" xml:space="preserve">
+    <value>المسؤول</value>
+  </data>
+  <data name="Maximumallowed" xml:space="preserve">
+    <value>العدد المسموح</value>
+  </data>
+  <data name="Mr" xml:space="preserve">
+    <value>السيد</value>
+  </data>
+  <data name="Mrs" xml:space="preserve">
+    <value>السيدة</value>
+  </data>
+  <data name="Nopaymenthasbeenselectedfortheconference" xml:space="preserve">
+    <value>لم يتم اختيار أي نوع من الدفع لهذا المؤتمر</value>
+  </data>
+  <data name="NotFoundRefereeForSendArticle" xml:space="preserve">
+    <value>التحكيم لم يتم إعداده للإرسال الآلي</value>
+  </data>
+  <data name="NotHasChair" xml:space="preserve">
+    <value>لايوجد مقعد</value>
+  </data>
+  <data name="OnlyTitle" xml:space="preserve">
+    <value>العنوان فقط</value>
+  </data>
+  <data name="OrginalSended" xml:space="preserve">
+    <value>إرسال أصل المقال من قبل المستخدم</value>
+  </data>
+  <data name="PasswordRecovery" xml:space="preserve">
+    <value>استعادة كلمة المرور</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>دفع</value>
+  </data>
+  <data name="PayConfirm" xml:space="preserve">
+    <value>تأكيد الدفع</value>
+  </data>
+  <data name="PaymentArticlePayment" xml:space="preserve">
+    <value>دفع تكاليف تسجيل المقال</value>
+  </data>
+  <data name="PaymentBoothReserv" xml:space="preserve">
+    <value>دفع تكاليف حجز الجناح</value>
+  </data>
+  <data name="PaymentHotelReserv" xml:space="preserve">
+    <value>دفع تكاليف حجز الفندق</value>
+  </data>
+  <data name="PaymentUserRegister" xml:space="preserve">
+    <value>دفع تكاليف التسجيل</value>
+  </data>
+  <data name="PaymentWorkShopReserv" xml:space="preserve">
+    <value>دفع تكاليف حجز ورشة العمل</value>
+  </data>
+  <data name="PayWait" xml:space="preserve">
+    <value>في إنتظار الدفع</value>
+  </data>
+  <data name="Pleaseenteraminimumorauthorforthe article" xml:space="preserve">
+    <value>الرجاء أدخل اسم كاتب واحد للمقال على الأقل</value>
+  </data>
+  <data name="PleaseEnterChipFoodDays" xml:space="preserve">
+    <value>الرجاء اختيار أيام كوبون الطعام</value>
+  </data>
+  <data name="PleaseEnterYourEmail" xml:space="preserve">
+    <value>الرجاء إدخال البريد الإلكتروني</value>
+  </data>
+  <data name="Please_Enter_YourGender" xml:space="preserve">
+    <value>الرجاء إداخل الهوية الجنسية</value>
+  </data>
+  <data name="Please_Enter_YourLastName" xml:space="preserve">
+    <value>الرجاء إدخال اسم العائلة</value>
+  </data>
+  <data name="Please_Enter_YourMobile" xml:space="preserve">
+    <value>الرجاء إدخال رقم الجوال</value>
+  </data>
+  <data name="Please_Enter_YourName" xml:space="preserve">
+    <value>الرجاء إدخال الإسم</value>
+  </data>
+  <data name="PresentConfirm" xml:space="preserve">
+    <value>تأكيد المشاركة في ورشة العمل</value>
+  </data>
+  <data name="PresentDenial" xml:space="preserve">
+    <value>رفض المشاركة في ورشة العمل</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
+  <data name="PrintArticlesAbstract" xml:space="preserve">
+    <value>طباعة ملخص المقالات </value>
+  </data>
+  <data name="RefereeEmailIsRepeat" xml:space="preserve">
+    <value>التحكيم تم تسجيله مسبقاً عبر البريد الإلكتروني</value>
+  </data>
+  <data name="RefereeInformArticleSMS" xml:space="preserve">
+    <value>الحكم المحترم (1) سوف يتم إرسال المقال (2) إلى (0) بغرض التحكيم إلى لوحة العمل الخاصة بك</value>
+  </data>
+  <data name="RefereeInsertEmail" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="RefereeUserNameIsRepeat" xml:space="preserve">
+    <value>التحكيم تم تسجيله مسبقاً باسم المتخدم هذا</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>التسجيل</value>
+  </data>
+  <data name="RegisterRequest" xml:space="preserve">
+    <value>تأكيد الطلب</value>
+  </data>
+  <data name="RegistertypeCapacityislessthanthenumberofusersisselected" xml:space="preserve">
+    <value>إختيار عدد نوع التسجيل أقل من عدد المستخدمين</value>
+  </data>
+  <data name="RptAbstractArticle" xml:space="preserve">
+    <value>تقرير خلاصة المقالات </value>
+  </data>
+  <data name="RptArticle" xml:space="preserve">
+    <value>تقرير المقالات </value>
+  </data>
+  <data name="RptArticleCertificate" xml:space="preserve">
+    <value>تقرير تصديق المقالات </value>
+  </data>
+  <data name="RptBoothOfficer" xml:space="preserve">
+    <value>تقرير المسؤولين على الأجنحة</value>
+  </data>
+  <data name="RptChipFood" xml:space="preserve">
+    <value>تقرير كوبون الطعام</value>
+  </data>
+  <data name="RptCongressCertificate" xml:space="preserve">
+    <value>تقرير تصديق المشاركة في المؤتمر</value>
+  </data>
+  <data name="RptHotelUser" xml:space="preserve">
+    <value>تقرير حجز مكان الإقامة</value>
+  </data>
+  <data name="RptMiniUserCard" xml:space="preserve">
+    <value>تقرير البطاقة المرافقة</value>
+  </data>
+  <data name="RptUser" xml:space="preserve">
+    <value>تقرير المستخدمين</value>
+  </data>
+  <data name="RptUserBooth" xml:space="preserve">
+    <value>تقرير حجز الجناح</value>
+  </data>
+  <data name="RptUserCard" xml:space="preserve">
+    <value>بطاقة المشارك</value>
+  </data>
+  <data name="RptWorkShopUser" xml:space="preserve">
+    <value>تقرير حجز ورشة العمل</value>
+  </data>
+  <data name="SeconedMiddleSchool" xml:space="preserve">
+    <value>المرحلة الثانية من المتوسطة</value>
+  </data>
+  <data name="SendForAllMan" xml:space="preserve">
+    <value>الإرسال إلى السادة فقط</value>
+  </data>
+  <data name="SendForAllUser" xml:space="preserve">
+    <value>الإرسال إلى كافة الأعضاء</value>
+  </data>
+  <data name="SendForAllUserHaveReserveChair" xml:space="preserve">
+    <value>إرسال رسالة إلى الأشخاص الذين حجزوا المقعد</value>
+  </data>
+  <data name="SendForAllUserHaveSaledChair" xml:space="preserve">
+    <value>إرسال رسالة إلى الأشخاص الذين سيتم بيع مقعدهم</value>
+  </data>
+  <data name="SendForAllUserInPreRegisterStatus" xml:space="preserve">
+    <value>الإرسال إلى المستخدمين ممن هم في بداية التسجيل</value>
+  </data>
+  <data name="SendForAllUserPayConfirmAndNotHaveChair" xml:space="preserve">
+    <value>إرسال رسالة إلى المستخدمين الذي تمت الموافقة على دفعهم للتكاليف لكنهم لم يحجزوا مقعدا</value>
+  </data>
+  <data name="SendForAllWomen" xml:space="preserve">
+    <value>الإرسال إلى السيدات فقط</value>
+  </data>
+  <data name="SendForRefrereeHasWaitForAnswerArticle" xml:space="preserve">
+    <value>الإرسال إلى الحكام الذين لم يبتوا بمقال في لوحتهم الخاصة</value>
+  </data>
+  <data name="SendForRefrereeNotHasWaitForAnswerArticle" xml:space="preserve">
+    <value>الإرسال إلى الحكام الذين لم يبتوا بجميع المقالات  في لوحتهم الخاصة</value>
+  </data>
+  <data name="SendForUserAbstarctConfirm" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين تمت الموافقة على خلاصة مقالهم</value>
+  </data>
+  <data name="SendForUserAbstarctConfirmAndNotSendOrginal" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين تمت الموافقة على خلاصة مقالهم ولم يرسلوا أصل المقال</value>
+  </data>
+  <data name="SendForUserArticleDenial" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين لم تتم الموافقة على مقالهم</value>
+  </data>
+  <data name="SendForUserOrginalConfirm" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين تم إقرار أصل مقالتهم</value>
+  </data>
+  <data name="SendForUserWhoConfirmInHoma" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين تمت الموافقة على مشاركتهم في المؤتمر</value>
+  </data>
+  <data name="SendForUserWhoDenialInHoma" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين لم تتم الموافقة على مشاركتهم في المؤتمر</value>
+  </data>
+  <data name="SendForUserWhoRegisterAndnotPay" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين لم يدفعو تكاليف التسجيل</value>
+  </data>
+  <data name="SendForUserWhoRegisterPayConfirm" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين تمت الموافقة على دفعهم لتكاليف التسجيل</value>
+  </data>
+  <data name="SendForUserWhoRegisterPayDenial" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين لم تتم الموافقة على دفعهم لتكاليف التسجيل</value>
+  </data>
+  <data name="SendForUserWhoReservedHotelButNotPay" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين حجزوا مكان الإقامة لكنهم لم يدفعوا تكاليفها</value>
+  </data>
+  <data name="SendForUserWhoReservedHotelConfirm" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين تمت الموافقة على حجزهم لمكان الإقامة</value>
+  </data>
+  <data name="SendForUserWhoReservedHotelDenial" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين لم تتم الموافقة على حجزهم لمكان الإقامة</value>
+  </data>
+  <data name="SendForUserWhoReservedWorkShopButNotPay" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين حجزوا ورشة العمل ولم يدفعوا التكاليف</value>
+  </data>
+  <data name="SendForUserWhoReservedWorkShopConfirm" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين تمت الموافقة على حجزهم لورشة العمل</value>
+  </data>
+  <data name="SendForUserWhoReservedWorkShopDenial" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين لم تتم الموافقة على حجزهم لورشة العمل</value>
+  </data>
+  <data name="SentForUserSendAbstractArticle" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين ارسلوا خلاصة مقالهم</value>
+  </data>
+  <data name="SentForUserSendOrginalArticle" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين ارسلوا أصل المقال</value>
+  </data>
+  <data name="SentInformByPivot" xml:space="preserve">
+    <value>الإرسال إلى الأعضاء الذين محور مقالهم هو {0}</value>
+  </data>
+  <data name="SentToSpecialReferee" xml:space="preserve">
+    <value>الإرسال إلى السكرتير الخاص</value>
+  </data>
+  <data name="SMS" xml:space="preserve">
+    <value>رسالة قصيرة</value>
+  </data>
+  <data name="ThereIsCongressThisUrl" xml:space="preserve">
+    <value>المؤتمر على العنوان التالي:</value>
+  </data>
+  <data name="ThisArticleNotHaveDirectorAuthor" xml:space="preserve">
+    <value>الرجاء إدخال الكاتب المسؤول</value>
+  </data>
+  <data name="ThisReserveHastTranscactionYouCannotDeleteIt" xml:space="preserve">
+    <value>لايمكنك حذف هذا الحجز والمعاملة المالية المسجلة</value>
+  </data>
+  <data name="ThisTransactionIsEndPleaseStartNewPayment" xml:space="preserve">
+    <value>لقد تم الإنتهاء من دفع هذه المعاملة يرجى تسجيل معاملة جديدة</value>
+  </data>
+  <data name="UnValid_Enter_Email" xml:space="preserve">
+    <value>البريد الإلكتروني المدخل غير صحيح</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>المستخدمون</value>
+  </data>
+  <data name="UserCard" xml:space="preserve">
+    <value>بطاقة المشاركة في المؤتمر</value>
+  </data>
+  <data name="UserChangeStatusSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) تسجيلك في (0) قد تم تغييره إلى وضعية (2)</value>
+  </data>
+  <data name="UserInsertSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) مقالك برمز (2) في (0) تم تحرير بنجاح</value>
+  </data>
+  <data name="UserNameIsRepeate" xml:space="preserve">
+    <value>لقد تم تسجيل هذا المستخدم من قبل</value>
+  </data>
+  <data name="UserNameNotRegisterInCongress" xml:space="preserve">
+    <value>بريدك الإلكتروني غير مسجل في النظام</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>لم يتم العثور على مستخدم بهذه المشخصات</value>
+  </data>
+  <data name="UserPaymentSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) تكاليف تسجيلك في (0) قد تم بنجاح</value>
+  </data>
+  <data name="UserPreRegisterStatus" xml:space="preserve">
+    <value>حالة ما قبل التسجيل</value>
+  </data>
+  <data name="UserRegisterConfirmPresentInHomaStatus" xml:space="preserve">
+    <value>تأكيد المشاركة في المؤتمر</value>
+  </data>
+  <data name="UserRegisterDenialPresentInHomaStatus" xml:space="preserve">
+    <value>رفض المشاركة في المؤتمر</value>
+  </data>
+  <data name="UserRegisterPayConfirmStatus" xml:space="preserve">
+    <value>تأكيد الدفع</value>
+  </data>
+  <data name="UserRegisterPayDenialStatus" xml:space="preserve">
+    <value>الدفع غير مقبول</value>
+  </data>
+  <data name="UserRegisterPayStatus" xml:space="preserve">
+    <value>دفع</value>
+  </data>
+  <data name="UserRegisterStatus" xml:space="preserve">
+    <value>التسجيل</value>
+  </data>
+  <data name="UsersNotFound" xml:space="preserve">
+    <value>لم يتم اختيار مستخدم من أجل الحجز</value>
+  </data>
+  <data name="UserUpdateSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) معلومات تسجيلك في (0) تم تسجيلها بنجاح</value>
+  </data>
+  <data name="WaitForAnswer" xml:space="preserve">
+    <value>في إنتظار الرد</value>
+  </data>
+  <data name="WaitForRefereeOpinion" xml:space="preserve">
+    <value>بإنتظار رأي الحكم</value>
+  </data>
+  <data name="WaitForScientificTeacher" xml:space="preserve">
+    <value>بإنتظار تأكيد المحرر العلمي</value>
+  </data>
+  <data name="WaitforSpecialRefereeOpinion" xml:space="preserve">
+    <value>بإنظار رأي المحرر المختص</value>
+  </data>
+  <data name="Workshop" xml:space="preserve">
+    <value>ورشة عمل</value>
+  </data>
+  <data name="WorkShopCapacityLessThanNumberOfSelectedUser" xml:space="preserve">
+    <value>اختيار عدد ورشة العمل أقل من عدد المستخدمين</value>
+  </data>
+  <data name="WorkShopChangeStatusSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجزك لورشة العمل (2) في (0) قد تم تغييره إلى وضعية (3)</value>
+  </data>
+  <data name="WorkShopInsertSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجزك لورشة العمل (2) في (0) قد تم تسجيله بنجاح</value>
+  </data>
+  <data name="WorkShopPaymentSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) تكاليف حجزك ورشة العمل (2) في (0) قد تم دفعها بنجاح</value>
+  </data>
+  <data name="WorkShopUpdateSMS" xml:space="preserve">
+    <value>المستخدم الكريم (1) حجزك لورشة العمل (2) في (0) قد تم تحريره بنجاح</value>
+  </data>
+  <data name="YouCanNotAddNewCongress" xml:space="preserve">
+    <value>طلبت إقامة مؤتمرات أكثر من الحد المسموح</value>
+  </data>
+  <data name="YouhavealreadyregisteredCongress" xml:space="preserve">
+    <value>لقد قمت بالتسجيل في هذا المؤتمر من قبل</value>
+  </data>
+  <data name="YouReservedThisBooth" xml:space="preserve">
+    <value>لقد قمت بحجز هذا الجناح من قبل</value>
+  </data>
+  <data name="RegisterInNewsLetter" xml:space="preserve">
+    <value>تسجيل في النشرة الإخبارية</value>
+  </data>
+  <data name="CongressArchiveNews" xml:space="preserve">
+    <value>المؤتمر أرشيف الأخبار</value>
+  </data>
+  <data name="CongressNews" xml:space="preserve">
+    <value>الاخبار</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>استمر...</value>
+  </data>
+  <data name="DeleteFromNewsLetter" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم الاول</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>عدد</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمه السر</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>اعد كلمة السر</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
+  <data name="CongressCode" xml:space="preserve">
+    <value>كود مؤتمر</value>
+  </data>
+  <data name="ListOfAticlesThat" xml:space="preserve">
+    <value>المقالات فی</value>
+  </data>
+</root>

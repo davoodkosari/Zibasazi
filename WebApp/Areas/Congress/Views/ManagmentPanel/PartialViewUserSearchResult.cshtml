@@ -1,0 +1,53 @@
+﻿@using Radyn.Web.Mvc
+
+@model IEnumerable<Radyn.EnterpriseNode.DataStructure.EnterpriseNode>
+    <script type="text/javascript">
+        function SelectAll() {
+            if ($("#CheckSelectAll").prop("checked") == true) {
+                $("[id^='CheckSelect']").each(function () {
+                    $(this).attr("checked", true);
+                    if(this.id !== "CheckSelectAll")
+                        $(this).click();
+                });
+            } else {
+                $("[id^='CheckSelect']").each(function () {
+                    $(this).attr("checked", false);
+                });
+            }
+        }
+
+        function GetSelectall() {
+            var value = document.getElementById("CheckAll").value;
+            if (value == "True") {
+                $("#CheckSelectAll").attr("checked", true);
+            } else {
+                $("#CheckSelectAll").attr("checked", false);
+            }
+            SelectAll();
+        }
+
+        $(document).ready(function () {
+            GetSelectall();
+        });
+
+    </script>
+    <div style="margin-top: 10px;">
+        <input type="hidden" value="@ViewBag.CheckAll" name="CheckAll" onclick="GetSelectall()" id="CheckAll" />
+        <div class="fit">
+            @{
+                Html.Radyn().Grid(Model).Name("Grid").HtmlAttributes(new { style = "width:100%;margin: 0 auto" }).Columns(columns =>
+                {
+                    columns.Template(user => "<input type='checkbox' class='checkboxGroups'  alt='" + Resources.Common.Select + "' style='cursor: pointer' value='" + user.Id + "'  id='CheckSelect-" + user.Id +"'  name='CheckSelect-" + user.Id + "' onclick='SelectUser(\"" + user.Id + "\",\"" + user.Email + "\",\"" + user.Cellphone + "\",\"" + user.RealEnterpriseNode.FirstName + "\",\"" + user.RealEnterpriseNode.LastName + "\")' />").Title("<input type='checkbox' class='checkboxGroups'  onclick='SelectAll();' style='cursor: pointer'   id='CheckSelectAll' name='CheckSelectAll' />").Width(60).HeaderHtmlAttributes(new { style = "text-align:center;height:30px" }).Sorting(false).Encode(false);
+                    columns.Template(user => user.Email).Title(Resources.Congress.Email).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(user => user.Cellphone).Title(Resources.EnterPriseNode.Cellphone).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(user => user.RealEnterpriseNode.FirstName).Title(Resources.EnterPriseNode.FirstName).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Template(user => user.RealEnterpriseNode.LastName).Title(Resources.EnterPriseNode.LastName).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                })
+                  //
+                  .Sortable(sorting => sorting.Enabled(true))
+                  .Pageable(paging => paging.Enabled(true))
+                  .Filterable(filtering => filtering.Enabled(true))
+                  //              .Footer(true)
+                  .Render();}
+        </div>
+    </div>

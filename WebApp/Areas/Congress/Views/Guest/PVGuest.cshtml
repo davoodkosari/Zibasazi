@@ -1,0 +1,76 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+
+@model IEnumerable<Radyn.Congress.DataStructure.User>
+    <script type="text/javascript">
+        function LookUpForm(id, state) {
+            if (id != "") {
+                switch (state) {
+                    case "Edit":
+                        window.open("@Url.Content("~/Congress/User/Edit?Id=")" + id);
+                        break;
+                    case "Details":
+                        window.open("@Url.Content("~/Congress/User/Details?Id=")" + id);
+                        break;
+
+                }
+
+            }
+
+        }
+
+    </script>
+    <div class="grid-guid">
+        <div class="grid-guid-title">
+            @Resources.Common.Help
+        </div>
+        <ul>
+            <li>
+                <img src="/Content/Images/details.png">
+                @Resources.Common.Detail
+            </li>
+            <li>
+                <img src="/Content/Images/Delete-Close.png">
+                @Resources.Common.Delete
+            </li>
+            <li>
+                <img src="/Content/Images/edit.png">
+                @Resources.Common.Edit
+            </li>
+        </ul>
+    </div>
+    <div class="fit">
+        @if (Model.Any())
+        {
+            Html.Radyn().Grid(Model).DataKeys(x => x.Add(y => y.Id)).Name("Grid").HtmlAttributes(new { style = "width:98%;margin: 0 auto" }).Columns(columns =>
+            {
+                columns.Template(user => user.Username).Title(Resources.Security.UserUsername).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(user => string.IsNullOrEmpty(user.EnterpriseNode.RealEnterpriseNode.FirstName.Trim()) ? Resources.Congress.Guest : user.EnterpriseNode.RealEnterpriseNode.FirstName).Title(Resources.EnterPriseNode.FirstName).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(user => string.IsNullOrEmpty(user.EnterpriseNode.RealEnterpriseNode.LastName.Trim()) ? Resources.Congress.Guest : user.EnterpriseNode.RealEnterpriseNode.LastName).Title(Resources.EnterPriseNode.LastName).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(user => user.RegisterDate).Title(Resources.Congress.RegisterDate).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                columns.Template(user =>
+                "<a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "','Details')\"  >" +
+                " <img width='18' align='absmiddle' title='" + Resources.Common.Detail + "' src='" + Url.Content("~/Content/Images/details.png") + "' />" + "</a> | " +
+                "<a style='cursor: pointer;'  onclick=\"DeleteUser('" + user.Id + "')\" >" +
+                " <img width='18' align='absmiddle' title='" + Resources.Common.Delete + "' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "' />" + "</a> | " +
+                "<a style='cursor: pointer;'  onclick=\"LookUpForm('" + user.Id + "','Edit')\" > " +
+                " <img width='18' align='absmiddle' title='" + Resources.Common.Edit + "' src='" + Url.Content("~/Content/Images/edit.png") + "' />" + "</a> ").Width(100).Encode(false);
+            })
+                            
+              
+                .Sortable(sorting => sorting.Enabled(true))
+                .Pageable(paging => paging.Enabled(true))
+                .Filterable(filtering => filtering.Enabled(true))
+                                .Footer(false)
+                .Render();
+
+
+        }
+        @*@if (Model.Any())
+        {
+            @(Resources.Common.Count + ":" + (Model != null ? Model.Count() : 0))
+
+        }*@
+    </div>
+

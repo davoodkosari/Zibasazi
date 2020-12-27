@@ -1,0 +1,89 @@
+﻿@using Radyn.Utility
+@model Radyn.Congress.DataStructure.Booth
+@Html.ValidationSummary(true)
+<div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.BoothCategory
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+            @Html.DisplayFor(model => model.BoothCatgory.Title)
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Code
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Html.DisplayFor(model => model.Code)
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Cost
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Model.ValidCost.ToDecimal().ToString("n0") @(Model.CurrencyType.ToEnum<Radyn.Common.Definition.Enums.CurrencyType>().GetDescriptionInLocalization())
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.ReservCapacity
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Html.DisplayFor(model => model.ReservCapacity)
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.FreeCapicity
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Html.DisplayFor(model => model.FreeCapicity)
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Location
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Html.DisplayFor(model => model.Location)
+            </div>
+        </div>
+    </div>
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.MaxBoothOfficerCount
+            </div>
+        </div>
+        <div class="table-row-item readonly">
+            <div class="item">
+                @Html.DisplayFor(model => model.MaxBoothOfficerCount)
+            </div>
+        </div>
+    </div>
+</div>

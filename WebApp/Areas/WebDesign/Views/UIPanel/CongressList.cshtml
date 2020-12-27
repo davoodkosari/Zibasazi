@@ -1,0 +1,96 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.News.Tools
+@using Radyn.FileManager
+@using Radyn.Utility
+@using Radyn.WebApp.AppCode.Security
+@model IEnumerable<Radyn.Congress.DataStructure.Homa>
+
+
+
+    @{
+        ViewBag.Title = ViewBag.ModelTitle;
+        Layout = "~/Views/Shared/WebDesignUser_Layout.cshtml";
+    }
+    @section Head{
+
+    }
+    <div class="container-hd widget">
+        <div class="container-header widget-title">
+            <div class="container-header-item">
+
+            </div>
+        </div>
+        <div class="container-box widget-content ">
+            <div class="news-list">
+                @foreach (var homa in Model)
+                {
+                    if (string.IsNullOrWhiteSpace(homa.CongressTitle))
+                    {
+                        continue;
+                    }
+
+                    <div class="news-box element-filter">
+                        <div style="position: relative">
+
+
+                            <a class="n-img" href="@Url.Content("/Congress/UIPanel/Index?hid=" + homa.Id)" target="_blank">
+                                @{
+                                    var miniPosterId = homa.Configuration.GetConfigurationContent().MiniPosterId;
+                                    if (miniPosterId != null)
+                                    {
+                                        <img src="@(FileManagerContants.FileHandlerRoot + miniPosterId)">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/Images/img-news.jpg" />
+                                    }
+                                }
+                            </a>
+                            <div class="news-box-content">
+                                <a class="n-title" href="@Url.Content("/Congress/UIPanel/Index?hid=" + homa.Id)">
+                                    @homa.CongressTitle.Trancate(72)
+
+                                </a>
+
+                                <div class="n-lead filter-text">
+                                    @homa.Description.Trancate(75)
+                                    <a href="@Url.Content("/Congress/UIPanel/Index?hid=" + homa.Id)">@Resources.Congress.Continue</a>
+                                </div>
+                                <div class="n-more">
+                                    <div class="date">
+                                        @if (homa.StartDate != null && !string.IsNullOrEmpty(homa.StartDate.Trim()))
+                                        {
+                                            @homa.StartDate.GetCultureDate(SessionParameters.Culture)
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+

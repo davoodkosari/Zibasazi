@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EB1AEBE7-46AF-4E76-AD10-6A926DABA5CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Radyn.WebDesign</RootNamespace>
+    <AssemblyName>Radyn.WebDesign</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Radyn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TParty\Radyn.dll</HintPath>
+    </Reference>
+    <Reference Include="Radyn.Framework">
+      <HintPath>..\TParty\Radyn.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Radyn.Utility">
+      <HintPath>..\TParty\Radyn.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BO\ConfigurationBO.cs" />
+    <Compile Include="BO\ContainerBO.cs" />
+    <Compile Include="BO\ContentBO.cs" />
+    <Compile Include="BO\FAQBO.cs" />
+    <Compile Include="BO\FolderBO.cs" />
+    <Compile Include="BO\FormsBO.cs" />
+    <Compile Include="BO\GalleryBO.cs" />
+    <Compile Include="BO\HtmlBO.cs" />
+    <Compile Include="BO\LanguageBO.cs" />
+    <Compile Include="BO\MenuBO.cs" />
+    <Compile Include="BO\MenuHtmlBO.cs" />
+    <Compile Include="BO\NewsBO.cs" />
+    <Compile Include="BO\ResourceBO.cs" />
+    <Compile Include="BO\SliderBO.cs" />
+    <Compile Include="BO\WebSiteAliasBO.cs" />
+    <Compile Include="BO\WebSiteBO.cs" />
+    <Compile Include="DataStructure\Configuration.cs" />
+    <Compile Include="DataStructure\Container.cs" />
+    <Compile Include="DataStructure\Content.cs" />
+    <Compile Include="DataStructure\FAQ.cs" />
+    <Compile Include="DataStructure\Folder.cs" />
+    <Compile Include="DataStructure\Forms.cs" />
+    <Compile Include="DataStructure\Gallery.cs" />
+    <Compile Include="DataStructure\Html.cs" />
+    <Compile Include="DataStructure\Language.cs" />
+    <Compile Include="DataStructure\Menu.cs" />
+    <Compile Include="DataStructure\MenuHtml.cs" />
+    <Compile Include="DataStructure\News.cs" />
+    <Compile Include="DataStructure\Resource.cs" />
+    <Compile Include="DataStructure\Slider.cs" />
+    <Compile Include="DataStructure\WebSite.cs" />
+    <Compile Include="DataStructure\WebSiteAlias.cs" />
+    <Compile Include="DA\ConfigurationDA.cs" />
+    <Compile Include="DA\ContainerDA.cs" />
+    <Compile Include="DA\ContentDA.cs" />
+    <Compile Include="DA\FAQDA.cs" />
+    <Compile Include="DA\FolderDA.cs" />
+    <Compile Include="DA\FormsDA.cs" />
+    <Compile Include="DA\GalleryDA.cs" />
+    <Compile Include="DA\HtmlDA.cs" />
+    <Compile Include="DA\LanguageDA.cs" />
+    <Compile Include="DA\MenuDA.cs" />
+    <Compile Include="DA\MenuHtmlDA.cs" />
+    <Compile Include="DA\NewsDA.cs" />
+    <Compile Include="DA\ResourceDA.cs" />
+    <Compile Include="DA\SliderDA.cs" />
+    <Compile Include="DA\WebSiteAliasDA.cs" />
+    <Compile Include="DA\WebSiteDA.cs" />
+    <Compile Include="Definition\Enums.cs" />
+    <Compile Include="Facade\ConfigurationFacade.cs" />
+    <Compile Include="Facade\ContainerFacade.cs" />
+    <Compile Include="Facade\ContentFacade.cs" />
+    <Compile Include="Facade\FAQFacade.cs" />
+    <Compile Include="Facade\FolderFacade.cs" />
+    <Compile Include="Facade\FormsFacade.cs" />
+    <Compile Include="Facade\GalleryFacade.cs" />
+    <Compile Include="Facade\HtmlFacade.cs" />
+    <Compile Include="Facade\Interface\IConfigurationFacade.cs" />
+    <Compile Include="Facade\Interface\IContainerFacade.cs" />
+    <Compile Include="Facade\Interface\IContentFacade.cs" />
+    <Compile Include="Facade\Interface\IFAQFacade.cs" />
+    <Compile Include="Facade\Interface\IFolderFacade.cs" />
+    <Compile Include="Facade\Interface\IFormsFacade.cs" />
+    <Compile Include="Facade\Interface\IGalleryFacade.cs" />
+    <Compile Include="Facade\Interface\IHtmlFacade.cs" />
+    <Compile Include="Facade\Interface\ILanguageFacade.cs" />
+    <Compile Include="Facade\Interface\IMenuFacade.cs" />
+    <Compile Include="Facade\Interface\IMenuHtmlFacade.cs" />
+    <Compile Include="Facade\Interface\INewsFacade.cs" />
+    <Compile Include="Facade\Interface\IResourceFacade.cs" />
+    <Compile Include="Facade\Interface\ISliderFacade.cs" />
+    <Compile Include="Facade\Interface\IWebSiteAliasFacade.cs" />
+    <Compile Include="Facade\Interface\IWebSiteFacade.cs" />
+    <Compile Include="Facade\LanguageFacade.cs" />
+    <Compile Include="Facade\MenuFacade.cs" />
+    <Compile Include="Facade\MenuHtmlFacade.cs" />
+    <Compile Include="Facade\NewsFacade.cs" />
+    <Compile Include="Facade\ResourceFacade.cs" />
+    <Compile Include="Facade\SliderFacade.cs" />
+    <Compile Include="Facade\WebSiteAliasFacade.cs" />
+    <Compile Include="Facade\WebSiteFacade.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\WebDesign.Designer.cs" />
+    <Compile Include="WebDesignBaseFacade.cs" />
+    <Compile Include="WebDesignComponent.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\WebDesign.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\WebDesign.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{3b7185a9-70d1-4cbe-9835-88944bf9384c}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContentManager\ContentManager.csproj">
+      <Project>{88186c77-0bd8-4068-b6a7-03914ba9b864}</Project>
+      <Name>ContentManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FAQ\FAQ.csproj">
+      <Project>{ea76a670-2ca6-40dd-bf3b-9c7e22f84a06}</Project>
+      <Name>FAQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileManager\FileManager.csproj">
+      <Project>{189d7172-b237-4afa-a5aa-105aa7693637}</Project>
+      <Name>FileManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FormGenerator\FormGenerator.csproj">
+      <Project>{4f138651-dda4-4453-bb8c-e998dbc90c4a}</Project>
+      <Name>FormGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gallery\Gallery.csproj">
+      <Project>{9d4f5fa9-0871-4921-aa00-63fbe92b8d48}</Project>
+      <Name>Gallery</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\News\News.csproj">
+      <Project>{03f3c529-60b9-4266-9b14-3052da14a312}</Project>
+      <Name>News</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security\Security.csproj">
+      <Project>{35aea767-a451-4bcd-a8f5-e0e412686279}</Project>
+      <Name>Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slider\Slider.csproj">
+      <Project>{adc9ffd5-6590-4345-917e-9d69f165be64}</Project>
+      <Name>Slider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Statistics\Statistics.csproj">
+      <Project>{f00e74e6-ae53-4da6-9dec-d0b05a0e7d33}</Project>
+      <Name>Statistics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

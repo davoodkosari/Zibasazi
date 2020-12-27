@@ -1,0 +1,885 @@
+﻿@using Radyn.Reservation.Definition
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+@model Radyn.Reservation.DataStructure.Hall
+@{
+    ViewBag.Title = "LookupAdminDesign";
+    Layout = "~/Views/Shared/LookUpLayout.cshtml";
+}
+@section Head
+{
+    <script type='text/javascript'>
+
+        function PostData() {
+            $("#DivLoad").show();
+            $("#DivSave").hide();
+            $.post("@Url.Content("~/Reservation/HallChairDesign/SaveDesign")", $('form[action^="@Url.Content("~/Reservation/HallChairDesign/LookUpDesign")"]').serialize(), function(data) {
+                if (data != "false") {
+                    ShowRadynMessage();
+
+                }
+                ShowRadynMessage();
+
+            }).complete(function() {
+                $("#DivLoad").hide();
+                $("#DivSave").show();
+            });
+        }
+
+        function DivOnMouseOver(cell) {
+            if (gCheckedValue != null) {
+                var mode = $("#DesignMode").val();
+                if (mode == 'HallMode') {
+                    SetMouseOverValues(cell);
+                } else if (GetCellEnable(cell) == true) {
+                    SetMouseOverValues(cell);
+                }
+
+            }
+        }
+
+        function DivOnMouseClick(cell) {
+            if (gCheckedValue != null) {
+                var mode = $("#DesignMode").val();
+                if (mode == 'HallMode') {
+                    SetMouseOverValues(cell);
+                } else {
+                    if (GetCellEnable(cell) == true) {
+                        if (mode == 'NumberMode' || mode == 'ChairTypeMode') {
+                            SetNodesValue(cell);
+
+                        }
+                        SetMouseOverValues(cell);
+                    }
+                }
+            }
+        }
+
+        var gCheckedValue = null;
+
+        function DivOnMouseDown() {
+            if (gCheckedValue != null) {
+                var mode = $("#DesignMode").val();
+                if ($("#WriteStaus").val() == "draw" && (mode == "NumberMode" || mode == "ChairTypeMode"))
+                    return;
+                else gCheckedValue = null;
+            } else {
+                if ($("#WriteStaus").val() != "")
+                    gCheckedValue = $("#WriteStaus").val() == "draw" ? "true" : "false";
+            }
+        }
+
+        function SetValues() {
+            var numberSetStatus = $("#SetStatus").val();
+            var numberSetDirection = $("#SetDirection").val();
+            var minNumber = $("#MinNumber").val();
+            var chairTypeId = $("#ChairTypeId").val();
+            var startNodeNumber = $("#StartNode").val();
+            var endNodeNumber = $("#EndNode").val();
+            var mode = $("#DesignMode").val();
+            if (numberSetStatus != "" && numberSetDirection != "") {
+                if ((mode == "ChairTypeMode" && chairTypeId != "") || (mode == "NumberMode" && minNumber != "")) {
+                    if (startNodeNumber != "" && endNodeNumber != "") {
+                        var startNodevalues = startNodeNumber.split(',');
+                        var endNodevalues = endNodeNumber.split(',');
+                        var startnodeRow = parseInt(startNodevalues[0]);
+                        var startnodeColumn = parseInt(startNodevalues[1]);
+                        var endnodeRow = parseInt(endNodevalues[0]);
+                        var endnodecolumn = parseInt(endNodevalues[1]);
+                        var maxnumber = minNumber;
+                        var loop1Startnode = startnodeRow;
+                        var loop2Startnode = startnodeColumn;
+                        var loop1Endnode = endnodeRow;
+                        var loop2Endnode = endnodecolumn;
+                        var loop1Sign = 1;
+                        var loop1LessThan = 1;
+                        var loop2Sign = 1;
+                        var loop2LessThan = 1;
+                        if (startnodeRow <= endnodeRow) {
+                            loop1Sign = 1;
+                            loop1LessThan = 1;
+                            if (numberSetStatus == "0") {
+                                loop1Startnode = startnodeRow;
+                                loop1Endnode = endnodeRow;
+                                if (startnodeColumn <= endnodecolumn) {
+                                    loop2Startnode = startnodeColumn;
+                                    loop2Endnode = endnodecolumn;
+                                } else {
+                                    loop2Startnode = endnodecolumn;
+                                    loop2Endnode = startnodeColumn;
+                                }
+                            }
+                            if (numberSetStatus == "1") {
+                                loop1Startnode = startnodeColumn;
+                                loop1Endnode = endnodecolumn;
+                                if (endnodecolumn < startnodeColumn) {
+                                    loop1Sign = -1;
+                                    loop1LessThan = -1;
+                                }
+                                loop2Startnode = startnodeRow;
+                                loop2Endnode = endnodeRow;
+                            }
+                            if (numberSetDirection == "1") {
+                                loop2Sign = -1;
+                                loop2LessThan = -1;
+                            } else {
+                                loop2Sign = 1;
+                                loop2LessThan = 1;
+                            }
+                        } else {
+                            loop1Sign = -1;
+                            loop1LessThan = -1;
+                            if (numberSetStatus == "0") {
+                                loop1Startnode = startnodeRow;
+                                loop1Endnode = endnodeRow;
+                                if (startnodeColumn <= endnodecolumn) {
+                                    loop2Startnode = startnodeColumn;
+                                    loop2Endnode = endnodecolumn;
+                                } else {
+                                    loop2Startnode = endnodecolumn;
+                                    loop2Endnode = startnodeColumn;
+                                }
+                            }
+                            if (numberSetStatus == "1") {
+                                loop1Startnode = startnodeColumn;
+                                loop1Endnode = endnodecolumn;
+                                if (startnodeColumn < endnodecolumn) {
+                                    loop1Sign = +1;
+                                    loop1LessThan = +1;
+                                }
+                                loop2Startnode = endnodeRow;
+                                loop2Endnode = startnodeRow;
+                            }
+                            if (numberSetDirection == "1") {
+                                loop2Sign = -1;
+                                loop2LessThan = -1;
+                            } else {
+                                loop2Sign = 1;
+                                loop2LessThan = 1;
+                            }
+                        }
+                        var loop2Endnode2 = loop2Endnode;
+                        var loop2Startnode2 = loop2Startnode;
+                        for (var i = loop1Startnode; (loop1LessThan == 1 ? i <= loop1Endnode : i >= loop1Endnode); i = i + (1 * loop1Sign)) {
+                            if (loop1Startnode <= loop1Endnode) {
+                                if (numberSetDirection == "1") {
+                                    if (i >= loop1Startnode && i <= loop1Endnode) {
+                                        loop2Startnode = loop2Endnode2;
+                                        loop2Endnode = loop2Startnode2;
+                                    }
+                                } else {
+                                    if (i >= loop1Startnode && i <= loop1Endnode) {
+                                        loop2Startnode = loop2Startnode2;
+                                        loop2Endnode = loop2Endnode2;
+                                    }
+                                }
+                            } else {
+                                if (numberSetDirection == "1") {
+                                    if (i <= loop1Startnode && i >= loop1Endnode) {
+                                        loop2Startnode = loop2Endnode2;
+                                        loop2Endnode = loop2Startnode2;
+                                    }
+                                } else {
+                                    if (i <= loop1Startnode && i >= loop1Endnode) {
+                                        loop2Startnode = loop2Startnode2;
+                                        loop2Endnode = loop2Endnode2;
+                                    }
+                                }
+                            }
+                            for (var j = loop2Startnode; (loop2LessThan == 1 ? j <= loop2Endnode : j >= loop2Endnode); j = j + (1 * loop2Sign)) {
+                                var row = i;
+                                var column = j;
+                                if (numberSetStatus == "1") {
+                                    row = j;
+                                    column = i;
+                                }
+                                if (GetCellEnable(row + '-' + column) == true) {
+                                    var item = $("[id=ItemParamerts-" + row + '-' + column + "]").val();
+                                    var value = item.split(',');
+                                    if (value[6] == '@Guid.Empty') {
+                                        if (mode == "NumberMode") {
+                                            value[4] = maxnumber;
+                                            maxnumber = parseInt(maxnumber) + 1;
+                                        }
+                                        if (mode == "ChairTypeMode") {
+                                            value[5] = chairTypeId;
+                                        }
+                                        $("#ItemParamerts-" + row + '-' + column).val(value);
+                                        SetCss(row + '-' + column);
+                                    }
+                                }
+                            }
+                        }
+                        ChangeMode(mode);
+                        $("#MinNumber").val(maxnumber);
+                    }
+                }
+
+            }
+        }
+
+        function SetNodesValue(cell) {
+            var checkboxchecked = gCheckedValue == "true";
+            if (checkboxchecked) {
+                var minNumber = $("#MinNumber").val();
+                var chairTypeId = $("#ChairTypeId").val();
+                var mode = $("#DesignMode").val();
+                var error = false;
+                if (mode == "ChairTypeMode" && chairTypeId == "") {
+                    alert('@Resources.Reservation.PleaseSelectChairType');
+                    error = true;
+                }
+                if (mode == "NumberMode" && (minNumber == 0 || minNumber == "")) {
+                    alert('@Resources.Reservation.PleaseEnterMinNumber');
+                    error = true;
+                }
+                if (error == false) {
+                    var inlineStyle = $("#ItemParamerts-" + cell).val();
+                    var startNodeNumber = $("#StartNode").val();
+                    var endNodeNumber = $("#EndNode").val();
+                    if (startNodeNumber == "")
+                        $("#StartNode").val(inlineStyle);
+
+                    else if (endNodeNumber == "") {
+                        $("#EndNode").val(inlineStyle);
+                        SetValues();
+                    }
+
+                }
+
+            } else {
+                $("#StartNode").val(null);
+                $("#EndNode").val(null);
+            }
+        }
+
+        function SetMouseOverValues(cell) {
+            var mode = $("#DesignMode").val();
+            var inlineStyle = $("#ItemParamerts-" + cell).val();
+            var value = inlineStyle.split(',');
+            var status = $("#StatusId").val();
+            var checkboxchecked = gCheckedValue == "true";
+            if (value[6] != '@Guid.Empty')
+                alert('@Resources.Reservation.ThisChairReserved'+"\n"+value[7]);
+            else {
+                switch (mode) {
+                case 'HallMode':
+                    if (checkboxchecked)
+                        value[3] = '@((byte) Enums.ReservStatus.Free)';
+                    else
+                        value[3] = '@((byte) Enums.ReservStatus.None)';
+                    break;
+                case 'StatusMode':
+                    if (checkboxchecked && status != null)
+                        value[3] = status;
+
+                    else
+                        value[3] = '@((byte) Enums.ReservStatus.Free)';
+                    break;
+                case
+                    'NumberMode':
+                    if (!checkboxchecked)
+                        value[4] = 0;
+                    break;
+                case
+                    'ChairTypeMode':
+                    if (!checkboxchecked)
+                        value[5] = '@Guid.Empty';
+                    break;
+                default:
+                }
+            }
+
+            $("#ItemParamerts-" + cell).val(value);
+            SetCss(cell);
+        }
+
+        function ClearAll() {
+            $("[id^=Div-]").each(function() {
+                var Id = $(this).attr('val');
+                $(this).removeClass();
+                var inlineStyle = $("#ItemParamerts-" + Id).val();
+                var value = inlineStyle.split(',');
+                if (value[6] == '@Guid.Empty') {
+                    $("#ItemParamerts-" + Id).val(value[0] + "," + value[1] + "," + value[2] + "," + 0 + "," + 0 + "," + '@Guid.Empty');
+                    SetCss(Id);
+                }
+            });
+        }
+
+        function SetCss(cell) {
+            $("#Div-" + cell).removeClass();
+            $("#Div-" + cell).html("");
+            var mode = $("#DesignMode").val();
+            var inlineStyle = $("#ItemParamerts-" + cell).val();
+            var value = inlineStyle.split(',');
+            var startNodeNumber = $("#StartNode").val();
+            var endNodeNumber = $("#EndNode").val();
+            $("#Div-" + cell).addClass('CommonStyle');
+            switch (mode) {
+            case 'HallMode':
+                if (value[3] != '@((byte) Enums.ReservStatus.None)') {
+                    $("#Div-" + cell).addClass('FreeStatus');
+                } else {
+                    $("#Div-" + cell).addClass('NoneChair');
+                }
+                break;
+            case 'StatusMode':
+                switch (value[3]) {
+                case '@((byte) Enums.ReservStatus.None)':
+                    $("#Div-" + cell).addClass('NoneStatus');
+                    break;
+                case '@((byte) Enums.ReservStatus.Free)':
+                    $("#Div-" + cell).addClass('FreeStatus');
+                    break;
+                case '@((byte) Enums.ReservStatus.NotForSale)':
+                    $("#Div-" + cell).addClass('NotForSaleStatus');
+                    break;
+                case '@((byte) Enums.ReservStatus.Saled)':
+                    $("#Div-" + cell).addClass('SaledStatus');
+                    break;
+                case '@((byte) Enums.ReservStatus.Reserved)':
+                    $("#Div-" + cell).addClass('ReservedStatus');
+                    break;
+
+                default:
+                }
+
+                break;
+            case 'ChairTypeMode':
+                if (value[3] != '@((byte) Enums.ReservStatus.None)') {
+                    if (value[5] != '@Guid.Empty') {
+                        $("#Div-" + cell).addClass('AmountSetStaus');
+                    } else if (startNodeNumber != "" && value == startNodeNumber) {
+                        $("#Div-" + cell).addClass('StartNodeStaus');
+                    } else if (endNodeNumber != "" && value == endNodeNumber) {
+                        $("#Div-" + cell).addClass('EndNodeStaus');
+                    } else {
+                        $("#Div-" + cell).addClass('FreeStatus');
+                    }
+                } else {
+                    $("#Div-" + cell).addClass('NoneStatus');
+                }
+
+                break;
+            case 'NumberMode':
+                if (value[3] != '@((byte) Enums.ReservStatus.None)') {
+                    if (value[4] > 0) {
+                        $("#Div-" + cell).addClass('NumberSetStaus');
+                        $("#Div-" + cell).html(value[4]);
+                    } else if (startNodeNumber != "" && value == startNodeNumber) {
+                        $("#Div-" + cell).addClass('StartNodeStaus');
+                        $("#Div-" + cell).html("");
+                    } else if (endNodeNumber != "" && value == endNodeNumber) {
+                        $("#Div-" + cell).addClass('EndNodeStaus');
+                        $("#Div-" + cell).html("");
+                    } else {
+                        $("#Div-" + cell).addClass('FreeStatus');
+                        $("#Div-" + cell).html("");
+                    }
+
+                } else {
+                    $("#Div-" + cell).addClass('NoneStatus');
+                }
+                break;
+
+            default:
+            }
+            if (GetCellEnable(cell) == true) {
+
+                var chairtype = value[5] == '@Guid.Empty' ? "@Resources.Common.No_results_found" : $("#ChairTypeId option[value=" + value[5].toLowerCase() + "]").html();
+                var owner = value[6] == '@Guid.Empty' ? "@Resources.Common.No_results_found" : value[7];
+                $("#Div-" + cell).attr('title', "@Resources.Reservation.Row:" + value[0] + "\n" + "@Resources.Reservation.Column:" + value[1] + "\n" + "@Resources.Reservation.ChairType:" + chairtype + "\n" + "@Resources.Reservation.Number:" + value[4] + "\n" + "@Resources.Reservation.Owner:" + owner);
+            }
+        }
+
+        function GetCellEnable(cell) {
+            var inlineStyle = $("#ItemParamerts-" + cell).val();
+            var value = inlineStyle.split(',');
+            return parseInt(value[3]) > '@((byte) Enums.ReservStatus.None)';
+        }
+
+        function ChangeMode(mode) {
+            $("[id^='DivPanel-']").each(function() {
+                $(this).hide();
+            });
+            $("#DivPanel-" + mode).show();
+            if (mode == "ChairTypeMode" || mode == "NumberMode")
+                $("#DivPanel-Direction").show();
+            $("#DesignMode").val(mode);
+            $("#StartNode").val(null);
+            $("#EndNode").val(null);
+            SetButtonCss("");
+            $("[id^='Div-']").each(function() {
+                var cell = $(this).attr('val');
+                SetCss(cell);
+
+            });
+            $("#MinNumber").val(1);
+
+        }
+
+        function SetChairStatus(value) {
+            var getvalue = "";
+            if (value != "") {
+                switch (value.trim()) {
+                case '@((byte) Enums.ReservStatus.Free)':
+                    getvalue = "Free";
+                    break;
+                case '@((byte) Enums.ReservStatus.NotForSale)':
+                    getvalue = "NotForSale";
+                    break;
+                case '@((byte) Enums.ReservStatus.Reserved)':
+                    getvalue = "Reserved";
+                    break;
+                case '@((byte) Enums.ReservStatus.Saled)':
+                    getvalue = "Saled";
+                    break;
+                default:
+                }
+            }
+            $("[id^='BtnChairStatus-']").each(function() {
+                var name = $(this).attr('Id').split('-');
+
+                $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                $(this).mouseover(function() {
+                    if (getvalue == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Hover.png")');
+                });
+                $(this).mouseout(function() {
+                    if (getvalue == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                });
+            });
+
+            $("#BtnChairStatus-" + getvalue).css('background-image', 'url("/Areas/Reservation/Content/Images/' + getvalue + '-Active.png")');
+
+            $("#StatusId").val(value.trim());
+
+        }
+
+        function FillStatus(value) {
+            var getvalue = "";
+            if (value != "") {
+                if (value == "0")
+                    getvalue = "HorizontalStatus";
+                if (value == "1")
+                    getvalue = "VerticalStatus";
+            }
+            $("[id^='BtnSetStatus-']").each(function() {
+                var name = $(this).attr('Id').split('-');
+                $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                $(this).mouseover(function() {
+                    if (getvalue == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Hover.png")');
+                });
+                $(this).mouseout(function() {
+                    if (getvalue == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                });
+            });
+
+            $("#BtnSetStatus-" + getvalue).css('background-image', 'url("/Areas/Reservation/Content/Images/' + getvalue + '-Active.png")');
+            $("#DivSetDirection").html("");
+            if (value == "0") {
+                $("#DivSetDirection").append(" <a class=\"btn btn-success btn-control-panel\" Id='BtnSetDirection-LeftToRightDirection' onclick=\"FillDirections('1')\" >@Resources.Common.RightToLeft <i class=\"fas fa-arrow-left\"></i></a>");
+                $("#DivSetDirection").append("<a class=\"btn btn-success btn-control-panel\" Id='BtnSetDirection-RightToLeftDirection' onclick=\"FillDirections('0')\" > @Resources.Common.LeftToRight <i class=\"fas fa-arrow-right\"></i></a>");
+
+            }
+            if (value == "1") {
+                $("#DivSetDirection").append("<a class=\"btn btn-success btn-control-panel\" Id='BtnSetDirection-UpToDownDirection' onclick=\"FillDirections('0')\" > @Resources.Common.RightToLeft <i class=\"fas fa-arrow-left\"></i></a>");
+                $("#DivSetDirection").append("<a class=\"btn btn-success btn-control-panel\" Id='BtnSetDirection-DownToUpDirection' onclick=\"FillDirections('1')\" >@Resources.Common.LeftToRight <i class=\"fas fa-arrow-right\"></i></a>");
+            }
+            $("#SetStatus").val(value);
+            FillDirections($("#SetDirection").val());
+        }
+
+        function FillDirections(value) {
+            var statusvalue = $("#SetStatus").val();
+            var getvalue = "";
+            if (value != "" && statusvalue != "") {
+                if (statusvalue == "0") {
+                    if (value == "0")
+                        getvalue = "RightToLeftDirection";
+                    if (value == "1")
+                        getvalue = "LeftToRightDirection";
+                }
+                if (statusvalue == "1") {
+                    if (value == "0")
+                        getvalue = "UpToDownDirection";
+                    if (value == "1")
+                        getvalue = "DownToUpDirection";
+
+                }
+
+            }
+            $("[id^='BtnSetDirection-']").each(function() {
+                var name = $(this).attr('Id').split('-');
+                $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                $(this).mouseover(function() {
+                    if (getvalue == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Hover.png")');
+                });
+                $(this).mouseout(function() {
+                    if (getvalue == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                });
+            });
+            $("#BtnSetDirection-" + getvalue).css('background-image', 'url("/Areas/Reservation/Content/Images/' + getvalue + '-Active.png")');
+            $("#SetDirection").val(value);
+        }
+
+        function SetPen(value) {
+            var oldvalue = $("#WriteStaus").val();
+            if (oldvalue == value) {
+                value = "";
+                gCheckedValue = null;
+            }
+            $("#BtnPenMode-" + value).css('background-image', 'url("/Areas/Reservation/Content/Images/' + value + '-active.png")');
+            $("#WriteStaus").val(value);
+            $("[id^='BtnPenMode-']").each(function() {
+                var name = $(this).attr('Id').split('-');
+                $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                $(this).mouseover(function() {
+                    if (value == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-hover.png")');
+                });
+                $(this).mouseout(function() {
+                    if (value == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                });
+            });
+
+
+        }
+
+        function SetButtonCss() {
+            var val = $("#DesignMode").val();
+            $("[id^=BtnDesignMode-]").each(function() {
+                var name = $(this).attr('Id').split('-');
+                $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                $(this).mouseover(function() {
+                    if (val == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Hover.png")');
+                });
+                $(this).mouseout(function() {
+                    if (val == name[1])
+                        $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '-Active.png")');
+                    else $(this).css('background-image', 'url("/Areas/Reservation/Content/Images/' + name[1] + '.png")');
+                });
+            });
+            $("#BtnDesignMode-" + val).css('background-image', 'url("/Areas/Reservation/Content/Images/' + val + '-Active.png")');
+
+        }
+
+        // NumberSetStatus==0 ?افقی
+        // NumberSetStatus==1 ?عمودی
+        // حالت افقی NumberSetDirection==1 ?راست
+        // حالت افقی NumberSetDirection==0 ?چپ
+        // حالت عمودی NumberSetDirection==1 ?بالا
+        // حالت عمودی NumberSetDirection==0 ?پایین
+        $(document).ready(function() {
+            $("#DivLoad").hide();
+            ChangeMode('HallMode');
+            FillStatus("0");
+            FillDirections("0");
+            SetChairStatus("1");
+            SetPen("");
+        });
+    </script>
+    <style>
+        .FreeStatus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-icon.png');
+            cursor: pointer;
+        }
+
+        .AmountSetStaus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-price-tagged.png');
+            cursor: pointer;
+        }
+
+        .NumberSetStaus {
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .StartNodeStaus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-start-end-point.png');
+            cursor: pointer;
+        }
+
+        .EndNodeStaus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-start-end-point.png');
+            cursor: pointer;
+        }
+
+        .SaledStatus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-soldout.png');
+            cursor: pointer;
+        }
+
+        .NotForSaleStatus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-deactived.png');
+            cursor: pointer;
+        }
+
+        .ReservedStatus {
+            background-image: url('/Areas/Reservation/Content/Images/chair-reserved.png');
+            cursor: pointer;
+        }
+
+        .NoneChair {
+            background-image: url('/Areas/Reservation/Content/Images/chair-deactived.png');
+        }
+
+        .NoneStatus {
+            background-color: transparent;
+        }
+
+        .CommonStyle {
+            height: 15px;
+            width: 15px;
+            text-align: center;
+            margin-bottom: 2px;
+            margin-top: 2px;
+            margin-right: 1px;
+            margin-left: 1px;
+            float: @Resources.Design.Align;
+            font-size: 10px;
+        }
+
+        .PenStyle {
+            width: 31px;
+            height: 33px;
+            border: none;
+        }
+    </style>
+
+
+
+}
+@section PageAction
+{
+    @if (Model != null && Model.Chairs.Count > 0)
+    {
+        <div class="button-div m-btn waves-green i-save">
+            @{Html.Radyn().ImageActionLink().Text(@Resources.Common.Save).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Save.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "PostData();" }).Render();}
+        </div>
+        <div class="button-div m-btn waves-green i-save">
+            @{Html.Radyn().ImageActionLink().Text(@Resources.Reservation.NewDesign).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("/Areas/Reservation/Content/Images/new-icon.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "ClearAll();" }).ImageHeight("20").ImageWidth("20").Render();}
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().Text(@Resources.Common.Close).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "Close_thisModal();" }).Render();}
+        </div>
+    }
+
+}
+@using (Html.BeginForm())
+{
+    if (Model != null && Model.Chairs.Count > 0)
+    {
+        <input type="hidden" name="WriteStaus" id="WriteStaus" />
+        <input type="hidden" name="StatusId" id="StatusId" />
+        <input type="hidden" name="DesignMode" id="DesignMode" />
+        <input type="hidden" name="EndNode" id="StartNode" />
+        <input type="hidden" name="EndNode" id="EndNode" />
+        <input type="hidden" name="SetStatus" id="SetStatus" />
+        <input type="hidden" name="SetDirection" id="SetDirection" />
+
+        <div class="fit" align="center" id="DivLoad">
+            @Resources.Reservation.PleaseWait
+            <img id="loading" width="150" src="@Url.Content("~/Content/Images/Gif/Loading128.gif")" alt="" />
+        </div>
+        <div class="fit item-row">
+            @*<input type="button" onclick=" SetPen('erase') " id="BtnPenMode-erase" title="@Resources.Reservation.erase" class="PenStyle" style="float: @Resources.Design.Align" />
+                <input type="button" onclick=" SetPen('draw') " id="BtnPenMode-draw" title="@Resources.Reservation.draw" class="PenStyle" style="float: @Resources.Design.Align" />*@
+            <div class="rsline">
+            </div>
+
+
+            <a class="btn btn-danger btn-control-panel" onclick=" SetPen('erase') " id="BtnPenMode-erase">
+                @Resources.Reservation.erase
+                <i class="fas fa-eraser"></i>
+            </a>
+            <a class="btn btn-warning btn-control-panel" onclick=" SetPen('draw') " id="BtnPenMode-draw">
+                @Resources.Reservation.draw
+                <i class="fas fa-pencil-alt"></i>
+            </a>
+            <div class="space-buttons">|</div>
+            <a class="btn btn-info btn-control-panel" onclick=" ChangeMode('HallMode') " id="BtnDesignMode-HallMode">
+                @Resources.Reservation.HallMode
+                <i class="fas fa-paint-brush"></i>
+            </a>
+            <a class="btn btn-info btn-control-panel" id="BtnDesignMode-StatusMode" onclick=" ChangeMode('StatusMode') ">
+                @Resources.Reservation.StatusMode
+                <i class="fas fa-align-center"></i>
+            </a>
+            <a class="btn btn-primary btn-control-panel" id="BtnDesignMode-NumberMode" onclick=" ChangeMode('NumberMode') ">
+                @Resources.Reservation.NumberMode
+                <i class="fas fa-sort-numeric-up"></i>
+            </a> <a class="btn btn-primary btn-control-panel" id="BtnDesignMode-ChairTypeMode" onclick=" ChangeMode('ChairTypeMode') ">
+                @Resources.Reservation.ChairType
+                <i class="fas fa-couch"></i>
+            </a>
+
+            @*<input type="button" id="BtnDesignMode-HallMode" onclick=" ChangeMode('HallMode') " title="@Resources.Reservation.HallMode" style="border: none; width: 105px; height: 33px; float: @Resources.Design.Align;" />
+                <input type="button" id="BtnDesignMode-StatusMode" onclick=" ChangeMode('StatusMode') " title="@Resources.Reservation.StatusMode" style="border: none; width: 83px; height: 33px; float: @Resources.Design.Align" />
+                <input type="button" id="BtnDesignMode-NumberMode" onclick=" ChangeMode('NumberMode') " title="@Resources.Reservation.NumberMode" style="border: none; width: 83px; height: 33px; float: @Resources.Design.Align" />
+                <input type="button" id="BtnDesignMode-ChairTypeMode" onclick=" ChangeMode('ChairTypeMode') " title="@Resources.Reservation.ChairType" style="border: none; width: 98px; height: 33px; float: @Resources.Design.Align" />*@
+            <div class="rsline">
+            </div>
+            <div class="item-row fit" id="DivPanel-NumberMode" style="float: @Resources.Design.Align;">
+                <div class="fit item-row">
+                    <div class="table-row-cap">
+                        <div class="item">
+                            @Resources.Reservation.Number
+                        </div>
+                    </div>
+                    <div class="table-row-item">
+                        <div class="item">
+                            @Html.TextBox("MinNumber", 0)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="rsline">
+                </div>
+            </div>
+            <div id="DivPanel-ChairTypeMode" style="float: @Resources.Design.Align;" class="item-row fit">
+                <div style="float: @Resources.Design.Align;">
+                    <div class="table-row-cap" style="float: @Resources.Design.Align">
+                        <div class="item">
+                            @Resources.Reservation.ChairType
+                        </div>
+                    </div>
+                    <div class="table-row-item" style="float: @Resources.Design.Align">
+                        <div class="item">
+                            @Html.DropDownList("ChairTypeId", (SelectList)ViewBag.ChairTypes, "")
+                        </div>
+                    </div>
+
+                </div>
+                <div class="rsline">
+                </div>
+            </div>
+
+            <div id="DivPanel-Direction" style="float: @Resources.Design.Align" class="fit">
+                <div style="float: @Resources.Design.Align;" class="item-row fit">
+                    <div class="table-row-cap">
+                        <div class="item">
+                            @Resources.Reservation.NumberDirection
+                        </div>
+                    </div>
+                    <div class="table-row-item" style="float: @Resources.Design.Align">
+                        <div class="item">
+                            <a class="btn btn-success btn-control-panel" id="BtnSetStatus-VerticalStatus" onclick=" FillStatus('1')">
+                                @Resources.Reservation.NumberDirectionVertical
+                                <i class="fas fa-arrows-alt-v"></i>
+                            </a>
+                            <a class="btn btn-success btn-control-panel" id="BtnSetStatus-HorizontalStatus" onclick=" FillStatus('0') ">
+                                @Resources.Reservation.NumberDirectionHorizontal
+                                <i class="fas fa-arrows-alt-h"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="rsline">
+                </div>
+                <div style="float: @Resources.Design.Align;" class="item-row fit">
+                    <div class="table-row-cap">
+                        <div class="item">
+                            @Resources.Reservation.Status
+                        </div>
+                    </div>
+                    <div style="float: @Resources.Design.Align" class="table-row-item">
+                        <div id="DivSetDirection">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="DivPanel-StatusMode" style="float: @Resources.Design.Align;" class="item-row fit">
+                <a class="btn btn-success btn-control-panel" id="BtnChairStatus-Free" onclick="SetChairStatus('@((byte) Enums.ReservStatus.Free) ') ">
+                    @Enums.ReservStatus.Free.GetDescriptionInLocalization()
+                    <i class="fas fa-couch"></i>
+                </a>
+                <a class="btn btn-danger btn-control-panel" id="BtnChairStatus-NotForSale" onclick="SetChairStatus('@((byte) Enums.ReservStatus.NotForSale) ') ">
+                    @Enums.ReservStatus.NotForSale.GetDescriptionInLocalization()
+                    <i class="fas fa-couch"></i>
+                </a>
+                <a class="btn btn-warning btn-control-panel" id="BtnChairStatus-Reserved" onclick="SetChairStatus('@((byte) Enums.ReservStatus.Reserved) ') ">
+                    @Enums.ReservStatus.Reserved.GetDescriptionInLocalization()
+                    <i class="fas fa-couch"></i>
+                </a>
+                <a class="btn btn-info btn-control-panel" id="BtnChairStatus-Saled" onclick="SetChairStatus('@((byte) Enums.ReservStatus.Saled) ') ">
+                    @Enums.ReservStatus.Saled.GetDescriptionInLocalization()
+                    <i class="fas fa-couch"></i>
+                </a>
+
+
+
+
+            </div>
+
+        </div>
+
+        <div id="DivCheckBox" class="fit item-row" dir="@Resources.Common.Direction">
+            @{
+                short column = 0;
+                var count = Model.Length * Model.Width;
+                for (int i = 1; i <= Model.Length; i++)
+                {
+                    if (i == 1)
+                    {
+                        <div style="width: 17px; float: @Resources.Design.Align;  margin-@Resources.Design.Align: 14px; text-align: center;">
+                            @i
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="width: 17px; float: @Resources.Design.Align;  text-align: center;">
+                            @i
+                        </div>
+                    }
+
+
+                }
+                for (int r = 1; r <= count / Model.Length; r++)
+                {
+                    <div class="fit">
+                        <div style="width: 1%" class="page-align">
+                            @r
+                        </div>
+                        <div class="width98percent page-align">
+
+
+                            @for (var c = 1; c <= Model.Length; c++)
+                            {
+                                if (column <= count)
+                                {
+                                    var value = Model.Chairs[column].ColumValue;
+                                    var cell = Model.Chairs[column].CellValue;
+                                    <input type="hidden" value="@value" name="ItemParamerts-@cell" id="ItemParamerts-@cell" />
+                                    <div id="Div-@cell" val="@cell" onmouseover="DivOnMouseOver('@cell')" onclick="DivOnMouseClick('@cell')" onmousedown="DivOnMouseDown()">
+                                    </div>
+                                }
+                                column++;
+                            }
+                        </div>
+                    </div>
+
+                }
+            }
+        </div>
+    }
+
+}

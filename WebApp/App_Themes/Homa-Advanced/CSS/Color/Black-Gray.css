@@ -1,0 +1,184 @@
+﻿/*خاکستری*/
+.my-nav, .ui-top-bar {
+    background: #3c3f41;
+}
+
+.radyn-footer, .footer, .ui-footer, .footer-company-box {
+    background: #3c3f41;
+}
+
+.header-lan li a, .language-btns table, .language-btn tr {
+    background: #c2c2c4;
+}
+
+.header, .header-nav-item > li {
+    background: #c6c5c4 !important;
+}
+
+    .nav-left-btn, .header-nav-item > li:hover, .header-nav-item li:focus {
+        background-color: #b3b3b3;
+        background: #b3b3b3 !important;
+    }
+
+@media (max-width: 1200px) {
+    .nav-left-btn, .header-nav-item > li:hover, .header-nav-item li:focus {
+        background-color: #b3b3b3;
+    }
+
+    .nav-left-btn {
+        background: transparent !important;
+    }
+}
+
+.border-title {
+    border-color: #de5f33;
+}
+
+.users-page .container-header-item:before {
+    background: #de5f33;
+}
+
+.login-container-bg .login-data-row-item input[type='submit'], .login-container-bg .login-data-row-item input[type='button'], .login-data-row-item input[type='submit'], .login-data-row-item input[type='button'], .btn-printcart  {
+    background-color: #de5f33;
+}
+
+.nav-left-btn:hover, .nav-left-btn:focus {
+    background-color: #a09d9d !important;
+}
+
+.header-lan li a:hover, .language-btns table:hover, .language-btn tr:hover {
+    background: #585858 !important
+}
+
+.login-data-row-item input[type='submit']:hover, .login-data-row-item input[type='button']:hover, .btn-printcart:hover, .btn-printcart:focus {
+    opacity: 0.8;
+    background-color: #bc502a;
+}
+
+@media (max-width: 768px) {
+    .header-nav-item > li:hover, .header-nav-item li:focus, .nav-left-btn:hover, .nav-left-btn :focus {
+        background: rgba(253, 253, 253, 0.0784313725490196) !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover, .header-nav-item li li:hover, .header-nav-item li li:focus {
+        color: #bc502a;
+        background-color: #c6c5c4 !important;
+    }
+
+    .navbar-nav > li > .dropdown-menu > li > .dropdown-menu > li > a:hover, .navbar-nav > li > .dropdown-menu > li > .dropdown-menu > li > .dropdown-menu > li > a:hover, .navbar-nav > li > .dropdown-menu > li > .dropdown-menu > li > .dropdown-menu > li > .dropdown-menu > li > a:hover {
+        box-shadow: inset -5px 0px 15px #a7a7a7;
+    }
+}
+
+/*---------------------User-Panel-------------------------*/
+
+
+.userloggedimg .liner-div {
+    background: #c6c5c4;
+}
+
+.userinfo span, .userinfo span > div {
+    color: #c6c5c4;
+}
+
+.gv-header {
+    background: #c6c5c4;
+}
+
+
+.ui-sheet input[type="checkbox"]:checked:after,
+.ui-sheet input[type="checkbox"]:not(:checked):after {
+    border: 1px solid #b3b3b3;
+}
+
+.ui-sheet input[type="checkbox"]:checked:before,
+.ui-sheet input[type="checkbox"]:not(:checked):before {
+    border-color: #b3b3b3;
+}
+
+/*Message-panel*/
+
+.ui-sheet .nav-mail-item:first-child {
+    border-top-color: #333333;
+}
+
+.ui-sheet .nav-mail-item span {
+    background-color: #333333;
+}
+
+.ui-sheet .nav-mail-item:hover {
+    background-color: #333333;
+}
+
+    .ui-sheet .nav-mail-item:hover span {
+        background-color: #2d2d2d;
+    }
+
+.ui-sheet .nav-mail-item {
+    background-color: #3e4040;
+    border-color: #333333;
+}
+
+.radyn_grid a, .radyn_grid a:hover, .radyn_grid a:focus, .radyn_grid a:active {
+    color: #333333;
+}
+
+/*Message-panel*/
+
+.ui-sheet .btn-forms:hover, .ui-sheet .btn-forms:focus, .ui-sheet .btn-forms:active, .ui-sheet .c-widget .cell-item a.btn:hover, .ui-sheet .my_select-group_box .btn-info:hover {
+    border-color: #808080;
+    background-color: #a2a2a2;
+}
+
+.ui-sheet .btn-forms, .ui-sheet .c-widget .cell-item a.btn, .ui-sheet .my_select-group_box .btn-info {
+    background-color: #b3b3b3;
+    border-color: #b3b3b3;
+}
+
+.ui-sheet .radyn_grid td {
+    border-color: #d0d0d0 !important;
+}
+
+.ui-sheet .radyn_grid th {
+    border-color: #d0d0d0 !important;
+    background-color: #2d2d2d !important;
+}
+
+.ui-sheet input[type="radio"]:checked:before, .ui-sheet input[type="radio"]:not(:checked):before {
+    background: #b3b3b3;
+}
+
+.ui-sheet .gv-row-style, .ui-sheet .gv-cell, .ui-sheet .gv-footer, .ui-sheet .gv-header {
+    border-color: #d0d0d0;
+}
+
+/*---------------------User-Panel-------------------------*/
+
+
+
+
+
+
+.login-data-row-item a.login-solid-btn {
+    border-color: #de5f33;
+    color: #de5f33;
+}
+
+    .login-data-row-item a.login-solid-btn:hover {
+        color: #fff;
+        background-color: #de5f33
+    }
+
+.wide-button {
+    background: #b3b3b3;
+}
+
+    .wide-button:hover, .news-list-lead > a, .news-list-lead span {
+        background: #c6c5c4;
+    }
+
+.aside-box .news-list-box a:hover, .aside-box .news-list-box a:active, .aside-box .news-list-box a:focus {
+    color: #de5f33
+}

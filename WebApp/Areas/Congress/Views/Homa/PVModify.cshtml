@@ -1,0 +1,195 @@
+﻿@using Radyn.Utility
+@using Radyn.Web.Mvc;
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.Common.Component
+
+@model Radyn.Congress.DataStructure.Homa
+@{Html.Radyn().Theme("RadynEditor").Render(); }
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Description').summernote({
+            lang: '@SessionParameters.Culture',
+            focus: true,
+            elementname: 'Description',
+            height: 250,
+            codemirror: {
+                theme: 'united'
+            }
+        });
+        GetAliasList();
+    });
+
+    function GetAliasList() {
+        $("#DivCongressAlias").html("");
+        $.get("@Url.Content("~/Congress/Homa/GetAliasList")", { date: new Date().getTime() }, function (data) {
+            $("#DivCongressAlias").html(data).slideDown("slow");;
+        });
+    }
+</script>
+<input type="hidden" value="@Model.Id" name="HomaId" id="HomaId"/>
+<div class="fit">
+   
+    <div class=" item-row fit">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Title
+            </div>
+        </div>
+        <div class="table-row-item table-fit">
+            <div class="item">
+                @Html.EditorFor(x => x.CongressTitle)
+            </div>
+        </div>
+    </div>
+
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.InstallPath
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.EditorFor(model => model.InstallPath)
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                نوع رویداد
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.DropDownListFor(model => model.CongressTypeId, (SelectList)ViewBag.CongressTypeList, "")
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                Is Default
+            </div>
+        </div>
+        <div class="table-row-item drp">
+            <div class="item ">
+                @Html.RadioButtonFor(model => model.IsDefaultForConfig, true)@Resources.Common.Yes
+                @Html.RadioButtonFor(model => model.IsDefaultForConfig, false)@Resources.Common.No
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.VirtualDirectory
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.EditorFor(model => model.VirtualDirectory)
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.StartDate
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item date-picker">
+                @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.StartDate).Render(); }
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.EndDate
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item date-picker">
+                @{Html.Radyn().PersianDateTimePickerFor(Model, model => model.EndDate).Render(); }
+            </div>
+        </div>
+    </div>
+
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Common.Enable
+            </div>
+        </div>
+        <div class="table-row-item drp">
+            <div class="item">
+                @Html.RadioButtonFor(model => model.Enabled, true)@Resources.Common.Enable
+                @Html.RadioButtonFor(model => model.Enabled, false)@Resources.Common.Disable
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Order
+            </div>
+        </div>
+        <div class="table-row-item ">
+            <div class="item">
+                @Html.EditorFor(model => model.Order)
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.HoldingDays
+            </div>
+        </div>
+        <div class="table-row-item ">
+            <div class="item">
+                @Html.EditorFor(model => model.HoldingDays)
+            </div>
+        </div>
+    </div>
+    <div style="display: none">
+        @{
+            Html.RenderAction("GenerateEnterpriseNodeModify", "EnterPriseNode", new { Area = "EnterpriseNode", state = ViewBag.ENState, id = Model.OwnerId });
+        }
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap table-c-fit">
+            <div class="item">
+                @Resources.Congress.File
+            </div>
+        </div>
+        <div class="table-row-item table-c-fit">
+            <div class="item">
+                @{
+                    Html.RenderAction("MultiFileUploader", "FileUpload", new { area = "FileManager",  fileName = "NewPhoto" });
+
+                }
+            
+            </div>
+        </div>
+    </div>
+    <div class="item-row full_width">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Description
+            </div>
+        </div>
+        <div class="table-row-item ">
+            <div class="item">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @row = 12 })
+              
+            </div>
+        </div>
+    </div>
+    <div class="fit" id="DivCongressAlias" ></div>
+
+</div>
+
+
+

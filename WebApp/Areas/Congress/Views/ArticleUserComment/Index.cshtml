@@ -1,0 +1,177 @@
+﻿@using Radyn.Web.Mvc;
+
+@model Radyn.Congress.DataStructure.ArticleUserComment
+@{
+    ViewBag.Title = Resources.Congress.ArticleUserComment + "(" + Model.Article.Title + ")";
+    Layout = "~/Views/Shared/LookUpLayout.cshtml";
+}
+
+@section Head{
+
+    <script>
+            $(function () {
+                GetSearchComments();
+            });
+
+            function GetSearchComments() {
+                ShowPostBackLoader();
+                $("#DivCommentResult").html("");
+                $.post("@Url.Content("~/Congress/ArticleUserComment/Index")", $('form[action*="@Url.Content("~/Congress/ArticleUserComment/Index")"]').serialize(), function (data) {
+
+                    if (data != "false") {
+                        $("#DivCommentResult").html(data);
+                        $("#DivCommentResult").slideDown();
+                    }
+
+                    ShowRadynMessage();
+                }).complete(function () {
+                    HidePostBackLoader();
+                });
+
+        }
+
+        function SaveAllComments() {
+            var list = [];
+                $('input[name="Confirm-Check"]:checked').each(function () {
+                    list.push($(this).val());
+
+                })
+                var res = list.join(',');
+                $('#ConfirmList').val(res);
+                RadynPostForm("@Url.Content("~/Congress/ArticleUserComment/SaveAllComments")", "@Url.Content("~/Congress/ArticleUserComment/Index")", function (data) {
+
+                });
+
+        }
+    </script>
+}
+
+@section PageAction
+{
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Congress.Save).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/save.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "SaveAllComments()" }).Render(); }
+
+
+    </div>
+}
+@section PageActionDown
+{
+    <div class="button-div m-btn waves-green i-save">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Congress.Save).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/save.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "SaveAllComments()" }).Render(); }
+
+
+    </div>
+}
+
+
+<div class="radynForm">
+    <div class="fit">
+        <div class="table-row-roller cursor-pointer" onclick="slide('advance-articlecomment-search');">
+            <div class="item">
+                @Resources.Congress.Search
+                <span class="arrow toButton Basic-Attachment advance-articlecomment-search"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="fit advanceSetting" id="advance-articlecomment-search">
+
+        <div class="full_width-box">
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.User
+                    </div>
+                </div>
+                <div class="table-row-item table-fit">
+                    <div class="item">
+                        @Html.TextBox("NameOfUser")
+                    </div>
+
+                </div>
+            </div>
+
+            @Html.Hidden("ArticleId", (Guid)Model.ArticleId)
+            @Html.Hidden("ConfirmList")
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.SaveDate
+                    </div>
+                </div>
+                <div class="table-row-item table-fit">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.SaveDate)
+                    </div>
+
+                </div>
+            </div>
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Congress.SaveTime
+                    </div>
+                </div>
+                <div class="table-row-item table-fit">
+                    <div class="item">
+                        @Html.TextBoxFor(model => model.SaveTime)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="item-input">
+            <div class="table-row-cap">
+                <div class="item">
+
+                    <div style="float: right">
+                        @Resources.Congress.ConfirmAdmin
+                    </div>
+
+                </div>
+            </div>
+            <div class="table-row-item drp ">
+                <div class="item">
+                    @Html.RadioButton("ConfirmAdmin", "All", true)@Resources.Congress.All
+                    @Html.RadioButton("ConfirmAdmin", true, false)@Resources.Common.Yes
+                    @Html.RadioButton("ConfirmAdmin", false, false)@Resources.Common.No
+                </div>
+            </div>
+        </div>
+
+
+        <div class="button-div m-btn waves-blue i-search">
+            @{Html.Radyn().ImageActionLink().Text(Resources.Congress.Search).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/Search-Icon.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "GetSearchComments()" }).Render(); }
+
+
+        </div>
+
+    </div>
+    <input type="hidden" name="Result" id="Result" />
+    <div class="grid-guid">
+        <div class="grid-guid-title">
+            @Resources.Common.Help
+        </div>
+        <ul>
+            <li>
+                <img src="/Content/Images/Save.png">
+                @Resources.Congress.Confirm
+            </li>
+            <li>
+                <img src="/Content/Images/form-view.png">
+                @Resources.Common.Detail
+            </li>
+            <li>
+                <img src="/Content/Images/Delete-Close.png">
+                @Resources.Common.Delete
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="fit" id="DivCommentResult">
+
+    </div>
+</div>

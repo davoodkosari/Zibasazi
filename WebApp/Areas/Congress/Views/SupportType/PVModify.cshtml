@@ -1,0 +1,34 @@
+﻿@using Radyn.WebApp.Areas.Common.Component
+@model Radyn.Congress.DataStructure.SupportType
+@Html.ValidationSummary(true)
+<div class="radynForm">
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Title
+
+            </div>
+        </div>
+        <div class="table-row-item table-fit">
+            <div class="item">
+                @{
+                    Html.LanguageContentTextBoxFor(Model, x => x.Title);
+                }
+            </div>
+        </div>
+    </div>
+    <div class="item-row">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.ShowType
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.DropDownListFor(model => model.ShowType, (SelectList)ViewBag.SupporterShowType, new { })
+            </div>
+        </div>
+    </div>
+
+</div>
+

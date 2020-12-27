@@ -1,0 +1,160 @@
+﻿@model Guid
+@using Radyn.WebApp.AppCode.Security
+@{
+    ViewBag.Title = (SessionParameters.User != null ? SessionParameters.User.Username : "");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Radyn/chat.js")"></script>
+}
+@section Head{}
+@if (SessionParameters.User != null)
+{ 
+    <table border="0" cellpadding="3" cellspacing="0" width="100%" dir="ltr">
+        <tr>
+            <td colspan="2" style="text-align: left;">
+                <div id="message" align="left">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%">
+            </td>
+            <td width="15%;">
+                <div id="UsersPanel" style="direction: ltr;">
+                    <fieldset style="border-color: darkslategrey; font-size: 10px;">
+                        <legend>کاربران</legend>
+                        <br />
+                        <div id="onlineUsers" style="border: 1px solid gray; height: 300px; overflow-y: scroll;">
+                        </div>
+                    </fieldset>
+                </div>
+            </td>
+            <td width="70%;" style="text-align: left;">
+                <fieldset style="border-color: darkslategrey; font-size: 10px;">
+                    <legend>مکالمه</legend>
+                    <br />
+                    <div id="chatarea" style="border: 1px solid gray; height: 300px; overflow-y: scroll;">
+                    </div>
+                </fieldset>
+            </td>
+            <td width="10%">
+            </td>
+        </tr>
+        <tr>
+            <td width="10%">
+            </td>
+            <td width="15%;">
+            </td>
+            <td width="70%;" style="text-align: left;">
+                <div id="divStatus" style="height: 25px;">
+                </div>
+            </td>
+            <td width="10%">
+            </td>
+        </tr>
+        <form id="newmessage" action="" defaultbutton="newmessage_sendbutton" method="post">
+        <tr>
+            <td width="10%">
+            </td>
+            <td style="text-align: right;">
+                <div>
+                    <div id="others" style="display: none; direction: rtl;">
+                    </div>
+                    <input type="button" value="Enter" id="newmessage_sendbutton" onclick="sendNewMessage();" />
+                </div>
+                <div id="ReadytochatMessage" align="left">
+                    لطفا کاربری را جهت شروع مکالمه انتخاب نمائید
+                </div>
+            </td>
+            <td>
+                <textarea id="newmessage_messagebody" name="message" cols="45" rows="25" style="background-color: lightgray;
+                    width: 100%;"></textarea>
+                <input type="hidden" id="newmessage_username" value="@SessionParameters.User.Username" />
+                <input type="hidden" name="reciverUsename" id="reciverUsename" value="@ViewBag.ChatUser" />
+                <input type="hidden" name="reciverId" id="reciverId" value="@ViewBag.ReciverId" />
+                <input type="hidden" name="sessionId"  id="sessionId" value="@Model" />
+            </td>
+        </tr>
+        </form>
+    </table>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#ReadytochatMessage").hide();
+            $("#newmessage").hide();
+
+            $("#message").html("<img width='20px' src='/Content/Images/Loading.gif' />" + "در حال به روز شدن");
+            var refreshId = setInterval("updateChatArea()", 3000);
+
+            if ($("#reciverUsename").val() == "") {
+                $("#newmessage_sendbutton").hide();
+                $("#newmessage_messagebody").hide();
+                $("#newmessage").slideUp('slow');
+                $("#ReadytochatMessage").fadeIn();
+            } else {
+                $("#newmessage_sendbutton").slideDown('slow');
+                $("#newmessage_messagebody").slideDown('slow');
+
+            }
+            $("#newmessage_messagebody").keypress(function (event) {
+                if (event.keyCode == 13) {
+                    {
+                        event.preventDefault();
+                        $("#newmessage_sendbutton").click();
+                    }
+                }
+            });
+        });
+
+    </script>
+}
+<script type="text/javascript">
+
+    $("#chatarea").addClass("content");
+    $("#User").addClass("User");
+    $("#message").addClass("Message");
+    $("#ReadytochatMessage").addClass("Message");
+    $("#newmessage_messagebody").addClass("txt");
+    $("#newmessage_sendbutton").width(100).height(80);
+
+</script>
+<style>
+    .txt
+    {
+        font-weight: bold;
+        font-family: tahoma;
+        font-size: 15px;
+        color: darkblue;
+        text-align: right;
+        direction: rtl;
+        height: 40px;
+    }
+    .User
+    {
+        font-weight: bold;
+        font-family: tahoma;
+        font-size: 13px;
+        color: red;
+        text-align: right;
+        direction: rtl;
+    }
+    .Message
+    {
+        text-align: center;
+        font-size: 12px;
+        color: red;
+        background-color: lightgray;
+        border: dashed 1px steelblue;
+        width: 250px;
+    }
+    .content
+    {
+        font-weight: bold;
+        font-family: tahoma;
+        font-size: 13px;
+        color: darkblue;
+        text-align: left;
+        direction: ltr;
+        background-color: whitesmoke;
+    }
+</style>

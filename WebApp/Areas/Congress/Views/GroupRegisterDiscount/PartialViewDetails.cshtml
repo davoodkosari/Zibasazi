@@ -1,0 +1,37 @@
+﻿@using Radyn.Common.Definition
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+
+@model IEnumerable<Radyn.Congress.DataStructure.GroupRegisterDiscount>
+    @if (Model.Any())
+    {
+        <fieldset style="border-width: 1px;border-color:#DADADA;  margin: 10px auto">
+            <legend class="page-legend">
+                <label>
+                    @Resources.Congress.GroupRegisterDiscount
+                </label>
+            </legend>
+            <br />
+            <div class="fit internal-grid">
+                @{
+                    Html.Radyn().Grid(Model).Name("Grid").HtmlAttributes(new { style = "margin: 0 auto" }).Columns(columns =>
+                    {
+                        columns.Template(groupRegisterDiscount => Resources.Congress.From + " " + groupRegisterDiscount.From + " " + Resources.Congress.People + " " + Resources.Congress.To + " " + groupRegisterDiscount.To + " " + Resources.Congress.People).Title(Resources.Congress.Description).Width(300).HeaderHtmlAttributes(new { style = "text-align:center" });
+                        columns.Template(discountType => discountType.IsPrecent ? discountType.ValidAmount + "%" : discountType.ValidAmount.ToDecimal().ToString("n0") + " " + discountType.CurrencyType.ToEnum<Enums.CurrencyType>().GetDescriptionInLocalization()).Title(@Resources.Payment.DiscountValue).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+
+
+                    })
+                         //
+                         .Sortable(sorting => sorting.Enabled(true))
+                         .Pageable(paging => paging.Enabled(true))
+                        .Filterable(filtering => filtering.Enabled(true))
+                        .Footer(false).Render();
+                }
+
+            </div>
+            <br />
+
+        </fieldset>
+        <br />
+    }
+

@@ -1,0 +1,82 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Web.Mvc
+@using Radyn.Utility
+@using Radyn.WebApp.AppCode.Security
+@model IEnumerable<Radyn.Congress.DataStructure.Article>
+    @{
+        ViewBag.Title = Resources.Congress.Archive;
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    @section Head{
+        <script>
+            function DeleteAricle(id) {
+
+                if (confirm('تمامی اطلاعات مربوط به این مورد در تمام بخش ها حذف خواهد شد ، آیا از حذف این مقاله اطمینان دارید ؟')) {
+                    $.get("@Url.Content("~/Congress/ManagmentPanel/DeleteArticle")",
+                        { articleId: id, date: new Date().getTime() },
+                        function (data) {
+                            window.location = window.location;
+                          ShowRadynMessage();
+                        });
+                    ShowRadynMessage();
+                }
+            }
+
+            function RecycleArticle(id) {
+
+                if (confirm('آیا از بازیابی مطمئن هستید؟')) {
+                    $.get("@Url.Content("~/Congress/ManagmentPanel/RecycleArticle")",
+                        { articleId: id, date: new Date().getTime() },
+                        function (data) {
+                            window.location = window.location;
+                            ShowRadynMessage();
+                        });
+                    ShowRadynMessage();
+                }
+            }
+        </script>
+    }
+    @section PageTitle
+    {
+        @Resources.Congress.Archive
+    }
+    @section PageAction
+{
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/ManagmentPanel/UserArticles")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+        </div>
+
+    }
+    @section PageActionDown
+{
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/ManagmentPanel/UserArticles")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+        </div>
+    }
+
+    <div class="radynForm">
+        @{
+            Html.Radyn().Grid(Model).Name("RadynGrid").Columns(columns =>
+            {
+                columns.Template(x => x.Title + " - " + x.Code).Title(string.Format(Resources.Congress.ArticleTitle, SessionParameters.CurrentCongress.Configuration.ArticleTitle));
+                columns.Template(x => x.FirstNameAndLastName).Title(Resources.Congress.User);
+                columns.Template((x => x.ArticleType != null ? x.ArticleType.Title : "")).Title(Resources.Congress.ArticleType);
+
+                columns.Template(article => ((byte)article.Status).ToString().ToEnum<Enums.ArticleState>().GetDescriptionInLocalization()).Title(Resources.Congress.Status);
+                columns.Template(article => article.FinalState.ToString().ToEnum<Enums.FinalState>()).Title(Resources.Congress.FinalState).Encode(false).Filterable(false);
+                    //columns.Template(article => (article.PayStatus.HasValue ? article.PayStatus.Value.ToString().ToEnum<Enums.ArticlepayState>().ToString():"")).Title(Resources.Congress.PaymentStatus).Visible((bool)ViewBag.HasArticlePayment).Filterable(true);
+                    columns.Template(article =>
+                                        "<a style='cursor: pointer;' onclick=\"DeleteAricle('" + article.Id + "')\" >" +
+                                        " <img width='18' align='absmiddle' title='" + Resources.Common.Delete + "' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "' />" + "</a> | " +
+                                        "<a style='cursor: pointer;' onclick=\"RecycleArticle('" + article.Id + "')\" > " +
+                                                                    " <img width='18' align='absmiddle' title='" + Resources.Congress.Recycle + "' src='" + Url.Content("~/Content/Images/refresh.png") + "' />" + "</a>").Width(300).HtmlAttributes(new { @class = "text-align" }).Encode(false).Filterable(false);
+
+            }).Pageable(x => x.Enabled(true))
+    .Searchable(x => x.Enabled(false))
+    .Filterable(x => x.Enabled(true))
+    .Sortable(x => x.Enabled(true))
+    .Culture(@SessionParameters.Culture)
+    .Render();
+        }
+    </div>

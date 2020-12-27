@@ -1,0 +1,35 @@
+﻿@model Radyn.Common.DataStructure.LanguageContent
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" dir="@Resources.Common.Direction" style="text-align:@Resources.Common.Aligment; " >
+    <tr>
+        <td colspan="2">
+            <table border="0" cellpadding="0" width="670px" cellspacing="0" dir="@Resources.Common.Direction" style="text-align:@Resources.Common.Aligment; " >
+                <tr>
+                    <td>
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="EditRow">
+                                    @Resources.News.NewsContentLanguageId
+                                </td>
+                                <td class="EditFiled">
+                                    @Html.DropDownListFor(model => model.LanguageId, (SelectList)ViewBag.Lanuages, new { onchange = "changeCulture();" })
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td class="EditRow">
+                                    @Resources.Article.ArticleTitle
+                                </td>
+                                <td class="EditFiled">
+                                    @Html.DisplayFor(model => model.Value,new {style="width: 300px;height: 100px"})
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+</table>

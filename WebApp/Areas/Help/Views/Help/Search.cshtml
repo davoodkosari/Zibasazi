@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = @Resources.Common.Create + " " + @Resources.Help.HelpName;
+    Layout = "~/Views/Shared/LookUpLayout.cshtml";
+}
+@section Head{
+    <style type="text/css">
+        .SearchHelp {
+            background-color: whitesmoke;
+            border: 1px solid grey;
+            margin: 0 auto;
+            min-height: 150px;
+            width: 630px;
+            font-family: tahoma;
+            font-size: 12px;
+        }
+
+            .SearchHelp .header {
+                width: 100%;
+                margin: 2px 2px 2px 2px;
+            }
+
+            .SearchHelp .button {
+                background-color: aliceblue;
+                border: 1px solid lightslategray;
+                cursor: pointer;
+                height: 16px;
+                margin: 1px;
+                padding: 0 2px 2px;
+                text-align: center;
+                width: 65px;
+            }
+
+                .SearchHelp .button:hover, table tr:hover {
+                    background-color: lightsteelblue;
+                }
+
+            .SearchHelp .content span {
+                display: inline-block;
+                margin: 0 2px 2px;
+                width: 90px;
+            }
+
+            .SearchHelp .srchButton {
+                background-color: gainsboro;
+                height: 24px;
+                margin: 2px;
+                padding: 7px;
+                width: 288px;
+                border: 1px solid darkgray;
+            }
+
+            .SearchHelp .rowButton {
+                margin: 3px 1px;
+                width: 312px;
+            }
+
+            .SearchHelp .result {
+                overflow-y: auto;
+                height: 300px;
+            }
+
+        /********SearchResult********/
+        table td {
+            text-align: center;
+        }
+
+        table tr {
+            margin: 2px;
+        }
+    </style>
+    <script type="text/javascript">
+        function searchHelp() {
+            if ($('#title').val().replace(/\s+/g, "") == "" && $('#DefaultConent').val().replace(/\s+/g, "") == "")
+                ShowRadynMessage("@Resources.Common.NotFillAnyFieldInSearch");
+            else {
+                $.post('/Help/Help/Search', $('form[action^="/Help/Help/Search"]').serialize(), function (data) {
+                    if (data != "") {
+                        $("#SearchResultPanel").hide();
+                        $("#SearchResultPanel").html(data);
+                        $("#SearchResultPanel").slideDown('normal');
+                    }
+                    else {
+                        $("#SearchResultPanel").html("");
+                        $("#SearchResultPanel").slideUp('normal');
+                        ShowRadynMessage();
+                    }
+
+                });
+            }
+        }
+    </script>
+}
+@using (Html.BeginForm())
+{
+    <p style="display: none"></p>
+    <div style="direction: @Resources.Common.Direction; text-align: @Resources.Common.Aligment">
+
+
+
+
+        @Resources.Help.SearchHelp
+        <div class="radynForm">
+            <div class="item-row">
+                <div class="table-row-cap">
+                    <div class="item">
+                        @Resources.Help.HelpTitle
+                    </div>
+                </div>
+                <div class="table-row-item">
+                    <div class="item">
+                        <input type="text" name="title" id="title" />
+                    </div>
+                </div>
+            </div>
+            <div class="button-div m-btn waves-blue i-search">
+                <a onclick="searchHelp()">
+                    @Resources.Common.Search
+                </a>
+            </div>
+            <div class="button-div m-btn waves-red i-close">
+                <a onclick="Close_thisModal();">@Resources.Common.Cancel</a>
+
+            </div>
+
+            <div class="fit" id="SearchResultPanel">
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="result" id="SearchResultPanel">
+        </div>
+    </div>
+}

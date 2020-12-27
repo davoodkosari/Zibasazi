@@ -1,0 +1,143 @@
+﻿@model Radyn.WebDesign.DataStructure.Configuration
+<div class="radynForm">
+    
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.WebDesign.MaxNewsShow
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.TextBoxFor(model => model.MaxNewsShow, new { })
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.WebDesign.HeaderId
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.HeaderId, (SelectList)ViewBag.Contents, "", new {  })
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.WebDesign.FooterId
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.FooterId, (SelectList)ViewBag.Contents, "", new {  })
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.WebDesign.IntroPage
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.IntroPageId, (SelectList)ViewBag.Contents, "", new {  })
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.WebDesign.MiniSlideId
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.MiniSlideId, (SelectList)ViewBag.Slides, "", new {  })
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.WebDesign.AverageSlideId
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.AverageSlideId, (SelectList)ViewBag.Slides, "", new { })
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.WebDesign.BigSlideId
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.BigSlideId, (SelectList)ViewBag.Slides, "", new {  })
+                </div>
+            </div>
+        </div>
+
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.WebDesign.Container
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.DefaultContainerID, (SelectList)ViewBag.Container, "", new {  })
+                </div>
+            </div>
+        </div>
+
+        <div class="item-row">
+            <div class="table-row-cap">
+                <div class="item">
+                    @Resources.WebDesign.Html
+                </div>
+            </div>
+            <div class="table-row-item">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.DefaultHTMLID, (SelectList)ViewBag.Html, "", new {  })
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap  ">
+                <div class="item">
+                    @Resources.Congress.DefaultMenuHtml
+                </div>
+            </div>
+            <div class="table-row-item ">
+                <div class="item">
+                    @Html.DropDownListFor(model => model.DefaultMenuHtmlId, (SelectList)ViewBag.MenuHtmls, "", new {  })
+
+
+                </div>
+            </div>
+        </div>
+        <div class="item-row">
+            <div class="table-row-cap width30percent">
+                <div class="item">
+                    Fav Icon
+                </div>
+            </div>
+            <div class="table-row-item drp width18percent">
+                <div class="item">
+                    @{
+                        Html.RenderAction("FileUploader", "FileUpload", new { area = "FileManager", filePropName = "FavIcon", fileid = Model.FavIcon, showimage = true, fileName = "UpFileFavIcon" });
+                    }
+                </div>
+            </div>
+        </div>
+    
+</div>

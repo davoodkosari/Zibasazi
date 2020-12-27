@@ -1,0 +1,65 @@
+@using Radyn.Utility
+@using Radyn.Web.Mvc
+
+@model IEnumerable<Radyn.Slider.DataStructure.Slide>
+    @{
+        ViewBag.Title = Resources.Slider.SliderList;
+
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    @section Head{}
+    @section PageTitle
+{
+        @Resources.Slider.SliderList
+    }
+    @section PageAction
+{
+        <div class="button-div m-btn waves-blue i-add">
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/CongressSlide/Create")).Text(Resources.Slider.SliderNew).Align(Resources.Common.Aligment.ToEnum<ImageActionLink.Alignment>()).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "window.location='/Security/User/Menu?oid=" + Radyn.Common.Constants.OperationId.CongressOperationId + "'" }).Render(); }
+        </div>
+    }
+    @section PageActionDown
+{
+        <div class="button-div m-btn waves-blue i-add">
+            @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/CongressSlide/Create")).Text(Resources.Slider.SliderNew).Align(Resources.Common.Aligment.ToEnum<ImageActionLink.Alignment>()).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+
+
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "window.location='/Security/User/Menu?oid=" + Radyn.Common.Constants.OperationId.CongressOperationId + "'" }).Render(); }
+        </div>
+    }
+    @using (Html.BeginForm())
+    {
+        <div class="radynForm">
+            <div class="fit">
+                @{Html.Radyn().Grid(Model).Name("Grid").HtmlAttributes(new { style = "width:98%;margin: 0 auto" }).Columns(columns =>
+                      {
+                          columns.Template(slide => slide.Title).Title(Resources.Slider.Title).Width(500).HeaderHtmlAttributes(new { style = "text-align:center" });
+                          columns.Template(slide => slide.Enabled ? Resources.Common.Enable : Resources.Common.Disable).Title(Resources.Common.Enable).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                          columns.Template(slide =>
+                              "<a style='cursor: pointer;'  href='" + Url.Content("~/Slider/SlideItem/Index?slideId=" + slide.Id + "&externalurl=" + Url.Content("~/Congress/CongressSlide/Index")) + "'>" +
+                           " <img width='18' align='absmiddle' title='" + Resources.Slider.SlideItem + "' src='" + Url.Content("/Areas/Congress/Content/Images/gallery.png") + "' />" + "</a> | " +
+                           "<a style='cursor: pointer;'  href='" + Url.Content("~/Congress/CongressSlide/Details?Id=" + slide.Id) + "'>" +
+                           " <img width='18' align='absmiddle' title='" + Resources.Common.Detail + "' src='" + Url.Content("~/Content/Images/details.png") + "' />" + "</a> | " +
+                           "<a style='cursor: pointer;'  href='" + Url.Content("~/Congress/CongressSlide/Edit?Id=" + slide.Id) + "'> " +
+                           " <img width='18' align='absmiddle' title='" + Resources.Common.Edit + "' src='" + Url.Content("~/Content/Images/edit.png") + "' />" + "</a> | " +
+                           "<a style='cursor: pointer;'  href='" + Url.Content("~/Congress/CongressSlide/Delete?Id=" + slide.Id) + "'>" +
+                           " <img width='18' align='absmiddle' title='" + Resources.Common.Delete + "' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "' />" + "</a> ").Width(100).Encode(false).Filterable(false);
+
+                      })
+        //
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Enabled(true))
+        //.Footer(true)
+        .Render();}
+
+            </div>
+        </div>
+
+    }
+

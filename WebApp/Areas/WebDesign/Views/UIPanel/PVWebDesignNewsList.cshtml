@@ -1,0 +1,49 @@
+﻿@using Radyn.News.Tools
+@using Radyn.FileManager
+@using Radyn.Utility
+@using Radyn.WebApp.AppCode.Security
+@model List<Radyn.News.DataStructure.News>
+
+    <script type="text/javascript">
+            function NewsClick(id, title) {
+                window.location = "@Url.Content("~/WebDesign/UIPanel/WebDesignNewsView?id=")" + id + '/' + title;
+
+            }
+
+    </script>
+    <div class="widget">
+        <div class="widget-title">
+            <ul class="list-inline">
+                <li>
+                    <div class="border-title"></div>
+                </li>
+                <li>
+                    <span>آخرین اخبار </span>
+                </li>
+            </ul>
+        </div>
+        <div class="widget-content">
+            <div class="news-list">
+                @foreach (var news in Model)
+                {
+                    <div class="news-list-box ">
+
+                        <div class="news-box-content element-filter">
+                            <div class="news-list-title">
+                                <a style="text-decoration: none;"  href="@Url.Content("~/WebDesign/UIPanel/WebDesignNewsView?id="+news.Id)">
+                                    @news.NewsContent.Title1
+                                </a>
+                            </div>
+                            <br>
+
+                        </div>
+
+
+                    </div>
+                }
+                <div class="footer-aside">
+                    <a class="wide-button" href="@Url.Content("~/WebDesign/UIPanel/WebSiteNewsList")"> مشاهده همه </a>
+                </div>
+            </div>
+        </div>
+    </div>

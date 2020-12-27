@@ -1,0 +1,51 @@
+﻿@using Radyn.Web.Mvc
+@using Radyn.WebApp.AppCode.Security
+@model Radyn.Congress.DataStructure.Article
+@{
+    ViewBag.Title = Resources.Congress.Payment + " " + string.Format(Resources.Congress.Article, SessionParameters.CurrentCongress.Configuration.ArticleTitle) + " " + Model.Title;
+    Layout = "~/Areas/Congress/Views/Shared/CongressUserLayout.cshtml";
+}
+@section Head
+{
+
+}
+@section PageTitle
+{
+    @Resources.Congress.Payment  @Resources.Congress.Article @Model.Title
+}
+@section PageAction
+{
+    <div class="button-div m-btn waves-blue i-payment">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Payment.Continue).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("/Areas/Congress/Content/Images/pay.png")).Width("35").Height("35").ImagePosition(ImageActionLink.Position.Right).Submit().Render(); }
+    </div>
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserArticlePanel/IndexArticle")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+@section PageActionDown
+{
+    <div class="button-div m-btn waves-blue i-payment">
+        @{Html.Radyn().ImageActionLink().Text(Resources.Payment.Continue).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("/Areas/Congress/Content/Images/pay.png")).Width("35").Height("35").ImagePosition(ImageActionLink.Position.Right).Submit().Render(); }
+    </div>
+    <div class="button-div m-btn waves-red i-return">
+        @{Html.Radyn().ImageActionLink().NavigateUrl(Url.Content("~/Congress/UserArticlePanel/IndexArticle")).Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).Render();}
+    </div>
+}
+@Html.ValidationSummary(true)
+@{
+    Html.RenderAction("GetUserArticlePayment", "UserArticlePanel", new { area = "Congress" });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

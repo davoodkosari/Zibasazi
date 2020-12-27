@@ -1,0 +1,215 @@
+﻿.ui-h-menu {
+    border-color: #539A55;
+    background: #478b48;
+    background: -moz-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #478b48), color-stop(50%, #459748), color-stop(51%, #328533), color-stop(100%, #337435));
+    background: -webkit-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -o-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -ms-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: linear-gradient(to bottom, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#478b48', endColorstr='#337435', GradientType=0 );
+    -webkit-box-shadow: inset 0px 0px 0px 1px #74A875;
+    -moz-box-shadow: inset 0px 0px 0px 1px #74A875;
+    box-shadow: inset 0px 0px 0px 1px #74A875;
+}
+/*##############Superfish*/
+/*##Superfish-Horizontal*/
+.sf-menu a {
+    border-color: #539A55;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #74A875;
+    -moz-box-shadow: inset 0px 0px 0px 1px #74A875;
+    box-shadow: inset 0px 0px 0px 1px #74A875;
+}
+
+
+.sf-menu li, .sf-menu ul li, .sf-menu ul ul li {
+    background: #478b48;
+    background: -moz-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #478b48), color-stop(50%, #459748), color-stop(51%, #328533), color-stop(100%, #337435));
+    background: -webkit-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -o-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -ms-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: linear-gradient(to bottom, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#478b48', endColorstr='#337435', GradientType=0 );
+}
+
+
+
+.sf-menu li:hover,
+.sf-menu li.sfHover {
+    background: #93a030;
+    background: -moz-linear-gradient(top, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #93a030), color-stop(50%, #9cae26), color-stop(51%, #8ea018), color-stop(100%, #7b891f));
+    background: -webkit-linear-gradient(top, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    background: -o-linear-gradient(top, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    background: -ms-linear-gradient(top, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    background: linear-gradient(to bottom, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93a030', endColorstr='#7b891f', GradientType=0 );
+}
+
+.sf-menu > li.sfHover > a, .sf-menu > li.sfHover > a:hover,
+.sf-menu > li > a:hover, .sf-menu > li.active > a,
+.sf-menu > li.active > a:hover, .sf-menu > li > ul li > a:hover,
+.sf-menu > li > ul li.sfHover > a, .sf-menu ul ul li a:hover {
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #444444;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #AEB863;
+    -moz-box-shadow: inset 0px 0px 0px 1px #AEB863;
+    box-shadow: inset 0px 0px 0px 1px #AEB863;
+}
+/*##Superfish-Vertical*/
+/*Superfish##############*/
+.radyn-Resources {
+    border-color: #539A55;
+    background: #478b48;
+    background: -moz-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #478b48), color-stop(50%, #459748), color-stop(51%, #328533), color-stop(100%, #337435));
+    background: -webkit-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -o-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -ms-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: linear-gradient(to bottom, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#478b48', endColorstr='#337435', GradientType=0 );
+    -webkit-box-shadow: inset 0px 0px 0px 1px #74A875;
+    -moz-box-shadow: inset 0px 0px 0px 1px #74A875;
+    box-shadow: inset 0px 0px 0px 1px #74A875;
+}
+
+/*container*/
+.container-hd {
+    border: 1px solid #539A55;
+}
+
+.container-header {
+    background: #67b46a;
+    background: -moz-linear-gradient(top, #67b46a 0%, #66be68 50%, #4faf51 51%, #4c984e 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #67b46a), color-stop(50%, #66be68), color-stop(51%, #4faf51), color-stop(100%, #4c984e));
+    background: -webkit-linear-gradient(top, #67b46a 0%, #66be68 50%, #4faf51 51%, #4c984e 100%);
+    background: -o-linear-gradient(top, #67b46a 0%, #66be68 50%, #4faf51 51%, #4c984e 100%);
+    background: -ms-linear-gradient(top, #67b46a 0%, #66be68 50%, #4faf51 51%, #4c984e 100%);
+    background: linear-gradient(to bottom, #67b46a 0%, #66be68 50%, #4faf51 51%, #4c984e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#67b46a', endColorstr='#4c984e', GradientType=0 );
+    border-bottom: solid 1px #539A55;
+}
+
+
+
+
+/**/
+
+/*MENU*/
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border-color: #539A55;
+    background: #478b48;
+    background: -moz-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #478b48), color-stop(50%, #459748), color-stop(51%, #328533), color-stop(100%, #337435));
+    background: -webkit-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -o-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: -ms-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    background: linear-gradient(to bottom, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#478b48', endColorstr='#337435', GradientType=0 );
+    -webkit-box-shadow: inset 0px 0px 0px 1px #74A875;
+    -moz-box-shadow: inset 0px 0px 0px 1px #74A875;
+    box-shadow: inset 0px 0px 0px 1px #74A875;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    border-color: #A2B03D;
+    background: #93a030;
+    background: -moz-linear-gradient(top, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #93a030), color-stop(50%, #9cae26), color-stop(51%, #8ea018), color-stop(100%, #7b891f));
+    background: -webkit-linear-gradient(top, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    background: -o-linear-gradient(top, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    background: -ms-linear-gradient(top, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    background: linear-gradient(to bottom, #93a030 0%, #9cae26 50%, #8ea018 51%, #7b891f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93a030', endColorstr='#7b891f', GradientType=0 );
+    -webkit-box-shadow: inset 0px 0px 0px 1px #AEB863;
+    -moz-box-shadow: inset 0px 0px 0px 1px #AEB863;
+    box-shadow: inset 0px 0px 0px 1px #AEB863;
+}
+
+/* General link styling */
+
+
+    /* The hover state of the menu/submenu links */
+    .cssmenu > ul li a:hover,
+    .cssmenu > ul li:hover > a {
+        border-color: #539A55;
+        background: #478b48;
+        background: -moz-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, #478b48), color-stop(50%, #459748), color-stop(51%, #328533), color-stop(100%, #337435));
+        background: -webkit-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+        background: -o-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+        background: -ms-linear-gradient(top, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+        background: linear-gradient(to bottom, #478b48 0%, #459748 50%, #328533 51%, #337435 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#478b48', endColorstr='#337435', GradientType=0 );
+        -webkit-box-shadow: inset 0px 0px 0px 1px #74A875;
+        -moz-box-shadow: inset 0px 0px 0px 1px #74A875;
+        box-shadow: inset 0px 0px 0px 1px #74A875;
+        color: #ffffff;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+    }
+
+/* THE SUBMENUS */
+.cssmenu > ul ul {
+    /* Background & effects */
+    background-color: #F2F7F9;
+    border: 1px solid #539A55;
+}
+
+
+
+/* End Vertical menu =====================================================================================*/
+
+
+/*INTERNALMAIL*/
+.nav-mail-item {
+    background-color: #478b48;
+    border-color: #539A55;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #74A875;
+    -moz-box-shadow: inset 0px 0px 0px 1px #74A875;
+    box-shadow: inset 0px 0px 0px 1px #74A875;
+}
+
+    .nav-mail-item:first-child {
+        border-top: 1px solid #539A55;
+    }
+
+.nav-mailText {
+    color: #ffffff;
+}
+
+.nav-mail-item:hover, .nav-mail-item-selected {
+    background-color: #93a030;
+}
+
+.nav-mail-item span {
+    background-color: #337435;
+    border-color: #539A55;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #74A875;
+    -moz-box-shadow: inset 0px 0px 0px 1px #74A875;
+    box-shadow: inset 0px 0px 0px 1px #74A875;
+}
+
+.nav-mail-item:hover span {
+    background-color: #7b891f;
+}
+
+.userinfo span {
+    background-color: #8D992C;
+    color: #ffffff;
+}
+
+    .userinfo span div {
+        background-color: #459748;
+        font-size: 15px;
+    }
+
+    .gv-header {
+    background-color: #5EBA61;
+    border-color: #4F9451;
+    color: #FFFFFF;
+}
+
+    .gv-row-style:hover, .gv-alternaterow-style:hover {
+        background-color: #F4BF8A; /*#73a039;*/
+    }

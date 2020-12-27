@@ -1,0 +1,50 @@
+﻿@using Radyn.Utility
+@using Enums = Radyn.Congress.Tools.Enums
+@model System.Collections.Generic.IEnumerable<Radyn.Congress.Tools.ModelView.SerachResultvalue>
+@{
+    ViewBag.Title = Resources.Congress.SearchResult;
+    Layout = "~/Views/Shared/User_Layout.cshtml";
+}
+
+@section Head
+{}
+<div class="container-hd">
+    <div class="container-header">
+        <div class="container-header-item">
+            <img src="/Areas/Congress/Content/Images/search-result-wh.png" />
+            @Resources.Congress.SearchResult
+        </div>
+    </div>
+    <div class="container-box">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+             {
+                 <div class="search-result">
+                     @if (item.SearchType.Equals(Enums.SearchType.Content))
+                     {
+                         <span></span><a href="/ContentManager/Content/View/@item.Key.ToInt()/@item.ResultValue">@item.ResultValue</a>
+                         <br/>
+                         <p>
+                             @Resources.Congress.Section
+                             @(item.SearchType.ToString().ToEnum<Enums.SearchType>().GetDescription())
+                         </p>
+                     }
+                     else
+                     {
+                         <span></span>
+                         <a href="/Congress/UIPanel/CongressNewsView/@item.Key.ToInt()/@item.ResultValue">@item.ResultValue</a>
+                         <br/>
+                         <p>
+                             @Resources.Congress.Section
+                             @(item.SearchType.ToString().ToEnum<Enums.SearchType>().GetDescription())
+                         </p>
+                     }
+                 </div>
+             }
+        }
+       
+
+    </div>
+</div>
+

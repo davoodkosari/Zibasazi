@@ -1,0 +1,17 @@
+﻿@using System.Linq
+@using Radyn.Security.DataStructure
+@using Radyn.WebApp.AppCode.Security
+<br />
+@if (SessionParameters.User != null)
+{
+    foreach (var item in ((IEnumerable<User>)ViewBag.Users)
+        .Where(user => !user.Username.Equals(SessionParameters.User.Username)))
+    {
+    <div id="div-@item.Id" align="left" style="background-color:@(ViewBag.ChatUser == item.Username ? "lightgoldenrodyellow" : "transparent");color:black;cursor: pointer;border-bottom: dashed 1px brown;" onmouseout="clearColor('#div-@item.Id');" onmouseover="setcolor('#div-@item.Id');">
+        <a style="text-decoration:none;" href="javascript:;" onclick="newChat('@item.Username');">
+            <img align="absmiddle" src="@(((IEnumerable<User>)this.ViewBag.OnlineUsers).Any(x => x.Username.Equals(item.Username)) ? Url.Content("~/Content/Images/online.png") : Url.Content("~/Content/Images/offline.png"))" border="0" />@item.Username</a>
+    </div>
+    <div style="height: 2px;">
+    </div>
+    }
+}

@@ -1,0 +1,60 @@
+﻿@using Radyn.Utility
+@using Radyn.Web.Mvc;
+@model IEnumerable<Radyn.ContentManager.DataStructure.HtmlDesgin>
+    @{
+        ViewBag.Title = Resources.ContentManager.HtmlList;
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+    }
+@section Head{
+    <script>
+        function LookUpFormPartialLoads(htmlDesginId) {
+            ShowModal("@Url.Content("~/ContentManager/PartialLoad/Index")", { htmlId:htmlDesginId, date: new Date().getTime() });
+
+
+        }
+    </script>
+    }
+    @section PageTitle
+{
+        @Resources.ContentManager.HtmlList
+    }
+    @section PageAction
+{
+        <div class="button-div m-btn waves-blue i-add">
+            @{ Html.Radyn().ImageActionLink().ActionName("Create").ControllerName("Html").Area("WebDesign").Text(Resources.ContentManager.NewHtml).Align(Resources.Common.Aligment.ToEnum<ImageActionLink.Alignment>()).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "window.location='/Security/User/Menu?oid=" + Radyn.Common.Constants.OperationId.WebDesignOperationId + "'" }).Render(); }
+        </div>
+    }
+    @section PageActionDown
+{
+        <div class="button-div m-btn waves-blue i-add">
+            @{ Html.Radyn().ImageActionLink().ActionName("Create").ControllerName("Html").Area("WebDesign").Text(Resources.ContentManager.NewHtml).Align(Resources.Common.Aligment.ToEnum<ImageActionLink.Alignment>()).ImageUrl(Url.Content("~/Content/Images/Add.png")).ImagePosition(ImageActionLink.Position.Right).Render(); }
+        </div>
+        <div class="button-div m-btn waves-red i-return">
+            @{Html.Radyn().ImageActionLink().Text(Resources.Common.Return).Align(ImageActionLink.Alignment.Left).ImageUrl(Url.Content("~/Content/Images/go-back.png")).ImagePosition(ImageActionLink.Position.Right).OtherAttribute(new { onclick = "window.location='/Security/User/Menu?oid=" + Radyn.Common.Constants.OperationId.WebDesignOperationId + "'" }).Render(); }
+        </div>
+    }
+        <div class="radynForm">
+    @{Html.Radyn().Grid(Model).Name("Grid").HtmlAttributes(new { style = "width:98%;margin: 0 auto" }).Columns(columns =>
+        {
+            columns.Template(desgin => desgin.Title).Title(Resources.Common.Title).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+            columns.Template(container => (
+                ("<a style='cursor: pointer;'  href='" + Url.Content("/ContentManager/UIDesginPanel/Index?Id=" + container.Id) + "'> " +
+                 " <img width='18' align='absmiddle' title='" + Resources.ContentManager.DesigneLayout + "' src='" + Url.Content("~/Content/Images/Design.png") + "' />" + "</a> | ")) +
+                                          "<a style='cursor: pointer;'  href='" + Url.Content("/WebDesign/Html/Details?Id=" + container.Id) + "'>" +
+                                          " <img width='18' align='absmiddle' title='" + Resources.Common.Detail + "' src='" + Url.Content("~/Content/Images/details.png") + "' />" + "</a> | " +
+                                          "<a style='cursor: pointer;'  href='" + Url.Content("/WebDesign/Html/Edit?Id=" + container.Id) + "'> " +
+                                          " <img width='18' align='absmiddle' title='" + Resources.Common.Edit + "' src='/Content/Images/edit.png' />" + "</a> | " +
+                                          "<a style='cursor: pointer;'  href='" + Url.Content("/WebDesign/Html/Delete?Id=" + container.Id) + "'>" +
+                                          " <img width='18' align='absmiddle' title='" + Resources.Common.Delete + "' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "' />" + "</a> "+
+                                          ("| <a style='cursor: pointer;' onclick=\"LookUpFormPartialLoads(" + "'" + container.Id + "'" + ");\"  >" +
+                                           " <img width='18' title='" + Resources.ContentManager.DesigneLayout + "' align='absmiddle'  src='" + Url.Content("/Areas/Congress/Content/Images/sub-gallery.png") + "' />" + "</a>  "  )).Encode(false).Width(150).Encode(false).Filterable(false);
+        })
+                                      .Sortable(sorting => sorting.Enabled(true))
+                                      .Pageable(paging => paging.Enabled(true))
+                                      .Filterable(filtering => filtering.Enabled(true))
+                                      .Footer(false).Render();}
+        </div>

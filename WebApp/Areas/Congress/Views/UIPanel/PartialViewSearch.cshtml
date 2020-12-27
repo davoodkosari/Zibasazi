@@ -1,0 +1,22 @@
+﻿<script type="text/javascript">
+    function SearchValue() {
+        var SerachType = document.getElementById("SerachTypeId");
+        var SerachTypevalue = SerachType.value;
+        var txtvalue = document.getElementById("TxtSearchValue").value;
+        if (txtvalue != 'جستجو ...' & txtvalue != "")
+        { window.location = "/Congress/UIPanel/Search?SearchValue=" + txtvalue + "&SerachType=" + SerachTypevalue; }
+    }
+
+</script>
+<div class="container-box">
+    <div class="search">
+        <input style="border: 1px solid;" name="TxtSearchValue" id="TxtSearchValue" type="text" value="@Resources.Common.Search ..." onclick="if (this.value == '@Resources.Common.Search ...') this.value = '';"
+               onblur="if(this.value.trim()=='')this.value='@Resources.Common.Search ...';" />
+        @Html.DropDownList("SerachTypeId", (SelectList)ViewBag.SerachTypes)
+        <a onclick="SearchValue();"></a>
+    </div>
+</div>
+
+
+
+

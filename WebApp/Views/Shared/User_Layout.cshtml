@@ -1,0 +1,121 @@
+﻿@using Radyn.Congress.Tools
+@using Radyn.Web.Mvc
+@using Radyn.Web.Mvc.Utility
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.Congress.Tools
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+@section Head{
+
+    @{Html.Radyn().Theme("HomaBase").Render();}
+    @{Html.Radyn().Theme("Common").Render();}
+
+
+    <link href="/App_Themes/HomaBase/CSS/@Resources.Design.HomaDirection" rel="stylesheet" />
+    <link href="/App_Themes/HomaBase/CSS/Menu/@Resources.Design.Superfish" rel="stylesheet" />
+
+    @{Html.Radyn().Theme(SessionParameters.CurrentCongress != null && !string.IsNullOrEmpty(SessionParameters.CurrentCongress.Configuration.Theme) ? SessionParameters.CurrentCongress.Configuration.Theme : "Default").Render();}
+    @{
+        if (SessionParameters.CurrentCongress != null && SessionParameters.CurrentCongress.Configuration != null && !string.IsNullOrEmpty(SessionParameters.CurrentCongress.Configuration.ThemeColorURL))
+        {
+            <link href="@SessionParameters.CurrentCongress.Configuration.ThemeColorURL" rel="stylesheet" />
+
+        }
+    }
+    <!-- END----HomaTheme-->
+    <!-- Start----Runtime-->
+    @{Html.HtmlEncoder(AppExtention.GetCongressResources(Enums.UseLayout.UserLayout)); }
+    <!-- END----Runtime-->
+    <script>
+
+        // initialise plugins
+        jQuery(function () {
+            jQuery('#example').superfish({
+                //useClick: true
+            });
+            $("ul.sf-menu li").addClass("ui-state-default");
+
+            $("ul.sf-menu li").hover(function () { $(this).addClass('ui-state-hover'); },
+                function () { $(this).removeClass('ui-state-hover'); });
+
+        });
+        $(document).ready(function () {
+
+            SetBachgroundColor();
+        });
+
+        function SetBachgroundColor() {
+            $(document).ready(function () {
+                var a = '@(SessionParameters.CurrentCongress != null && SessionParameters.CurrentCongress.Configuration.BackgroundIsImage)';
+                var b = '@(SessionParameters.CurrentCongress != null && SessionParameters.CurrentCongress.Configuration.BackgroundIsImage && SessionParameters.CurrentCongress.Configuration.BackgroundImage!=null)';
+                var c = '@(SessionParameters.CurrentCongress != null && !SessionParameters.CurrentCongress.Configuration.BackgroundIsImage && !string.IsNullOrEmpty(SessionParameters.CurrentCongress.Configuration.BackgroundColor))';
+                if (a == "True" && b == "True") {
+                    document.getElementsByTagName("body")[0].style.background = 'url("@(Radyn.FileManager.FileManagerContants.FileHandlerRoot+(SessionParameters.CurrentCongress!=null?SessionParameters.CurrentCongress.Configuration.BackgroundImage:Guid.Empty))")';
+
+                }
+                if (a == "False" && c == "True") {
+                    document.getElementsByTagName("body")[0].style.backgroundColor = "#" + '@(SessionParameters.CurrentCongress!=null?SessionParameters.CurrentCongress.Configuration.BackgroundColor:"none")';
+                }
+            });
+        }
+    </script>
+
+    @RenderSection("Head", false)
+}
+
+
+<div class="ui-sheet ui-design">
+
+    <div class="ui-top-bar language-bar">
+        <div>
+            @{
+                Html.RenderAction("CultureBar", "CongressLanguage", new { area = "Congress" });
+            }
+        </div>
+    </div>
+    <div class="ui-header">
+        @{Html.RenderAction("GetHeader", "UIPanel", new { area = "Congress" });}
+    </div>
+    <div class="ui-h-menu">
+        @{Html.RenderAction("GetMenuHorizontal", "UIPanel", new { area = "Congress" });}
+    </div>
+    <div class="ui-content-nav ">
+        <div class="row">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div class="ui-footer">
+        @{Html.RenderAction("GetFoter", "UIPanel", new { area = "Congress" });}
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+﻿@using Radyn.Web.Mvc
+@using Radyn.WebApp.Areas.EnterpriseNode.ExtentionTools
+@model Dictionary<Radyn.Congress.DataStructure.UserRegisterPaymentType, bool>
+    <div class="item-row">
+        <div class="table-row-item table-c-fit ">
+            @{
+                const int column = 3;
+
+                var couter = -1;
+                foreach (var valuePair in Model)
+                {
+                    couter++;
+                    if (couter % column == 0)
+                    {
+                    }
+
+                    <div class="item-check">
+                        @{Html.Radyn().CheckBox().Checked(valuePair.Value).Name("SelectedType").Value(valuePair.Key.Id.ToString()).Enabled((bool)ViewBag.EditMode).Render(); }
+                        <label>@valuePair.Key.Title</label>
+                    </div>
+
+                }
+            }
+        </div>
+    </div>

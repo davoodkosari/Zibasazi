@@ -1,0 +1,54 @@
+﻿@using Radyn.Common.Component
+@using Radyn.Congress.Tools
+@using Radyn.FileManager
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.ContentManager.Componenet
+@model List<Radyn.Gallery.DataStructure.Gallery>
+    @{
+        ViewBag.Title = Resources.Congress.CongressGallery;
+        Layout = "~/Views/Shared/User_Layout.cshtml";
+    }
+    @section Head{
+        <script type="text/javascript">
+            function GetItems(id) {
+                $.get("@Url.Content("~/Gallery/Photo/GalleryPhotos")", { galleyId: id, date: new Date().getTime() }, function (data) {
+                    if (data != "") {
+                        window.location = '@Url.Content("/Gallery/Photo/GalleryPhotos?galleyId=")' + id;
+                    }
+                    ShowRadynMessage();
+                });
+
+            }
+
+        </script>
+    }
+    @if (SessionParameters.CurrentCongress.Configuration.Container == null)
+    {
+        <div class="container-hd main-box-widget">
+
+            <div class="container-header">
+                <div class="container-header-item">
+                    <span>@Resources.Gallery1.Galleryname</span>
+
+                </div>
+            </div>
+            <div class="container-box ">
+                <div id="_mainwrapper">
+                    @{
+                        Html.RenderAction("PrepareGalleryList", "CongressGallery", new { area = "Congress" });
+                    }
+
+
+
+                </div>
+            </div>
+        </div>
+    }
+
+
+    else
+    {
+        
+        Html.RenderAction("PrepareGalleryList", "CongressGallery", new {area = "Congress"});
+    }
+

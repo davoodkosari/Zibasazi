@@ -1,0 +1,71 @@
+﻿@using Radyn.Web.Mvc
+@using Radyn.WebApp
+
+@model IEnumerable<Radyn.Congress.DataStructure.ArticleUserComment>
+
+
+
+
+    <script>
+        function LookUpFormcomments(id, state) {
+            ShowModal("/Congress/ArticleUserComment/Details?commentId=" + id + "&status=" + state);
+        }
+
+        function SaveComment(id) {
+          var value = $('input[id="che-' + id + '"]').is(':checked');
+            ShowPostBackLoader();
+            RadynPostData("@Url.Content("~/Congress/ArticleUserComment/UpdateConfirm")", { id: id, confirm: value }, function (data) {
+                    
+                });
+        }
+        function SelectAll() {
+            var value = $('#confirm-all').is(':checked');
+             if (value) {
+                $('input[name="Confirm-Check"]').each(function () {
+                    $(this).attr('checked', 'checked');
+
+                });
+            } else {
+                $('input[name="Confirm-Check"]').each(function () {
+                    $(this).removeAttr('checked');
+
+                });
+                
+            }
+        }
+    </script>
+
+
+
+
+    
+
+    <div id="radyn_gird">
+
+        <div style="margin-top: 10px;">
+            <div class="fit">
+                @{
+                    Html.Radyn().Grid(Model).Name("GridComments").HtmlAttributes(new { style = "width:100%;margin: 0 auto" }).Columns(columns =>
+                    {
+
+
+                        columns.Template(x => ("<input " + (x.ConfirmAdmin ? "checked" : "") + " type='checkbox' value='" + x.Id + "' id='che-" + x.Id + "' name='Confirm-Check' />")).Title(Resources.Congress.Confirm + "" + "<input onchange='SelectAll()' type='checkbox' id='confirm-all' />").HeaderHtmlAttributes(new { style = "text-align:center" }).Width(100).Encode(false).Filterable(false);
+                        columns.Template(x => x.Name).Title(Resources.Congress.Name).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                        columns.Template(x => x.Article.Title).Title(Resources.Congress.Title).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                        columns.Template(x => x.SaveDate).Title(Resources.Congress.SaveDate).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                        columns.Template(x => x.SaveTime).Title(Resources.Congress.SaveTime).Width(200).HeaderHtmlAttributes(new { style = "text-align:center" });
+                      
+                        columns.Template(x => ("<a style=\"text-align:left;cursor: pointer;\" onClick=\"LookUpFormcomments('" + x.Id + "','"+PageMode.Details+"')\"><img width='17' align='absmiddle' title='" + Resources.Common.View + "' src='" + Url.Content("~/Content/Images/form-view.png") + "' /></a> |" +
+                                "<a style=\"text-align:left;cursor: pointer;\" onClick=\"LookUpFormcomments('" + x.Id + "','"+PageMode.Delete+"')\"><img width='17' style=\"margin: 0 3px 0 0\"  align='absmiddle' title='" + Resources.Common.Delete + "' src='" + Url.Content("~/Content/Images/Delete-Close.png") + "' /></a> |" +
+                                "<a style=\"text-align:left;cursor: pointer;\" onClick=\"SaveComment('" + x.Id + "')\"><img width='15' style=\"margin: 0 3px \" align='absmiddle' title='" + Resources.Congress.Save + "' src='" + Url.Content("~/Content/Images/Save.png") + "' /></a>")).Title("").Width(200).HeaderHtmlAttributes(new { style = "text-align:center" }).Encode(false).Filterable(false);
+
+                    })
+                //
+                .Sortable(sorting => sorting.Enabled(true))
+                .Pageable(paging => paging.Enabled(true))
+                .Filterable(filtering => filtering.Enabled(true))
+                //              .Footer(true)
+                .Render();}
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,472 @@
+﻿@using Radyn.Congress.DataStructure
+@using Radyn.Congress.Tools
+@using Radyn.FileManager
+@using Radyn.FormGenerator.Tools
+@using Radyn.Web.Mvc
+@using Radyn.Web.Mvc.Utility
+@using Radyn.WebApp.AppCode.Security
+@using Radyn.WebApp.Areas.Common.Component
+@using Radyn.WebApp.Areas.Congress.Tools
+@using Radyn.WebApp.Areas.FormGenerator.Tools
+@using System.Web.Mvc
+
+@model Article
+@{Html.Radyn().Theme("RadynEditor").Render(); }
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        changePivotCategory();
+        AuthorList();
+        $('#Abstract').summernote({
+            lang: '@SessionParameters.Culture',
+            focus: true,
+            height: 250,
+            disablelink: true,
+            elementname: 'Abstract',
+            disableselectimage: true,
+            disableCodeView: true,
+            codemirror: {
+                theme: 'monokai'
+            }
+        });
+        $('#ArticleOrginalText').summernote({
+            lang: '@SessionParameters.Culture',
+            focus: true,
+            height: 250,
+            disablelink: true,
+            elementname: 'ArticleOrginalText',
+            disableselectimage: true,
+            codemirror: {
+                theme: 'united'
+            }
+        });
+        var abstractWordCount = document.getElementById("AbstractWordCount").value;
+        $("#rcounter").html(abstractWordCount).hide();
+        $("#rcounter").fadeIn();
+
+        var articleOrginalWordCount = document.getElementById("ArticleOrginalWordCount").value;
+        $("#rcounterarticle").html(articleOrginalWordCount).hide();
+        $("#rcounterarticle").fadeIn();
+        GetCount();
+        $("#divAbstractText").bind('input blur focus', function () {
+            GetCount();
+        });
+        $("#divArticleText").bind('input blur focus', function () {
+            GetCountArticle();
+        });
+
+
+    });
+    function countWords() {
+        var object = $('#Abstract');
+        if (object != undefined) {
+            var s = $('#Abstract').val();
+            var wordCount = 0;
+            wordCount = (s.split(" ").length);
+            return wordCount;
+        }
+        return 0;
+    }
+    function countWordsArticle() {
+        var object = $('#ArticleOrginalText');
+        if (object != undefined) {
+            var s = $('#ArticleOrginalText').val();
+            var wordCount = 0;
+            wordCount = (s.split(" ").length);
+            return wordCount;
+        }
+        return 0;
+    }
+    function GetCount() {
+
+        var abstractWordCount = document.getElementById("AbstractWordCount").value;
+        var object = $('#Abstract');
+        if (object != undefined) {
+            var wordcount = $('#Abstract').val();
+            if (wordcount != "" && wordcount != undefined) {
+                var number = countWords();
+                var counter = parseInt(abstractWordCount) - number;
+                $("#Wordcounter").html('@Resources.Congress.WordCount' + "(" + number + ")");
+                $("#rcounter").html(counter);
+                $("#rcounter").fadeIn();
+                if (counter > 0) {
+                    $("#rcounter").css("color", "#5500fd");
+                } else {
+                    $("#rcounter").css("color", "red");
+                }
+            } else {
+                $("#rcounter").html(abstractWordCount);
+                $("#rcounter").fadeIn();
+            }
+        }
+
+    }
+
+    function GetCountArticle() {
+        var object = $('#ArticleOrginalText');
+        if (object != undefined) {
+            var articleOrginalWordCount = document.getElementById("ArticleOrginalWordCount").value;
+            var wordcount = $('#ArticleOrginalText').val();
+            if (wordcount != "" && wordcount != undefined) {
+                var number = countWordsArticle();
+                var counter = parseInt(articleOrginalWordCount) - number;
+                $("#Wordarticlecounter").html('@Resources.Congress.WordCount' + "(" + number + ")");
+                $("#rcounterarticle").html(counter);
+                $("#rcounterarticle").fadeIn();
+                if (counter > 0) {
+                    $("#rcounterarticle").css("color", "#5500fd");
+                } else {
+                    $("#rcounterarticle").css("color", "red");
+                }
+            } else {
+                $("#rcounterarticle").html(articleOrginalWordCount);
+                $("#rcounterarticle").fadeIn();
+            }
+        }
+
+    }
+        function AuthorList() {
+            
+                $("#DivSetAuthorList").html("");
+                $.get("@Url.Content("~/Congress/ArticlePanel/GetAuthorList")",
+                    { date: new Date().getTime() },
+                    function(data) {
+                        $("#DivSetAuthorList").html(data);
+                        $("#DivSetAuthorList").slideDown();
+                    });
+
+
+    }
+
+    function GetPrivotForm() {
+        $("#Articleform").html("");
+        var id = $('#PivotId').val();
+        var url = '@(AppExtention.CongressMoudelName)' + "-/Congress/ArticlePanel/Article";
+        if (id != undefined && id != "") {
+            url += "?PivotId=" + id;
+        }
+        var modelname = '@Model.GetType().Name';
+        var modelId = '@Model.Id.ToString()';
+        $.get("@Url.Content("~/FormGenerator/UI/RenderForm")",
+            { url: url, modelname: modelname, modelid: modelId, id: new Date().getTime() },
+            function(data) {
+                if (data != "false") {
+                    $("#Articleform").html(data).slideDown("slow");
+                }
+            });
+
+    }
+
+    function changePivotCategory() {
+        var id = $('#PivotCategoryId').val();
+        $.get("@Url.Content("~/Congress/Pivot/GetPivot")",
+            { categoryId: id, date: new Date().getTime() },
+            function(data) {
+                $("#PivotId").html('');
+                if (data != undefined) {
+                    for (var i = 0; i < data.length; i++) {
+                        var op = $('<option>').attr('value', data[i].Id).text(data[i].Title);
+                        if ('@Html.Encode(Model.PivotId)' == data[i].Id) {
+                            op.attr('selected', 'selected');
+                        }
+                        $("#PivotId").append(op);
+                    }
+
+
+                }
+
+            }).complete(function() {
+            GetPrivotForm();
+        });
+    }
+    </script>
+<input type="hidden" value="@Model.Id" id="Id" name="Id" />
+<input type="hidden" value="@(SessionParameters.CurrentCongress.Configuration.AbstractWordCount)" name="AbstractWordCount" id="AbstractWordCount" />
+<input type="hidden" value="@(SessionParameters.CurrentCongress.Configuration.ArticleOrginalWordCount)" name="ArticleOrginalWordCount" id="ArticleOrginalWordCount" />
+
+<div id="divfix" class="fit">
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.PivotCategory
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                @Html.DropDownListFor(model => model.Pivot.PivotCategoryId, (SelectList)ViewBag.Category, "", new { onchange = "changePivotCategory()", id = "PivotCategoryId" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                @Resources.Congress.Pivot
+            </div>
+        </div>
+        <div class="table-row-item">
+            <div class="item">
+                <select id="PivotId" name="PivotId" class="form-control" onchange = "GetPrivotForm();"></select>
+            </div>
+        </div>
+    </div>
+    <div class="fit item-input">
+        <div class="table-row-cap">
+            <div class="item">
+                <span style="color: red">*</span>  @string.Format(Resources.Congress.ArticleTitle, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+            </div>
+        </div>
+        <div class="table-row-item table-fit" style="width: 100%;">
+            <div class="item">
+                @{
+
+                    if (SessionParameters.CurrentCongress.Configuration.MultiLanguageArticle.Equals(true))
+                    {
+                        <div>
+                            @{
+                                Html.LanguageContentTextBoxFor(Model, m => m.Title, LanguageComponent.ComponentMode.TextBox, 500, 28, true, "LanguageId", true);
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="divOneLaguage">
+                            @{
+                                Html.LanguageContentTextBoxFor(Model, x => x.Title, LanguageComponent.ComponentMode.TextBox, 500, 28, false, "LanguageId", true);
+                            }
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+    @if (SessionParameters.CurrentCongress != null && SessionParameters.CurrentCongress.Configuration.AllowUserAddAuthor)
+    {
+        <div class="fit" id="DivSetAuthorList">
+        </div>
+    }
+@if (SessionParameters.CurrentCongress != null && SessionParameters.CurrentCongress.Configuration.EnabledArticleKeyword)
+{
+    <div class="fit item-input">
+        <div class="table-row-cap ">
+            <div class="item ">
+                <div>
+                    <span style="color: red">*</span> @Resources.Congress.KeyWord
+                </div>
+                <div class="des-item" style="float: @Resources.Design.Align">
+                    @Resources.Congress.PleaseSeprateWithComma
+                </div>
+                <div class="des-item" style="float: @Resources.Design.Align">
+                    <span style="color: red"> @string.Format(Resources.Congress.NotUseQuotationInAbstract, SessionParameters.CurrentCongress.Configuration.ArticleTitle)</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="table-row-item table-fit ">
+            <div class="item">
+                @Html.TextAreaFor(model => model.Keyword, new {style = "height:50px;"})
+            </div>
+        </div>
+    </div>
+}
+    <div class="fit" style="display: none">
+        <div class="table-row-cap ">
+            <div class="item">
+                @Resources.Congress.Description
+            </div>
+        </div>
+        <div class="table-row-item table-fit ">
+            <div class="item">
+                @Html.TextAreaFor(model => model.Description, new { style = "height:50px;" })
+            </div>
+        </div>
+    </div>
+</div>
+@if (SessionParameters.CurrentCongress.Configuration.AllowGetArticleAbstract())
+{
+    if (SessionParameters.CurrentCongress.Configuration.GetAbstractFile.Equals(false))
+    {
+        if (ViewBag.ViewGetAbstractFile)
+        {
+
+
+            <div class="" id="divAbstractLabel">
+                <div class="table-row-cap table-c-double table-fit " style="width: 99%;height: 25px">
+                    <div style="text-align: center" class="item">
+                        <span style="color: red">*</span>    @Resources.Congress.Abstract
+                        <span id="Wordcounter"></span>
+                    </div>
+                </div>
+                <div class="fit" id="divAbstract">
+
+                    <div class="table-row-item table-c-double table-fit " style="height: 350px;width: 99%" @*style="overflow-y: scroll"*@>
+                        <div class="item" id="divAbstractText">
+                            @Html.TextAreaFor(model => model.Abstract, new { style = "height:180px;" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <div class="fit">
+                <div class="table-row-cap table-c-auto">
+                    <div class="item">
+                        <span style="color: red">*</span> @Resources.Congress.ArticleAbstract
+
+                    </div>
+                </div>
+                <div class="table-row-item table-c-auto table-fit ">
+                    <div class="item">
+                        @{
+                            Html.HtmlEncoder(Model.Abstract);
+                        }
+                    </div>
+
+                </div>
+            </div>
+        }
+        <div class="item-input">
+            <div class="table-row-cap ">
+                <div class="item">
+                    @Resources.Congress.MinAbstractWordCount
+                </div>
+            </div>
+            <div class="table-row-item  readonly">
+                <div class="item">
+                    @(SessionParameters.CurrentCongress.Configuration.MinAbstractWordCount)
+                </div>
+            </div>
+        </div>
+        <div class="item-input">
+            <div class="table-row-cap ">
+                <div class="item">
+                    @Resources.Congress.AbstractWordCountRemind
+                </div>
+            </div>
+            <div class="table-row-item readonly " style="width: 97%;">
+                <div class="item">
+                    <span id="rcounter"></span>
+                </div>
+            </div>
+        </div>
+
+
+    }
+    if (SessionParameters.CurrentCongress.Configuration.GetAbstractFile.Equals(true))
+    {
+        <div id="divAbstractFile">
+            <div class="table-row-cap table-c-fit">
+                <div class="item">
+                    <span style="color: red">*</span>    @Resources.Congress.AbstractFile
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+                    @if (ViewBag.ViewGetAbstractFile)
+                    {
+
+                        Html.RenderAction("FileUploader", "FileUpload", new { area = "FileManager", filePropName = "AbstractFileId", fileid = Model.AbstractFileId, fileName = "AbstractFileId" });
+
+
+                    }
+                    else
+                    {
+                        if (Model != null && Model.AbstractFileId.HasValue)
+                        {
+                            Html.RadynFile().Image().ID(Model.AbstractFileId.Value).Download().Render();
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (SessionParameters.CurrentCongress.Configuration.AllowGetArticleOrginal())
+{
+    if (SessionParameters.CurrentCongress.Configuration.GetArticleOrginalFile.Equals(false))
+    {
+
+        <div class="fit">
+            <div class="table-row-item table-c-double table-fit " style="width: 99%;height: 25px">
+                <div style="text-align: center" class="item">
+                    <span style="color: red">*</span>   @string.Format(SessionParameters.CurrentCongress.Configuration.ArticleOrginalTitle)
+                    <span id="Wordarticlecounter"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="item-input fit">
+
+            <div class="table-row-item table-c-double table-fit " style="height: 350px;width: 99%" @*style="overflow-y: scroll"*@>
+                <div class="item" id="divArticleText">
+                    @Html.TextAreaFor(model => model.ArticleOrginalText, new { style = "height:180px;" })
+                </div>
+            </div>
+        </div>
+        <div class="item-input">
+            <div class="table-row-cap ">
+                <div class="item">
+                    @string.Format(Resources.Congress.MinimumNumberOfWords, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                </div>
+            </div>
+            <div class="table-row-item readonly">
+                <div class="item">
+                    @(SessionParameters.CurrentCongress.Configuration.MinArticleOrginalWordCount)
+                </div>
+            </div>
+        </div>
+        <div class="item-input">
+            <div class="table-row-cap ">
+                <div class="item">
+                    @Resources.Congress.ArticleWordCountRemind
+                </div>
+            </div>
+            <div class="table-row-item readonly">
+                <div class="item">
+                    <span id="rcounterarticle"></span>
+                </div>
+            </div>
+        </div>
+    }
+    if (SessionParameters.CurrentCongress.Configuration.GetArticleOrginalFile.Equals(true))
+    {
+        <div class="item-input">
+            <div class="table-row-cap table-c-fit">
+                <div class="item">
+                    @string.Format(Resources.Congress.OrginalFile, SessionParameters.CurrentCongress.Configuration.ArticleTitle)
+                </div>
+            </div>
+            <div class="table-row-item table-c-fit">
+                <div class="item">
+
+                    @{
+                        Html.RenderAction("FileUploader", "FileUpload", new { area = "FileManager", filePropName = "OrginalFileId", fileid = Model.OrginalFileId, fileName = "OrginalFileId" });
+
+                    }
+                    @if (Model != null && Model.OrginalFileId.HasValue)
+                    {
+
+                        Html.RadynFile().Image().ID(Model.OrginalFileId.Value).Download().Render();
+
+                    }
+                </div>
+            </div>
+        </div>
+
+    }
+
+}
+
+
+
+<div id="Articleform">
+
+</div>
